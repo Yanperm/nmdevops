@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     h1 {
         color: #fff;
-        background-color: #2196F3;
+        background-color: #358DCE;
         border-bottom: 1px solid #D0D0D0;
         font-size: 19px;
         font-weight: normal;
@@ -56,6 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		line-height: 32px;
 		padding: 0 10px 0 10px;
 		margin: 20px 0 0 0;
+        color: #358DCE;
 	}
 
 	#container {
@@ -68,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to Nutmor!</h1>
+	<h1>Welcome to Nutmor</h1>
 
 	<div id="body">
 		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
