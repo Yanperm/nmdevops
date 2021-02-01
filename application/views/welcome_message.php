@@ -6,23 +6,23 @@
             <p>
                 นัดหมายแพทย์ เช็คอิน ดูคิวออนไลน์ ไม่ต้องรอนาน
             </p>
-            <form method="post" action="<?php echo base_url('link/list') ?>">
+            <form method="get" action="<?php echo base_url('search') ?>">
                 <div id="custom-search-input">
                     <div class="input-group">
-                        <input type="text" name="CLINICNAME" class=" search-query" placeholder="ค้นหาจากชื่อแพทย์">
+                        <input type="text" name="text_search" class=" search-query" placeholder="ค้นหาจากชื่อแพทย์">
                         <input type="submit" class="btn_search" value="ค้นหาเลย">
                     </div>
                     <ul>
                         <li>
-                            <input type="radio" id="all" name="radio_search" value="all" checked>
+                            <input type="radio" id="all" name="type_search" value="all" checked>
                             <label for="all">ทั้งหมด</label>
                         </li>
                         <li>
-                            <input type="radio" id="doctor" name="radio_search" value="doctor">
+                            <input type="radio" id="doctor" name="type_search" value="doctor">
                             <label for="doctor">แพทย์</label>
                         </li>
                         <li>
-                            <input type="radio" id="clinic" name="radio_search" value="clinic">
+                            <input type="radio" id="clinic" name="type_search" value="clinic">
                             <label for="clinic">คลินิก</label>
                         </li>
                     </ul>
