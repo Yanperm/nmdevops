@@ -79,7 +79,7 @@
                     $clinicid = $row->CLINICID;
                     ?>
                     <div class="item">
-                        <form method="post" action="<?php echo base_url('link/detail') ?>">
+                        <form method="post" action="<?php echo base_url('detail/'.$clinicid) ?>">
                             <input type="hidden" name="CLINICID" value="<?php echo $clinicid; ?>"/>
                             <div class="views"><i class="icon-eye-7"></i>3000</div>
                             <div class="title">                                

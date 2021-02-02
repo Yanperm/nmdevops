@@ -13,49 +13,50 @@
 		markers = [],
 		markersData = {
 			'Doctors': [
-			{
-				name: 'Dr. Jhoanna Steel',
-				location_latitude: 48.873792, 
-				location_longitude: 2.295028,
-				map_image_url: 'img/doctor_listing_1.jpg',
-				type: 'Psicologist - Pediatrician',
-				url_detail: 'detail-page.html',
-				name_point: 'Dr. Jhoanna Steel',
-				description_point: '35 Newtownards Road, Belfast, BT4.',
-				get_directions_start_address: '',
-				phone: '+3934245255'
-			},
-				{
-				name: 'Dr. Robert Carl',
-				location_latitude: 48.800040, 
-				location_longitude: 2.139670,
-				map_image_url: 'img/doctor_listing_1.jpg',
-				type: 'Psicologist',
-				url_detail: 'detail-page.html',
-				name_point: 'Dr. Robert Carl',
-				description_point: '35 Newtownards Road, Belfast, BT4.',
-				get_directions_start_address: '',
-				phone: '+3934245255'
-			},
-			{
-				name: 'Dr. Mark Twain',
-				location_latitude: 48.846222, 
-				location_longitude: 2.346414,
-				map_image_url: 'img/doctor_listing_1.jpg',
-				type: 'Primary Care',
-				url_detail: 'detail-page.html',
-				name_point: 'Dr. Mark Twain',
-				description_point: '35 Newtownards Road, Belfast, BT4.',
-				get_directions_start_address: '',
-				phone: '+3934245255'
-			}
+                {
+                    name: 'คลินิกหมอรัฐวิชญ์',
+                    location_latitude: 17.8737049,
+                    location_longitude: 102.7343848,
+                    map_image_url: 'assets/img/doctor_listing_1.jpg',
+                    type: 'เฉพาะทางสูติ-นรีเวช',
+                    url_detail: 'detail-page.html',
+                    name_point: 'นายแพทย์รัฐวิชญ์ สุนทร',
+                    description_point: '84/9-10 ถนนพนังชลประทาน ตำบลในเมือง อำเภอเมือง จังหวัดหนองคาย 43000',
+                    get_directions_start_address: '',
+                    phone: '095-169-3971'
+                }
+			// },
+			// 	{
+			// 	name: 'Dr. Robert Carl',
+			// 	location_latitude: 48.800040,
+			// 	location_longitude: 2.139670,
+			// 	map_image_url: '/assets/img/doctor_listing_1.jpg',
+			// 	type: 'Psicologist',
+			// 	url_detail: 'detail-page.html',
+			// 	name_point: 'Dr. Robert Carl',
+			// 	description_point: '35 Newtownards Road, Belfast, BT4.',
+			// 	get_directions_start_address: '',
+			// 	phone: '+3934245255'
+			// },
+			// {
+			// 	name: 'Dr. Mark Twain',
+			// 	location_latitude: 48.846222,
+			// 	location_longitude: 2.346414,
+			// 	map_image_url: '/assets/img/doctor_listing_1.jpg',
+			// 	type: 'Primary Care',
+			// 	url_detail: 'detail-page.html',
+			// 	name_point: 'Dr. Mark Twain',
+			// 	description_point: '35 Newtownards Road, Belfast, BT4.',
+			// 	get_directions_start_address: '',
+			// 	phone: '+3934245255'
+			// }
 			]
 
 		};
 
 			var mapOptions = {
-				zoom: 10,
-				center: new google.maps.LatLng(48.865633, 2.321236),
+				zoom: 12,
+				center: new google.maps.LatLng(17.8737049, 102.7343848),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 
 				mapTypeControl: false,
@@ -194,7 +195,7 @@
 					marker = new google.maps.Marker({
 						position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
 						map: mapObject,
-						icon: 'img/pins/' + key + '.png',
+						icon: 'assets/img/pins/' + key + '.png',
 					});
 
 					if ('undefined' === typeof markers[key])
@@ -259,7 +260,7 @@
 				maxWidth: 0,
 				pixelOffset: new google.maps.Size(10, 105),
 				closeBoxMargin: '',
-				closeBoxURL: "img/close_infobox.png",
+				closeBoxURL: "assets/img/close_infobox.png",
 				isHidden: false,
 				alignBottom: true,
 				pane: 'floatPane',

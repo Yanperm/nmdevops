@@ -57,3 +57,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['search'] = 'search/listData';
 
 $route['detail/(:any)'] = 'clinic/detail';
+$route['booking/(:any)'] = 'clinic/booking';
+$route['booking-confirm'] = 'clinic/confirm';
+
