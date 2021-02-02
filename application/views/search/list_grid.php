@@ -235,3 +235,8 @@
     </div>
     <!-- /container -->
 </main>
+<!-- SPECIFIC SCRIPTS -->
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDHFd8roCGXvkpRiNV3bEiyVMkqSL6qoPU"></script>
+<script src="<?php echo base_url() ?>assets/js/markerclusterer.js"></script>
+<script src="<?php echo base_url() ?>assets/js//map_listing.js"></script>
+<script src="<?php echo base_url() ?>assets/js//infobox.js"></script>

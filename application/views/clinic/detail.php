@@ -311,7 +311,7 @@
             <!-- /col -->
             <aside class="col-xl-4 col-lg-4" id="sidebar">
                 <div class="box_general_3 booking">
-                    <form>
+                    <form method="post" action="<?php echo base_url('booking/1');?>">
                         <div class="title">
                             <h3>นัดหมายแพทย์</h3>
                             <small>บริการนัดหมายแพทย์ออนไลน์</small>
@@ -322,7 +322,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="คลินิกหมอรัฐวิชญ์" name="email_booking" id="email_booking">
+                                    <input type="email" class="form-control" placeholder="คลินิกหมอรัฐวิชญ์" name="email_booking" id="email_booking" value="คลินิกหมอรัฐวิชญ์" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -336,29 +336,35 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="email_booking" id="email_booking">
+                                    <input type="date" class="form-control" name="booking_date" id="book_date" required>
                                 </div>
                             </div>
                         </div>
                         <!-- /row -->
-
-
-
-
-                        <!--
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2017" data-max-year="2020" data-disabled-days="10/17/2017,11/18/2017">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" id="booking_time" value="9:00 am">
+                                    <input type="text" class="form-control" name="booking_time" id="booking_time" required>
                                 </div>
                             </div>
                         </div>
-                        /row -->
+
+
+
+                        
+<!--                        <div class="row">-->
+<!--                            <div class="col-6">-->
+<!--                                <div class="form-group">-->
+<!--                                    <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2017" data-max-year="2020" data-disabled-days="10/17/2017,11/18/2017">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-6">-->
+<!--                                <div class="form-group">-->
+<!--                                    <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
 
                         <!--
                         <ul class="treatments clearfix">
@@ -389,12 +395,8 @@
                         </ul>  -->
 
                         <hr>
-                        <a href="booking-page.html" class="btn_1 full-width">นัดหมอทันที</a>
-
+                        <button class="btn_1 full-width" type="submit">นัดหมอทันที</button>
                     </form>
-
-
-
                 </div>
                 <!-- /box_general -->
             </aside>
