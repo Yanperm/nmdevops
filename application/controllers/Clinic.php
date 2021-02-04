@@ -3,100 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Clinic extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('ClinicModel');
-        $this->load->model('BookingModel');
-        $this->load->model('MembersModel');
-    }
 
     public function detail()
     {
         $clinicId = $this->uri->segment('2');
 
-        $clinic = $this->ClinicModel->detail($clinicId);
-
-        $data = [
-            'clinic' => $clinic
-        ];
-
         $this->load->view('template/header');
-        $this->load->view('clinic/detail', $data);
-        $this->load->view('template/footer');
-    }
-
-    public function time()
-    {
-        $clinicId = $this->uri->segment('2');
-        $date = $this->input->post('booking_date');
-
-        $clinic = $this->ClinicModel->detail($clinicId);
-        $today = date('D');
-        $startTime = '';
-        $endTime = '';
-
-        if ($today == 'Sun') {
-            $startTime = $clinic->TIME_OPEN;
-            $endTime = $clinic->TIME_CLOSE;
-        } else if ($today == 'Mon') {
-            $startTime = $clinic->TIME1;
-            $endTime = $clinic->CLOSE1;
-        } else if ($today == 'Tue') {
-            $startTime = $clinic->TIME2;
-            $endTime = $clinic->CLOSE2;
-        } else if ($today == 'Wed') {
-            $startTime = $clinic->TIME3;
-            $endTime = $clinic->CLOSE3;
-        } else if ($today == 'Thu') {
-            $startTime = $clinic->TIME4;
-            $endTime = $clinic->CLOSE4;
-        } else if ($today == 'Fri') {
-            $startTime = $clinic->TIME5;
-            $endTime = $clinic->CLOSE5;
-        } else if ($today == 'Sat') {
-            $startTime = $clinic->TIME6;
-            $endTime = $clinic->CLOSE6;
-        }
-
-        $begin = new DateTime($startTime);
-        $end = new DateTime($endTime);
-
-        $interval = DateInterval::createFromDateString('15 min');
-
-        $times = new DatePeriod($begin, $interval, $end);
-
-        $booking = $this->BookingModel->getData($clinicId, $date);
-
-        $data = [
-            'date' => $date,
-            'clinic' => $clinic,
-            'times' => $times,
-            'interval' => $interval,
-            'booking' => $booking
-        ];
-
-        $this->load->view('template/header');
-        $this->load->view('clinic/time', $data);
+        $this->load->view('clinic/detail');
         $this->load->view('template/footer');
     }
 
     public function booking()
     {
         $clinicId = $this->uri->segment('2');
-        $date = $this->input->get('booking_date');
-        $time = $this->input->get('booking_time');
-        $ques = $this->input->get('ques');
-        $qber = $this->input->get('qber');
 
-        $clinic = $this->ClinicModel->detail($clinicId);
+        $date = $this->input->post('booking_date');
+        $time = $this->input->post('booking_time');
 
         $data = [
             'date' => $date,
-            'clinic' => $clinic,
-            'time' => $time,
-            'ques' => $ques,
-            'qber' => $qber,
+            'time' => $time
         ];
 
         $this->load->view('template/header');
@@ -115,38 +41,17 @@ class Clinic extends CI_Controller
         $cause = $this->input->post('cause');
         $date = $this->input->post('date');
         $time = $this->input->post('time');
-        $clinicId = $this->input->post('clinic_id');
-        $ques = $this->input->get('ques');
-        $qber = $this->input->get('qber');
 
-        //insert member
-        $dateNow = new DateTime();
-        $timeId = $dateNow->getTimestamp();
         $data = [
-            'MEMBERIDCARD' => $timeId,
-            'CUSTOMERNAME' => $firstName . " " . $lastName,
-            'IDCARD' => $idCard,
-            'LINEID' => $lineId,
-            'EMAIL' => $email,
-            'PASSWORD' => md5('1234'),
-            'PHONE' => $telephone,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'idCard' => $idCard,
+            'telephone' => $telephone,
+            'lineId' => $lineId,
+            'cause' => $cause,
+            'date' => $date,
+            'time' => $time
         ];
-        $this->MembersModel->insert($data);
-
-        //insert booking
-        $data = [
-            'BOOKINGID' => 'VN' . $timeId,
-            'QUES' => $ques,
-            'QBER' => $qber,
-            'IDCARD' => $idCard,
-            'MEMBERIDCARD' => $timeId,
-            'CLINICID' => $clinicId,
-            'BOOKDATE' => $date,
-            'BOOKTIME' => $time,
-            'DETAIL' => $cause
-        ];
-        $this->ClinicModel->insert($data);
-
         $subject = "ยืนยันการนัดหมอ";
         $message = $this->load->view('email_template', $data, true);
 
@@ -167,13 +72,12 @@ class Clinic extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.postmarkapp.com',
             'smtp_port' => 587,
-            'smtp_user' => '61efd55b-647d-4cfc-9030-af1e1b1166bb',
-            'smtp_pass' => '61efd55b-647d-4cfc-9030-af1e1b1166bb',
+            'smtp_user' => 'ef9badbf-896b-4e89-9c1a-f1fcf540e9f5',
+            'smtp_pass' => 'ef9badbf-896b-4e89-9c1a-f1fcf540e9f5',
             'smtp_crypto' => 'TLS',
             'mailtype' => 'html',
             'charset' => 'utf-8',
         );
-
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('no-reply@nutmor.com', "Pharmacy Nutmor.com");
