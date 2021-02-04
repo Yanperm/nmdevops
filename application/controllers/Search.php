@@ -3,24 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Search extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('ClinicModel');
-    }
 
     public function listData()
     {
-
         $textSearch = $this->input->get('text_search');
         $typeSearch = $this->input->get('type_search');
 
-        $clinic = $this->ClinicModel->search($textSearch,$typeSearch);
-
         $data = [
             'textSearch' => $textSearch,
-            'typeSearch' => $typeSearch,
-            'clinic' => $clinic
+            'typeSearch' => $typeSearch
         ];
 
         $this->load->view('template/header');
