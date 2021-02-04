@@ -60,4 +60,7 @@ $route['detail/(:any)'] = 'clinic/detail';
 $route['time/(:any)'] = 'clinic/time';
 $route['booking/(:any)'] = 'clinic/booking';
 $route['booking-confirm'] = 'clinic/confirm';
+$route['checkin'] = 'clinic/checkin';
+$route['detail_checkin'] = 'clinic/detailCheckin';
+$route['confirm/checkin/(:any)'] = 'clinic/confirmCheckin';
 

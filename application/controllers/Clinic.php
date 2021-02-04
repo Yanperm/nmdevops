@@ -202,4 +202,59 @@ class Clinic extends CI_Controller
         $this->email->message($message);
         $this->email->send();
     }
+
+    public function checkIn(){
+        $clinic = $this->ClinicModel->getdata();
+        $clinicId = '';
+        if(!empty($this->input->get('clinic'))){
+            $clinicId =$this->input->get('clinic');
+        }
+
+        $data = [
+            'clinic' => $clinic,
+            'clinicId' => $clinicId
+        ];
+
+        $this->load->view('template/header');
+        $this->load->view('clinic/checkin', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function detailCheckin(){
+        $clinic = $this->input->post('clinic');
+        $email = $this->input->post('email');
+
+        $detail = $this->BookingModel->getCheckin($clinic,$email);
+
+        $data = [
+            'detail' => $detail
+        ];
+
+        $this->load->view('template/header');
+        $this->load->view('clinic/detail_checkin', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function confirmCheckin(){
+        $bookingId = $this->uri->segment('3');
+
+        $this->BookingModel->checkin($bookingId);
+
+        $booking = $this->BookingModel->detail($bookingId);
+
+        $subject = "ยืนยันการเช็คอิน";
+        $message = "ยืนยันการเช็คอิน การจองหมายเลข : ".$booking[0]->BOOKINGID."\n";
+        $message .= "วันที่ : ".$booking[0]->BOOKDATE."\n";
+        $message .= "เวลา : ".$booking[0]->BOOKTIME."\n";
+        $message .= "คิว : ".$booking[0]->QUES."\n";
+
+        //sendmail
+        if ($booking[0]->EMAIL != '') {
+            $this->sendMail($booking[0]->EMAIL, $subject, $message);
+        }
+
+        $this->load->view('template/header');
+        $this->load->view('clinic/confirm_checkin');
+        $this->load->view('template/footer');
+    }
 }
