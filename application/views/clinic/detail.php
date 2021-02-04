@@ -2,8 +2,8 @@
     <div id="breadcrumb">
         <div class="container">
             <ul>
-                <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><?php echo $clinic->CLINICNAME ?? ''; ?></li>
+                <li><a href="<?php echo base_url('');?>">หน้าแรก</a></li>
+                <li>คลินิก</li>
             </ul>
         </div>
     </div>
@@ -27,12 +27,14 @@
                             <div class="row">
                                 <div class="col-lg-5 col-md-4">
                                     <figure>
-                                        <img src="<?php echo $clinic->image ?? 'http://via.placeholder.com/565x565.jpg'; ?>" alt="" class="img-fluid">
+                                        <img src="http://via.placeholder.com/565x565.jpg" alt="" class="img-fluid">
                                     </figure>
                                 </div>
                                 <div class="col-lg-7 col-md-8">
-                                    <small><?php echo $clinic->DETAIL ?? ''; ?></small>
-                                    <h1><?php echo $clinic->DOCTORNAME ?? ''; ?></h1>
+                                    <small>คลินิกเฉพาะทางสูติ-นรีเวช</small>
+                                    <h1>นายแพทย์รัฐวิชญ์ สุนทร</h1>
+
+
                                     <span class="rating">
 											<i class="icon_star voted"></i>
 											<i class="icon_star voted"></i>
@@ -41,19 +43,26 @@
 											<i class="icon_star voted"></i>
 											<small>(145)</small>
                                         <!--<a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="img/badges/badge_1.svg" width="15" height="15" alt=""></a>-->
-                                    </span>
+										</span>
+
+
+
                                     <ul class="statistic">
                                         <li>เว็บ</li>
                                         <li>มือถือ</li>
                                     </ul>
+
+
+
+
                                     <ul class="contacts">
                                         <li>
-                                            <h6>ที่อยู่</h6>
-                                            <?php echo $clinic->PROVINCE ?? ''; ?>
-                                            <a href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@<?php echo $clinic->LAT ?? ''; ?>,<?php echo $clinic->LONG ?? ''; ?>,14z/data=!4m15!1m6!3m5!1s0x0:0xa6a9af76b1e2d899!2sAssistance+%E2%80%93+H%C3%B4pitaux+De+Paris!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361" target="_blank"> <strong>ดูบนแผนที่</strong></a>
+                                            <h6>Address</h6>
+                                            84/9-10 ถนนพนังชลประทาน ตำบลในเมือง อำเภอเมือง จังหวัดหนองคาย 43000
+                                            <a href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@48.8606548,2.3348734,14z/data=!4m15!1m6!3m5!1s0x0:0xa6a9af76b1e2d899!2sAssistance+%E2%80%93+H%C3%B4pitaux+De+Paris!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361" target="_blank"> <strong>View on map</strong></a>
                                         </li>
                                         <li>
-                                            <h6>Contact</h6> โทร:<a href="tel://006<?php echo $clinic->PHONE ?? ''; ?>"> <?php echo $clinic->PHONE ?? ''; ?></a> Line: <a href="http://line.me/ti/p/<?php echo $clinic->LINE ?? ''; ?>" target="_blank"> <?php echo $clinic->LINE ?? ''; ?></a></li>
+                                            <h6>Contact</h6> โทร:<a href="tel://0066951693971">  095-169-3971</a> Line: <a href="tel://0066951693971"> @rathawit-clinic</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -68,19 +77,28 @@
                             <!--<p>สาขาวิชาที่เชี่ยวชาญ</p>-->
                         </div>
                         <div class="wrapper_indent">
-                            <p><?php echo $clinic->PROFICIENT ?? ''; ?></p>
-                            <?php if ($clinic->SERVICE != ''): ?>
-                                <h5>บริการของทางคลินิก</h5>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <ul class="bullets">
-                                            <?php foreach (explode(",", $clinic->SERVICE) as $item): ?>
-                                                <li><?php echo $item; ?></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </div>
+                            <p>สูติศาสตร์ นรีเวชวิทยา</p>
+
+
+                            <h5>บริการของทางคลินิก</h5>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="bullets">
+                                        <li>อัลตราซาวด์ 4 มิติ</li>
+                                        <li>ปัญหาเรื่องสุขภาพสำหรับผู้หญิง</li>
+                                        <li>ปรึกษาฝากครรภ์</li>
+                                        <li>วางแผนคลอดบุตร</li>
+                                    </ul>
                                 </div>
-                            <?php endif; ?>
+                                <div class="col-lg-6">
+                                    <ul class="bullets">
+                                        <li>รักษาเนื้องอก</li>
+                                        <li>วัยทอง</li>
+                                        <li>รับวัคซีน</li>
+                                        <li>ผ่าตัดทางนรีเวช </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <!-- /row-->
                         </div>
                         <!-- /wrapper indent -->
@@ -93,15 +111,13 @@
                             <!--<p>Mussum ipsum cacilds, vidis litro abertis.</p>-->
                         </div>
                         <div class="wrapper_indent">
-                            <p><?php echo $clinic->DIPLOMA ?? ''; ?></p>
-                            <?php if ($clinic->DEGREE != ''): ?>
-                                <h5>วุฒิบัตร </h5>
-                                <ul class="list_edu">
-                                    <?php foreach (explode(",", $clinic->DEGREE) as $item): ?>
-                                        <li><?php echo $item; ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php endif; ?>
+                            <p>แพทย์ศาสตร์บัณฑิต - มหาวิทยาลัยนเรศวร</p>
+                            <h5>วุฒิบัตร </h5>
+                            <ul class="list_edu">
+                                <li><strong>มหาวิทยาลัยนเรศวร</strong> - แพทย์ศาสตร์บัณฑิต</li>
+                                <li><strong>Montefiore Medical Center</strong> - Residency in Internal Medicine</li>
+                                <li><strong>New York Medical College</strong> - Master Internal Medicine</li>
+                            </ul>
                         </div>
                         <!--  End wrapper indent -->
 
@@ -123,48 +139,35 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php if ($clinic->DAYOFF != 1): ?>
-                                        <tr>
-                                            <td>วันจันทร์</td>
-                                            <td><?php echo $clinic->TIME1; ?> - <?php echo $clinic->CLOSE1; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 2): ?>
-                                        <tr>
-                                            <td>วันอังคาร</td>
-                                            <td><?php echo $clinic->TIME2; ?> - <?php echo $clinic->CLOSE2; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 3): ?>
-                                        <tr>
-                                            <td>วันพุธ</td>
-                                            <td><?php echo $clinic->TIME3; ?> - <?php echo $clinic->CLOSE3; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 4): ?>
-                                        <tr>
-                                            <td>วันพฤหัสบดี</td>
-                                            <td><?php echo $clinic->TIME4; ?> - <?php echo $clinic->CLOSE4; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 5): ?>
-                                        <tr>
-                                            <td>วันศุกร์</td>
-                                            <td><?php echo $clinic->TIME5; ?> - <?php echo $clinic->CLOSE5; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 6): ?>
-                                        <tr>
-                                            <td>วันเสาร์</td>
-                                            <td><?php echo $clinic->TIME6; ?> - <?php echo $clinic->CLOSE6; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 0): ?>
-                                        <tr>
-                                            <td>วันอาทิตย์</td>
-                                            <td><?php echo $clinic->TIME_OPEN; ?> - <?php echo $clinic->TIME_CLOSE; ?></td>
-                                        </tr>
-                                    <?php endif; ?>
+                                    <tr>
+                                        <td>วันจันทร์</td>
+                                        <td>17.00-20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันอังคาร</td>
+                                        <td>17.00-20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันพุธ</td>
+                                        <td>17.00-20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันพฤหัสบดี</td>
+                                        <td>17.00-20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันศุกร์</td>
+                                        <td>17.00-20.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันเสาร์</td>
+                                        <td>8.00-17.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันอาทิตย์</td>
+                                        <td>9.00-12.00</td>
+                                    </tr>
+
 
                                     </tbody>
                                 </table>
@@ -196,9 +199,7 @@
                                                 <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-3">
-                                            <small><strong>5 stars</strong></small>
-                                        </div>
+                                        <div class="col-lg-2 col-3"><small><strong>5 stars</strong></small></div>
                                     </div>
                                     <!-- /row -->
                                     <div class="row">
@@ -207,9 +208,7 @@
                                                 <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-3">
-                                            <small><strong>4 stars</strong></small>
-                                        </div>
+                                        <div class="col-lg-2 col-3"><small><strong>4 stars</strong></small></div>
                                     </div>
                                     <!-- /row -->
                                     <div class="row">
@@ -218,9 +217,7 @@
                                                 <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-3">
-                                            <small><strong>3 stars</strong></small>
-                                        </div>
+                                        <div class="col-lg-2 col-3"><small><strong>3 stars</strong></small></div>
                                     </div>
                                     <!-- /row -->
                                     <div class="row">
@@ -229,9 +226,7 @@
                                                 <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-3">
-                                            <small><strong>2 stars</strong></small>
-                                        </div>
+                                        <div class="col-lg-2 col-3"><small><strong>2 stars</strong></small></div>
                                     </div>
                                     <!-- /row -->
                                     <div class="row">
@@ -240,9 +235,7 @@
                                                 <div class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-3">
-                                            <small><strong>1 stars</strong></small>
-                                        </div>
+                                        <div class="col-lg-2 col-3"><small><strong>1 stars</strong></small></div>
                                     </div>
                                     <!-- /row -->
                                 </div>
@@ -318,7 +311,7 @@
             <!-- /col -->
             <aside class="col-xl-4 col-lg-4" id="sidebar">
                 <div class="box_general_3 booking">
-                    <form method="post" action="<?php echo base_url('time/'.$clinic->CLINICID); ?>">
+                    <form method="post" action="<?php echo base_url('booking/1');?>">
                         <div class="title">
                             <h3>นัดหมายแพทย์</h3>
                             <small>บริการนัดหมายแพทย์ออนไลน์</small>
@@ -329,11 +322,14 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="" name="email_booking" id="email_booking" value="<?php echo $clinic->CLINICNAME ?? ''; ?>" readonly="readonly">
+                                    <input type="email" class="form-control" placeholder="คลินิกหมอรัฐวิชญ์" name="email_booking" id="email_booking" value="คลินิกหมอรัฐวิชญ์" readonly="readonly">
                                 </div>
                             </div>
                         </div>
                         <!-- /row -->
+
+
+
 
 
                         <!-- /row -->
@@ -345,27 +341,29 @@
                             </div>
                         </div>
                         <!-- /row -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="booking_time" id="booking_time" required>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        
 <!--                        <div class="row">-->
-<!--                            <div class="col-lg-12">-->
+<!--                            <div class="col-6">-->
 <!--                                <div class="form-group">-->
-<!--                                    <input type="text" class="form-control" name="booking_time" id="booking_time" required>-->
+<!--                                    <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2017" data-max-year="2020" data-disabled-days="10/17/2017,11/18/2017">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-6">-->
+<!--                                <div class="form-group">-->
+<!--                                    <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
 <!--                                </div>-->
 <!--                            </div>-->
 <!--                        </div>-->
-
-
-                        <!--                        <div class="row">-->
-                        <!--                            <div class="col-6">-->
-                        <!--                                <div class="form-group">-->
-                        <!--                                    <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2017" data-max-year="2020" data-disabled-days="10/17/2017,11/18/2017">-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="col-6">-->
-                        <!--                                <div class="form-group">-->
-                        <!--                                    <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
 
 
                         <!--
@@ -397,7 +395,7 @@
                         </ul>  -->
 
                         <hr>
-                        <button class="btn_1 full-width" type="submit">เลือกเวลา</button>
+                        <button class="btn_1 full-width" type="submit">นัดหมอทันที</button>
                     </form>
                 </div>
                 <!-- /box_general -->
