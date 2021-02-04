@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('detail/1'); ?>">คลินิกหมอรัฐวิชญ์</a></li>
+                <li><a href="<?php echo base_url('detail/'.$clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME;?></a></li>
                 <li>ยืนยันการนัดหมอ</li>
             </ul>
         </div>
@@ -22,7 +22,7 @@
                             </g>
                         </svg>
                     </div>
-                    <h2>ขอบขอบคุณสำหรับการนัดหมอ !</h2>
+                    <h2>ขอขอบคุณสำหรับการนัดหมอ !</h2>
                     <p>คุณจะได้รับรายละเอียดการนัดหมอที่อีเมล</p>
                 </div>
             </div>
