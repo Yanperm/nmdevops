@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Search extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -11,7 +12,6 @@ class Search extends CI_Controller
 
     public function listData()
     {
-
         $textSearch = $this->input->get('text_search');
         $typeSearch = $this->input->get('type_search');
 

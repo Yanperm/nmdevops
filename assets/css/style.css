@@ -1185,11 +1185,11 @@ ul#additional_links li:after {
   border-radius: 3px;
   position: relative;
   font-weight: 500;
-  color: #555;
+  color: #4caf50;
 }
 .list_home ul li a strong {
   background-color: #f8f8f8;
-  color: #999;
+  color: #3f4078;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1;
@@ -1220,6 +1220,88 @@ ul#additional_links li:after {
 }
 .list_home ul li a:hover:after {
   color: #fff;
+}
+
+.list_time ul li  {
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    position: relative;
+    font-weight: bold;
+    color: #3f4078;
+}
+.list_time ul li  strong {
+    background-color: #f8f8f8;
+    float: left;
+    color: #3f4078;
+    font-size: 18px;
+    line-height: 1;
+    padding: 6px;
+    display: inline-block;
+    margin-right: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+}
+.list_time ul li  a {
+    background: #fff;
+    border: 2px solid #e74e84;
+    float: right;
+    color: #e74e84;
+    padding: 5px 20px;
+    font-weight: 500;
+    line-height: 1;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.list_time ul li  button {
+    background: #fff;
+    border: 2px solid #e74e84;
+    float: right;
+    color: #e74e84;
+    padding: 5px 20px;
+    font-weight: 500;
+    line-height: 1;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.booked {
+    background: #dfdfdf !important;
+    border: 2px solid #eaeaea !important;
+    color: #3f4078 !important;
+    cursor: no-drop !important;
+}
+
+
+.list_time ul li  button:hover {
+    background: #e74e84;
+    color: #fff;
 }
 
 /*Carousel home page*/
