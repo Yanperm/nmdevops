@@ -64,7 +64,7 @@
 
     </div>
     <!-- /container -->
-    <?php if(count($clinic) > 0):?>
+
     <div class="bg_color_1">
         <div class="container margin_120_95">
             <div class="main_title">
@@ -73,23 +73,29 @@
             </div>
             <div id="reccomended" class="owl-carousel owl-theme">
 
-                <?php foreach ($clinic as $row):?>
+                <?php
+                $query = $this->db->get_where('tbclinic', array('MOBILE' => 1));
+                foreach ($query->result() as $row) {
+                    $clinicid = $row->CLINICID;
+                    ?>
                     <div class="item">
-                        <form method="post" action="<?php echo base_url('detail/'.$row->CLINICID) ?>">
+                        <form method="post" action="<?php echo base_url('detail/'.$clinicid) ?>">
+                            <input type="hidden" name="CLINICID" value="<?php echo $clinicid; ?>"/>
                             <div class="views"><i class="icon-eye-7"></i>3000</div>
                             <div class="title">                                
                                 <button class="btn btn-block btn-info" type="submit"><?php echo $row->CLINICNAME; ?><br/><em><?php echo $row->DETAIL; ?></em></button>
                             </div><img src="<?php echo $row->image; ?>" alt="">
                         </form>
                     </div>
-                <?php endforeach; ?>
+                    <?php
+                }
+                ?>
 
             </div>
+            <!-- /carousel -->
         </div>
+        <!-- /container -->
     </div>
-    <?php endif;?>
-
-
     <!-- /white_bg -->
     <!-- /container
     <div class="container margin_120_95 hidden">
