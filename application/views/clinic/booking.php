@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('detail/1'); ?>">คลินิกหมอรัฐวิชญ์</a></li>
+                <li><a href="<?php echo base_url('detail/1'); ?>"><?php echo $clinic->CLINICNAME;?></a></li>
                 <li>นัดหมอออนไลน์</li>
             </ul>
         </div>
@@ -14,6 +14,9 @@
         <form method="post" action="<?php echo base_url('booking-confirm')?>">
             <input type="hidden" value="<?php echo $date;?>" name="date">
             <input type="hidden" value="<?php echo $time;?>" name="time">
+            <input type="hidden" value="<?php echo $ques;?>" name="ques">
+            <input type="hidden" value="<?php echo $qber;?>" name="qber">
+            <input type="hidden" value="<?php echo $clinic->CLINICID;?>" name="clinic_id">
             <div class="row">
 
                 <div class="col-xl-8 col-lg-8">
@@ -109,7 +112,7 @@
                             <ul>
                                 <li>วันที่: <strong class="float-right"><?php echo $date;?></strong></li>
                                 <li>เวลา: <strong class="float-right"><?php echo $time;?></strong></li>
-                                <li>แพทย์: <strong class="float-right">นายแพทย์รัฐวิชญ์ สุนทร</strong></li>
+                                <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME ?? ''; ?></strong></li>
                             </ul>
                         </div>
                         <!--                        <ul class="treatments checkout clearfix">-->
@@ -137,11 +140,11 @@
     </div>
     <!-- /container -->
 </main>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-    Swal.fire(
-        'หมายเหตุ!',
-        'ใส่ข้อมูลอีเมลให้ถูกต้องเพื่อทำการส่งอีเมล<br>ส่วนการส่งอีเมลถึงแพทย์รอการเชื่อมฐานข้อมูลก็ส่งได้เลยค่ะ<br> (ข้อมูลพร้อมลงฐานข้อมูลแล้วค่ะ)',
-        'warning'
-    )
-</script>
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>-->
+<!--<script>-->
+<!--    Swal.fire(-->
+<!--        'หมายเหตุ!',-->
+<!--        'ใส่ข้อมูลอีเมลให้ถูกต้องเพื่อทำการส่งอีเมล<br>ส่วนการส่งอีเมลถึงแพทย์รอการเชื่อมฐานข้อมูลก็ส่งได้เลยค่ะ<br> (ข้อมูลพร้อมลงฐานข้อมูลแล้วค่ะ)',-->
+<!--        'warning'-->
+<!--    )-->
+<!--</script>-->
