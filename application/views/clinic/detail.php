@@ -61,6 +61,9 @@
                                         <li>
                                             <h6>Contact</h6> โทร:<a href="tel://006<?php echo $clinic->PHONE ?? ''; ?>"> <?php echo $clinic->PHONE ?? ''; ?></a> Line: <a href="http://line.me/ti/p/<?php echo $clinic->LINE ?? ''; ?>" target="_blank"> <?php echo $clinic->LINE ?? ''; ?></a></li>
                                     </ul>
+                                    <div class="mt-3" style="text-align: center">
+                                        <a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" class="btn_1 medium fadeIn animated mt-2">Check in</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,8 +89,9 @@
                                     </ul>
                                 </div>
                             </div>
+                            <?php endif; ?>
                         </div>
-                        <?php endif; ?>
+
                         <!-- /row-->
 
                         <!-- /wrapper indent -->
