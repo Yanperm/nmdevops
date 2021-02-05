@@ -41,6 +41,18 @@ class ClinicModel extends CI_Model
         }
     }
 
+    public function ques($clinicId)
+    {
+
+        $query = $this->db->query('SELECT * FROM tbclinic where CLINICID = "' . $clinicId . '"');
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
     public function insert($data)
     {
         $this->db->insert('tbbooking', $data);

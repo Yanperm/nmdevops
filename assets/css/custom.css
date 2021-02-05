@@ -1,27 +1,31 @@
 /*============================================================================================*/
 /* Your custom styles below */
 /*============================================================================================*/
-.p_checkin{
+.p_checkin {
     color: #3f417a;
     font-size: 20px;
     font-weight: 900;
     margin-bottom: 0px;
 }
-.text_checkin{
+
+.text_checkin {
     font-size: 20px;
     color: #3f417a;
     font-weight: 700;
 }
-.link_checkin{
+
+.link_checkin {
     text-decoration: underline !important;
     cursor: pointer;
 }
-.ques_detail{
+
+.ques_detail {
     color: #3f417a;
     font-size: 23px;
     font-weight: 800;
 }
-.box_feat {
+
+.box_feat_checkin {
     background-color: #fff;
     padding: 18px 45px 20px 45px;
     text-align: center;
@@ -35,7 +39,8 @@
     box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 10%);
     margin-bottom: 25px;
 }
-.btn_cancel{
+
+.btn_cancel {
     border: 2px solid #e74e84;
     color: #e74e84;
     cursor: pointer;
@@ -50,7 +55,8 @@
     -ms-border-radius: 30px;
     border-radius: 30px;
 }
-.status{
+
+.status {
     display: inline-block;
     background-color: #74d1c6;
     -webkit-border-radius: 5px;
@@ -66,10 +72,12 @@
     min-width: 120px;
     margin-bottom: 5px;
 }
-.confirm_0{
-   color: #e91e63;
+
+.confirm_0 {
+    color: #e91e63;
 }
-.confirm_1{
+
+.confirm_1 {
     color: #3f417a;
     font-size: 20px;
 }
@@ -85,4 +93,48 @@
     -ms-transform: translate(-50%, -50%) scale(1);
     -o-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
+}
+
+.ques_online_link {
+    cursor: pointer;
+    color: #ffffff !important;
+}
+
+.ques_online_li {
+    float: right;
+}
+
+.ques_online_review_li {
+
+}
+
+.ques_online_icon {
+    font-size: 53px;
+    color: #e84e84;
+}
+.ques_online_number{
+    font-size: 47px !important;
+}
+
+.badge_level_0 {
+    width: auto;
+    height: auto;
+    margin: 0 auto 25px;
+    position: relative;
+}
+
+.ques_online_text{
+    font-size: 30px !important;
+}
+
+#secondary_nav ul li:last-child {
+    display: block;
+    margin-right: 0;
+}
+
+@media (max-width: 425px) {
+
+    .ques_online_review_li {
+        display: none !important;
+    }
 }

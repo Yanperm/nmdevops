@@ -28,7 +28,7 @@
         <!-- YOUR CUSTOM CSS -->
         <link href="<?php echo base_url() ?>assets/css/custom.css?v=<?php echo  time();?>" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200&display=swap" rel="stylesheet">
-
+        <script src="<?php echo base_url() ?>assets/js/jquery-2.2.4.min.js"></script>
     </head>
 
     <body style="font-family: 'Mitr', sans-serif;">
