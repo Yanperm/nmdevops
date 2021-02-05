@@ -16,8 +16,12 @@
                     <div class="container">
                         <ul class="clearfix">
                             <li><a href="#section_1" class="active">ข้อมูลพื้นฐาน</a></li>
-                            <li><a href="#section_2">รีวิว</a></li>
-                            <li><a href="#sidebar">จองคิว</a></li>
+                            <li class="ques_online_review_li"><a href="#section_2">รีวิว</a></li>
+                            <li class="ques_online_li"><a onclick="getQues()" class="ques_online_link">
+                                    <div class="fs1" aria-hidden="true" data-icon=""> คิวตรวจออนไลน์</div>
+                                </a></li>
+
+
                         </ul>
                     </div>
                 </nav>
@@ -62,7 +66,7 @@
                                             <h6>Contact</h6> โทร:<a href="tel://006<?php echo $clinic->PHONE ?? ''; ?>"> <?php echo $clinic->PHONE ?? ''; ?></a> Line: <a href="http://line.me/ti/p/<?php echo $clinic->LINE ?? ''; ?>" target="_blank"> <?php echo $clinic->LINE ?? ''; ?></a></li>
                                     </ul>
                                     <div class="mt-3" style="text-align: center">
-                                        <a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" class="btn_1 medium fadeIn animated mt-2">Check in</a>
+                                        <a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" class="btn_1 medium fadeIn animated mt-2">เช็คอิน</a>
                                     </div>
                                 </div>
                             </div>
@@ -79,22 +83,21 @@
                         <div class="wrapper_indent">
                             <p><?php echo $clinic->PROFICIENT ?? ''; ?></p>
                             <?php if ($clinic->SERVICE != ''): ?>
-                            <h5>บริการของทางคลินิก</h5>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <ul class="bullets">
-                                        <?php foreach (explode(",", $clinic->SERVICE) as $item): ?>
-                                            <li><?php echo $item; ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
+                                <h5>บริการของทางคลินิก</h5>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <ul class="bullets">
+                                            <?php foreach (explode(",", $clinic->SERVICE) as $item): ?>
+                                                <li><?php echo $item; ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
                             <?php endif; ?>
                         </div>
 
                         <!-- /row-->
 
-                        <!-- /wrapper indent -->
 
                         <hr>
 
@@ -134,43 +137,82 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php if ($clinic->DAYOFF != 1): ?>
+                                    <?php
+                                    $start = '';
+                                    $end = '';
+                                    $dayNow = date('N');
+                                    if ($clinic->DAYOFF != 1):
+                                        if ($dayNow == 1):
+                                            $start = $clinic->TIME1;
+                                            $end = $clinic->CLOSE1;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันจันทร์</td>
                                             <td><?php echo $clinic->TIME1; ?> - <?php echo $clinic->CLOSE1; ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 2): ?>
+                                    <?php if ($clinic->DAYOFF != 2):
+                                        if ($dayNow == 2):
+                                            $start = $clinic->TIME2;
+                                            $end = $clinic->CLOSE2;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันอังคาร</td>
                                             <td><?php echo $clinic->TIME2; ?> - <?php echo $clinic->CLOSE2; ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 3): ?>
+                                    <?php if ($clinic->DAYOFF != 3):
+                                        if ($dayNow == 3):
+                                            $start = $clinic->TIME3;
+                                            $end = $clinic->CLOSE3;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันพุธ</td>
                                             <td><?php echo $clinic->TIME3; ?> - <?php echo $clinic->CLOSE3; ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 4): ?>
+                                    <?php if ($clinic->DAYOFF != 4):
+                                        if ($dayNow == 4):
+                                            $start = $clinic->TIME4;
+                                            $end = $clinic->CLOSE4;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันพฤหัสบดี</td>
                                             <td><?php echo $clinic->TIME4; ?> - <?php echo $clinic->CLOSE4; ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 5): ?>
+                                    <?php if ($clinic->DAYOFF != 5):
+                                        if ($dayNow == 5):
+                                            $start = $clinic->TIME5;
+                                            $end = $clinic->CLOSE5;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันศุกร์</td>
                                             <td><?php echo $clinic->TIME5; ?> - <?php echo $clinic->CLOSE5; ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 6): ?>
+                                    <?php if ($clinic->DAYOFF != 6):
+                                        if ($dayNow == 6):
+                                            $start = $clinic->TIME6;
+                                            $end = $clinic->CLOSE6;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันเสาร์</td>
                                             <td><?php echo $clinic->TIME6; ?> - <?php echo $clinic->CLOSE6; ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                    <?php if ($clinic->DAYOFF != 0): ?>
+                                    <?php if ($clinic->DAYOFF != 0):
+                                        if ($dayNow == 0):
+                                            $start = $clinic->TIME_OPEN;
+                                            $end = $clinic->TIME_CLOSE;
+                                        endif;
+                                        ?>
                                         <tr>
                                             <td>วันอาทิตย์</td>
                                             <td><?php echo $clinic->TIME_OPEN; ?> - <?php echo $clinic->TIME_CLOSE; ?></td>
@@ -185,6 +227,9 @@
                         <!--  /wrapper_indent -->
                     </div>
                     <!-- /section_1 -->
+                    <input type="hidden" value="<?php echo $start; ?>" id="start">
+                    <input type="hidden" value="<?php echo $end; ?>" id="end">
+                    <input type="hidden" value="<?php echo $clinic->DAYOFF; ?>" id="day_off">
                 </div>
                 <!-- /box_general -->
 
@@ -420,3 +465,93 @@
     </div>
     <!-- /container -->
 </main>
+<!-- /wrapper indent -->
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo $clinic->CLINICNAME ?? ''; ?></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="box_badges" id="stop" style="display: none">
+                    <div id="badge_level_0"><span class="pe-7s-door-lock ques_online_icon"></span></div>
+                    <h3 class="ques_online_text">หยุดทำการ</h3>
+                </div>
+                <div class="box_badges" id="close" style="display: none">
+                    <div id="badge_level_0"><span class="pe-7s-door-lock ques_online_icon"></span></div>
+                    <h3 class="ques_online_text">เวลาเปิดบริการ</h3>
+                    <h3 class="ques_online_text" id="time_service"><?php echo $start; ?>-<?php echo $end; ?></h3>
+
+                </div>
+                <div class="box_badges" id="open" style="display: none">
+                    <div id="badge_level_0"><span class="pe-7s-speaker ques_online_icon"></span></div>
+                    <h3 class="ques_online_number" id="qber">A3</h3>
+                    <ul>
+                        <li style="font-size: 24px;"><span class="pe-7s-note2"></span> ช่องบริการ <span id="service_no">1</span></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn_1 outline" data-dismiss="modal">ปิด</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function getQues() {
+        let today = new Date();
+        let dateToday = ('0' + (today.getMonth() + 1)).slice(-2) + "/" + ('0' + today.getDate()).slice(-2) + "/" + today.getFullYear();
+        let dayOff = $('#day_off').val();
+        let start = Date.parse(dateToday + " " + $('#start').val());
+        let end = Date.parse(dateToday + " " + $('#end').val());
+        let currentTime = Date.parse(dateToday + " " + today.getHours() + ":" + today.getMinutes());
+        //let currentTime = Date.parse(dateToday + " " + "20:59");
+        if (isNaN(dayOff) || today.getDay() == dayOff) {
+            $('#stop').show();
+            $('#close').hide();
+            $('#open').hide();
+        } else if (start > currentTime || end < currentTime) {
+            $('#close').show();
+            $('#open').hide();
+            $('#stop').hide();
+        } else if (start <= currentTime || end >= currentTime) {
+            $('#close').hide();
+            $('#open').show();
+            $('#stop').hide();
+
+            let minutesToAdd = 15;
+            let time = start;
+            let ques = 1;
+            let quesShow = 0;
+
+            while (time < end) {
+                time = new Date(time + minutesToAdd * 60000);
+                time = Date.parse(time);
+                if (currentTime <= time && quesShow == 0) {
+                    quesShow = ques;
+                }
+                ques++;
+            }
+
+            $('#qber').html("A" + quesShow);
+        }
+
+        $('#myModal').modal('show');
+    }
+</script>
+
+

@@ -46,7 +46,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-6">
-                                <div class="box_feat">
+                                <div class="box_feat_checkin">
                                     <p class="ques_detail"><i class="icon_calendar"></i> <?php echo $detail[0]->BOOKDATE; ?></p>
                                     <p class="ques_detail"><i class="icon_clock_alt"></i> <?php echo $detail[0]->BOOKTIME; ?></p>
                                     <h3>คิวที่</h3>
