@@ -188,15 +188,15 @@ class Clinic extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.postmarkapp.com',
             'smtp_port' => 587,
-            'smtp_user' => '7bf89511-c52e-4073-bddd-e878a3f7650c',
-            'smtp_pass' => '7bf89511-c52e-4073-bddd-e878a3f7650c',
+            'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+            'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
             'smtp_crypto' => 'TLS',
             'mailtype' => 'html',
             'charset' => 'utf-8',
         );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('no-reply@nutmor.com', "Nutmor.com");
+        $this->email->from('Partchayanan.y@softubon.com', "Dev Nutmor.com");
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
