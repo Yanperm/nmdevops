@@ -32,7 +32,7 @@ class Welcome extends CI_Controller {
         'newline' => "\r\n"
         ));
 
-        $this->email->from('Partchayanan.y@softubon.com', 'Nutmor.com');
+        $this->email->from('no-reply@nutmor.com', 'Nutmor.com');
         $this->email->to('partchayanan.y@gmail.com');
         $this->email->cc('partchayanan.y@outlook.co.th');
         $this->email->bcc('partchayanan@oulook.com');
