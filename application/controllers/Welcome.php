@@ -20,4 +20,26 @@ class Welcome extends CI_Controller {
         $this->load->view('welcome_message', $data);
 		$this->load->view('template/footer');
 	}
+    public function sendgrid(){
+        $this->load->library('email');
+        $this->email->initialize(array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'smtp.sendgrid.net',
+        'smtp_user' => 'apikey',
+        'smtp_pass' => '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',
+        'smtp_port' => 587,
+        'crlf' => "\r\n",
+        'newline' => "\r\n"
+        ));
+
+        $this->email->from('Partchayanan.y@softubon.com', 'Nutmor.com');
+        $this->email->to('partchayanan.y@gmail.com');
+        $this->email->cc('partchayanan.y@outlook.co.th');
+        $this->email->bcc('partchayanan@oulook.com');
+        $this->email->subject('Email Test');
+        $this->email->message('Testing the email class.');
+        $this->email->send();
+
+        echo $this->email->print_debugger();
+    }
 }

@@ -182,21 +182,19 @@ class Clinic extends CI_Controller
     }
 
     public function sendMail($to, $subject, $message)
-    {
-        $config = array(
-            'useragent' => 'nutmor.com',
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.postmarkapp.com',
-            'smtp_port' => 587,
-            'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
-            'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
-            'smtp_crypto' => 'TLS',
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-        );
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('Partchayanan.y@softubon.com', "Dev Nutmor.com");
+    {       
+        $this->load->library('email');
+        $this->email->initialize(array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'smtp.sendgrid.net',
+        'smtp_user' => 'apikey',
+        'smtp_pass' => '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',
+        'smtp_port' => 587,
+        'crlf' => "\r\n",
+        'newline' => "\r\n"
+        ));
+
+        $this->email->from('Partchayanan.y@softubon.com', 'Nutmor.com');
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
