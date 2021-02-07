@@ -182,7 +182,8 @@ class Clinic extends CI_Controller
     }
 
     public function sendMail($to, $subject, $message)
-    {       
+    {    
+        //SendGride Service Mail   
         $this->load->library('email');
         $this->email->initialize(array(
         'protocol' => 'smtp',
