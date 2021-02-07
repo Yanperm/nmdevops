@@ -185,16 +185,16 @@ class Clinic extends CI_Controller
     {    
         //SendGride Service Mail   
         $this->load->library('email');
-        $this->email->initialize(array(
-        'protocol' => 'smtp',
-        'smtp_host' => 'smtp.sendgrid.net',
-        'smtp_user' => 'apikey',
-        'smtp_pass' => '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',
-        'smtp_port' => 587,
-        'crlf' => "\r\n",
-        'newline' => "\r\n"
+        $this->email->initialize(
+        array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.sendgrid.net',
+            'smtp_user' => 'apikey',
+            'smtp_pass' => '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',
+            'smtp_port' => 587,
+            'crlf' => "\r\n",
+            'newline' => "\r\n"
         ));
-
         $this->email->from('no-reply@nutmor.com', 'Nutmor.com');
         $this->email->to($to);
         $this->email->subject($subject);
