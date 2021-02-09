@@ -13,9 +13,9 @@ class Clinic extends CI_Controller
 
     public function detail()
     {
-        $clinicId = $this->uri->segment('2');
+        $clinicName = $this->uri->segment('2');
 
-        $clinic = $this->ClinicModel->detail($clinicId);
+        $clinic = $this->ClinicModel->detail($clinicName);
 
         $data = [
             'clinic' => $clinic
@@ -67,10 +67,6 @@ class Clinic extends CI_Controller
         $times = new DatePeriod($begin, $interval, $end);
 
         $booking = $this->BookingModel->getData($clinicId, $date);
-//        echo '<pre>';
-//        print_r($booking);
-//        echo '</pre>';
-//        exit();
 
         $data = [
             'date' => $date,
@@ -93,7 +89,7 @@ class Clinic extends CI_Controller
         $ques = $this->input->get('ques');
         $qber = $this->input->get('qber');
 
-        $clinic = $this->ClinicModel->detail($clinicId);
+        $clinic = $this->ClinicModel->detailById($clinicId);
 
         $data = [
             'date' => $date,
@@ -113,7 +109,6 @@ class Clinic extends CI_Controller
         $firstName = $this->input->post('firstname_booking');
         $lastName = $this->input->post('lastname_booking');
         $email = $this->input->post('email');
-        $idCard = $this->input->post('id_card');
         $telephone = $this->input->post('telephone');
         $lineId = $this->input->post('line_id');
         $cause = $this->input->post('cause');
@@ -123,27 +118,39 @@ class Clinic extends CI_Controller
         $ques = $this->input->post('ques');
         $qber = $this->input->post('qber');
 
-        //insert member
         $dateNow = new DateTime();
-        $timeId = $dateNow->getTimestamp();
-        $data = [
-            'MEMBERIDCARD' => $timeId,
-            'CUSTOMERNAME' => $firstName . " " . $lastName,
-            'IDCARD' => $idCard,
-            'LINEID' => $lineId,
-            'EMAIL' => $email,
-            'PASSWORD' => md5('1234'),
-            'PHONE' => $telephone,
-        ];
-        $this->MembersModel->insert($data);
+        $currentTime = $dateNow->getTimestamp();
+
+        //Duplicate email check
+        $userId = $this->MembersModel($email);
+
+        if ($userId == false) {
+            $userId = $currentTime;
+            //insert member
+            $data = [
+                'MEMBERIDCARD' => $currentTime,
+                'CUSTOMERNAME' => $firstName . " " . $lastName,
+                'LINEID' => $lineId,
+                'EMAIL' => $email,
+                'PASSWORD' => md5($telephone),
+                'PHONE' => $telephone,
+            ];
+            $this->MembersModel->insert($data);
+            $subject = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor";
+            $message = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor\r\nขอบคุณ คุณ " . $firstName . " " . $lastName . " ที่ให้ความไว้วางใจสมัครสมาชิกเพื่อใช้บริการกับเรา\r\n
+            ข้อมูลการเช้าระบบ\r\n
+            username : " . $email . "\r\n
+            password : " . $telephone . "\r\n
+            \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
+            sendMail($email, $subject, $message);
+        }
 
         //insert booking
         $data = [
-            'BOOKINGID' => 'VN' . $timeId,
+            'BOOKINGID' => 'VN' . $currentTime,
             'QUES' => $ques,
             'QBER' => $qber,
-            'IDCARD' => $idCard,
-            'MEMBERIDCARD' => $timeId,
+            'MEMBERIDCARD' => $userId,
             'CLINICID' => $clinicId,
             'BOOKDATE' => $date,
             'BOOKTIME' => $time,
@@ -151,13 +158,12 @@ class Clinic extends CI_Controller
         ];
         $this->ClinicModel->insert($data);
 
-        $clinic = $this->ClinicModel->detail($clinicId);
-
+        $clinic = $this->ClinicModel->detailById($clinicId);
 
         $dataEmail = [
+            'vn' => 'VN' . $currentTime,
             'firstName' => $firstName,
             'lastName' => $lastName,
-            'idCard' => $idCard,
             'telephone' => $telephone,
             'lineId' => $lineId,
             'cause' => $cause,
@@ -169,7 +175,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($email != '') {
-            $this->sendMail($email, $subject, $message);
+            sendMail($email, $subject, $message);
         }
 
         $data = [
@@ -181,32 +187,12 @@ class Clinic extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function sendMail($to, $subject, $message)
-    {    
-        //SendGride Service Mail   
-        $this->load->library('email');
-        $this->email->initialize(
-        array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.sendgrid.net',
-            'smtp_user' => 'apikey',
-            'smtp_pass' => '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',
-            'smtp_port' => 587,
-            'crlf' => "\r\n",
-            'newline' => "\r\n"
-        ));
-        $this->email->from('no-reply@nutmor.com', 'Nutmor.com');
-        $this->email->to($to);
-        $this->email->subject($subject);
-        $this->email->message($message);
-        $this->email->send();
-    }
-
-    public function checkIn(){
+    public function checkIn()
+    {
         $clinic = $this->ClinicModel->getdata();
         $clinicId = '';
-        if(!empty($this->input->get('clinic'))){
-            $clinicId =$this->input->get('clinic');
+        if (!empty($this->input->get('clinic'))) {
+            $clinicId = $this->input->get('clinic');
         }
 
         $data = [
@@ -219,11 +205,23 @@ class Clinic extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function detailCheckin(){
-        $clinic = $this->input->post('clinic');
+    public function detailCheckin()
+    {
         $email = $this->input->post('email');
 
-        $detail = $this->BookingModel->getCheckin($clinic,$email);
+        $detail = '';
+
+        $clinicId = '';
+        if (!empty($this->input->post('clinic'))) {
+            $clinicId = $this->input->post('clinic');
+            $detail = $this->BookingModel->getCheckin($clinicId, $email);
+        }
+
+        $vnId = '';
+        if (!empty($this->input->post('vn'))) {
+            $vnId = $this->input->post('vn');
+            $detail = $this->BookingModel->getCheckinByVN($vnId, $email);
+        }
 
         $data = [
             'detail' => $detail
@@ -234,7 +232,8 @@ class Clinic extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function confirmCheckin(){
+    public function confirmCheckin()
+    {
         $bookingId = $this->uri->segment('3');
 
         $this->BookingModel->checkin($bookingId);
@@ -242,14 +241,14 @@ class Clinic extends CI_Controller
         $booking = $this->BookingModel->detail($bookingId);
 
         $subject = "ยืนยันการเช็คอิน";
-        $message = "ยืนยันการเช็คอิน การจองหมายเลข : ".$booking[0]->BOOKINGID."\n";
-        $message .= "วันที่ : ".$booking[0]->BOOKDATE."\n";
-        $message .= "เวลา : ".$booking[0]->BOOKTIME."\n";
-        $message .= "คิว : ".$booking[0]->QUES."\n";
+        $message = "ยืนยันการเช็คอิน การจองหมายเลข : " . $booking[0]->BOOKINGID . "\n";
+        $message .= "วันที่ : " . $booking[0]->BOOKDATE . "\n";
+        $message .= "เวลา : " . $booking[0]->BOOKTIME . "\n";
+        $message .= "คิว : " . $booking[0]->QUES . "\n";
 
         //sendmail
         if ($booking[0]->EMAIL != '') {
-            $this->sendMail($booking[0]->EMAIL, $subject, $message);
+            sendMail($booking[0]->EMAIL, $subject, $message);
         }
 
         $this->load->view('template/header');

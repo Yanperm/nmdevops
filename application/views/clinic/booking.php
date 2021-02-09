@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('detail/'.$clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME;?></a></li>
+                <li><a href="<?php echo base_url('clinic/'.$clinic->CLINICNAME); ?>"><?php echo $clinic->CLINICNAME;?></a></li>
                 <li>นัดหมอออนไลน์</li>
             </ul>
         </div>
@@ -39,14 +39,6 @@
                                     <div class="form-group">
                                         <label>นามสกุล</label>
                                         <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>หมายเลขประจําตัวประชาชน</label>
-                                        <input type="text" id="id_card" name="id_card" class="form-control" placeholder="x - xxxx - xxxxx - xx - x">
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +103,7 @@
                         <div class="summary">
                             <ul>
                                 <li>วันที่: <strong class="float-right"><?php echo $date;?></strong></li>
+                                <li>คิวที่ : <strong class="float-right"><?php echo  $ques;?></strong></li>
                                 <li>เวลา: <strong class="float-right"><?php echo $time;?></strong></li>
                                 <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME ?? ''; ?></strong></li>
                             </ul>

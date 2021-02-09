@@ -31,9 +31,19 @@ class ClinicModel extends CI_Model
         }
     }
 
-    public function detail($clinicId)
+    public function detailById($clinicId)
     {
         $query = $this->db->query('SELECT * FROM tbclinic where CLINICID = "' . $clinicId . '"');
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
+    public function detail($clinicName)
+    {
+        $query = $this->db->query('SELECT * FROM tbclinic where CLINICNAME LIKE "' . $clinicName . '"');
         if ($query->num_rows() > 0) {
             return $query->row();
         } else {

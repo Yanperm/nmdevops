@@ -6,10 +6,17 @@ class Welcome extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
         $this->load->model('ClinicModel');
     }
 	public function index()
 	{
+//        $user_data =  $this->session->userdata('userdata');
+//        print_r($user_data);
+//        echo $this->session->userdata('name');
+//	    echo 'sdf';
+
+
         $clinic = $this->ClinicModel->getData();
 
         $data = [

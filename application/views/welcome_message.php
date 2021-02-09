@@ -28,7 +28,6 @@
                     </ul>
                 </div>
             </form>
-            <a href="<?php echo base_url('/checkin')?>" class="btn_1 medium">เช็คอินยืนยันการเข้าตรวจ</a>
         </div>
     </div>
     <!-- /Hero -->
