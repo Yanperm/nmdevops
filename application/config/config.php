@@ -375,7 +375,7 @@ $config['encryption_key'] = '';
 |
 | Other session cookie settings are shared with the rest of the application,
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
-|
+|session
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
