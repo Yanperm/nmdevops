@@ -17,11 +17,7 @@
                         <ul class="clearfix">
                             <li><a href="#section_1" class="active">ข้อมูลพื้นฐาน</a></li>
                             <li class="ques_online_review_li"><a href="#section_2">รีวิว</a></li>
-                            <li class="ques_online_li"><a onclick="getQues()" class="ques_online_link">
-                                    <div class="fs1" aria-hidden="true" data-icon=""> คิวตรวจออนไลน์</div>
-                                </a></li>
-
-
+                            <li></li>
                         </ul>
                     </div>
                 </nav>
@@ -51,8 +47,8 @@
 
 
                                     <ul class="statistic">
-                                        <li>เว็บ</li>
-                                        <li>มือถือ</li>
+                                        <li><a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" style="color: #ffffff;">เช็คอิน</a></li>
+                                        <li onclick="getQues()" style="cursor: pointer">ดูคิว</li>
                                     </ul>
 
 
@@ -65,9 +61,6 @@
                                         <li>
                                             <h6>Contact</h6> โทร:<a href="tel://006<?php echo $clinic->PHONE ?? ''; ?>"> <?php echo $clinic->PHONE ?? ''; ?></a> Line: <a href="http://line.me/ti/p/<?php echo $clinic->LINE ?? ''; ?>" target="_blank"> <?php echo $clinic->LINE ?? ''; ?></a></li>
                                     </ul>
-                                    <div class="mt-3" style="text-align: center">
-                                        <a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" class="btn_1 medium fadeIn animated mt-2">เช็คอิน</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -375,7 +368,7 @@
             <!-- /col -->
             <aside class="col-xl-4 col-lg-4" id="sidebar">
                 <div class="box_general_3 booking">
-                    <form method="post" action="<?php echo base_url('time/' . $clinic->CLINICID); ?>">
+                    <form method="post" action="<?php echo base_url('time/' . $clinic->CLINICNAME); ?>">
                         <div class="title">
                             <h3>นัดหมายแพทย์</h3>
                             <small>บริการนัดหมายแพทย์ออนไลน์</small>
@@ -397,7 +390,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="booking_date" id="book_date" required>
+                                    <input type="date"  class="form-control" name="booking_date" id="book_date" required>
                                 </div>
                             </div>
                         </div>

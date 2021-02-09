@@ -127,14 +127,30 @@
     font-size: 30px !important;
 }
 
+.img_login{
+    width: 100%;
+    margin-top: 55px;
+}
 #secondary_nav ul li:last-child {
     display: block;
     margin-right: 0;
+}
+
+ul#top_access li i {
+    font-size: 34px;
+    font-size: 22px !important;
+}
+.error{
+    color: #e91e63;
 }
 
 @media (max-width: 425px) {
 
     .ques_online_review_li {
         display: none !important;
+    }
+
+    .img_login{
+        margin-bottom: 20px;
     }
 }

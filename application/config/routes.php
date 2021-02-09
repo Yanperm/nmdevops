@@ -56,11 +56,19 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['search'] = 'search/listData';
 
-$route['detail/(:any)'] = 'clinic/detail';
+$route['clinic/(:any)'] = 'clinic/detail';
 $route['time/(:any)'] = 'clinic/time';
 $route['booking/(:any)'] = 'clinic/booking';
 $route['booking-confirm'] = 'clinic/confirm';
 $route['checkin'] = 'clinic/checkin';
 $route['detail_checkin'] = 'clinic/detailCheckin';
 $route['confirm/checkin/(:any)'] = 'clinic/confirmCheckin';
+
+$route['register'] = 'auth/register';
+$route['login'] = 'auth/login';
+$route['logout'] = 'auth/logout';
+$route['login_member'] = 'auth/loginMember';
+$route['add_member'] = 'auth/addMember';
+$route['check_email_already'] = 'auth/checkEmailAlready';
+
 
