@@ -112,6 +112,9 @@
                     required: "กรุณากรอกยืนยันรหัสผ่าน",
                     equalTo: "รหัสไม่ตรงกัน"
                 }
+            },
+            submitHandler: function(form) {
+                form.submit();
             }
         });
     });

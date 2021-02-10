@@ -83,7 +83,7 @@
                                 </ul>
                             </li>
 
-                        <?php endif; ?>
+                        <?php endif;?>
                     </ul>
                 </div>
                 <!-- /main-menu -->
