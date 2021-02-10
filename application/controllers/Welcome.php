@@ -6,26 +6,24 @@ class Welcome extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('session');
         $this->load->model('ClinicModel');
+        $this->load->model('AdvertiseModel');
     }
 	public function index()
 	{
-//        $user_data =  $this->session->userdata('userdata');
-//        print_r($user_data);
-//        echo $this->session->userdata('name');
-//	    echo 'sdf';
-
+        $advertise = $this->AdvertiseModel->listData();
 
         $clinic = $this->ClinicModel->getData();
 
         $data = [
-            'clinic' => $clinic
+            'clinic' => $clinic,
+            'advertise' => $advertise
         ];
 
 		$this->load->view('template/header');
         $this->load->view('welcome_message', $data);
 		$this->load->view('template/footer');
+
 	}
     public function sendgrid(){
         $this->load->library('email');

@@ -1,4 +1,66 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css"/>
+<style>
 
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #f5f8fa;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .swiper-button-prev:after, .swiper-button-next:after {
+        font-family: swiper-icons;
+        font-size: 26px;
+        text-transform: none !important;
+        letter-spacing: 0;
+        text-transform: none;
+        font-variant: initial;
+        line-height: 1;
+    }
+    .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+        left: -5px;
+        right: auto;
+        width: 32px;
+        height: 32px;
+        color: #3f417a;
+        background: rgb(255, 255, 255);
+        box-shadow: rgb(0 0 0 / 25%) 0px 2px 4px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .swiper-button-prev, .swiper-button-next {
+
+        top: 40% !important;
+    }
+    .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+        right: -5px;
+        left: auto;
+        width: 32px;
+        height: 32px;
+        color: #3f417a;
+        background: rgb(255, 255, 255);
+        box-shadow: rgb(0 0 0 / 25%) 0px 2px 4px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
 <main>
     <div class="hero_home version_1">
         <div class="content">
@@ -35,61 +97,86 @@
     <div class="container margin_120_95">
         <div class="main_title">
             <h2>ประสบการณ์ใหม่ <strong>นัดหมอ</strong> ออนไลน์</h2>
-            <p>เมื่อเราเจ็บป่วย ทุกคนต้องการที่จะพบหมอโดยเร็ว ตรวจร่างกาย แล้วได้พบหมอ เพื่อจะได้รักษาอาการที่เป็น โดยไม่ต้องไปรอที่คลินิกนานๆ มีขั้นตอนง่ายๆ ดังนี้</p>
+            <p>เมื่อเราเจ็บป่วย ทุกคนต้องการที่จะพบหมอโดยเร็ว ตรวจร่างกาย แล้วได้พบหมอ เพื่อจะได้รักษาอาการที่เป็น</p>
         </div>
-        <div class="row add_bottom_30">
-            <div class="col-lg-4">
-                <div class="box_feat" id="icon_1">
-                    <span></span>
-                    <h3>ค้นหาแพทย์</h3>
-                    <p>ค้นหาแพทย์ หรือ คลินิกโดยใช้ ชื่อจริง ของแพทย์ หรือคำค้นอาการที่แสดง แล้วกด ค้นหา เลือกนัดหมายแพทย์</p>
+
+        <?php if(count($advertise) > 0):?>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <?php  foreach ($advertise as $item):?>
+                <div class="swiper-slide">
+                    <div class="box_card">
+                        <img class="advertise_image" src="<?php echo $item->ADVERTISEIMAGE;?>">
+                        <h3><?php echo $item->ADVERTISESUBJECT;?></h3>
+                        <p><?php echo $item->ADVERTISEDETAIL;?></p>
+                        <a href="<?php echo $item->ADVERTISELINK;?>" target="_blank" class="advertise_link">อ่านต่อ</a>
+                    </div>
                 </div>
+                <?php endforeach;?>
             </div>
-            <div class="col-lg-4">
-                <div class="box_feat" id="icon_2">
-                    <span></span>
-                    <h3>ดูโปรไฟล์</h3>
-                    <p>ศึกษารายละเอียดข้อมูลแพทย์ ความเชี่ยวชาญ ที่ตั้ง เวลาเปิดปิด ว่าตรงกับอาการและความต้องการ ของเราหรือไม่ </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="box_feat" id="icon_3">
-                    <h3>นัดหมอ</h3>
-                    <p>ทำการนัดหมายแพทย์ ผ่านระบบออนไลน์ ทางเว็บ และทาง mobile application เช็คอิน ดูคิวออนไลน์ </p>
-                </div>
-            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
+        <?php endif;?>
+
+
+        <!--        <div class="row add_bottom_30">-->
+        <!--            <div class="col-lg-4">-->
+        <!--                <div class="box_feat" id="icon_1">-->
+        <!--                    <span></span>-->
+        <!--                    <h3>ค้นหาแพทย์</h3>-->
+        <!--                    <p>ค้นหาแพทย์ หรือ คลินิกโดยใช้ ชื่อจริง ของแพทย์ หรือคำค้นอาการที่แสดง แล้วกด ค้นหา เลือกนัดหมายแพทย์</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="col-lg-4">-->
+        <!--                <div class="box_feat" id="icon_2">-->
+        <!--                    <span></span>-->
+        <!--                    <h3>ดูโปรไฟล์</h3>-->
+        <!--                    <p>ศึกษารายละเอียดข้อมูลแพทย์ ความเชี่ยวชาญ ที่ตั้ง เวลาเปิดปิด ว่าตรงกับอาการและความต้องการ ของเราหรือไม่ </p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="col-lg-4">-->
+        <!--                <div class="box_feat" id="icon_3">-->
+        <!--                    <h3>นัดหมอ</h3>-->
+        <!--                    <p>ทำการนัดหมายแพทย์ ผ่านระบบออนไลน์ ทางเว็บ และทาง mobile application เช็คอิน ดูคิวออนไลน์ </p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
         <!-- /row -->
-        <p class="text-center"><a href="<?php echo base_url('link/list') ?>" class="btn_1 medium">นัดหมอ</a></p>
+<!--        <p class="text-center"><a href="--><?php //echo base_url('link/list') ?><!--" class="btn_1 medium">นัดหมอ</a></p>-->
 
     </div>
     <!-- /container -->
-    <?php if(count($clinic) > 0):?>
-    <div class="bg_color_1">
-        <div class="container margin_120_95">
-            <div class="main_title">
-                <h2>คลินิกโปรด</h2>
-                <p>รายการคลินิกโปรด ที่มีผู้สนใจใช้บริการในขณะนี้</p>
-            </div>
-            <div id="reccomended" class="owl-carousel owl-theme">
+    <?php if (count($clinic) > 0): ?>
+        <div class="bg_color_1">
+            <div class="container margin_120_95">
+                <div class="main_title">
+                    <h2>คลินิกโปรด</h2>
+                    <p>รายการคลินิกโปรด ที่มีผู้สนใจใช้บริการในขณะนี้</p>
+                </div>
+                <div id="reccomended" class="owl-carousel owl-theme">
 
-                <?php foreach ($clinic as $row):?>
-                    <div class="item">
-                        <form method="post" action="<?php echo base_url('detail/'.$row->CLINICID) ?>">
-                            <div class="views"><i class="icon-eye-7"></i>3000</div>
-                            <div class="title">
-                                <button class="btn btn-block btn-info" type="submit"><?php echo $row->CLINICNAME; ?><br/><em><?php echo $row->DETAIL; ?></em></button>
-                            </div><img src="<?php echo $row->image; ?>" alt="">
-                        </form>
-                    </div>
-                <?php endforeach; ?>
+                    <?php foreach ($clinic as $row): ?>
+                        <div class="item">
+                            <form method="post" action="<?php echo base_url('detail/' . $row->CLINICID) ?>">
+                                <div class="views"><i class="icon-eye-7"></i>3000</div>
+                                <div class="title">
+                                    <button class="btn btn-block btn-info" type="submit"><?php echo $row->CLINICNAME; ?><br/><em><?php echo $row->DETAIL; ?></em></button>
+                                </div>
+                                <img src="<?php echo $row->image; ?>" alt="">
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
 
+                </div>
+                <!-- /carousel -->
             </div>
-            <!-- /carousel -->
+            <!-- /container -->
         </div>
-        <!-- /container -->
-    </div>
-    <?php endif;?>
+    <?php endif; ?>
     <!-- /white_bg -->
     <!-- /container
     <div class="container margin_120_95 hidden">
@@ -155,9 +242,9 @@
                     <p class="lead">Tota omittantur necessitatibus mei ei. Quo paulo perfecto eu, errem percipit ponderum no eos. Has eu mazim sensibus. Ad nonumes dissentiunt qui, ei menandri electram eos. Nam iisque consequuntur cu.</p>
                     <div class="app_buttons wow" data-wow-offset="100">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
-                        <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1" />
-                        <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58" />
-                        <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9" />
+                        <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-1" d="M40.6,78.1C39,71.3,37.2,64.6,35.2,58"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" class="draw-arrow tail-2" d="M39.8,78.5c-7.2,1.7-14.3,3.3-21.5,4.9"/>
                         </svg>
                         <a href="https://apps.apple.com/app/id1510928546" class="fadeIn"><img src="<?php echo base_url() ?>assets/img/apple_app.png" alt="" width="150" height="50" data-retina="true"></a>
                         <a href="https://play.google.com/store/apps/details?id=com.nutmor.app" class="fadeIn"><img src="<?php echo base_url() ?>assets/img/google_play_app.png" alt="" width="150" height="50" data-retina="true"></a>
@@ -171,3 +258,22 @@
     <!-- /app_section -->
 </main>
 <!-- /main content -->
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: false,
+        pagination: false,
+        // pagination: {
+        //     el: '.swiper-pagination',
+        //     clickable: true,
+        // },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
