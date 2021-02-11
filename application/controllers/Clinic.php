@@ -66,8 +66,8 @@ class Clinic extends CI_Controller
 
         $times = new DatePeriod($begin, $interval, $end);
 
-        $booking = $this->BookingModel->getData($clinicId, $date);
-
+        $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
+        
         $data = [
             'date' => $date,
             'clinic' => $clinic,
