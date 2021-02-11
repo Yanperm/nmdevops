@@ -47,13 +47,10 @@
                                 </div>
                             </div>
                             <p class="text-center link_bright">เป็นสมาชิกอยู่แล้วหรือไม่? <a href="<?php echo base_url('login') ?>"><strong>เข้าสู่ระบบ</strong></a></p>
-                            <!--                            <p class="text-center"><small>Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet. Eum no atqui putant democritum, velit nusquam sententiae vis no.</small></p>-->
                         </form>
                     </div>
                 </div>
-                <!-- /row -->
             </div>
-            <!-- /register -->
         </div>
     </div>
 </main>
@@ -113,7 +110,7 @@
                     equalTo: "รหัสไม่ตรงกัน"
                 }
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 form.submit();
             }
         });
