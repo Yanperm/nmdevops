@@ -122,7 +122,7 @@ class Clinic extends CI_Controller
         $currentTime = $dateNow->getTimestamp();
 
         //Duplicate email check
-        $userId = $this->MembersModel($email);
+        $userId = $this->MembersModel->checkDuplicate($email);
 
         if ($userId == false) {
             $userId = $currentTime;
@@ -189,6 +189,15 @@ class Clinic extends CI_Controller
 
     public function checkIn()
     {
+        $vn = '';
+        $email = '';
+        if(!empty($this->input->get('vn'))){
+            $vn = $this->input->get('vn');
+        }
+        if(!empty($this->input->get('email'))){
+            $email = $this->input->get('email');
+        }
+
         $clinic = $this->ClinicModel->getdata();
         $clinicId = '';
         if (!empty($this->input->get('clinic'))) {
@@ -197,7 +206,9 @@ class Clinic extends CI_Controller
 
         $data = [
             'clinic' => $clinic,
-            'clinicId' => $clinicId
+            'clinicId' => $clinicId,
+            'vn' => $vn,
+            'email' => $email
         ];
 
         $this->load->view('template/header');

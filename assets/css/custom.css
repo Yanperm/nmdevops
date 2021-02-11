@@ -215,6 +215,12 @@ ul#top_access li i {
     cursor: pointer;
 }
 
+.history_span{
+    color: #e91e63;
+    font-size: 17px;
+    font-weight: 900;
+}
+
 @media (max-width: 425px) {
 
     .ques_online_review_li {

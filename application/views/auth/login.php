@@ -11,7 +11,7 @@
                 <?php echo form_open(base_url('login'), array('id' => 'loginForm')) ?>
                 <div class="box_form clearfix">
                     <div class="box_login">
-                        <img class="img_login" src="assets/img/logo_2x.png">
+                        <img class="img_login" src="assets/img/nutmor_logo.png">
                     </div>
                     <div class="box_login last">
                         <div class="form-group">

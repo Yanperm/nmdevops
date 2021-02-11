@@ -19,11 +19,11 @@
 
     <!-- BASE CSS -->
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/style.css?v=<?php echo time(); ?>" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/menu.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/vendors.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>assets/css/tables.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/tables.css?v=<?php echo time(); ?>" rel="stylesheet">
     <script src="<?php echo base_url() ?>assets/js/modernizr_tables.js"></script>
     <!-- YOUR CUSTOM CSS -->
     <link href="<?php echo base_url() ?>assets/css/custom.css?v=<?php echo time(); ?>" rel="stylesheet">
@@ -78,7 +78,7 @@
                             <li class="submenu">
                                 <a class="show-submenu"><i class="icon-user-7"></i> <?php echo $this->session->userdata('name');?><i class="icon-down-open-mini"></i></a>
                                 <ul>
-                                    <li><a href="#">บัญชีผู้ใช้</a></li>
+                                    <li><a href="<?php echo base_url('member/profile');?>">บัญชีผู้ใช้</a></li>
                                     <li><a href="<?php echo base_url('logout') ?>">ออกจากระบบ</a></li>
                                 </ul>
                             </li>

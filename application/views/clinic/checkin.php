@@ -21,12 +21,12 @@
                             <?php if($clinicId == ''):?>
                                 <p class="p_checkin">หมายเลขการจอง * vnxxxxxxx</p>
                                 <div class="form-group">
-                                    <input type="text" name="vn" class="form-control" placeholder="">
+                                    <input type="text" name="vn" value="<?php echo $vn;?>" class="form-control" placeholder="">
                                 </div>
                             <?php endif;?>
                             <p class="p_checkin">อีเมล</p>
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="อีเมลของท่าน">
+                                <input type="email" name="email" value="<?php echo $email;?>" class="form-control" placeholder="อีเมลของท่าน">
                             </div>
 
                             <div class="form-group">

@@ -13,13 +13,6 @@ class Auth extends CI_Controller
         $this->load->model('MembersModel');
     }
 
-    private function logged_in()
-    {
-        if( ! $this->session->userdata('authenticated')){
-            redirect('login');
-        }
-    }
-
     public function register()
     {
         $this->load->view('template/header');
@@ -34,18 +27,17 @@ class Auth extends CI_Controller
 
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
-        if($this->form_validation->run() == false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('template/header');
             $this->load->view('auth/login');
             $this->load->view('template/footer');
-        }
-        else {
+        } else {
             $email = $this->security->xss_clean($this->input->post('email'));
             $password = $this->security->xss_clean($this->input->post('password'));
 
             $user = $this->MembersModel->login($email, $password);
 
-            if($user){
+            if ($user) {
                 $userdata = array(
                     'id' => $user->MEMBERIDCARD,
                     'name' => $user->CUSTOMERNAME,
@@ -55,10 +47,9 @@ class Auth extends CI_Controller
                 $this->session->set_userdata($userdata);
 
                 redirect(base_url(''));
-            }
-            else {
-                $this->session->set_flashdata('message', 'Invalid email or password');
-                redirect('login');
+            } else {
+                $this->session->set_flashdata('message', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+                redirect(base_url('login'));
             }
         }
     }
@@ -67,21 +58,6 @@ class Auth extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(base_url('login'));
-    }
-
-//    public function login()
-//    {
-//        $this->load->view('template/header');
-//        $this->load->view('auth/login');
-//        $this->load->view('template/footer');
-//    }
-
-    public function loginMember()
-    {
-
-//        $this->load->view('template/header');
-//        $this->load->view('auth/login');
-//        $this->load->view('template/footer');
     }
 
     public function addMember()
@@ -120,13 +96,36 @@ class Auth extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function checkEmailAlready(){
+    public function checkEmailAlready()
+    {
         $email = $this->input->post('email');
         $check = $this->MembersModel->checkDuplicate($email);
-        if($check == false){
+        if ($check == false) {
             echo 'true';
-        }else{
+        } else {
             echo 'false';
+        }
+    }
+
+    public function checkEmailAlreadyProfile()
+    {
+        $email = $this->input->post('email');
+        $check = $this->MembersModel->checkDuplicateProfile($email, $this->session->userdata('id'));
+        if ($check == false) {
+            echo 'true';
+        } else {
+            echo 'false';
+        }
+    }
+
+    public function checkOldPassword()
+    {
+        $password = $this->input->post('old_password');
+        $check = $this->MembersModel->checkOldPassword(md5($password), $this->session->userdata('id'));
+        if ($check == false) {
+            echo 'false';
+        } else {
+            echo 'true';
         }
     }
 }

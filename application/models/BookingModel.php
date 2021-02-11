@@ -59,6 +59,21 @@ class BookingModel extends CI_Model
         }
     }
 
+    public function getBookingByUserId($userId,$rowperpage,$rowno){
+        $query = $this->db->query('
+            SELECT * FROM tbbooking as booking 
+            left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
+            left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
+            where booking.MEMBERIDCARD = "'.$userId.'"
+            limit '.$rowno.','.$rowperpage);
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
     public function checkin($bookingId)
     {
         $this->db->set('CHECKIN', '1', FALSE);

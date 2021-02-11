@@ -37,13 +37,37 @@ class MembersModel extends CI_Model
         }
     }
 
+    public function checkDuplicateProfile($email, $userId)
+    {
+        $query = $this->db->query('SELECT MEMBERIDCARD FROM tbmembers where MEMBERIDCARD != "' . $userId . '" AND EMAIL = "' . $email . '"');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $item) {
+                return $item->MEMBERIDCARD;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function checkOldPassword($password, $userId)
+    {
+        $query = $this->db->query('SELECT MEMBERIDCARD FROM tbmembers where MEMBERIDCARD = "' . $userId . '" AND PASSWORD = "' . $password . '"');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $item) {
+                return $item->MEMBERIDCARD;
+            }
+        } else {
+            return false;
+        }
+    }
+
     public function login($email, $password)
     {
         $this->db->where('EMAIL', $email);
         $this->db->where('PASSWORD', md5($password));
         $query = $this->db->get('tbmembers');
 
-        if($query->num_rows() == 1) {
+        if ($query->num_rows() == 1) {
             return $query->row();
         }
 
@@ -54,6 +78,13 @@ class MembersModel extends CI_Model
     {
         $this->db->insert('tbmembers', $data);
         return $this->db->insert_id();
+    }
+
+    public function update($data, $userId)
+    {
+        $this->db->where('MEMBERIDCARD', $userId);
+        $this->db->update('tbmembers', $data);
+        return true;
     }
 
 }

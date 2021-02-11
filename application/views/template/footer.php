@@ -5,7 +5,7 @@
                     <div class="col-lg-3 col-md-12">
                         <p>
                             <a href="index.html" title="Findoctor">
-                                <img src="<?php echo base_url() ?>assets/img/logo.png" data-retina="true" alt="" width="163" height="36" class="img-fluid">
+                                <img src="<?php echo base_url() ?>assets/img/nutmor_logo.png" data-retina="true" alt="" width="163" height="36" class="img-fluid">
                             </a>
                         </p>
                     </div>

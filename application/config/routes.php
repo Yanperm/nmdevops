@@ -70,5 +70,12 @@ $route['logout'] = 'auth/logout';
 $route['login_member'] = 'auth/loginMember';
 $route['add_member'] = 'auth/addMember';
 $route['check_email_already'] = 'auth/checkEmailAlready';
+$route['check_email_already_profile'] = 'auth/checkEmailAlreadyProfile';
+$route['check_old_password'] = 'auth/checkOldPassword';
 
+$route['member/profile'] = 'member/profile';
+$route['loadBooking/(:any)'] = 'member/loadBooking';
+$route['loadCheckin/(:any)'] = 'member/loadCheckin';
+$route['profile/update'] = 'member/profileUpdate';
+$route['password/update'] = 'member/passwordUpdate';
 
