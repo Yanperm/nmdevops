@@ -15,6 +15,16 @@
                     </div>
                     <div class="box_login last">
                         <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" id="inlineRadio1" checked value="member">
+                            <label class="form-check-label" for="inlineRadio1">สมาชิกทั่วไป</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="clinic">
+                            <label class="form-check-label" for="inlineRadio2">คลีนิก</label>
+                        </div>
+                        </div>
+                        <div class="form-group">
                             <input type="email" class="form-control" placeholder="อีเมล" name="email" id="email">
                             <?php echo form_error('email', '<div class="error">', '</div>') ?>
                         </div>

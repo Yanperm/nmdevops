@@ -74,6 +74,16 @@ class MembersModel extends CI_Model
         return false;
     }
 
+    public function checkVerify($email, $code)
+    {
+        $query = $this->db->query('SELECT MEMBERIDCARD FROM tbmembers where EMAIL = "' . $email . '" AND email_verification_code = "' . $code . '"');
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function insert($data)
     {
         $this->db->insert('tbmembers', $data);
