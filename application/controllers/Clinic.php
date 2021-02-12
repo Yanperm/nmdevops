@@ -67,7 +67,7 @@ class Clinic extends CI_Controller
         $times = new DatePeriod($begin, $interval, $end);
 
         $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
-        
+
         $data = [
             'date' => $date,
             'clinic' => $clinic,
@@ -264,6 +264,21 @@ class Clinic extends CI_Controller
 
         $this->load->view('template/header');
         $this->load->view('clinic/confirm_checkin');
+        $this->load->view('template/footer');
+    }
+
+    public function profile()
+    {
+        $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+       // $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
+
+        $data = [
+            'clinic' => $clinic,
+           // 'countBooking' => $allcount
+        ];
+
+        $this->load->view('template/header');
+        $this->load->view('clinic/profile', $data);
         $this->load->view('template/footer');
     }
 }

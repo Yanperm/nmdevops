@@ -63,15 +63,20 @@ $route['booking-confirm'] = 'clinic/confirm';
 $route['checkin'] = 'clinic/checkin';
 $route['detail_checkin'] = 'clinic/detailCheckin';
 $route['confirm/checkin/(:any)'] = 'clinic/confirmCheckin';
+$route['clinic_profile'] = 'clinic/profile';
 
 $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['login_member'] = 'auth/loginMember';
 $route['add_member'] = 'auth/addMember';
+$route['add_clinic'] = 'auth/addClinic';
 $route['check_email_already'] = 'auth/checkEmailAlready';
+$route['check_email_clinic_already'] = 'auth/checkEmailClinicAlready';
 $route['check_email_already_profile'] = 'auth/checkEmailAlreadyProfile';
 $route['check_old_password'] = 'auth/checkOldPassword';
+$route['verify'] = 'auth/verify';
+$route['verify/check'] = 'auth/verifyCheck';
 
 $route['member/profile'] = 'member/profile';
 $route['loadBooking/(:any)'] = 'member/loadBooking';

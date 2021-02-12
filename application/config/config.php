@@ -521,3 +521,11 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['folder_name'] = 'nutmor_member_image/';
+
+$config['s3_access_key'] = 'AKIAJLBOTBCHGDTVEBRQ';
+$config['s3_secret_key'] = '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';
+
+$config['s3_bucket_name'] = 'elasticbeanstalk-ap-southeast-1-169851560771';
+$config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com';

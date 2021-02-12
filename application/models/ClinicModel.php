@@ -63,6 +63,47 @@ class ClinicModel extends CI_Model
         }
     }
 
+    public function checkDuplicate($email)
+    {
+        $query = $this->db->query('SELECT IDCLINIC FROM tbclinic where USERNAME = "' . $email . '"');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $item) {
+                return $item->IDCLINIC;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function checkVerify($email, $code)
+    {
+        $query = $this->db->query('SELECT IDCLINIC FROM tbclinic where USERNAME = "' . $email . '" AND email_verification_code = "' . $code . '"');
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function login($email, $password)
+    {
+        $this->db->where('USERNAME', $email);
+        $this->db->where('PASSWORD', md5($password));
+        $query = $this->db->get('tbclinic');
+
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        }
+
+        return false;
+    }
+
+    public function insertClinic($data)
+    {
+        $this->db->insert('tbclinic', $data);
+        return $this->db->insert_id();
+    }
+
     public function insert($data)
     {
         $this->db->insert('tbbooking', $data);
