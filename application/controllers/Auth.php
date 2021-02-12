@@ -72,6 +72,52 @@ class Auth extends CI_Controller
         $this->load->view('template/footer');
     }
 
+    public function reSendMail(){
+        $email = $this->input->get('email');
+        $type = $this->input->get('type');
+
+        $newCode = random_int(111111,999999);
+
+        if($type == 'member'){
+            $member = $this->MembersModel->detailByEmail($email);
+
+            $data = [
+                'email_verification_code' => $newCode
+            ];
+
+            $this->MembersModel->update($data,$member->MEMBERIDCARD);
+        }else if($type == 'clinic'){
+            $clinic = $this->ClinicModel->detailByEmail($email);
+
+            $data = [
+                'email_verification_code' => $newCode
+            ];
+
+            $this->MembersModel->update($data,$clinic->IDCLINIC);
+        }
+
+        $subject = "โปรดยืนยันอีเมลของคุณ";
+
+        $dataEmail = [
+            'email' => $email,
+            'code' => $newCode,
+            'type' => $type
+        ];
+
+        $message = $this->load->view('email_layout_template', $dataEmail);
+        sendMail($email, $subject, $message);
+
+        $data = [
+            'email' => $email,
+            'type' => $type
+        ];
+
+        $this->load->view('template/header');
+        $this->load->view('auth/verify', $data);
+        $this->load->view('template/footer');
+
+    }
+
     public function login()
     {
         $this->form_validation->set_rules('email', 'email', 'trim|required');
@@ -106,6 +152,8 @@ class Auth extends CI_Controller
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
                         'authenticated' => TRUE,
+                        'activate' =>$user->ACTIVATE_STATUS,
+                        'email' =>$user->EMAIL,
                         'type' => 'member'
                     );
                 }else{
@@ -113,6 +161,8 @@ class Auth extends CI_Controller
                         'id' => $user->tbclinic,
                         'name' => $user->CLINICNAME,
                         'authenticated' => TRUE,
+                        'activate' => $user->ACTIVATE,
+                        'email' =>$user->USERNAME,
                         'type' => 'clinic'
                     );
                 }
