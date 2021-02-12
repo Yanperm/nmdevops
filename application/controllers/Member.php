@@ -17,7 +17,7 @@ class Member extends CI_Controller
     {
         if (!$this->session->userdata('authenticated')) {
             redirect(base_url('login'));
-        } else {
+        } else if($this->session->userdata('authenticated') && !$this->session->userdata('activate')){
             if (!$this->session->userdata('activate')) {
                 redirect(base_url('verify') . "?email=" . $this->session->userdata('email') . "&type=member");
             }
