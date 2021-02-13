@@ -29,7 +29,7 @@
                             <div class="form-group text-center add_top_30">
                                 <input class="btn_1" type="submit" value="ยืนยัน">
                             </div>
-                            <p class="text-center link_bright">หากไม่ได้รับอีเมล? <a href="<?php echo base_url('login') ?>"><strong>ส่งรหัสอีกครั้ง</strong></a></p>
+                            <p class="text-center link_bright">หากไม่ได้รับอีเมล? <a href="<?php echo base_url('re-send-email?email='.$email."&type=".$type) ?>"><strong>ส่งรหัสอีกครั้ง</strong></a></p>
                         </div>
 
 

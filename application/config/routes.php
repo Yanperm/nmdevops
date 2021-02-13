@@ -77,6 +77,8 @@ $route['check_email_already_profile'] = 'auth/checkEmailAlreadyProfile';
 $route['check_old_password'] = 'auth/checkOldPassword';
 $route['verify'] = 'auth/verify';
 $route['verify/check'] = 'auth/verifyCheck';
+$route['re-send-email'] = 'auth/reSendMail';
+
 
 $route['member/profile'] = 'member/profile';
 $route['loadBooking/(:any)'] = 'member/loadBooking';

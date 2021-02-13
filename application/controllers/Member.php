@@ -17,6 +17,10 @@ class Member extends CI_Controller
     {
         if (!$this->session->userdata('authenticated')) {
             redirect(base_url('login'));
+        } else if($this->session->userdata('authenticated') && !$this->session->userdata('activate')){
+            if (!$this->session->userdata('activate')) {
+                redirect(base_url('verify') . "?email=" . $this->session->userdata('email') . "&type=member");
+            }
         }
     }
 
@@ -91,42 +95,39 @@ class Member extends CI_Controller
         redirect(base_url('member/profile'));
     }
 
-    public function loadBooking(){
+    public function loadBooking()
+    {
         $rowno = $this->uri->segment('2');
 
         $rowperpage = 5;
 
-        if($rowno != 0){
-            $rowno = ($rowno-1) * $rowperpage;
+        if ($rowno != 0) {
+            $rowno = ($rowno - 1) * $rowperpage;
         }
 
-        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'),$rowperpage,$rowno);
+        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'), $rowperpage, $rowno);
 
         $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
 
-//        $this->db->limit($rowperpage, $rowno);
-//        $booking = $this->db->get('tbbooking')->result_array();
-//        $allcount = $this->db->count_all("tbbooking");
-
-        $config['base_url'] = base_url().'loadBooking';
+        $config['base_url'] = base_url() . 'loadBooking';
         $config['use_page_numbers'] = TRUE;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
 
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tag_close']  = '<span aria-hidden="true"></span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tag_close']  = '</span></li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav></div>';
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close'] = '</span></li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['next_tag_close'] = '<span aria-hidden="true"></span></span></li>';
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['prev_tag_close'] = '</span></li>';
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['first_tag_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tag_close']  = '</span></li>';
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['last_tag_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
 
@@ -134,45 +135,42 @@ class Member extends CI_Controller
         $data['row'] = $rowno;
         $data['pagination'] = $this->pagination->create_links();
 
-        return $this->load->view('member/listBooking',$data);
+        return $this->load->view('member/listBooking', $data);
     }
 
-    public function loadCheckin(){
+    public function loadCheckin()
+    {
         $rowno = $this->uri->segment('2');
 
         $rowperpage = 5;
 
-        if($rowno != 0){
-            $rowno = ($rowno-1) * $rowperpage;
+        if ($rowno != 0) {
+            $rowno = ($rowno - 1) * $rowperpage;
         }
 
-        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'),$rowperpage,$rowno);
+        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'), $rowperpage, $rowno);
 
         $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
 
-//        $this->db->limit($rowperpage, $rowno);
-//        $booking = $this->db->get('tbbooking')->result_array();
-//        $allcount = $this->db->count_all("tbbooking");
-
-        $config['base_url'] = base_url().'loadBooking';
+        $config['base_url'] = base_url() . 'loadBooking';
         $config['use_page_numbers'] = TRUE;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
 
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tag_close']  = '<span aria-hidden="true"></span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tag_close']  = '</span></li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav></div>';
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close'] = '</span></li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['next_tag_close'] = '<span aria-hidden="true"></span></span></li>';
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['prev_tag_close'] = '</span></li>';
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['first_tag_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tag_close']  = '</span></li>';
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['last_tag_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
 
@@ -180,6 +178,6 @@ class Member extends CI_Controller
         $data['row'] = $rowno;
         $data['pagination'] = $this->pagination->create_links();
 
-        return $this->load->view('member/listCheckin',$data);
+        return $this->load->view('member/listCheckin', $data);
     }
 }
