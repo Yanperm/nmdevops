@@ -11,6 +11,24 @@ class Clinic extends CI_Controller
         $this->load->model('MembersModel');
     }
 
+    public function index(){
+        $this->load->view('template/header_doctor');
+        $this->load->view('clinic/index');
+        $this->load->view('template/footer');
+    }
+
+    public function register(){
+        $this->load->view('template/header_doctor');
+        $this->load->view('clinic/register');
+        $this->load->view('template/footer');
+    }
+
+    public function package(){
+        $this->load->view('template/header_doctor');
+        $this->load->view('clinic/package');
+        $this->load->view('template/footer');
+    }
+
     public function detail()
     {
         $clinicName = $this->uri->segment('2');

@@ -56,6 +56,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['search'] = 'search/listData';
 
+$route['physician'] = 'clinic/index';
+$route['physician/register'] = 'clinic/register';
+$route['package'] = 'clinic/package';
 $route['clinic/(:any)'] = 'clinic/detail';
 $route['time/(:any)'] = 'clinic/time';
 $route['booking/(:any)'] = 'clinic/booking';

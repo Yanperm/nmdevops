@@ -59,22 +59,11 @@
                 <div class="main-menu">
 
                     <ul>
-                        <li><a href="<?php echo base_url() ?>">หน้าหลัก</a></li>
-                        <li><a href="<?php echo base_url('checkin') ?>">เช็คอิน</a></li>
-                        <li><a href="<?php echo base_url('checkin') ?>">จัดการนัดหมาย</a></li>
-                        <li><a href="<?php echo base_url('physician') ?>">สำหรับคลีนิค</a></li>
-<!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
-<!--                        <li class="submenu">-->
-<!--                            <a class="show-submenu">คู่มือการใช้งาน<i class="icon-down-open-mini"></i></a>-->
-<!--                            <ul>-->
-<!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การลงทะเบียน</a></li>-->
-<!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การยืนยันบัญชีสมาชิก</a></li>-->
-<!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การเปลี่ยนแปลงรหัสผ่าน</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="--><?php //echo base_url('link/contact') ?><!--">ติดต่อเรา</a></li>-->
+                        <li><a href="<?php echo base_url('physician/register') ?>">สมัครสมาชิกคลีนิค</a></li>
+                        <li><a href="<?php echo base_url('package') ?>">แพ็คเก็จใช้งาน</a></li>
+
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
-                            <li><a href="<?php echo base_url('login') ?>"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>
+                            <li><a href="<?php echo base_url('login') ?>"><i class="icon-user-7"></i> ล็อคอิน/เข้าสู่ระบบคลีนิค</a></li>
                         <?php endif; ?>
                         <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated')): ?>
                             <li class="submenu">
