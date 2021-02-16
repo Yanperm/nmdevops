@@ -6,24 +6,32 @@ class Clinic extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->library('session');
+        $this->load->library('S3_upload');
+        $this->load->library('S3');
         $this->load->model('ClinicModel');
         $this->load->model('BookingModel');
         $this->load->model('MembersModel');
     }
 
-    public function index(){
+    public function index()
+    {
         $this->load->view('template/header_doctor');
         $this->load->view('clinic/index');
         $this->load->view('template/footer');
     }
 
-    public function register(){
+    public function register()
+    {
         $this->load->view('template/header_doctor');
         $this->load->view('clinic/register');
         $this->load->view('template/footer');
     }
 
-    public function package(){
+    public function package()
+    {
         $this->load->view('template/header_doctor');
         $this->load->view('clinic/package');
         $this->load->view('template/footer');
@@ -209,10 +217,10 @@ class Clinic extends CI_Controller
     {
         $vn = '';
         $email = '';
-        if(!empty($this->input->get('vn'))){
+        if (!empty($this->input->get('vn'))) {
             $vn = $this->input->get('vn');
         }
-        if(!empty($this->input->get('email'))){
+        if (!empty($this->input->get('email'))) {
             $email = $this->input->get('email');
         }
 
@@ -288,15 +296,81 @@ class Clinic extends CI_Controller
     public function profile()
     {
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
-       // $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
+        // $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
 
         $data = [
             'clinic' => $clinic,
-           // 'countBooking' => $allcount
+            // 'countBooking' => $allcount
         ];
 
         $this->load->view('template/header');
         $this->load->view('clinic/profile', $data);
         $this->load->view('template/footer');
+    }
+
+    public function login()
+    {
+        $this->form_validation->set_rules('email', 'email', 'trim|required');
+        $this->form_validation->set_rules('password', 'password', 'required');
+
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        $type = $this->input->post('type');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('template/header_doctor');
+            $this->load->view('clinic/login');
+            $this->load->view('template/footer');
+
+        } else {
+            $email = $this->security->xss_clean($this->input->post('email'));
+            $password = $this->security->xss_clean($this->input->post('password'));
+
+            $user = false;
+
+            if ($type == 'member') {
+                $user = $this->MembersModel->login($email, $password);
+            }
+
+            if ($type == 'clinic') {
+                $user = $this->ClinicModel->login($email, $password);
+            }
+
+            if ($user) {
+                
+                $userdata = array();
+
+                if ($type == 'member') {
+                    $userdata = array(
+                        'id' => $user->MEMBERIDCARD,
+                        'name' => $user->CUSTOMERNAME,
+                        'authenticated' => TRUE,
+                        'activate' => $user->ACTIVATE_STATUS,
+                        'email' => $user->EMAIL,
+                        'type' => 'member'
+                    );
+                    $this->session->set_userdata($userdata);
+
+                    redirect(base_url(''));
+                } else {
+                    $userdata = array(
+                        'id' => $user->tbclinic,
+                        'name' => $user->CLINICNAME,
+                        'authenticated' => TRUE,
+                        'activate' => $user->ACTIVATE,
+                        'email' => $user->USERNAME,
+                        'type' => 'clinic'
+                    );
+                    $this->session->set_userdata($userdata);
+
+                    redirect(base_url('physician/dashboard'));
+                }
+
+            } else {
+                $this->session->set_flashdata('message', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+                redirect(base_url('physician/login'));
+            }
+        }
     }
 }

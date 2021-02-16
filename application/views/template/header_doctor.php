@@ -59,11 +59,11 @@
                 <div class="main-menu">
 
                     <ul>
-                        <li><a href="<?php echo base_url('physician/register') ?>">สมัครสมาชิกคลีนิค</a></li>
+                        <li><a href="<?php echo base_url('physician/register'); ?>">สมัครสมาชิกคลีนิค</a></li>
                         <li><a href="<?php echo base_url('package') ?>">แพ็คเก็จใช้งาน</a></li>
 
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
-                            <li><a href="<?php echo base_url('login') ?>"><i class="icon-user-7"></i> ล็อคอิน/เข้าสู่ระบบคลีนิค</a></li>
+                            <li><a href="<?php echo base_url('physician/login') ?>"><i class="icon-user-7"></i> ล็อคอิน/เข้าสู่ระบบคลีนิค</a></li>
                         <?php endif; ?>
                         <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated')): ?>
                             <li class="submenu">
@@ -73,9 +73,9 @@
                                         <li><a href="<?php echo base_url('member/profile'); ?>">บัญชีผู้ใช้</a></li>
                                     <?php endif; ?>
                                     <?php if ($this->session->userdata('type') == 'clinic'): ?>
-                                        <li><a href="<?php echo base_url('clinic_profile'); ?>">บัญชีผู้ใช้</a></li>
+                                        <li><a href="<?php echo base_url('physician/dashboard'); ?>">บัญชีผู้ใช้</a></li>
                                     <?php endif; ?>
-                                    <li><a href="<?php echo base_url('logout') ?>">ออกจากระบบ</a></li>
+                                    <li><a href="<?php echo base_url('physician/logout') ?>">ออกจากระบบ</a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>
