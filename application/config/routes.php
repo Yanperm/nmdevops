@@ -58,6 +58,7 @@ $route['search'] = 'search/listData';
 
 $route['physician'] = 'clinic/index';
 $route['physician/register'] = 'clinic/register';
+$route['physician/login'] = 'clinic/login';
 $route['package'] = 'clinic/package';
 $route['clinic/(:any)'] = 'clinic/detail';
 $route['time/(:any)'] = 'clinic/time';
@@ -67,6 +68,10 @@ $route['checkin'] = 'clinic/checkin';
 $route['detail_checkin'] = 'clinic/detailCheckin';
 $route['confirm/checkin/(:any)'] = 'clinic/confirmCheckin';
 $route['clinic_profile'] = 'clinic/profile';
+
+$route['physician/dashboard'] = 'physician/dashboard';
+
+
 
 $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';

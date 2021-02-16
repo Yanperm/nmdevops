@@ -88,6 +88,11 @@ class MembersModel extends CI_Model
     {
         $query = $this->db->query('SELECT MEMBERIDCARD FROM tbmembers where EMAIL = "' . $email . '" AND email_verification_code = "' . $code . '"');
         if ($query->num_rows() > 0) {
+            foreach ($query->result() as $item) {
+                $this->db->set('ACTIVATE_STATUS', '1');
+                $this->db->where('MEMBERIDCARD', $item->MEMBERIDCARD);
+                $this->db->update('tbmembers');
+            }
             return true;
         } else {
             return false;

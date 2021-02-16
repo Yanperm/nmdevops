@@ -89,6 +89,11 @@ class ClinicModel extends CI_Model
     {
         $query = $this->db->query('SELECT IDCLINIC FROM tbclinic where USERNAME = "' . $email . '" AND email_verification_code = "' . $code . '"');
         if ($query->num_rows() > 0) {
+            foreach ($query->result() as $item) {
+                $this->db->set('ACTIVATE', '1');
+                $this->db->where('IDCLINIC', $item->IDCLINIC);
+                $this->db->update('tbclinic');
+            }
             return true;
         } else {
             return false;

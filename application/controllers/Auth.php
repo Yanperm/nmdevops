@@ -35,7 +35,12 @@ class Auth extends CI_Controller
             'type' => $type
         ];
 
-        $this->load->view('template/header');
+        if ($type == 'clinic') {
+            $this->load->view('template/header_doctor');
+        }
+        if ($type == 'member') {
+            $this->load->view('template/header');
+        }
         $this->load->view('auth/verify', $data);
         $this->load->view('template/footer');
     }
@@ -67,7 +72,12 @@ class Auth extends CI_Controller
             'msg' => $msg
         ];
 
-        $this->load->view('template/header');
+        if ($type == 'clinic') {
+            $this->load->view('template/header_doctor');
+        }
+        if ($type == 'member') {
+            $this->load->view('template/header');
+        }
         $this->load->view('auth/confirm_verify', $data);
         $this->load->view('template/footer');
     }
@@ -125,14 +135,22 @@ class Auth extends CI_Controller
 
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
+        $type = $this->input->post('type');
+
         if ($this->form_validation->run() == false) {
-            $this->load->view('template/header');
+            if($type == 'clinic'){
+                $this->load->view('template/header_doctor');
+                $this->load->view('clinic/login');
+            }else{
+                $this->load->view('template/header');
+                $this->load->view('auth/login');
+            }
+
             $this->load->view('auth/login');
             $this->load->view('template/footer');
         } else {
             $email = $this->security->xss_clean($this->input->post('email'));
             $password = $this->security->xss_clean($this->input->post('password'));
-            $type = $this->input->post('type');
 
             $user = false;
 
@@ -249,11 +267,6 @@ class Auth extends CI_Controller
         $lineId = $this->input->post('line_id_clinic');
         $password = $this->input->post('password_clinic');
         $website = $this->input->post('website');
-        $province = $this->input->post('province');
-        $proficient = $this->input->post('proficient');
-        $service = $this->input->post('service');
-        $diploma = $this->input->post('diploma');
-        $degree = $this->input->post('degree');
 
         $dateNow = new DateTime();
         $currentTime = $dateNow->getTimestamp();
@@ -271,11 +284,6 @@ class Auth extends CI_Controller
             'image' => $image,
             'email_verification_code' => $code,
             'DOMAIN' => $website,
-            'PROVINCE' => $province,
-            'PROFICIENT' => $proficient,
-            'SERVICE' => $service,
-            'DIPLOMA' => $diploma,
-            'DEGREE' => $degree,
         ];
 
         $this->ClinicModel->insertClinic($data);
@@ -290,7 +298,7 @@ class Auth extends CI_Controller
         $message = $this->load->view('email_layout_template', $dataEmail, true);
         sendMail($email, $subject, $message);
 
-        $this->load->view('template/header');
+        $this->load->view('template/header_doctor');
         $this->load->view('auth/confirm_register');
         $this->load->view('template/footer');
     }
