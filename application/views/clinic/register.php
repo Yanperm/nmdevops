@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <div class="form-group">
-                                        <label>ชื่อคลีนิก</label>
+                                        <label>ชื่อคลินิก</label>
                                         <input type="text" class="form-control" placeholder="" name="clinic_name">
                                     </div>
                                 </div>

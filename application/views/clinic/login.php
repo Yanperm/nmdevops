@@ -2,7 +2,7 @@
     <div class="bg_color_2">
         <div class="container margin_60_35">
             <div id="login-2">
-                <h1>เข้าสู่ระบบสำหรับคลีนิค!</h1>
+                <h1>เข้าสู่ระบบสำหรับคลินิก!</h1>
                 <?php if ($this->session->flashdata('message')) { ?>
                     <div class="alert alert-danger">
                         <?php echo $this->session->flashdata('message') ?>
