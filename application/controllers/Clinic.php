@@ -338,7 +338,7 @@ class Clinic extends CI_Controller
             }
 
             if ($user) {
-                
+
                 $userdata = array();
 
                 if ($type == 'member') {
@@ -355,7 +355,7 @@ class Clinic extends CI_Controller
                     redirect(base_url(''));
                 } else {
                     $userdata = array(
-                        'id' => $user->tbclinic,
+                        'id' => $user->IDCLINIC,
                         'name' => $user->CLINICNAME,
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE,

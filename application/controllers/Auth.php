@@ -146,7 +146,6 @@ class Auth extends CI_Controller
                 $this->load->view('auth/login');
             }
 
-            $this->load->view('auth/login');
             $this->load->view('template/footer');
         } else {
             $email = $this->security->xss_clean($this->input->post('email'));

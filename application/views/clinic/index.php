@@ -23,9 +23,10 @@
                     </figure>
                 </div>
                 <div class="col-lg-5">
-                    <p>Lorem ipsum dolor sit amet, homero erroribus in cum. Cu eos <strong>scaevola probatus</strong>. Nam atqui intellegat ei, sed ex graece essent delectus. Autem consul eum ea. Duo cu fabulas nonumes contentiones, nihil voluptaria pro id. Has graeci deterruisset ad, est no primis detracto pertinax, at cum malis vitae facilisis.</p>
-                    <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates neglegentur. Eam id legimus torquatos cotidieque, usu decore <strong>percipitur definitiones</strong> ex, nihil utinam recusabo mel no. Dolores reprehendunt no sit, quo cu viris theophrastus. Sit unum efficiendi cu.</p>
-                    <p><em><a href="">สมัครสมาชิก</a></em></p>
+                    <p>คุณหมอหลายท่านอาจมีเวลาประชาสัมพันธ์คลินิกของตัวเองน้อย เพราะต้องวุ่นกับการโฟกัสผู้ป่วยทั้งในคลินิก และในโรงพยาบาล นัดหมอ จะขอเป็นแพล็ตฟอร์มที่เชื่อมโยง ผู้ป่วยและคลินิก เมื่อคนไข้ต้องการพบแพทย์ เขาจะทำการค้นหาข้อมูล online เมื่อพบคลินิกนอกจากจะมีข้อมูลคลินิกให้คนไข้ตัดสินใจแล้ว คนไข้ยังสามารถนัดหมายคุณหมอได้ทันที พร้อมระบุสาเหตุ หรืออาการที่ต้องการมาพบแพทย์ ทำให้แพทย์ประจำคลินิกได้รู้จำนวนคนไข้และอาการต่างๆได้ เพื่อเตรียมตัวล่วงหน้าสำหรับแต่ละการนัดหมาย
+
+                        นอกจากบริการนัดหมายแพทย์แล้ว เรายังให้บริการระบบ Electronic Patient Record (EPR) ที่จะมาช่วยคุณหมอได้บันทึกข้อมูลผู้ป่วยแต่ละราย ทำการวินิจฉัยโรค จ่ายยา ส่งตรวจแล็บและบันทึกการทำหัตถการของคลินิก รวมถึงการวิเคราะห์ภาพรวมของคลินิกด้วย เราจะเป็น Platform ตอบโจทย์ของคลินิกภายในแพล็ตฟอร์มเดียว All solution in one platform พร้อมการสนับสนุนของทีมงาน ตลอด 24 ชั่วโมง เรียกได้ว่า มีทีม IT ประจำคลินิกที่จะคอย Support เรื่องระบบตลอดเวลา</p>
+                    <p><em><a href="<?php echo base_url('physician/register');?>">สมัครสมาชิก</a></em></p>
                 </div>
             </div>
             <!--/row-->
