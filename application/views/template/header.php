@@ -62,7 +62,7 @@
                         <li><a href="<?php echo base_url() ?>">หน้าหลัก</a></li>
                         <li><a href="<?php echo base_url('checkin') ?>">เช็คอิน</a></li>
                         <li><a href="<?php echo base_url('checkin') ?>">จัดการนัดหมาย</a></li>
-                        <li><a href="<?php echo base_url('physician') ?>">สำหรับคลีนิค</a></li>
+                        <li><a href="<?php echo base_url('physician') ?>">สำหรับคลินิก</a></li>
 <!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
 <!--                        <li class="submenu">-->
 <!--                            <a class="show-submenu">คู่มือการใช้งาน<i class="icon-down-open-mini"></i></a>-->
