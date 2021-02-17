@@ -113,6 +113,11 @@ class ClinicModel extends CI_Model
         return false;
     }
 
+    public function updateById($data,$clinicId){
+        $this->db->where('IDCLINIC', $clinicId);
+        $this->db->update('tbclinic', $data);
+    }
+
     public function insertClinic($data)
     {
         $this->db->insert('tbclinic', $data);

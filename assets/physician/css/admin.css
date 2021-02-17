@@ -28,6 +28,7 @@ Author URI: http://themeforest.net/user/Ansonika/
 html {
   position: relative;
   min-height: 100%;
+    font-family: 'Prompt', sans-serif;
 }
 
 body {
@@ -464,7 +465,7 @@ footer.sticky-footer {
 body {
   background: #f8f8f8;
   color: #777 !important;
-  font-family: "Poppins", Helvetica, sans-serif;
+  font-family: "prompt","Poppins", Helvetica, sans-serif;
   font-size: 14px;
   font-size: 0.875rem;
 }
