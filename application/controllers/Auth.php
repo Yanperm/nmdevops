@@ -64,6 +64,7 @@ class Auth extends CI_Controller
 
         if ($result) {
             $msg = "ยืนยันบัญชีเรียบร้อยแล้ว";
+            $this->session->set_userdata('activate', 1);
         } else {
             $msg = "ยืนยันบัญชีไม่สำเร็จกรุณาลองใหม่";
         }
@@ -114,8 +115,8 @@ class Auth extends CI_Controller
             'type' => $type
         ];
 
-        $message = $this->load->view('email_layout_template', $dataEmail);
-        sendMail($email, $subject, $message);
+        $message = $this->load->view('email_layout_template', $dataEmail,true);
+        $this->sendMail($email, $subject, $message);
 
         $data = [
             'email' => $email,
@@ -241,8 +242,8 @@ class Auth extends CI_Controller
             'type' => 'member'
         ];
 
-        $message = $this->load->view('email_layout_template', $dataEmail);
-        sendMail($email, $subject, $message);
+        $message = $this->load->view('email_layout_template', $dataEmail, true);
+        $this->sendMail($email, $subject, $message);
 
         $this->load->view('template/header');
         $this->load->view('auth/confirm_register');
@@ -295,7 +296,7 @@ class Auth extends CI_Controller
         ];
 
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        sendMail($email, $subject, $message);
+        $this->sendMail($email, $subject, $message);
 
         $this->load->view('template/header_doctor');
         $this->load->view('auth/confirm_register');
@@ -344,5 +345,29 @@ class Auth extends CI_Controller
         } else {
             echo 'true';
         }
+    }
+
+    public function sendMail($to, $subject, $message){
+        //Postmark Service Mail
+        $config = array(
+            'useragent' => 'nutmor.com',
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.postmarkapp.com',
+            'smtp_port' => 25,
+            'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+            'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+            'smtp_crypto' => 'TLS',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('no-reply@nutmor.com', "Pharmacy Nutmor.com");
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+
+        return true;
     }
 }

@@ -168,7 +168,7 @@ class Clinic extends CI_Controller
             username : " . $email . "\r\n
             password : " . $telephone . "\r\n
             \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
-            sendMail($email, $subject, $message);
+            $this->sendMail($email, $subject, $message);
         }
 
         //insert booking
@@ -201,7 +201,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($email != '') {
-            sendMail($email, $subject, $message);
+            $this->sendMail($email, $subject, $message);
         }
 
         $data = [
@@ -285,7 +285,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($booking[0]->EMAIL != '') {
-            sendMail($booking[0]->EMAIL, $subject, $message);
+            $this->sendMail($booking[0]->EMAIL, $subject, $message);
         }
 
         $this->load->view('template/header');
@@ -372,5 +372,29 @@ class Clinic extends CI_Controller
                 redirect(base_url('physician/login'));
             }
         }
+    }
+
+    public function sendMail($to, $subject, $message){
+        //Postmark Service Mail
+        $config = array(
+            'useragent' => 'nutmor.com',
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.postmarkapp.com',
+            'smtp_port' => 25,
+            'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+            'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+            'smtp_crypto' => 'TLS',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('no-reply@nutmor.com', "Pharmacy Nutmor.com");
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+
+        return true;
     }
 }
