@@ -116,6 +116,10 @@ class Clinic extends CI_Controller
         $qber = $this->input->get('qber');
 
         $clinic = $this->ClinicModel->detailById($clinicId);
+        $member = [];
+        if (!empty($this->session->userdata('authenticated'))){
+            $member = $this->MembersModel->detail($this->session->userdata('id'));
+        }
 
         $data = [
             'date' => $date,
@@ -123,7 +127,11 @@ class Clinic extends CI_Controller
             'time' => $time,
             'ques' => $ques,
             'qber' => $qber,
+            'member' => $member
         ];
+
+
+
 
         $this->load->view('template/header');
         $this->load->view('clinic/booking', $data);
