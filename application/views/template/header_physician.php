@@ -74,14 +74,20 @@
             </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
                 <a class="nav-link" href="<?php echo base_url('physician/ques/show');?>" target="_blank">
-                    <i class="fa fa-fw fa-star"></i>
+                    <i class="fa fa-fw fa-bullhorn"></i>
                     <span class="nav-link-text">ประกาศคิว</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookmarks">
                 <a class="nav-link" href="<?php echo base_url('physician/time');?>">
-                    <i class="fa fa-fw fa-heart"></i>
+                    <i class="fa fa-fw fa-clock-o"></i>
                     <span class="nav-link-text">ตั้งค่าวันเวลา</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookmarks">
+                <a class="nav-link" href="<?php echo base_url('physician/youtube');?>">
+                    <i class="fa fa-fw fa-youtube"></i>
+                    <span class="nav-link-text">ตั้งค่าYoutube</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My profile">
