@@ -85,6 +85,10 @@ $route['physician/time/holiday/delete'] = 'physician/timeHolidayDelete';
 $route['physician/clinic'] = 'physician/clinic';
 $route['physician/clinic/update'] = 'physician/clinicUpdate';
 
+$route['physician/youtube'] = 'physician/youtube';
+$route['physician/youtube/update'] = 'physician/youtubeUpdate';
+$route['physician/youtube/delete'] = 'physician/youtubeDelete';
+
 $route['physician/doctor'] = 'physician/doctor';
 $route['physician/doctor/update'] = 'physician/doctorUpdate';
 

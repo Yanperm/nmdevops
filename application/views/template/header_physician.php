@@ -39,7 +39,7 @@
 <body class="fixed-nav sticky-footer" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
-    <a class="navbar-brand" href="<?php echo base_url('physician')?>"><img src="<?php echo base_url() ?>assets/img/nutmor_logo.png" data-retina="true" alt="" width="163" height="36"></a>
+    <a class="navbar-brand" href="<?php echo base_url('physician')?>"><img src="<?php echo base_url() ?>assets/img/nutmor_logo_white.png" data-retina="true" alt="" width="163" height="36"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -74,14 +74,20 @@
             </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
                 <a class="nav-link" href="<?php echo base_url('physician/ques/show');?>" target="_blank">
-                    <i class="fa fa-fw fa-star"></i>
+                    <i class="fa fa-fw fa-bullhorn"></i>
                     <span class="nav-link-text">ประกาศคิว</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookmarks">
                 <a class="nav-link" href="<?php echo base_url('physician/time');?>">
-                    <i class="fa fa-fw fa-heart"></i>
+                    <i class="fa fa-fw fa-clock-o"></i>
                     <span class="nav-link-text">ตั้งค่าวันเวลา</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookmarks">
+                <a class="nav-link" href="<?php echo base_url('physician/youtube');?>">
+                    <i class="fa fa-fw fa-youtube"></i>
+                    <span class="nav-link-text">ตั้งค่าYoutube</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My profile">

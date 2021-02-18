@@ -11,6 +11,7 @@ class Physician extends CI_Controller
         $this->load->model('ClinicModel');
         $this->load->model('BookingModel');
         $this->load->model('CloseModel');
+        $this->load->model('YoutubeModel');
         $this->load->library('pagination');
     }
 
@@ -249,6 +250,47 @@ class Physician extends CI_Controller
 
         $this->session->set_flashdata('msg_holiday', 'ลบวันหยุดเรียบร้อย');
         redirect(base_url('physician/time'));
+    }
+
+    public function youtube()
+    {
+        $youtube = $this->YoutubeModel->listData($this->session->userdata('id'));
+
+        $data = [
+            'youtube' => $youtube
+        ];
+//        print_r($youtube);
+//        exit();
+
+        $this->load->view('template/header_physician');
+        $this->load->view('physician/youtube', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function youtubeUpdate()
+    {
+        $this->YoutubeModel->deleteByClinicId($this->session->userdata('id'));
+        $dateNow = new DateTime();
+
+        $linkYoutube =  $this->input->post('youtube');
+        $select =  $this->input->post('status');
+        foreach ($linkYoutube as $key =>  $item){
+            $status = 0;
+            if($select == $key){
+                $status = 1;
+            }
+            $currentTime = $dateNow->getTimestamp();
+            $data = [
+                'ID' => $currentTime.$key,
+                'CLINICID' => $this->session->userdata('id'),
+                'LINK' => $item,
+                'STATUS' => $status
+            ];
+            $this->YoutubeModel->insert($data);
+        }
+
+        $this->session->set_flashdata('msg', 'แก้ไขการตั้งค่า Youtube เรียบร้อย');
+        redirect(base_url('physician/youtube'));
     }
 
 
