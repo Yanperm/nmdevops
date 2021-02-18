@@ -21,9 +21,11 @@
 
                 <div class="col-xl-8 col-lg-8">
                     <div class="box_general_3 cart">
+                        <?php if (empty($this->session->userdata('authenticated'))): ?>
                         <div class="message">
                             <p>เป็นสมาชิกอยู่แล้วหรือไม่?<a href="#0"> เข้าสู่ระบบ </a>ที่นี้</p>
                         </div>
+                        <?php endif;?>
                         <div class="form_title">
                             <h3><strong>1</strong>ข้อมูลพื้นฐาน</h3>
                         </div>
@@ -32,13 +34,13 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>ชื่อ</label>
-                                        <input type="text" class="form-control" id="firstname_booking" name="firstname_booking" placeholder="">
+                                        <input type="text" class="form-control" id="firstname_booking" name="firstname_booking" placeholder="" value="<?php if(!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[0]; endif;?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>นามสกุล</label>
-                                        <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="">
+                                        <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="" value="<?php if(!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[1]; endif;?>">
                                     </div>
                                 </div>
                             </div>
@@ -54,13 +56,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เบอร์โทรศัพท์ติดต่อ</label>
-                                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="">
+                                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="" value="<?php if(!empty($member)): echo $member->PHONE; endif;?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Line Id</label>
-                                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="">
+                                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="" value="<?php if(!empty($member)): echo $member->LINEID; endif;?>">
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +70,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>อีเมล</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php if(!empty($member)): echo $member->EMAIL; endif;?>">
                                     </div>
                                 </div>
                             </div>
