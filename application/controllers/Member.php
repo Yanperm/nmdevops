@@ -11,6 +11,8 @@ class Member extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('BookingModel');
         $this->load->library('pagination');
+        $this->load->library('S3_upload');
+        $this->load->library('S3');
     }
 
     private function logged_in()
@@ -62,13 +64,28 @@ class Member extends CI_Controller
         $lineId = $this->input->post('line_id');
         $phone = $this->input->post('phone');
         $email = $this->input->post('email');
+        $image = $this->input->post('old_image');
+
+        if (!empty($_FILES["file"])) {
+            $dir = dirname($_FILES["file"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+            rename($_FILES["file"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+            $this->session->set_userdata('image', $image);
+
+            //remove old image S3
+            if($this->input->post('old_image') != ''){
+                $this->s3_upload->deleteFile(basename($this->input->post('old_image')));
+            }
+        }
 
         $data = [
             'CUSTOMERNAME' => $name,
             'BIRTHDAY' => $birthDate,
             'LINEID' => $lineId,
             'EMAIL' => $email,
-            'PHONE' => $phone
+            'PHONE' => $phone,
+            'IMAGE' => $image
         ];
 
         $this->MembersModel->update($data, $this->session->userdata('id'));

@@ -170,9 +170,10 @@ class Auth extends CI_Controller
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
                         'authenticated' => TRUE,
-                        'activate' =>$user->ACTIVATE_STATUS,
-                        'email' =>$user->EMAIL,
-                        'type' => 'member'
+                        'activate' => $user->ACTIVATE_STATUS,
+                        'email' => $user->EMAIL,
+                        'type' => 'member',
+                        'image' => $user->IMAGE
                     );
                 }else{
                     $userdata = array(
@@ -180,7 +181,7 @@ class Auth extends CI_Controller
                         'name' => $user->CLINICNAME,
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE,
-                        'email' =>$user->USERNAME,
+                        'email' => $user->USERNAME,
                         'type' => 'clinic'
                     );
                 }
