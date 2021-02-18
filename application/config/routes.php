@@ -71,6 +71,12 @@ $route['clinic_profile'] = 'clinic/profile';
 
 $route['physician/dashboard'] = 'physician/dashboard';
 
+$route['physician/manage/checkin'] = 'physician/checkin';
+
+$route['physician/ques/show'] = 'physician/showQues';
+$route['physician/ques/call'] = 'physician/quesCall';
+$route['physician/ques/reset'] = 'physician/quesReset';
+
 $route['physician/time'] = 'physician/time';
 $route['physician/time/update'] = 'physician/timeUpdate';
 $route['physician/time/holiday'] = 'physician/timeHoliday';
@@ -81,11 +87,6 @@ $route['physician/clinic/update'] = 'physician/clinicUpdate';
 
 $route['physician/doctor'] = 'physician/doctor';
 $route['physician/doctor/update'] = 'physician/doctorUpdate';
-
-$route['physician/ques/show'] = 'physician/showQues';
-$route['physician/ques/call'] = 'physician/quesCall';
-$route['physician/ques/reset'] = 'physician/quesReset';
-
 
 $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';

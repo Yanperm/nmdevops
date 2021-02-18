@@ -3,7 +3,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo base_url('physician/dashboard')?>">Dashboard</a>
+                <a href="<?php echo base_url('physician/dashboard') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
@@ -15,9 +15,9 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-envelope-open"></i>
                         </div>
-                        <div class="mr-5"><h5>26 คิวทั้งหมด</h5></div>
+                        <div class="mr-5"><h5><?php echo number_format($allBooking); ?> คิวทั้งหมด</h5></div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="messages.html">
+                    <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('physician/ques/manage');?>">
                         <span class="float-left">รายละเอียด</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -31,9 +31,9 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-star"></i>
                         </div>
-                        <div class="mr-5"><h5> 15 คิววันนี้</h5></div>
+                        <div class="mr-5"><h5> <?php echo number_format($todayBooking); ?> คิววันนี้</h5></div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="reviews.html">
+                    <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('physician/ques') ?>">
                         <span class="float-left">รายละเอียด</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -57,22 +57,22 @@
                     </a>
                 </div>
             </div>
-<!--            <div class="col-xl-3 col-sm-6 mb-3">-->
-<!--                <div class="card dashboard text-white bg-danger o-hidden h-100">-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="card-body-icon">-->
-<!--                            <i class="fa fa-fw fa-heart"></i>-->
-<!--                        </div>-->
-<!--                        <div class="mr-5"><h5>10,000 Page Visit</h5></div>-->
-<!--                    </div>-->
-<!--                    <a class="card-footer text-white clearfix small z-1" href="bookmarks.html">-->
-<!--                        <span class="float-left">View Details</span>-->
-<!--                        <span class="float-right">-->
-<!--                <i class="fa fa-angle-right"></i>-->
-<!--              </span>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="col-xl-3 col-sm-6 mb-3">-->
+            <!--                <div class="card dashboard text-white bg-danger o-hidden h-100">-->
+            <!--                    <div class="card-body">-->
+            <!--                        <div class="card-body-icon">-->
+            <!--                            <i class="fa fa-fw fa-heart"></i>-->
+            <!--                        </div>-->
+            <!--                        <div class="mr-5"><h5>10,000 Page Visit</h5></div>-->
+            <!--                    </div>-->
+            <!--                    <a class="card-footer text-white clearfix small z-1" href="bookmarks.html">-->
+            <!--                        <span class="float-left">View Details</span>-->
+            <!--                        <span class="float-right">-->
+            <!--                <i class="fa fa-angle-right"></i>-->
+            <!--              </span>-->
+            <!--                    </a>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
         <!-- /cards -->
         <h2></h2>

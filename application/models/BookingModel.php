@@ -14,6 +14,25 @@ class BookingModel extends CI_Model
         }
     }
 
+    public function getDataAllByClinic($clicnicId)
+    {
+        $query = $this->db->query('SELECT count(BOOKINGID) AS ALLBOOKING FROM tbbooking where CLINICID = "' . $clicnicId.'"');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getDataTodayByClinic($clicnicId)
+    {
+        $query = $this->db->query('SELECT count(BOOKINGID) AS TODAYBOOKING FROM tbbooking where BOOKDATE  = "'.date('Y-m-d').'" AND CLINICID = "' . $clicnicId.'"');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
 
     public function detail($bookingId)
     {
@@ -83,6 +102,24 @@ class BookingModel extends CI_Model
             SELECT * FROM tbbooking as booking 
             INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
             where booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . date('Y-m-d') . '"
+            order by booking.BOOKTIME ASC
+            limit ' . $rowno . ',' . $rowperpage
+        );
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
+    public function getDataListByDate($clinicId,$date, $rowperpage, $rowno)
+    {
+
+        $query = $this->db->query('
+            SELECT * FROM tbbooking as booking 
+            INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
+            where booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . $date . '"
             order by booking.BOOKTIME ASC
             limit ' . $rowno . ',' . $rowperpage
         );

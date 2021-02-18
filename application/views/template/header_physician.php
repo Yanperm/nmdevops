@@ -52,9 +52,11 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                <a class="nav-link" href="<?php echo base_url('physician/ques-manage');?>">
+                <a class="nav-link" href="<?php echo base_url('physician/manage');?>">
                     <i class="fa fa-fw fa-calendar-check-o"></i>
-                    <span class="nav-link-text">จัดการนัดหมาย<span class="badge badge-pill badge-primary">26 New</span></span>
+                    <span class="nav-link-text">จัดการนัดหมาย
+<!--                        <span class="badge badge-pill badge-primary">26 New</span>-->
+                    </span>
                 </a>
             </li>
 
