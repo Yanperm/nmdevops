@@ -27,9 +27,89 @@ class Physician extends CI_Controller
 
     public function dashboard()
     {
+        $allBooking = $this->BookingModel->getDataAllByClinic($this->session->userdata('id'));
+        $todayBooking = $this->BookingModel->getDataTodayByClinic($this->session->userdata('id'));
+
+        $data = [
+            'allBooking' => $allBooking[0]->ALLBOOKING,
+            'todayBooking' => $todayBooking[0]->TODAYBOOKING
+        ];
+
         $this->load->view('template/header_physician');
-        $this->load->view('physician/dashboard');
+        $this->load->view('physician/dashboard', $data);
         $this->load->view('template/footer_physician');
+    }
+
+    public function manage()
+    {
+        $rowno = 0;
+
+        if (!empty($this->uri->segment('3'))) {
+            $rowno = $this->uri->segment('3');
+        }
+
+        $date = date('Y-m-d');
+        if (!empty($this->input->get('date'))) {
+            $date = $this->input->get('date');
+        }
+
+        $data['date'] = $date;
+
+        $rowperpage = 5;
+
+        if ($rowno != 0) {
+            $rowno = ($rowno - 1) * $rowperpage;
+        }
+
+        $ques = $this->BookingModel->getDataListByDate($this->session->userdata('id'), $date, $rowperpage, $rowno);
+
+        $allcount = $this->db->where('CLINICID', $this->session->userdata('id'))
+            ->where('BOOKDATE', $date)
+            ->count_all_results('tbbooking');
+
+        $config['base_url'] = base_url() . 'physician/manage';
+        $config['use_page_numbers'] = TRUE;
+        $config['total_rows'] = $allcount;
+        $config['per_page'] = $rowperpage;
+        $config['reuse_query_string'] = true;
+
+        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav></div>';
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close'] = '</span></li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['next_tag_close'] = '<span aria-hidden="true"></span></span></li>';
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['prev_tag_close'] = '</span></li>';
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['first_tag_close'] = '</span></li>';
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['last_tag_close'] = '</span></li>';
+
+        $this->pagination->initialize($config);
+
+        $data['ques'] = $ques;
+        $data['row'] = $rowno;
+        $data['pagination'] = $this->pagination->create_links();
+
+        $this->load->view('template/header_physician');
+        $this->load->view('physician/ques_manage', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function checkin()
+    {
+        if(!empty($this->input->get('id'))){
+            $this->BookingModel->checkin($this->input->get('id'));
+        }
+        $url= $_SERVER['HTTP_REFERER'];
+       // echo $url;
+       // return redirect()->to($url);
+        header( "location:".$url );
+        exit(0);
+       // return redirect()->to($_SERVER['HTTP_REFERER']);
     }
 
     public function ques()
@@ -88,13 +168,15 @@ class Physician extends CI_Controller
     }
 
 
-    public function quesCall(){
+    public function quesCall()
+    {
         $this->BookingModel->quesCall($this->input->get('id'));
 
         redirect(base_url('physician/ques'));
     }
 
-    public function quesReset(){
+    public function quesReset()
+    {
         $this->BookingModel->quesReset($this->session->userdata('id'));
 
         redirect(base_url('physician/ques'));
@@ -116,9 +198,10 @@ class Physician extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
-    public function timeUpdate(){
+    public function timeUpdate()
+    {
 
-        $data  = [
+        $data = [
             'DAYOFF' => $this->input->post('DAYOFF'),
             'TIME_OPEN' => $this->input->post('TIME_OPEN'),
             'TIME_CLOSE' => $this->input->post('TIME_CLOSE'),
@@ -142,11 +225,12 @@ class Physician extends CI_Controller
         redirect(base_url('physician/time'));
     }
 
-    public function timeHoliday(){
+    public function timeHoliday()
+    {
         $dateNow = new DateTime();
         $currentTime = $dateNow->getTimestamp();
 
-        $data  = [
+        $data = [
             'closeid' => $currentTime,
             'CLOSEDATE' => $this->input->post('CLOSEDATE'),
             'CLINICID' => $this->session->userdata('id'),
@@ -158,7 +242,8 @@ class Physician extends CI_Controller
         redirect(base_url('physician/time'));
     }
 
-    public function timeHolidayDelete(){
+    public function timeHolidayDelete()
+    {
 
         $this->CloseModel->delete($this->input->get('id'));
 
