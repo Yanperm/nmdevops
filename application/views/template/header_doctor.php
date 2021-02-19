@@ -59,7 +59,9 @@
                 <div class="main-menu">
 
                     <ul>
+                        <?php if (empty($this->session->userdata('authenticated'))): ?>
                         <li><a href="<?php echo base_url('physician/register'); ?>">สมัครสมาชิกคลินิก</a></li>
+                        <?php endif;?>
                         <li><a href="<?php echo base_url('package') ?>">แพ็คเก็จใช้งาน</a></li>
 
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
@@ -67,7 +69,14 @@
                         <?php endif; ?>
                         <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated')): ?>
                             <li class="submenu">
-                                <a class="show-submenu"><i class="icon-user-7"></i> <?php echo $this->session->userdata('name'); ?><i class="icon-down-open-mini"></i></a>
+                                <a class="show-submenu">
+                                    <?php if ($this->session->userdata('image') == ''): ?>
+                                        <i class="icon-user-7"></i>
+                                    <?php endif; ?>
+                                    <?php if ($this->session->userdata('image') != ''): ?>
+                                        <img class="avatar-header" src="<?php echo $this->session->userdata('image'); ?>">
+                                    <?php endif; ?>
+                                    <?php echo $this->session->userdata('name'); ?><i class="icon-down-open-mini"></i></a>
                                 <ul>
                                     <?php if ($this->session->userdata('type') == 'member'): ?>
                                         <li><a href="<?php echo base_url('member/profile'); ?>">บัญชีผู้ใช้</a></li>

@@ -366,7 +366,8 @@ class Clinic extends CI_Controller
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE_STATUS,
                         'email' => $user->EMAIL,
-                        'type' => 'member'
+                        'type' => 'member',
+                        'image' => $user->IMAGE
                     );
                     $this->session->set_userdata($userdata);
 
@@ -378,7 +379,8 @@ class Clinic extends CI_Controller
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE,
                         'email' => $user->USERNAME,
-                        'type' => 'clinic'
+                        'type' => 'clinic',
+                        'image' => $user->image
                     );
                     $this->session->set_userdata($userdata);
 

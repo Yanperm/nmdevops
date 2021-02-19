@@ -62,7 +62,9 @@
                     <ul>
                         <li><a href="<?php echo base_url() ?>">หน้าหลัก</a></li>
                         <li><a href="<?php echo base_url('checkin') ?>">เช็คอิน</a></li>
-                        <li><a href="<?php echo base_url('checkin') ?>">จัดการนัดหมาย</a></li>
+                        <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && $this->session->userdata('type') == 'member'): ?>
+                            <li><a href="<?php echo base_url('member/profile') ?>">จัดการนัดหมาย</a></li>
+                        <?php endif ?>
                         <li><a href="<?php echo base_url('physician') ?>">สำหรับคลินิก</a></li>
                         <!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
                         <!--                        <li class="submenu">-->
@@ -84,7 +86,7 @@
                                         <i class="icon-user-7"></i>
                                     <?php endif; ?>
                                     <?php if ($this->session->userdata('image') != ''): ?>
-                                        <img class="avatar-header" src="<?php echo $this->session->userdata('image');?>" >
+                                        <img class="avatar-header" src="<?php echo $this->session->userdata('image'); ?>">
                                     <?php endif; ?>
                                     <?php echo $this->session->userdata('name'); ?>
                                     <i class="icon-down-open-mini"></i>

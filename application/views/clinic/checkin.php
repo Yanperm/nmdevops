@@ -7,26 +7,31 @@
                     <div class="box_form clearfix">
                         <div class="box_login">
 
-                            <?php if($clinicId != ''):?>
+                            <?php if ($clinicId != ''): ?>
                                 <p class="p_checkin">คลินิก</p>
-                            <div class="form-group">
-                                <select class="form-control" required name="clinic">
-                                    <option value=""></option>
-                                    <?php foreach ($clinic as $item): ?>
-                                    <option <?php if ($clinicId != '' && $clinicId == $item->CLINICID): ?>selected<?php endif; ?> value="<?php echo $item->CLINICID; ?>"><?php echo $item->CLINICNAME; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <?php endif;?>
-                            <?php if($clinicId == ''):?>
+                                <div class="form-group">
+                                    <select class="form-control" required name="clinic">
+                                        <option value=""></option>
+                                        <?php foreach ($clinic as $item): ?>
+                                            <option <?php if ($clinicId != '' && $clinicId == $item->CLINICID): ?>selected<?php endif; ?> value="<?php echo $item->CLINICID; ?>"><?php echo $item->CLINICNAME; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($clinicId == ''): ?>
                                 <p class="p_checkin">หมายเลขการจอง * vnxxxxxxx</p>
                                 <div class="form-group">
-                                    <input type="text" name="vn" value="<?php echo $vn;?>" class="form-control" placeholder="">
+                                    <input type="text" name="vn" value="<?php echo $vn; ?>" class="form-control" placeholder="">
                                 </div>
-                            <?php endif;?>
+                            <?php endif; ?>
                             <p class="p_checkin">อีเมล</p>
                             <div class="form-group">
-                                <input type="email" name="email" value="<?php echo $email;?>" class="form-control" placeholder="อีเมลของท่าน">
+                                <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && $this->session->userdata('type') == 'member'): ?>
+                                    <input type="email" name="email" value="<?php echo $this->session->userdata('email'); ?>" class="form-control" placeholder="อีเมลของท่าน">
+                                <?php endif; ?>
+                                <?php if (empty($this->session->userdata('authenticated'))) : ?>
+                                    <input type="email" name="email" value="<?php echo $email; ?>" class="form-control" placeholder="อีเมลของท่าน">
+                                <?php endif ?>
                             </div>
 
                             <div class="form-group">
@@ -40,7 +45,7 @@
 
                     </div>
                 </form>
-                <p class="text-center link_bright">เป็นสมาชิกอยู่แล้วหรือไม่? <a href="<?php echo base_url('login')?>"><strong>เข้าสู่ระบบ</strong></a></p>
+                <p class="text-center link_bright">เป็นสมาชิกอยู่แล้วหรือไม่? <a href="<?php echo base_url('login') ?>"><strong>เข้าสู่ระบบ</strong></a></p>
             </div>
             <!-- /login -->
         </div>
