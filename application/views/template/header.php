@@ -29,6 +29,7 @@
     <link href="<?php echo base_url() ?>assets/css/custom.css?v=<?php echo time(); ?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200&display=swap" rel="stylesheet">
     <script src="<?php echo base_url() ?>assets/js/jquery-2.2.4.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body style="font-family: 'Mitr', sans-serif;">
@@ -61,30 +62,41 @@
                     <ul>
                         <li><a href="<?php echo base_url() ?>">หน้าหลัก</a></li>
                         <li><a href="<?php echo base_url('checkin') ?>">เช็คอิน</a></li>
-                        <li><a href="<?php echo base_url('checkin') ?>">จัดการนัดหมาย</a></li>
+                        <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && $this->session->userdata('type') == 'member'): ?>
+                            <li><a href="<?php echo base_url('member/profile') ?>">จัดการนัดหมาย</a></li>
+                        <?php endif ?>
                         <li><a href="<?php echo base_url('physician') ?>">สำหรับคลินิก</a></li>
-<!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
-<!--                        <li class="submenu">-->
-<!--                            <a class="show-submenu">คู่มือการใช้งาน<i class="icon-down-open-mini"></i></a>-->
-<!--                            <ul>-->
-<!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การลงทะเบียน</a></li>-->
-<!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การยืนยันบัญชีสมาชิก</a></li>-->
-<!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การเปลี่ยนแปลงรหัสผ่าน</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="--><?php //echo base_url('link/contact') ?><!--">ติดต่อเรา</a></li>-->
+                        <!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
+                        <!--                        <li class="submenu">-->
+                        <!--                            <a class="show-submenu">คู่มือการใช้งาน<i class="icon-down-open-mini"></i></a>-->
+                        <!--                            <ul>-->
+                        <!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การลงทะเบียน</a></li>-->
+                        <!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การยืนยันบัญชีสมาชิก</a></li>-->
+                        <!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การเปลี่ยนแปลงรหัสผ่าน</a></li>-->
+                        <!--                            </ul>-->
+                        <!--                        </li>-->
+                        <!--                        <li><a href="--><?php //echo base_url('link/contact') ?><!--">ติดต่อเรา</a></li>-->
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
                             <li><a href="<?php echo base_url('login') ?>"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>
                         <?php endif; ?>
                         <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated')): ?>
                             <li class="submenu">
-                                <a class="show-submenu"><i class="icon-user-7"></i> <?php echo $this->session->userdata('name'); ?><i class="icon-down-open-mini"></i></a>
+                                <a class="show-submenu">
+                                    <?php if ($this->session->userdata('image') == ''): ?>
+                                        <i class="icon-user-7"></i>
+                                    <?php endif; ?>
+                                    <?php if ($this->session->userdata('image') != ''): ?>
+                                        <img class="avatar-header" src="<?php echo $this->session->userdata('image'); ?>">
+                                    <?php endif; ?>
+                                    <?php echo $this->session->userdata('name'); ?>
+                                    <i class="icon-down-open-mini"></i>
+                                </a>
                                 <ul>
                                     <?php if ($this->session->userdata('type') == 'member'): ?>
                                         <li><a href="<?php echo base_url('member/profile'); ?>">บัญชีผู้ใช้</a></li>
                                     <?php endif; ?>
                                     <?php if ($this->session->userdata('type') == 'clinic'): ?>
-                                        <li><a href="<?php echo base_url('clinic_profile'); ?>">บัญชีผู้ใช้</a></li>
+                                        <li><a href="<?php echo base_url('physician/dashboard'); ?>">บัญชีผู้ใช้</a></li>
                                     <?php endif; ?>
                                     <li><a href="<?php echo base_url('logout') ?>">ออกจากระบบ</a></li>
                                 </ul>

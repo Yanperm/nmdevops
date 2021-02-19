@@ -221,6 +221,17 @@ ul#top_access li i {
     font-weight: 900;
 }
 
+.avatar-header{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.cancel-text{
+    color: #f44336;
+    font-size: 20px;
+    font-weight: 800;
+}
+
 @media (max-width: 425px) {
 
     .ques_online_review_li {

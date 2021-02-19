@@ -1,6 +1,6 @@
-<h2>ยืนยันการนัดหมอ</h2>
-<p>รายละเอียดผู้ป่วย</p>
-<p>หมายเลขการจอง : <?php echo $vn;?></p>
+<h2> ยืนยันการนัดหมอ</h2>
+<p> รายละเอียดผู้ป่วย</p>
+<p> หมายเลขการจอง : <?php echo $vn;?></p>
 <p> ชื่อผู้ป่วย : <?php echo $firstName;?> <?php echo $lastName;?></p>
 <p> เบอร์โทรศัพท์ติดต่อ : <?php echo $telephone;?></p>
 <p> Line Id : <?php echo $lineId;?></p>
@@ -9,7 +9,9 @@
 <br><br><br>
 วันและเวลาที่นัดหมอ
 <p> วันที่ : <?php echo $date;?></p>
-<p> เวลา : <?php echo $time;?></p>
+<?php if($time != ''):?><p> เวลา : <?php echo $time;?></p><?php endif;?>
+
+<p> คิวที่  : <?php echo $ques;?></p>
 
 <br><br><br>
 

@@ -93,13 +93,15 @@ class Clinic extends CI_Controller
         $times = new DatePeriod($begin, $interval, $end);
 
         $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
+        $bookingExtraQues = $this->BookingModel->getDataExtra($clinic->CLINICID, $date);
 
         $data = [
             'date' => $date,
             'clinic' => $clinic,
             'times' => $times,
             'interval' => $interval,
-            'booking' => $booking
+            'booking' => $booking,
+            'bookingExtraQues' => $bookingExtraQues
         ];
 
         $this->load->view('template/header');
@@ -152,6 +154,12 @@ class Clinic extends CI_Controller
         $ques = $this->input->post('ques');
         $qber = $this->input->post('qber');
 
+        $type = 0;
+        if($time == '0'){
+            $type = 1;
+            $time = '';
+        }
+
         $dateNow = new DateTime();
         $currentTime = $dateNow->getTimestamp();
 
@@ -172,7 +180,7 @@ class Clinic extends CI_Controller
             $this->MembersModel->insert($data);
             $subject = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor";
             $message = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor\r\nขอบคุณ คุณ " . $firstName . " " . $lastName . " ที่ให้ความไว้วางใจสมัครสมาชิกเพื่อใช้บริการกับเรา\r\n
-            ข้อมูลการเช้าระบบ\r\n
+            ข้อมูลการเข้าสู่ระบบ\r\n
             username : " . $email . "\r\n
             password : " . $telephone . "\r\n
             \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
@@ -184,6 +192,7 @@ class Clinic extends CI_Controller
             'BOOKINGID' => 'VN' . $currentTime,
             'QUES' => $ques,
             'QBER' => $qber,
+            'TYPE' => $type,
             'MEMBERIDCARD' => $userId,
             'CLINICID' => $clinicId,
             'BOOKDATE' => $date,
@@ -202,7 +211,8 @@ class Clinic extends CI_Controller
             'lineId' => $lineId,
             'cause' => $cause,
             'date' => $date,
-            'time' => $time
+            'time' => $time,
+            'ques' => $ques
         ];
         $subject = "ยืนยันการนัดหมอ";
         $message = $this->load->view('email_template', $dataEmail, true);
@@ -356,7 +366,8 @@ class Clinic extends CI_Controller
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE_STATUS,
                         'email' => $user->EMAIL,
-                        'type' => 'member'
+                        'type' => 'member',
+                        'image' => $user->IMAGE
                     );
                     $this->session->set_userdata($userdata);
 
@@ -368,7 +379,8 @@ class Clinic extends CI_Controller
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE,
                         'email' => $user->USERNAME,
-                        'type' => 'clinic'
+                        'type' => 'clinic',
+                        'image' => $user->image
                     );
                     $this->session->set_userdata($userdata);
 

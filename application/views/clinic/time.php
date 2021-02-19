@@ -23,7 +23,7 @@
                             </div>
                             <ul>
                                 <?php foreach ($times as $key => $time):
-                                    $textTime = $time->format('H:i').'-'.$time->add($interval)->format('H:i');
+                                    $textTime = $time->format('H:i') . '-' . $time->add($interval)->format('H:i');
                                     ?>
                                     <li><strong><?php echo $textTime; ?></strong>
                                         <span>A<?php echo $key + 1; ?> </span>
@@ -40,11 +40,21 @@
                                         <?php endif; ?>
 
                                         <?php if (!$booked): ?>
-                                            <a href="<?php echo base_url('/booking/'.$clinic->CLINICID.'?booking_date='.$date."&booking_time=".$textTime.'&ques=A'.($key+1).'&qber='.($key+1))?>">จองคิว</a>
+                                            <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=" . $textTime . '&ques=A' . ($key + 1) . '&qber=' . ($key + 1)) ?>">จองคิว</a>
                                         <?php endif; ?>
 
                                     </li>
                                 <?php endforeach; ?>
+<!--                                --><?php //foreach ($bookingExtraQues as $key => $item): ?>
+<!--                                    <li style="background: #e9e6ee;"><strong style="width: 105px;">คิวเสริม</strong>-->
+<!--                                        <span>B--><?php //echo $key + 1; ?><!-- </span>-->
+<!--                                        <button class="booked" disabled>จองแล้ว</button>-->
+<!--                                    </li>-->
+<!--                                --><?php //endforeach; ?>
+                                <li style="background: #e9e6ee;"><strong style="width: 105px;">คิวเสริม</strong>
+                                    <span>B<?php echo count($bookingExtraQues) + 1; ?> </span>
+                                    <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=0&ques=B" . (count($bookingExtraQues) + 1) . '&qber=' . (count($bookingExtraQues) + 1)) ?>">จองคิว</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

@@ -11,6 +11,8 @@ class Member extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('BookingModel');
         $this->load->library('pagination');
+        $this->load->library('S3_upload');
+        $this->load->library('S3');
     }
 
     private function logged_in()
@@ -47,9 +49,23 @@ class Member extends CI_Controller
         $this->load->view('template/footer');
     }
 
+    public function cancelBooking()
+    {
+        if(!empty($this->input->get('vn'))){
+            $booking = $this->BookingModel->getDataById($this->input->get('vn'));
+
+            if($booking->TYPE == 0){
+                $this->BookingModel->delete($this->input->get('vn'));
+            }else{
+                $this->BookingModel->cancel($this->input->get('vn'));
+            }
+        }
+
+        redirect(base_url('member/profile'));
+    }
+
     public function history()
     {
-
         $this->load->view('template/header');
         $this->load->view('member/history');
         $this->load->view('template/footer');
@@ -62,13 +78,28 @@ class Member extends CI_Controller
         $lineId = $this->input->post('line_id');
         $phone = $this->input->post('phone');
         $email = $this->input->post('email');
+        $image = $this->input->post('old_image');
+
+        if (!empty($_FILES["file"])) {
+            $dir = dirname($_FILES["file"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+            rename($_FILES["file"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+            $this->session->set_userdata('image', $image);
+
+            //remove old image S3
+            if($this->input->post('old_image') != ''){
+                $this->s3_upload->deleteFile(basename($this->input->post('old_image')));
+            }
+        }
 
         $data = [
             'CUSTOMERNAME' => $name,
             'BIRTHDAY' => $birthDate,
             'LINEID' => $lineId,
             'EMAIL' => $email,
-            'PHONE' => $phone
+            'PHONE' => $phone,
+            'IMAGE' => $image
         ];
 
         $this->MembersModel->update($data, $this->session->userdata('id'));
@@ -148,9 +179,12 @@ class Member extends CI_Controller
             $rowno = ($rowno - 1) * $rowperpage;
         }
 
-        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'), $rowperpage, $rowno);
+        $booking = $this->BookingModel->getBookingByUserIdCheckin($this->session->userdata('id'), $rowperpage, $rowno);
 
-        $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
+        $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))
+            ->where('CHECKIN != 1')
+            ->where('STATUS != 2')
+            ->count_all_results('tbbooking');
 
         $config['base_url'] = base_url() . 'loadBooking';
         $config['use_page_numbers'] = TRUE;

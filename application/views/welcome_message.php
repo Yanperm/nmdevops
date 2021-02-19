@@ -161,7 +161,7 @@
 
                     <?php foreach ($clinic as $row): ?>
                         <div class="item">
-                            <form method="post" action="<?php echo base_url('detail/' . $row->CLINICID) ?>">
+                            <form method="post" action="<?php echo base_url('clinic/' . $row->CLINICNAME) ?>">
                                 <div class="views"><i class="icon-eye-7"></i>3000</div>
                                 <div class="title">
                                     <button class="btn btn-block btn-info" type="submit"><?php echo $row->CLINICNAME; ?><br/><em><?php echo $row->DETAIL; ?></em></button>

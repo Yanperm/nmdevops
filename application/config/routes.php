@@ -72,6 +72,7 @@ $route['clinic_profile'] = 'clinic/profile';
 $route['physician/dashboard'] = 'physician/dashboard';
 
 $route['physician/manage/checkin'] = 'physician/checkin';
+$route['physician/manage/cancel'] = 'physician/cancel';
 
 $route['physician/ques/show'] = 'physician/showQues';
 $route['physician/ques/call'] = 'physician/quesCall';
@@ -91,6 +92,10 @@ $route['physician/youtube/delete'] = 'physician/youtubeDelete';
 
 $route['physician/doctor'] = 'physician/doctor';
 $route['physician/doctor/update'] = 'physician/doctorUpdate';
+
+$route['physician/profile'] = 'physician/profile';
+$route['physician/profile/update'] = 'physician/profileUpdate';
+$route['physician/password/update'] = 'physician/passwordUpdate';
 
 $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';

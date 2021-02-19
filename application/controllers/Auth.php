@@ -60,6 +60,12 @@ class Auth extends CI_Controller
             $result = $this->ClinicModel->checkVerify($email, $code);
         }
 
+//        echo $this->session->userdata('id');
+//        $clinic = $this->ClinicModel->getData($this->session->userdata('id'));
+//
+//        print_r($clinic);
+//        exit();
+
         $msg = '';
 
         if ($result) {
@@ -104,7 +110,7 @@ class Auth extends CI_Controller
                 'email_verification_code' => $newCode
             ];
 
-            $this->MembersModel->update($data,$clinic->IDCLINIC);
+            $this->ClinicModel->updateById($data,$clinic->IDCLINIC);
         }
 
         $subject = "โปรดยืนยันอีเมลของคุณ";
@@ -170,9 +176,10 @@ class Auth extends CI_Controller
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
                         'authenticated' => TRUE,
-                        'activate' =>$user->ACTIVATE_STATUS,
-                        'email' =>$user->EMAIL,
-                        'type' => 'member'
+                        'activate' => $user->ACTIVATE_STATUS,
+                        'email' => $user->EMAIL,
+                        'type' => 'member',
+                        'image' => $user->IMAGE
                     );
                 }else{
                     $userdata = array(
@@ -180,7 +187,7 @@ class Auth extends CI_Controller
                         'name' => $user->CLINICNAME,
                         'authenticated' => TRUE,
                         'activate' => $user->ACTIVATE,
-                        'email' =>$user->USERNAME,
+                        'email' => $user->USERNAME,
                         'type' => 'clinic'
                     );
                 }
