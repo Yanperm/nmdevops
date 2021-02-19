@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('clinic/'.$clinic->CLINICNAME); ?>"><?php echo $clinic->CLINICNAME;?></a></li>
+                <li><a href="<?php echo base_url('clinic/' . $clinic->CLINICNAME); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
                 <li>นัดหมอออนไลน์</li>
             </ul>
         </div>
@@ -11,21 +11,21 @@
     <!-- /breadcrumb -->
 
     <div class="container margin_60">
-        <form method="post" action="<?php echo base_url('booking-confirm')?>">
-            <input type="hidden" value="<?php echo $date;?>" name="date">
-            <input type="hidden" value="<?php echo $time;?>" name="time">
-            <input type="hidden" value="<?php echo $ques;?>" name="ques">
-            <input type="hidden" value="<?php echo $qber;?>" name="qber">
-            <input type="hidden" value="<?php echo $clinic->CLINICID;?>" name="clinic_id">
+        <form method="post" action="<?php echo base_url('booking-confirm') ?>">
+            <input type="hidden" value="<?php echo $date; ?>" name="date">
+            <input type="hidden" value="<?php echo $time; ?>" name="time">
+            <input type="hidden" value="<?php echo $ques; ?>" name="ques">
+            <input type="hidden" value="<?php echo $qber; ?>" name="qber">
+            <input type="hidden" value="<?php echo $clinic->CLINICID; ?>" name="clinic_id">
             <div class="row">
 
                 <div class="col-xl-8 col-lg-8">
                     <div class="box_general_3 cart">
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
-                        <div class="message">
-                            <p>เป็นสมาชิกอยู่แล้วหรือไม่?<a href="#0"> เข้าสู่ระบบ </a>ที่นี้</p>
-                        </div>
-                        <?php endif;?>
+                            <div class="message">
+                                <p>เป็นสมาชิกอยู่แล้วหรือไม่?<a href="#0"> เข้าสู่ระบบ </a>ที่นี้</p>
+                            </div>
+                        <?php endif; ?>
                         <div class="form_title">
                             <h3><strong>1</strong>ข้อมูลพื้นฐาน</h3>
                         </div>
@@ -34,13 +34,13 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>ชื่อ</label>
-                                        <input type="text" class="form-control" id="firstname_booking" name="firstname_booking" placeholder="" value="<?php if(!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[0]; endif;?>">
+                                        <input type="text" class="form-control" id="firstname_booking" name="firstname_booking" placeholder="" value="<?php if (!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[0]; endif; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>นามสกุล</label>
-                                        <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="" value="<?php if(!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[1]; endif;?>">
+                                        <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="" value="<?php if (!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[1]; endif; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -56,13 +56,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เบอร์โทรศัพท์ติดต่อ</label>
-                                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="" value="<?php if(!empty($member)): echo $member->PHONE; endif;?>">
+                                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="" value="<?php if (!empty($member)): echo $member->PHONE; endif; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Line Id</label>
-                                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="" value="<?php if(!empty($member)): echo $member->LINEID; endif;?>">
+                                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="" value="<?php if (!empty($member)): echo $member->LINEID; endif; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>อีเมล</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php if(!empty($member)): echo $member->EMAIL; endif;?>">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php if (!empty($member)): echo $member->EMAIL; endif; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -104,9 +104,11 @@
                         </div>
                         <div class="summary">
                             <ul>
-                                <li>วันที่: <strong class="float-right"><?php echo $date;?></strong></li>
-                                <li>คิวที่ : <strong class="float-right"><?php echo  $ques;?></strong></li>
-                                <li>เวลา: <strong class="float-right"><?php echo $time;?></strong></li>
+                                <li>วันที่: <strong class="float-right"><?php echo $date; ?></strong></li>
+                                <li>คิวที่ : <strong class="float-right"><?php echo $ques; ?></strong></li>
+                                <?php if ($time != '0'): ?>
+                                    <li>เวลา: <strong class="float-right"><?php echo $time; ?></strong></li>
+                                <?php endif; ?>
                                 <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME ?? ''; ?></strong></li>
                             </ul>
                         </div>

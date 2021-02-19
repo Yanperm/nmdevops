@@ -13,6 +13,8 @@ class Physician extends CI_Controller
         $this->load->model('CloseModel');
         $this->load->model('YoutubeModel');
         $this->load->library('pagination');
+        $this->load->library('S3_upload');
+        $this->load->library('S3');
     }
 
     private function logged_in()
@@ -102,16 +104,31 @@ class Physician extends CI_Controller
 
     public function checkin()
     {
-        if(!empty($this->input->get('id'))){
+        if (!empty($this->input->get('id'))) {
             $this->BookingModel->checkin($this->input->get('id'));
         }
-        $url= $_SERVER['HTTP_REFERER'];
-       // echo $url;
-       // return redirect()->to($url);
-        header( "location:".$url );
+        $url = $_SERVER['HTTP_REFERER'];
+        header("location:" . $url);
         exit(0);
-       // return redirect()->to($_SERVER['HTTP_REFERER']);
     }
+
+    public function cancel()
+    {
+        if (!empty($this->input->get('vn'))) {
+            $booking = $this->BookingModel->getDataById($this->input->get('id'));
+
+            if ($booking->TYPE == 0) {
+                $this->BookingModel->delete($this->input->get('id'));
+            } else {
+                $this->BookingModel->cancel($this->input->get('id'));
+            }
+        }
+
+        $url = $_SERVER['HTTP_REFERER'];
+        header("location:" . $url);
+        exit(0);
+    }
+
 
     public function ques()
     {
@@ -272,16 +289,16 @@ class Physician extends CI_Controller
         $this->YoutubeModel->deleteByClinicId($this->session->userdata('id'));
         $dateNow = new DateTime();
 
-        $linkYoutube =  $this->input->post('youtube');
-        $select =  $this->input->post('status');
-        foreach ($linkYoutube as $key =>  $item){
+        $linkYoutube = $this->input->post('youtube');
+        $select = $this->input->post('status');
+        foreach ($linkYoutube as $key => $item) {
             $status = 0;
-            if($select == $key){
+            if ($select == $key) {
                 $status = 1;
             }
             $currentTime = $dateNow->getTimestamp();
             $data = [
-                'ID' => $currentTime.$key,
+                'ID' => $currentTime . $key,
                 'CLINICID' => $this->session->userdata('id'),
                 'LINK' => $item,
                 'STATUS' => $status
@@ -374,6 +391,74 @@ class Physician extends CI_Controller
         ];
 
         $this->load->view('physician/show_ques', $data);
+    }
+
+    public function profile()
+    {
+        $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+
+        $data = [
+            'clinic' => $clinic,
+        ];
+
+        $this->load->view('template/header_physician');
+        $this->load->view('physician/profile', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function profileUpdate()
+    {
+        $image = $this->input->post('old_image');
+
+        if (!empty($_FILES["file"])) {
+            $dir = dirname($_FILES["file"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+            rename($_FILES["file"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+            $this->session->set_userdata('image', $image);
+
+            //remove old image S3
+            if ($this->input->post('old_image') != '') {
+                $this->s3_upload->deleteFile(basename($this->input->post('old_image')));
+            }
+        }
+
+        $data = [
+            'image' => $image
+        ];
+
+        $this->ClinicModel->updateById($data, $this->session->userdata('id'));
+
+        $this->session->set_flashdata('msg', 'แก้ไขรูปภาพเรียบร้อย');
+
+        redirect(base_url('physician/profile'));
+    }
+
+    public function passwordUpdate()
+    {
+        $password = $this->input->post('password');
+
+        $data = [
+            'PASSWORD' => md5($password),
+        ];
+
+        $this->ClinicModel->updateById($data, $this->session->userdata('id'));
+
+        $this->session->set_flashdata('msgPwd', 'แก้ไขรหัสผ่านเรียบร้อย');
+
+        redirect(base_url('physician/profile'));
+    }
+
+
+    public function check_old_password()
+    {
+        $password = $this->input->post('old_password');
+        $check = $this->ClinicModel->checkOldPassword(md5($password), $this->session->userdata('id'));
+        if ($check == false) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
     }
 
     public function logout()

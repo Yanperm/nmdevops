@@ -94,7 +94,7 @@
                                         <li><a href="<?php echo base_url('member/profile'); ?>">บัญชีผู้ใช้</a></li>
                                     <?php endif; ?>
                                     <?php if ($this->session->userdata('type') == 'clinic'): ?>
-                                        <li><a href="<?php echo base_url('clinic_profile'); ?>">บัญชีผู้ใช้</a></li>
+                                        <li><a href="<?php echo base_url('physician/dashboard'); ?>">บัญชีผู้ใช้</a></li>
                                     <?php endif; ?>
                                     <li><a href="<?php echo base_url('logout') ?>">ออกจากระบบ</a></li>
                                 </ul>

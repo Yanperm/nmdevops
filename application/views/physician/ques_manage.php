@@ -37,6 +37,7 @@
                             <th>บัตรคิว</th>
                             <th>วันที่</th>
                             <th>เวลา</th>
+                            <th>สาเหตุ</th>
                             <th>ชื่อสกุลคนไข้ที่จองคิวตรวจ</th>
                             <th>เบอร์โทร</th>
                             <th>LINE</th>
@@ -50,16 +51,30 @@
                                 <td><?php echo $item['QUES']; ?></td>
                                 <td><?php echo $item['BOOKDATE']; ?></td>
                                 <td><?php echo $item['BOOKTIME']; ?></td>
+                                <td><?php echo $item['DETAIL']; ?></td>
                                 <td><?php echo $item['CUSTOMERNAME']; ?></td>
                                 <td><?php echo $item['PHONE']; ?></td>
                                 <td><?php echo $item['LINEID']; ?></td>
                                 <td>
-                                    <?php if (!$item["CHECKIN"]): ?> <span class="badge badge-danger">ยังเช็คอิน</span> <?php endif; ?>
-                                    <?php if ($item["CHECKIN"]): ?> <span class="badge badge-success">เช็คอินแล้ว</span> <?php endif; ?>
+                                    <?php if ($item["TYPE"] == 0): ?>
+                                        <?php if (!$item["CHECKIN"]): ?> <span class="badge badge-warning">ยังไม่เช็คอิน</span> <?php endif; ?>
+                                        <?php if ($item["CHECKIN"]): ?> <span class="badge badge-success">เช็คอินแล้ว</span> <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if ($item["TYPE"] == 1): ?>
+                                        <?php if ($item["STATUS"] != 2): ?>
+                                            <?php if (!$item["CHECKIN"]): ?> <span class="badge badge-warning">ยังไม่เช็คอิน</span> <?php endif; ?>
+                                            <?php if ($item["CHECKIN"]): ?> <span class="badge badge-success">เช็คอินแล้ว</span> <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($item["STATUS"] == 2): ?>
+                                            <span class="badge badge-danger">ยกเลิกคิว</span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td>
-                                    <?php if (!$item["CHECKIN"]): ?> <a style="width: 100%" class="btn btn-warning" href="<?php echo base_url('physician/manage/checkin') . "?id=" . $item["BOOKINGID"]; ?>"> เช็คอินให้ </a> <?php endif; ?>
-                                    <?php if ($item["CHECKIN"]): ?><a style="width: 100%" class="btn btn-danger" href="#" >  <i class="fa fa-fw fa-trash"></i> </a> <?php endif; ?>
+                                    <?php if ($item["STATUS"] != 2): ?>
+                                        <?php if (!$item["CHECKIN"]): ?> <a style="width: 100%" class="btn btn-warning" href="<?php echo base_url('physician/manage/checkin') . "?id=" . $item["BOOKINGID"]; ?>"> เช็คอินให้ </a> <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if ($item["CHECKIN"] && $item["STATUS"] != 2): ?><a href="<?php echo base_url('physician/manage/cancel')."?id=".$item["BOOKINGID"];?>" style="width: 100%" class="btn btn-danger" href="#"> <i class="fa fa-fw fa-trash"></i> </a> <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

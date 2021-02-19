@@ -6,9 +6,29 @@ class BookingModel extends CI_Model
 
     public function getData($clicnicId, $date)
     {
-        $query = $this->db->query('SELECT * FROM tbbooking where CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
+        $query = $this->db->query('SELECT * FROM tbbooking where TYPE = 0 AND CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
         if ($query->num_rows() > 0) {
             return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getDataExtra($clicnicId, $date)
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking where TYPE = 1 AND CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getDataById($id)
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking where BOOKINGID = "'.$id.'"');
+        if ($query->num_rows() > 0) {
+            return $query->row();
         } else {
             return array();
         }
@@ -86,6 +106,22 @@ class BookingModel extends CI_Model
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.MEMBERIDCARD = "' . $userId . '"
+            limit ' . $rowno . ',' . $rowperpage);
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
+    public function getBookingByUserIdCheckin($userId, $rowperpage, $rowno)
+    {
+        $query = $this->db->query('
+            SELECT * FROM tbbooking as booking 
+            left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
+            left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
+            where booking.MEMBERIDCARD = "' . $userId . '" AND booking.CHECKIN != 1 AND booking.STATUS != 2 
             limit ' . $rowno . ',' . $rowperpage);
 
         if ($query->num_rows() > 0) {
@@ -178,5 +214,19 @@ class BookingModel extends CI_Model
         $this->db->update('tbbooking');
 
         return true;
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('BOOKINGID', $id);
+        $this->db->delete('tbbooking');
+    }
+
+
+    public function cancel($id)
+    {
+        $this->db->set('STATUS', 2);
+        $this->db->where('BOOKINGID', $id);
+        $this->db->update('tbbooking');
     }
 }

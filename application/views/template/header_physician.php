@@ -33,7 +33,8 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="<?php echo base_url() ?>assets/physician/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -101,6 +102,9 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url('physician/doctor');?>">ข้อมูลแพทย์</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('physician/profile');?>">ตั้งค่าบัญชี</a>
                     </li>
                 </ul>
             </li>

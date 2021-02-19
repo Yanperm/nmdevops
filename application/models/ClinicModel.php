@@ -23,7 +23,7 @@ class ClinicModel extends CI_Model
 
     public function getData()
     {
-        $query = $this->db->query('SELECT * FROM tbclinic where MOBILE = 1 ');
+        $query = $this->db->query('SELECT * FROM tbclinic WHERE MOBILE = 1');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
@@ -33,7 +33,7 @@ class ClinicModel extends CI_Model
 
     public function detailById($clinicId)
     {
-        $query = $this->db->query('SELECT * FROM tbclinic where CLINICID = "' . $clinicId . '"');
+        $query = $this->db->query('SELECT * FROM tbclinic where IDCLINIC = "' . $clinicId . '"');
         if ($query->num_rows() > 0) {
             return $query->row();
         } else {
@@ -111,6 +111,18 @@ class ClinicModel extends CI_Model
         }
 
         return false;
+    }
+
+    public function checkOldPassword($password, $clinicId)
+    {
+        $query = $this->db->query('SELECT IDCLINIC FROM tbclinic where IDCLINIC = "' . $clinicId . '" AND PASSWORD = "' . $password . '"');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $item) {
+                return $item->IDCLINIC;
+            }
+        } else {
+            return false;
+        }
     }
 
     public function updateById($data,$clinicId){

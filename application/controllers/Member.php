@@ -49,9 +49,23 @@ class Member extends CI_Controller
         $this->load->view('template/footer');
     }
 
+    public function cancelBooking()
+    {
+        if(!empty($this->input->get('vn'))){
+            $booking = $this->BookingModel->getDataById($this->input->get('vn'));
+
+            if($booking->TYPE == 0){
+                $this->BookingModel->delete($this->input->get('vn'));
+            }else{
+                $this->BookingModel->cancel($this->input->get('vn'));
+            }
+        }
+
+        redirect(base_url('member/profile'));
+    }
+
     public function history()
     {
-
         $this->load->view('template/header');
         $this->load->view('member/history');
         $this->load->view('template/footer');
@@ -165,9 +179,12 @@ class Member extends CI_Controller
             $rowno = ($rowno - 1) * $rowperpage;
         }
 
-        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'), $rowperpage, $rowno);
+        $booking = $this->BookingModel->getBookingByUserIdCheckin($this->session->userdata('id'), $rowperpage, $rowno);
 
-        $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
+        $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))
+            ->where('CHECKIN != 1')
+            ->where('STATUS != 2')
+            ->count_all_results('tbbooking');
 
         $config['base_url'] = base_url() . 'loadBooking';
         $config['use_page_numbers'] = TRUE;

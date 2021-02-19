@@ -60,6 +60,12 @@ class Auth extends CI_Controller
             $result = $this->ClinicModel->checkVerify($email, $code);
         }
 
+//        echo $this->session->userdata('id');
+//        $clinic = $this->ClinicModel->getData($this->session->userdata('id'));
+//
+//        print_r($clinic);
+//        exit();
+
         $msg = '';
 
         if ($result) {
@@ -104,7 +110,7 @@ class Auth extends CI_Controller
                 'email_verification_code' => $newCode
             ];
 
-            $this->MembersModel->update($data,$clinic->IDCLINIC);
+            $this->ClinicModel->updateById($data,$clinic->IDCLINIC);
         }
 
         $subject = "โปรดยืนยันอีเมลของคุณ";
