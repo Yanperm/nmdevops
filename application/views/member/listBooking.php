@@ -8,7 +8,7 @@
         <h3><?php echo $item['CLINICNAME']; ?></h3>
         <p><?php echo $item['SERVICE']; ?></p>
         <h3>หมายเลขการจอง <?php echo $item['BOOKINGID']; ?></h3>
-        <p>สถานะเช็คอิน <span class="history_span"><?php if ($item["CHECKIN"]): echo 'เช็คอินแล้ว'; endif; ?><?php if (!$item["CHECKIN"]): echo 'ยังไม่ได้เช็คอิน'; endif; ?></span></p>
+        <p>สถานะเช็คอิน <span class="history_span" <?php if ($item["CHECKIN"]):?>style="color:#4caf50" <?php endif;?>><?php if ($item["CHECKIN"]): echo 'เช็คอินแล้ว'; endif; ?><?php if (!$item["CHECKIN"]): echo 'ยังไม่ได้เช็คอิน'; endif; ?></span></p>
         <?php if($item["STATUS"] == 2 && substr($item["QUES"],0,1) == 'B'):?><p class="cancel-text">ยกเลิกคิว</p><?php endif;?>
         <ul>
             <li>คิว <span class="history_span"><?php echo $item["QUES"]; ?></span></li>

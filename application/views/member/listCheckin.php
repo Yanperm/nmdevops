@@ -1,6 +1,6 @@
-<?php foreach ($listCheckin as $item):?>
+<?php foreach ($listCheckin as $item): ?>
     <div class="strip_list wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
-
+        <a onClick="cancel('<?php echo $item["BOOKINGID"]; ?>')" style="float: right;cursor: pointer" href="javascript:void(0)">X</a>
         <figure style="width: 64px;height: 64px;">
             <a href="<?php echo base_url('clinic/' . $item["CLINICNAME"]); ?>"><img src="<?php echo $item['image']; ?>" alt="" style="    width: 68px;height: 79px;"></a>
         </figure>
@@ -8,7 +8,7 @@
         <h3><?php echo $item['CLINICNAME']; ?></h3>
         <div><h3>หมายเลขการจอง <?php echo $item['BOOKINGID']; ?></h3></div>
         <p>สถานะเช็คอิน <span class="history_span"><?php if ($item["CHECKIN"]): echo 'เช็คอินแล้ว'; endif; ?><?php if (!$item["CHECKIN"]): echo 'ยังไม่ได้เช็คอิน'; endif; ?></span>
-            <a class="btn_1" href="<?php echo base_url('member/cancelBooking') ?>?vn=<?php echo $item["BOOKINGID"]; ?>">ยกเลิก</a>
+
         </p>
         <ul>
             <li>คิว <span class="history_span"><?php echo $item["QUES"]; ?></span></li>
@@ -16,7 +16,7 @@
             <?php if ($item["BOOKTIME"] != ''): ?>
                 <li>เวลา <span class="history_span"><?php echo $item["BOOKTIME"]; ?></span></li>
             <?php endif; ?>
-            <li><a href="<?php echo base_url('checkin') ?>?vn=<?php echo $item["BOOKINGID"]; ?>&email=<?php echo $item["EMAIL"]; ?>" target="_blank">เช็คอิน</a></li>
+            <li><a href="javascript:void(0)" onClick='checkInMember("<?php echo base_url('profile/checkin') ?>?vn=<?php echo $item["BOOKINGID"]; ?>&email=<?php echo $item["EMAIL"]; ?>")'>เช็คอิน</a></li>
 
         </ul>
     </div>
@@ -31,6 +31,40 @@
         var pageno = $(this).attr('data-ci-pagination-page');
         loadCheckin(pageno);
     });
+
+    function cancel(id) {
+        Swal.fire({
+            title: 'ต้องการยกเลิกการจองหรือไม่?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่',
+            cancelButtonText: 'ไม่ใช่'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "<?php echo base_url('member/cancelBooking') ?>?vn=" + id;
+            }
+        })
+    }
+
+    function checkInMember(url) {
+        Swal.fire({
+            title: 'ต้องการเช็คอินหรือไม่?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่',
+            cancelButtonText: 'ไม่ใช่'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        })
+    }
 </script>
 
 

@@ -11,7 +11,7 @@
     <!-- /breadcrumb -->
 
     <div class="container margin_60">
-        <form method="post" action="<?php echo base_url('booking-confirm') ?>">
+        <form id="booking-clinic-form" method="post" action="<?php echo base_url('booking-confirm') ?>">
             <input type="hidden" value="<?php echo $date; ?>" name="date">
             <input type="hidden" value="<?php echo $time; ?>" name="time">
             <input type="hidden" value="<?php echo $ques; ?>" name="ques">
@@ -85,7 +85,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" name="cause"></textarea>
+                                        <textarea class="form-control" name="cause" id="cause"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -145,3 +145,59 @@
 <!--        'warning'-->
 <!--    )-->
 <!--</script>-->
+
+<script>
+    $(document).ready(function () {
+        $('#booking-clinic-form').validate({
+            rules: {
+                firstname_booking: {
+                    required: true,
+                },
+                lastname_booking: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    //remote: {
+                    //    url: "<?php //echo base_url('check_email_clinic_already')?>//",
+                    //    type: "post"
+                    //}
+                },
+                telephone: {
+                    required: true,
+                },
+                cause: {
+                    required: true,
+                },
+
+            },
+            // set validation messages for the rules are set previously
+            messages: {
+                firstname_booking: {
+                    required: "กรุณากรอกชื่อ"
+                },
+                lastname_booking: {
+                    required: "กรุณากรอกนยามสกุล"
+                },
+                telephone: {
+                    required: "กรุณากรอกเบอร์โทรศัพท์"
+                },
+                email: {
+                    required: "กรุณากรอกอีเมล",
+                    email: "รูปแบบอีเมลไม่ถูกต้อง",
+                    //remote: "อีเมลนี้มีการใช้งานแล้ว"
+                },
+                cause: {
+                    required: "กรุณากรอกสาเหตุ",
+                },
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+<!-- Validation JS file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>

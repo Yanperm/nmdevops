@@ -117,10 +117,10 @@
                         <div class="indent_title_in">
                             <i class="icon-calendar-7"></i>
                             <h3>ตารางออกตรวจ</h3>
-                            <p>Mussum ipsum cacilds, vidis litro abertis.</p>
+<!--                            <p>Mussum ipsum cacilds, vidis litro abertis.</p>-->
                         </div>
                         <div class="wrapper_indent">
-                            <p>Zril causae ancillae sit ea. Dicam veritus mediocritatem sea ex, nec id agam eius. Te pri facete latine salutandi, scripta mediocrem et sed, cum ne mundi vulputate. Ne his sint graeco detraxit, posse exerci volutpat has in.</p>
+<!--                            <p>Zril causae ancillae sit ea. Dicam veritus mediocritatem sea ex, nec id agam eius. Te pri facete latine salutandi, scripta mediocrem et sed, cum ne mundi vulputate. Ne his sint graeco detraxit, posse exerci volutpat has in.</p>-->
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -379,7 +379,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="" name="email_booking" id="email_booking" value="<?php echo $clinic->CLINICNAME ?? ''; ?>" readonly="readonly">
+                                    <input type="email"  class="form-control" placeholder="" name="email_booking" id="email_booking" value="<?php echo $clinic->CLINICNAME ?? ''; ?>" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="date"  class="form-control" name="booking_date" id="book_date" required>
+                                    <input type="date"  min="<?php echo date('Y-m-d');?>" class="form-control" name="booking_date" id="book_date" required>
                                 </div>
                             </div>
                         </div>

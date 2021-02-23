@@ -116,5 +116,7 @@ $route['member/profile'] = 'member/profile';
 $route['loadBooking/(:any)'] = 'member/loadBooking';
 $route['loadCheckin/(:any)'] = 'member/loadCheckin';
 $route['profile/update'] = 'member/profileUpdate';
+$route['profile/change/image'] = 'member/profileChangeImage';
 $route['password/update'] = 'member/passwordUpdate';
+$route['profile/checkin'] = 'member/checkInMember';
 

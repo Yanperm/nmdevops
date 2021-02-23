@@ -409,7 +409,7 @@ class Clinic extends CI_Controller
         );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('no-reply@nutmor.com', "Pharmacy Nutmor.com");
+        $this->email->from('no-reply@nutmor.com', "Nutmor.com");
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
