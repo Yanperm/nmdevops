@@ -64,6 +64,17 @@ class Member extends CI_Controller
         redirect(base_url('member/profile'));
     }
 
+    public function checkInMember()
+    {
+        if(!empty($this->input->get('vn'))){
+           $this->BookingModel->checkin($this->input->get('vn'));
+        }
+
+        $this->session->set_flashdata('msg', 'ทำการเช็คอินเรียบร้อย');
+
+        redirect(base_url('member/profile'));
+    }
+
     public function history()
     {
         $this->load->view('template/header');
@@ -106,6 +117,35 @@ class Member extends CI_Controller
 
         $this->session->set_flashdata('msg', 'แก้ไขบัญชีผู้ใช้เรียบร้อย');
         $this->session->set_flashdata('tab', 'profile');
+
+        redirect(base_url('member/profile'));
+    }
+
+
+    public function profileChangeImage()
+    {
+        $image = $this->input->post('old_image1');
+
+        if (!empty($_FILES["file1"])) {
+            $dir = dirname($_FILES["file1"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file1"]["name"];
+            rename($_FILES["file1"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+            $this->session->set_userdata('image', $image);
+
+            //remove old image S3
+            if($this->input->post('old_image1') != ''){
+                $this->s3_upload->deleteFile(basename($this->input->post('old_image1')));
+            }
+        }
+
+        $data = [
+            'IMAGE' => $image
+        ];
+
+        $this->MembersModel->update($data, $this->session->userdata('id'));
+
+        $this->session->set_flashdata('msg', 'แก้ไขรูปภาพเรียบร้อย');
 
         redirect(base_url('member/profile'));
     }

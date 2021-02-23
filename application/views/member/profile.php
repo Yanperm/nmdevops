@@ -15,6 +15,26 @@
             <aside class="col-xl-3 col-lg-4" id="sidebar">
                 <div class="box_profile">
 
+                    <form id="avatar-form" action="<?php echo base_url('profile/change/image') ?>" method="post" enctype="multipart/form-data">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload1" name="file1" accept=".png, .jpg, .jpeg"/>
+                                <label for="imageUpload1"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <input type="hidden" value="<?= $member->IMAGE ?>" name="old_image1">
+                                <?php if ($member->IMAGE == ''): ?>
+                                    <div id="imagePreview1" style="background-image: url('https://www.efood2you.com/uploads/avatar.png');">
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($member->IMAGE !== ''): ?>
+                                    <div id="imagePreview1" style="background-image: url(<?php echo $member->IMAGE; ?>);">
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </form>
 
                     <h6 class="mt-3"><?php echo $member->CUSTOMERNAME; ?></h6>
 
@@ -41,23 +61,24 @@
                 <div class="tabs_styled_2">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link <?php if (empty($this->session->flashdata('tab')) || $this->session->flashdata('tab') == 'profile'): ?> active <?php endif; ?>" id="book-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="book">บัญชีของฉัน</a>
+                            <a class="nav-link <?php if (empty($this->session->flashdata('tab')) || $this->session->flashdata('tab') == 'history'): ?> active <?php endif; ?>" id="general-tab" data-toggle="tab" href="#history" role="tab" aria-controls="general" aria-expanded="true">นัดหมอของฉัน</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($this->session->flashdata('tab') == 'checkin'): ?> active <?php endif; ?>" id="reviews-tab" data-toggle="tab" href="#checkin" role="tab" aria-controls="reviews">เช็คอิน</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($this->session->flashdata('tab') == 'profile'): ?> active <?php endif; ?>" id="book-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="book">บัญชีของฉัน</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php if ($this->session->flashdata('tab') == 'password'): ?> active <?php endif; ?>" id="change-password-tab" data-toggle="tab" href="#change-password" role="tab" aria-controls="change-password" aria-expanded="true">เปลี่ยนรหัสผ่าน</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if ($this->session->flashdata('tab') == 'history'): ?> active <?php endif; ?>" id="general-tab" data-toggle="tab" href="#history" role="tab" aria-controls="general" aria-expanded="true">ประวัติการใช้งาน</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if ($this->session->flashdata('tab') == 'checkin'): ?> active <?php endif; ?>" id="reviews-tab" data-toggle="tab" href="#checkin" role="tab" aria-controls="reviews">เช็คอินและยกเลิกคิว</a>
-                        </li>
+
                     </ul>
                     <!--/nav-tabs -->
 
                     <div class="tab-content">
 
-                        <div class="tab-pane fade  <?php if (empty($this->session->flashdata('tab')) || $this->session->flashdata('tab') == 'profile'): ?> show active <?php endif; ?>" id="profile" role="tabpanel" aria-labelledby="book-tab">
+                        <div class="tab-pane fade  <?php if ($this->session->flashdata('tab') == 'profile'): ?> show active <?php endif; ?>" id="profile" role="tabpanel" aria-labelledby="book-tab">
                             <form id="profile-form" action="<?php echo base_url('profile/update') ?>" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 ">
@@ -108,14 +129,14 @@
                                             <label for="imageUpload"></label>
                                         </div>
                                         <div class="avatar-preview">
-                                            <input type="hidden" value="<?=$member->IMAGE?>" name="old_image">
+                                            <input type="hidden" value="<?= $member->IMAGE ?>" name="old_image">
                                             <?php if ($member->IMAGE == ''): ?>
                                                 <div id="imagePreview" style="background-image: url('https://www.efood2you.com/uploads/avatar.png');">
                                                 </div>
                                             <?php endif; ?>
 
                                             <?php if ($member->IMAGE !== ''): ?>
-                                                <div id="imagePreview" style="background-image: url(<?php echo $member->IMAGE;?>);">
+                                                <div id="imagePreview" style="background-image: url(<?php echo $member->IMAGE; ?>);">
                                                 </div>
                                             <?php endif; ?>
                                         </div>
@@ -175,7 +196,7 @@
 
                         </div>
 
-                        <div class="tab-pane fade <?php if ($this->session->flashdata('tab') == 'history'): ?> show active <?php endif; ?>" id="history" role="tabpanel" aria-labelledby="general-tab">
+                        <div class="tab-pane fade <?php if (empty($this->session->flashdata('tab')) || $this->session->flashdata('tab') == 'history'): ?> show active <?php endif; ?>" id="history" role="tabpanel" aria-labelledby="general-tab">
                             <div class="search_bar_list mb-4">
                                 <input type="text" class="form-control" placeholder="ค้นหาจากชื่อแพทย์ หมายเลขจองคิว หรือชื่อคลีนิก">
                                 <input type="submit" value="ค้นหา">
@@ -267,6 +288,14 @@
         background-position: center;
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!--<script>-->
+<!--    Swal.fire(-->
+<!--        'หมายเหตุ!',-->
+<!--        'ใส่ข้อมูลอีเมลให้ถูกต้องเพื่อทำการส่งอีเมล<br>ส่วนการส่งอีเมลถึงแพทย์รอการเชื่อมฐานข้อมูลก็ส่งได้เลยค่ะ<br> (ข้อมูลพร้อมลงฐานข้อมูลแล้วค่ะ)',-->
+<!--        'warning'-->
+<!--    )-->
+<!--</script>-->
 <script>
     $(document).ready(function () {
         function readURL(input) {
@@ -281,8 +310,24 @@
             }
         }
 
+        function readURL1(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview1').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview1').hide();
+                    $('#imagePreview1').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         $("#imageUpload").change(function () {
             readURL(this);
+        });
+        $("#imageUpload1").change(function () {
+            readURL1(this);
+            $('#avatar-form').submit();
         });
 
         //validate profile tab
@@ -393,7 +438,10 @@
             }
         });
     }
+
+
 </script>
+
 
 <!-- Validation JS file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
