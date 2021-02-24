@@ -385,7 +385,11 @@ class Physician extends CI_Controller
     public function showQues()
     {
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
-
+        $booking = $this->BookingModel->getData($this->session->userdata('id'),date('Y-m-d'));
+//        echo '<pre>';
+//        print_r($booking);
+//        echo '</pre>';
+//        exit();
         $data = [
             'clinic' => $clinic
         ];
