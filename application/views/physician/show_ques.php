@@ -131,9 +131,9 @@
         }
         .styled-table tbody tr.active-row {
             font-weight: bold;
-            color: #3f4077;
+            color: #8bc34a;
             text-align: center;
-            font-size: 37px;
+            font-size: 4em;
         }
     </style>
 </head>
@@ -204,75 +204,93 @@
 
 
 
-
-    var wsUri = "ws://echo.websocket.org/";
-    var output;
-
-    function init()
-    {
-        output = document.getElementById("output");
-        testWebSocket();
+    function fetchdata(){
+        $.ajax({
+            url: '<?php echo base_url('physician/order');?>',
+            type: 'get',
+            success: function(response){
+                // Perform operation on the return value
+               // alert(response);
+               // console.log(response);
+                $('#order').html(response);
+            }
+        });
     }
 
-    function testWebSocket()
-    {
-        websocket = new WebSocket(wsUri);
-        websocket.onopen = function(evt) { onOpen(evt) };
-        websocket.onclose = function(evt) { onClose(evt) };
-        websocket.onmessage = function(evt) { onMessage(evt) };
-        websocket.onerror = function(evt) { onError(evt) };
-    }
+    $(document).ready(function(){
+        setInterval(fetchdata,5000);
+    });
 
-    function onOpen(evt)
-    {
-        writeToScreen("CONNECTED");
-        doSend("WebSocket rocks");
-    }
-
-    function onClose(evt)
-    {
-        writeToScreen("DISCONNECTED");
-    }
-
-    function onMessage(evt)
-    {
-        alert(evt);
-        writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-        websocket.close();
-    }
-
-    function onError(evt)
-    {
-        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-    }
-
-    function doSend(message)
-    {
-        writeToScreen("SENT: " + message);
-        websocket.send(message);
-    }
-
-    function writeToScreen(message)
-    {
-        var pre = document.createElement("p");
-        pre.style.wordWrap = "break-word";
-        pre.innerHTML = message;
-        output.appendChild(pre);
-    }
-
-    window.addEventListener("load", init, false);
+    //
+    //
+    // var wsUri = "ws://echo.websocket.org/";
+    // var output;
+    //
+    // function init()
+    // {
+    //     output = document.getElementById("output");
+    //     testWebSocket();
+    // }
+    //
+    // function testWebSocket()
+    // {
+    //     websocket = new WebSocket(wsUri);
+    //     websocket.onopen = function(evt) { onOpen(evt) };
+    //     websocket.onclose = function(evt) { onClose(evt) };
+    //     websocket.onmessage = function(evt) { onMessage(evt) };
+    //     websocket.onerror = function(evt) { onError(evt) };
+    // }
+    //
+    // function onOpen(evt)
+    // {
+    //     writeToScreen("CONNECTED");
+    //     doSend("WebSocket rocks");
+    // }
+    //
+    // function onClose(evt)
+    // {
+    //     writeToScreen("DISCONNECTED");
+    // }
+    //
+    // function onMessage(evt)
+    // {
+    //     alert(evt);
+    //     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
+    //     websocket.close();
+    // }
+    //
+    // function onError(evt)
+    // {
+    //     writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    // }
+    //
+    // function doSend(message)
+    // {
+    //     writeToScreen("SENT: " + message);
+    //     websocket.send(message);
+    // }
+    //
+    // function writeToScreen(message)
+    // {
+    //     var pre = document.createElement("p");
+    //     pre.style.wordWrap = "break-word";
+    //     pre.innerHTML = message;
+    //     output.appendChild(pre);
+    // }
+    //
+    // window.addEventListener("load", init, false);
 
 </script>
 <body style="padding-top: 1rem;font-family: 'Prompt', sans-serif;background-color: #fff!important;    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulpZNGZBaAfPS0zcLUU8ACHLIfrDVaIPc1w&usqp=CAU);" class="bg-dark text-white">
-<h2>WebSocket Test</h2>
-<input id="text" name="text" type="text" size="36">
-<label>
-    <input type="submit" name="button" id="button" value=" Send " onClick=" doSend(document.getElementById('text').value);">
-</label>
-<div id="output" style="    color: #000;"></div>
+<!--<h2>WebSocket Test</h2>-->
+<!--<input id="text" name="text" type="text" size="36">-->
+<!--<label>-->
+<!--    <input type="submit" name="button" id="button" value=" Send " onClick=" doSend(document.getElementById('text').value);">-->
+<!--</label>-->
+<!--<div id="output" style="    color: #000;"></div>-->
 <div class="container-fluid">
     <?php
     $start = '';
@@ -353,12 +371,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-2" style="display: flex">
+            <img style="width: 38px;border-radius: 50%;height: 38px;" src="<?php echo $clinic->image;?>">
+            <h3 style="       font-size: 1.2em; color: #3f4078;"><?php echo $clinic->CLINICNAME;?></h3></div>
         <div class="col-md-2"><img style="width: 256px;" src="<?php echo base_url(); ?>/assets/img/nutmor_logo.png"></div>
     </div>
     <div class="row mt-5">
         <div class="col-md-8">
-            <iframe style="width: 100%;height:550px" src="https://www.youtube.com/embed/MCJLW8O5-dg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe style="width: 100%;height:550px" src="https://www.youtube.com/embed/MCJLW8O5-dg?autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="col-md-4">
             <div id="qber">
@@ -371,18 +391,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>A0</td>
-                    <td>00</td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td>A0</td>-->
+<!--                    <td>00</td>-->
+<!--                </tr>-->
                 <tr class="active-row">
-                    <td>A11</td>
-                    <td>01</td>
+                    <td id="order"></td>
+                    <td>1</td>
                 </tr>
-                <tr>
-                    <td>A12</td>
-                    <td>00</td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td>A12</td>-->
+<!--                    <td>00</td>-->
+<!--                </tr>-->
                 <!-- and so on... -->
                 </tbody>
             </table>
@@ -390,5 +410,6 @@
     </div>
 </div>
 <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="f0314693281be9dc0159a340-|49" defer=""></script>
+
 </body>
 </html>
