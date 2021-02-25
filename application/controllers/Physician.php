@@ -173,7 +173,10 @@ class Physician extends CI_Controller
         $config['last_tag_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
-
+//echo "<pre>";
+//print_r($ques);
+//        echo "</pre>";
+//        exit();
         $data['ques'] = $ques;
         $data['row'] = $rowno;
         $data['pagination'] = $this->pagination->create_links();
@@ -188,7 +191,7 @@ class Physician extends CI_Controller
 
     public function quesCall()
     {
-        $this->BookingModel->quesCall($this->input->get('id'));
+        $this->BookingModel->quesCall($this->input->get('id'),$this->session->userdata('id'));
 
         redirect(base_url('physician/ques'));
     }
@@ -484,5 +487,13 @@ class Physician extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(base_url('physician/login'));
+    }
+
+    public function chat(){
+        $arr['message'] = "RESPONSE";
+        $arr['date'] = date('m-d-Y');
+        $arr['msgcount'] = 30;
+        $arr['success'] = true;
+        echo json_encode($arr);
     }
 }

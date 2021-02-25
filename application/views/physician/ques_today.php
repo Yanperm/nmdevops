@@ -63,11 +63,11 @@
                             </ul>
                             <ul class="buttons">
                                 <?php
-                                if ($item["SHOWS"] != 2): ?>
-                                    <li><a href="<?php echo base_url('physician/ques/call') . "?id=" . $item['BOOKINGID']; ?>" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> เรียกคิว</a></li>
+                                if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
+                                    <li><a onclick="call('<?php echo $item['BOOKINGID'];?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> เรียกคิว</a></li>
                                 <?php endif; ?>
-                                <?php if ($item["SHOWS"] == 2): ?>
-                                    <li><a href="<?php echo base_url('physician/ques/call') . "?id=" . $item['BOOKINGID']; ?>" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> เรียกซ้ำ</a></li>
+                                <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2 ): ?>
+                                    <li><a  onclick="call('<?php echo $item['BOOKINGID'];?>','<?php echo $item["QUES"]; ?>')" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> เรียกซ้ำ</a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>
@@ -80,3 +80,16 @@
         </nav>
     </div>
 </div>
+<script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js');?>"></script>
+
+<script>
+
+    function call(id,q){
+        window.location.replace("<?php echo base_url('physician/ques/call');?>"+"?id="+id);
+        var socket = io.connect( 'http://'+window.location.hostname+':3000' );
+            socket.emit('queue', {
+                id : '<?php echo $this->session->userdata("id");?>',
+                message: q
+            });
+    }
+</script>

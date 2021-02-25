@@ -174,7 +174,9 @@ class BookingModel extends CI_Model
             SELECT QUES FROM tbbooking as booking 
             where booking.CLINICID = "' . $clinicId . '" 
             AND booking.BOOKDATE = "' . date('Y-m-d') . '"
-            AND booking.SHOWS = 2');
+            AND booking.SHOWS = 2
+            AND booking.CALLED = 1'
+        );
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -206,10 +208,27 @@ class BookingModel extends CI_Model
         return true;
     }
 
-    public function quesCall($id)
+    public function quesCall($id,$clinicId)
     {
-        $this->db->set('STATUS', '1');
-        $this->db->set('SHOWS', '2');
+        $query = $this->db->query('
+            SELECT * FROM tbbooking as booking
+            where booking.CLINICID = "' . $clinicId . '"
+            AND booking.BOOKDATE = "' . date('Y-m-d') . '"
+            AND booking.SHOWS = 2
+            AND booking.STATUS = 1'
+        );
+        if ($query->num_rows() > 0) {
+           $result =  $query->result();
+            foreach ($result as $item){
+                $this->db->set('SHOWS', 3);
+                $this->db->where('BOOKINGID', $item->BOOKINGID);
+                $this->db->update('tbbooking');
+            }
+        }
+
+        $this->db->set('STATUS', 1);
+        $this->db->set('SHOWS', 2);
+        $this->db->set('CALLED', 1);
         $this->db->where('BOOKINGID', $id);
         $this->db->update('tbbooking');
 

@@ -16,7 +16,7 @@
     <link href="https://nutmor.com/rathawitclinic/css/corusal.css" rel="stylesheet">
     <link href="https://nutmor.com/rathawitclinic/css/anmimation.css" rel="stylesheet">
     <link href="https://nutmor.com/rathawitclinic/css/softubon.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic/css/productc.css" rel="stylesheet">
+<!--    <link href="https://nutmor.com/rathawitclinic/css/productc.css" rel="stylesheet">-->
     <link href="https://nutmor.com/rathawitclinic/js/jquery-ui-1.11.4.custom.css" rel="stylesheet"/>
     <script src="https://nutmor.com/rathawitclinic/js/jquery-1.12.3.js" type="f0314693281be9dc0159a340-text/javascript"></script>
     <script src="https://nutmor.com/rathawitclinic/js/jquery-ui-1.11.4.custom.js" type="f0314693281be9dc0159a340-text/javascript"></script>
@@ -217,80 +217,12 @@
         });
     }
 
-    $(document).ready(function(){
-        setInterval(fetchdata,5000);
-    });
-
-    //
-    //
-    // var wsUri = "ws://echo.websocket.org/";
-    // var output;
-    //
-    // function init()
-    // {
-    //     output = document.getElementById("output");
-    //     testWebSocket();
-    // }
-    //
-    // function testWebSocket()
-    // {
-    //     websocket = new WebSocket(wsUri);
-    //     websocket.onopen = function(evt) { onOpen(evt) };
-    //     websocket.onclose = function(evt) { onClose(evt) };
-    //     websocket.onmessage = function(evt) { onMessage(evt) };
-    //     websocket.onerror = function(evt) { onError(evt) };
-    // }
-    //
-    // function onOpen(evt)
-    // {
-    //     writeToScreen("CONNECTED");
-    //     doSend("WebSocket rocks");
-    // }
-    //
-    // function onClose(evt)
-    // {
-    //     writeToScreen("DISCONNECTED");
-    // }
-    //
-    // function onMessage(evt)
-    // {
-    //     alert(evt);
-    //     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-    //     websocket.close();
-    // }
-    //
-    // function onError(evt)
-    // {
-    //     writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-    // }
-    //
-    // function doSend(message)
-    // {
-    //     writeToScreen("SENT: " + message);
-    //     websocket.send(message);
-    // }
-    //
-    // function writeToScreen(message)
-    // {
-    //     var pre = document.createElement("p");
-    //     pre.style.wordWrap = "break-word";
-    //     pre.innerHTML = message;
-    //     output.appendChild(pre);
-    // }
-    //
-    // window.addEventListener("load", init, false);
-
 </script>
 <body style="padding-top: 1rem;font-family: 'Prompt', sans-serif;background-color: #fff!important;    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulpZNGZBaAfPS0zcLUU8ACHLIfrDVaIPc1w&usqp=CAU);" class="bg-dark text-white">
-<!--<h2>WebSocket Test</h2>-->
-<!--<input id="text" name="text" type="text" size="36">-->
-<!--<label>-->
-<!--    <input type="submit" name="button" id="button" value=" Send " onClick=" doSend(document.getElementById('text').value);">-->
-<!--</label>-->
-<!--<div id="output" style="    color: #000;"></div>-->
+
 <div class="container-fluid">
     <?php
     $start = '';
@@ -409,7 +341,21 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="f0314693281be9dc0159a340-|49" defer=""></script>
 
+
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="f0314693281be9dc0159a340-|49" defer=""></script>
+<script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js');?>"></script>
+
+<script>
+    var socket = io.connect( 'http://'+window.location.hostname+':3000');
+
+    socket.on('queue', function( data ) {});
+
+    socket.on('<?php echo $this->session->userdata('id');?>', function( data ) {
+        $('#order').html(data.message)
+    });
+
+</script>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </body>
 </html>
