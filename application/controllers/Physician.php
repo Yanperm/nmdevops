@@ -173,7 +173,10 @@ class Physician extends CI_Controller
         $config['last_tag_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
-
+//echo "<pre>";
+//print_r($ques);
+//        echo "</pre>";
+//        exit();
         $data['ques'] = $ques;
         $data['row'] = $rowno;
         $data['pagination'] = $this->pagination->create_links();
@@ -188,7 +191,7 @@ class Physician extends CI_Controller
 
     public function quesCall()
     {
-        $this->BookingModel->quesCall($this->input->get('id'));
+        $this->BookingModel->quesCall($this->input->get('id'),$this->session->userdata('id'));
 
         redirect(base_url('physician/ques'));
     }
@@ -384,18 +387,33 @@ class Physician extends CI_Controller
 
     public function showQues()
     {
+
+        // Load package path
+       // $this->load->add_package_path(FCPATH.'application/vendor/romainrg/ratchet_client');
+        //$this->load->library('ratchet_client');
+       // $this->load->remove_package_path(FCPATH.'application/vendor/romainrg/ratchet_client');
+
+        // Run server
+      //this->ratchet_client->run();
+     //   $youtube = $this->ClinicModel->getYoutube($this->session->userdata('id'));
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
-        $booking = $this->BookingModel->getData($this->session->userdata('id'),date('Y-m-d'));
-//        echo '<pre>';
-//        print_r($booking);
-//        echo '</pre>';
-//        exit();
+
         $data = [
             'clinic' => $clinic
         ];
 
         $this->load->view('physician/show_ques', $data);
     }
+
+    public function order(){
+        $booking = $this->BookingModel->getCurrentQues($this->session->userdata('id'));
+        if(count($booking) > 0){
+            echo $booking[0]->QUES;
+        }else{
+            echo '-';
+        }
+    }
+
 
     public function profile()
     {
@@ -469,5 +487,13 @@ class Physician extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(base_url('physician/login'));
+    }
+
+    public function chat(){
+        $arr['message'] = "RESPONSE";
+        $arr['date'] = date('m-d-Y');
+        $arr['msgcount'] = 30;
+        $arr['success'] = true;
+        echo json_encode($arr);
     }
 }
