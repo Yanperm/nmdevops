@@ -86,7 +86,7 @@
 
     function call(id,q){
         window.location.replace("<?php echo base_url('physician/ques/call');?>"+"?id="+id);
-        var socket = io.connect( 'http://'+window.location.hostname+':3000' );
+        var socket = io.connect( 'https://'+window.location.hostname+':3000' );
             socket.emit('queue', {
                 id : '<?php echo $this->session->userdata("id");?>',
                 message: q

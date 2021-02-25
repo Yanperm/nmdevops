@@ -1,6 +1,15 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app);
+
+var fs = require('fs');
+var options = {
+    key: fs.readFileSync('/root/.ssh/server.key'),
+    cert: fs.readFileSync('/root/.ssh/server.crt')
+};
+
+//const app = require('express')();
+//const https = require('https').Server(options, app);
+var server = require('https').createServer(options, app);
 
 var port = process.env.PORT || 3000;
 server.listen(port, function () {
