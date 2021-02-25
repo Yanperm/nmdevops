@@ -22,6 +22,7 @@
     <script src="https://nutmor.com/rathawitclinic/js/jquery-ui-1.11.4.custom.js" type="f0314693281be9dc0159a340-text/javascript"></script>
     <script src="https://nutmor.com/rathawitclinic/js/datepicker.js" type="f0314693281be9dc0159a340-text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery-2.2.4.min.js"></script>
+<!--    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
     <style>
 
         .box {
@@ -347,7 +348,7 @@
 <script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js');?>"></script>
 
 <script>
-    var socket = io.connect( 'http://'+window.location.hostname+':3000');
+    var socket = io.connect( 'https://'+window.location.hostname+':3000');
 
     socket.on('queue', function( data ) {});
 
@@ -356,6 +357,6 @@
     });
 
 </script>
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
 </body>
 </html>
