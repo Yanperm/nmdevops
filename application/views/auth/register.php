@@ -74,7 +74,7 @@
                     </div>
                     <div class="hs_email field hs-form-field">
                         <label for="email-99a6d115-5e68-4355-a7d0-529207feb0b3_2983">E-mail </label>
-                        <input id="email-99a6d115-5e68-4355-a7d0-529207feb0b3_2983" name="email" required="required"  type="email" value="" placeholder="" data-rule-required="true" data-msg-required="กรุณากรุณากรอกเมล">
+                        <input id="email" name="email" required="required"  type="email" value="" placeholder="" data-rule-required="true" data-rule-email="true" data-msg-email="กรุณากรุณากรอกเมลให้ถูกต้อง" data-msg-required="กรุณากรุณากรอกเมล" data-rule-remote="<?php echo base_url('check_email_already')?>" data-msg-remote="บัญชีอีเมลนี้มีการใช้งานแล้ว">
                         <span class="error1" style="display: none;">
                             <i class="error-log fa fa-exclamation-triangle"></i>
                         </span>
@@ -89,19 +89,34 @@
                     <h2 class="fs-title">บัญชีผู้ใช้</h2>
                     <div class="form-group">
                         <label>รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="">
+                        <input type="password" class="form-control" id="cpassword1" name="password" placeholder="" data-rule-required="true" data-rule-equalto="#cpassword" data-msg-required="กรุณากรุณากรอกรหัสผ่าน" data-msg-equalto="กรุณากรุณากรอกรหัสผ่านให้ตรงกัน">
+                        <span class="error1" style="display: none;">
+                            <i class="error-log fa fa-exclamation-triangle"></i>
+                        </span>
                     </div>
+
                     <div class="form-group">
                         <label>ยืนยันรหัสผ่าน</label>
-                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="">
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="" data-rule-required="true" data-rule-equalto="#cpassword1" data-msg-required="กรุณากรุณากรอกยืนยันรหัสผ่าน" data-msg-equalto="กรุณากรุณากรอกรหัสผ่านให้ตรงกัน">
+                        <span class="error1" style="display: none;">
+                            <i class="error-log fa fa-exclamation-triangle"></i>
+                        </span>
                     </div>
+
+<!--                    <div class="form-group">-->
+<!--                        <label>รหัสผ่าน</label>-->
+<!--                        <input type="password" class="form-control" id="password1" name="password1" placeholder="" data-rule-required="true" data-rule-equalto="#cpassword" data-msg-required="กรุณากรุณากรอกรหัสผ่าน" data-msg-equalto="กรุณากรุณากรอกรหัสผ่านให้ตรงกัน">-->
+<!--                        <span class="error1" style="display: none;">-->
+<!--                            <i class="error-log fa fa-exclamation-triangle"></i>-->
+<!--                        </span>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label> รูปภาพ</label>
                         <input type="file" name="files" class="form-control">
                     </div>
 
                     <input type="button" data-page="3" name="previous" class="previous action-button" value="ก่อนหน้า"/>
-                    <input type="button" data-page="3" name="next" class="next action-button" value="สมัครสมาชิก"/>
+                    <input type="button" data-page="3" name="next" class="submit action-button" value="สมัครสมาชิก"/>
 
                 </fieldset>
             </form>
@@ -110,7 +125,7 @@
                 <h1>สร้างบัญชีนัดหมอ</h1>
                 <div class="row justify-content-center">
                     <div class="col-md-7">
-                        <form id="register-form" action="<?php echo base_url('add_member'); ?>" method="post" enctype="multipart/form-data">
+                        <form id="register-form2" action="<?php echo base_url('add_member'); ?>" method="post" enctype="multipart/form-data">
                             <div class="box_form">
                                 <div class="form-group">
                                     <label>ชื่อ</label>
@@ -122,7 +137,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>อีเมล</label>
-                                    <input type="email" class="form-control" placeholder="" name="email">
+                                    <input type="email" class="form-control" placeholder="" name="email1">
                                 </div>
                                 <div class="form-group">
                                     <label>Line Id</label>
@@ -182,7 +197,7 @@
         border-radius: 3px;
         box-shadow: 0 17px 41px -21px rgb(0, 0, 0);
         padding: 20px 30px;
-        border-top: 9px solid #7B1FA2;
+        border-top: 9px solid #e74e84;
         box-sizing: border-box;
         width: 80%;
         margin: 0 10%;
@@ -236,7 +251,7 @@
 
     .steps input:focus, .steps textarea:focus {
         color: #333333;
-        border: 1px solid #7B1FA2;
+        border: 1px solid #e74e84;
     }
 
     .error1 {
@@ -255,7 +270,8 @@
         color: #ffffff;
         background: #e62163;
         border: 0;
-        font: 14px Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+        font-weight: bold;
+        /*font: 14px Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;*/
         line-height: 39px;
         white-space: nowrap;
 
@@ -290,8 +306,7 @@
     /*buttons*/
     .steps .action-button, .action-button {
         width: 100px !important;
-        background: #7B1FA2;
-        font-family: 'Prompt';
+        background: #e74e84;
         font-weight: bold;
         color: white;
         border: 0 none;
@@ -316,7 +331,7 @@
     }
 
     .steps .action-button:hover, .steps .action-button:focus, .action-button:hover, .action-button:focus {
-        background: #9F2AD0;;
+        background: #bf134d;;
     }
 
     .steps .explanation {
@@ -344,9 +359,9 @@
         text-transform: uppercase;
         margin: 0 0 5px;
         line-height: 1;
-        color: #7B1FA2;
+        color: #e74e84;
         font-size: 18px;
-        font-weight: 400;
+        font-weight: bold;
         text-align: center;
     }
 
@@ -413,7 +428,7 @@
     /*marking active/completed steps green*/
     /*The number of the step and the connector before it = green*/
     #progressbar li.active:before, #progressbar li.active:after {
-        background: #7B1FA2;
+        background: #e74e84;
         color: white;
     }
 
@@ -551,6 +566,7 @@
         .error1 {
             left: 345px;
             margin-top: -58px;
+            font-weight: 700;
         }
 
 
@@ -575,6 +591,7 @@
             left: 0 !important;
             margin-top: 24px;
             top: -11px;
+            font-weight: 700;
         }
 
         .error1:before {
@@ -583,6 +600,7 @@
             left: 14px;
             top: -14px;
             content: '';
+            font-weight: 700;
             position: absolute;
             border-left: 6px solid transparent;
             border-bottom: 8px solid #e62163;
@@ -667,6 +685,8 @@
 
 <script>
     $(document).ready(function () {
+
+
         var current_fs, next_fs, previous_fs;
         var left, opacity, scale;
         var animating;
@@ -701,29 +721,30 @@
                 return true;
             }
             if (animating) return false;
-            animating = true;
+            animating = false;
             current_fs = $(this).parent();
             next_fs = $(this).parent().next();
             $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
             next_fs.show();
-            current_fs.animate(
-                {opacity: 0},
-                {
-                    step: function (now, mx) {
-                        scale = 1 - (1 - now) * 0.2;
-                        left = now * 50 + "%";
-                        opacity = 1 - now;
-                        current_fs.css({transform: "scale(" + scale + ")"});
-                        next_fs.css({left: left, opacity: opacity});
-                    },
-                    duration: 800,
-                    complete: function () {
-                        current_fs.hide();
-                        animating = false;
-                    },
-                    easing: "easeInOutExpo"
-                }
-            );
+            current_fs.hide();
+            // current_fs.animate(
+            //     {opacity: 0},
+            //     {
+            //         step: function (now, mx) {
+            //             scale = 1 - (1 - now) * 0.2;
+            //             left = now * 50 + "%";
+            //             opacity = 1 - now;
+            //             current_fs.css({transform: "scale(" + scale + ")"});
+            //             next_fs.css({left: left, opacity: opacity});
+            //         },
+            //         duration: 800,
+            //         complete: function () {
+            //             current_fs.hide();
+            //             animating = false;
+            //         },
+            //         easing: "easeInOutExpo"
+            //     }
+            // );
         });
         $(".submit").click(function () {
             $(".steps").validate({
@@ -748,411 +769,125 @@
             next_fs = $(this).parent().next();
             $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
             next_fs.show();
-            current_fs.animate(
-                {opacity: 0},
-                {
-                    step: function (now, mx) {
-                        scale = 1 - (1 - now) * 0.2;
-                        left = now * 50 + "%";
-                        opacity = 1 - now;
-                        current_fs.css({transform: "scale(" + scale + ")"});
-                        next_fs.css({left: left, opacity: opacity});
-                    },
-                    duration: 800,
-                    complete: function () {
-                        current_fs.hide();
-                        animating = false;
-                    },
-                    easing: "easeInOutExpo"
-                }
-            );
+           // current_fs.hide();
+            $('#register-form').submit();
+
+            // current_fs.animate(
+            //     {opacity: 0},
+            //     {
+            //         step: function (now, mx) {
+            //             scale = 1 - (1 - now) * 0.2;
+            //             left = now * 50 + "%";
+            //             opacity = 1 - now;
+            //             current_fs.css({transform: "scale(" + scale + ")"});
+            //             next_fs.css({left: left, opacity: opacity});
+            //         },
+            //         duration: 800,
+            //         complete: function () {
+            //             current_fs.hide();
+            //             animating = false;
+            //         },
+            //         easing: "easeInOutExpo"
+            //     }
+            // );
         });
         $(".previous").click(function () {
             if (animating) return false;
-            animating = true;
+            animating = false;
             current_fs = $(this).parent();
             previous_fs = $(this).parent().prev();
             $("#progressbar li")
                 .eq($("fieldset").index(current_fs))
                 .removeClass("active");
             previous_fs.show();
-            current_fs.animate(
-                {opacity: 0},
-                {
-                    step: function (now, mx) {
-                        scale = 0.8 + (1 - now) * 0.2;
-                        left = (1 - now) * 50 + "%";
-                        opacity = 1 - now;
-                        current_fs.css({left: left});
-                        previous_fs.css({
-                            transform: "scale(" + scale + ")",
-                            opacity: opacity
-                        });
-                    },
-                    duration: 800,
-                    complete: function () {
-                        current_fs.hide();
-                        animating = false;
-                    },
-                    easing: "easeInOutExpo"
-                }
-            );
-        });
-    });
-    jQuery(document).ready(function () {
-        jQuery(
-            "#edit-submitted-acquisition-amount-1,#edit-submitted-acquisition-amount-2,#edit-submitted-cultivation-amount-1,#edit-submitted-cultivation-amount-2,#edit-submitted-cultivation-amount-3,#edit-submitted-cultivation-amount-4,#edit-submitted-retention-amount-1,#edit-submitted-retention-amount-2,#edit-submitted-constituent-base-total-constituents"
-        ).keyup(function () {
-            calcTotal();
+            current_fs.hide();
+            // current_fs.animate(
+            //     {opacity: 0},
+            //     {
+            //         step: function (now, mx) {
+            //             scale = 0.8 + (1 - now) * 0.2;
+            //             left = (1 - now) * 50 + "%";
+            //             opacity = 1 - now;
+            //             current_fs.css({left: left});
+            //             previous_fs.css({
+            //                 transform: "scale(" + scale + ")",
+            //                 opacity: opacity
+            //             });
+            //         },
+            //         duration: 800,
+            //         complete: function () {
+            //             current_fs.hide();
+            //             animating = false;
+            //         },
+            //         easing: "easeInOutExpo"
+            //     }
+            // );
         });
     });
 
-    function calcTotal() {
-        var grade = 0;
-        var donorTotal = Number(
-            jQuery("#edit-submitted-constituent-base-total-constituents")
-                .val()
-                .replace(/,/g, "")
-        );
-        if (donorTotal) {
-            donorTotal = parseFloat(donorTotal);
-        } else {
-            donorTotal = 0;
-        }
-        grade += getBonusDonorPoints(donorTotal);
-        var acqAmount1 = Number(
-            jQuery("#edit-submitted-acquisition-amount-1").val().replace(/,/g, "")
-        );
-        var acqAmount2 = Number(
-            jQuery("#edit-submitted-acquisition-amount-2").val().replace(/,/g, "")
-        );
-        var acqTotal = 0;
-        if (acqAmount1) {
-            acqAmount1 = parseFloat(acqAmount1);
-        } else {
-            acqAmount1 = 0;
-        }
-        if (acqAmount2) {
-            acqAmount2 = parseFloat(acqAmount2);
-        } else {
-            acqAmount2 = 0;
-        }
-        if (acqAmount1 > 0 && acqAmount2 > 0) {
-            acqTotal = (((acqAmount2 - acqAmount1) / acqAmount1) * 100).toFixed(2);
-        } else {
-            acqTotal = 0;
-        }
-        jQuery("#edit-submitted-acquisition-percent-change").val(acqTotal + "%");
-        grade += getAcquisitionPoints(acqTotal);
-        console.log(grade);
-        var cultAmount1 = Number(
-            jQuery("#edit-submitted-cultivation-amount-1").val().replace(/,/g, "")
-        );
-        var cultAmount2 = Number(
-            jQuery("#edit-submitted-cultivation-amount-2").val().replace(/,/g, "")
-        );
-        var cultTotal = 0;
-        if (cultAmount1) {
-            cultAmount1 = parseFloat(cultAmount1);
-        } else {
-            cultAmount1 = 0;
-        }
-        if (cultAmount2) {
-            cultAmount2 = parseFloat(cultAmount2);
-        } else {
-            cultAmount2 = 0;
-        }
-        if (cultAmount1 > 0 && cultAmount2 > 0) {
-            cultTotal = (((cultAmount2 - cultAmount1) / cultAmount1) * 100).toFixed(2);
-        } else {
-            cultTotal = 0;
-        }
-        jQuery("#edit-submitted-cultivation-percent-change1").val(cultTotal + "%");
-        grade += getAcquisitionPoints(cultTotal);
-        var cultAmount3 = Number(
-            jQuery("#edit-submitted-cultivation-amount-3").val().replace(/,/g, "")
-        );
-        var cultAmount4 = Number(
-            jQuery("#edit-submitted-cultivation-amount-4").val().replace(/,/g, "")
-        );
-        if (cultAmount3) {
-            cultAmount3 = parseFloat(cultAmount3);
-        } else {
-            cultAmount3 = 0;
-        }
-        if (cultAmount4) {
-            cultAmount4 = parseFloat(cultAmount4);
-        } else {
-            cultAmount4 = 0;
-        }
-        if (cultAmount3 > 0 && cultAmount4 > 0) {
-            cultTotal2 = (((cultAmount4 - cultAmount3) / cultAmount3) * 100).toFixed(2);
-        } else {
-            cultTotal2 = 0;
-        }
-        jQuery("#edit-submitted-cultivation-percent-change2").val(cultTotal2 + "%");
-        grade += getAcquisitionPoints(cultTotal2);
-        var retAmount1 = Number(
-            jQuery("#edit-submitted-retention-amount-1").val().replace(/,/g, "")
-        );
-        var retAmount2 = Number(
-            jQuery("#edit-submitted-retention-amount-2").val().replace(/,/g, "")
-        );
-        var retTotal = 0;
-        if (retAmount1) {
-            retAmount1 = parseFloat(retAmount1);
-        } else {
-            retAmount1 = 0;
-        }
-        if (retAmount2) {
-            retAmount2 = parseFloat(retAmount2);
-        } else {
-            retAmount2 = 0;
-        }
-        if (retAmount1 > 0 && retAmount2 > 0) {
-            retTotal = ((retAmount2 / retAmount1) * 100).toFixed(2);
-        } else {
-            retTotal = 0;
-        }
-        jQuery("#edit-submitted-retention-percent-change").val(retTotal + "%");
-        grade += getAcquisitionPoints(retTotal);
-        jQuery("#edit-submitted-final-grade-grade").val(grade + " / 400");
-    }
 
-    function getAcquisitionPoints(val) {
-        if (val < 1) {
-            return 0;
-        } else if (val >= 1 && val < 6) {
-            return 50;
-        } else if (val >= 6 && val < 11) {
-            return 60;
-        } else if (val >= 11 && val < 16) {
-            return 70;
-        } else if (val >= 16 && val < 21) {
-            return 75;
-        } else if (val >= 21 && val < 26) {
-            return 80;
-        } else if (val >= 26 && val < 31) {
-            return 85;
-        } else if (val >= 31 && val < 36) {
-            return 90;
-        } else if (val >= 36 && val < 41) {
-            return 95;
-        } else if (val >= 41) {
-            return 100;
-        }
-    }
-
-    function getCultivationGiftPoints(val) {
-        if (val < 1) {
-            return 0;
-        } else if (val >= 1 && val < 4) {
-            return 50;
-        } else if (val >= 4 && val < 7) {
-            return 60;
-        } else if (val >= 7 && val < 10) {
-            return 70;
-        } else if (val >= 10 && val < 13) {
-            return 75;
-        } else if (val >= 13 && val < 16) {
-            return 80;
-        } else if (val >= 16 && val < 21) {
-            return 85;
-        } else if (val >= 21 && val < 26) {
-            return 90;
-        } else if (val >= 26 && val < 51) {
-            return 95;
-        } else if (val >= 51) {
-            return 100;
-        }
-    }
-
-    function getCultivationDonationPoints(val) {
-        if (val < 1) {
-            return 0;
-        } else if (val >= 1 && val < 6) {
-            return 50;
-        } else if (val >= 6 && val < 11) {
-            return 60;
-        } else if (val >= 11 && val < 16) {
-            return 70;
-        } else if (val >= 16 && val < 21) {
-            return 75;
-        } else if (val >= 21 && val < 26) {
-            return 80;
-        } else if (val >= 26 && val < 31) {
-            return 85;
-        } else if (val >= 31 && val < 36) {
-            return 90;
-        } else if (val >= 36 && val < 41) {
-            return 95;
-        } else if (val >= 41) {
-            return 100;
-        }
-    }
-
-    function getRetentionPoints(val) {
-        if (val < 1) {
-            return 0;
-        } else if (val >= 1 && val < 51) {
-            return 50;
-        } else if (val >= 51 && val < 56) {
-            return 60;
-        } else if (val >= 56 && val < 61) {
-            return 70;
-        } else if (val >= 61 && val < 66) {
-            return 75;
-        } else if (val >= 66 && val < 71) {
-            return 80;
-        } else if (val >= 71 && val < 76) {
-            return 85;
-        } else if (val >= 76 && val < 81) {
-            return 90;
-        } else if (val >= 81 && val < 91) {
-            return 95;
-        } else if (val >= 91) {
-            return 100;
-        }
-    }
-
-    function getBonusDonorPoints(val) {
-        if (val < 10001) {
-            return 0;
-        } else if (val >= 10001 && val < 25001) {
-            return 10;
-        } else if (val >= 25001 && val < 50000) {
-            return 15;
-        } else if (val >= 50000) {
-            return 20;
-        }
-    }
-
-    var modules = {
-        $window: $(window),
-        $html: $("html"),
-        $body: $("body"),
-        $container: $(".container"),
-        init: function () {
-            $(function () {
-                modules.modals.init();
-            });
-        },
-        modals: {
-            trigger: $(".explanation"),
-            modal: $(".modal"),
-            scrollTopPosition: null,
-            init: function () {
-                var self = this;
-                if (self.trigger.length > 0 && self.modal.length > 0) {
-                    modules.$body.append('<div class="modal-overlay"></div>');
-                    self.triggers();
-                }
-            },
-            triggers: function () {
-                var self = this;
-                self.trigger.on("click", function (e) {
-                    e.preventDefault();
-                    var $trigger = $(this);
-                    self.openModal($trigger, $trigger.data("modalId"));
-                });
-                $(".modal-overlay").on("click", function (e) {
-                    e.preventDefault();
-                    self.closeModal();
-                });
-                modules.$body.on("keydown", function (e) {
-                    if (e.keyCode === 27) {
-                        self.closeModal();
-                    }
-                });
-                $(".modal-close").on("click", function (e) {
-                    e.preventDefault();
-                    self.closeModal();
-                });
-            },
-            openModal: function (_trigger, _modalId) {
-                var self = this,
-                    scrollTopPosition = modules.$window.scrollTop(),
-                    $targetModal = $("#" + _modalId);
-                self.scrollTopPosition = scrollTopPosition;
-                modules.$html
-                    .addClass("modal-show")
-                    .attr("data-modal-effect", $targetModal.data("modal-effect"));
-                $targetModal.addClass("modal-show");
-                modules.$container.scrollTop(scrollTopPosition);
-            },
-            closeModal: function () {
-                var self = this;
-                $(".modal-show").removeClass("modal-show");
-                modules.$html.removeClass("modal-show").removeAttr("data-modal-effect");
-                modules.$window.scrollTop(self.scrollTopPosition);
-            }
-        }
-    };
-    modules.init();
+    //$(document).ready(function () {
+    //
+    //    $('#register-form').validate({
+    //        rules: {
+    //            first_name: {
+    //                required: true,
+    //            },
+    //            last_name: {
+    //                required: true,
+    //            },
+    //            email: {
+    //                required: true,
+    //                email: true,
+    //                remote: {
+    //                    url: "<?php //echo base_url('check_email_already')?>//",
+    //                    type: "post"
+    //                }
+    //            },
+    //            phone: {
+    //                required: true,
+    //            },
+    //            password: {
+    //                required: true,
+    //                minlength: 6
+    //            },
+    //            cpassword: {
+    //                required: true,
+    //                equalTo: "#password"
+    //            }
+    //        },
+    //        // set validation messages for the rules are set previously
+    //        messages: {
+    //            first_name: {
+    //                required: "กรุณากรอกชื่อ"
+    //            },
+    //            last_name: {
+    //                required: "กรุณากรอกนามสกุล"
+    //            },
+    //            phone: {
+    //                required: "กรุณากรอกเบอร์โทรศัพท์"
+    //            },
+    //            email: {
+    //                required: "กรุณากรอกอีเมล",
+    //                email: "รูปแบบอีเมลไม่ถูกต้อง",
+    //                remote: "อีเมลนี้มีการใช้งานแล้ว"
+    //            },
+    //            password: {
+    //                required: "กรุณากรอกรหัสผ่าน",
+    //                minlength: "ความยาวของรหัสผ่านอย่างน้อย 6 ตัวอักษร"
+    //            },
+    //            cpassword: {
+    //                required: "กรุณากรอกยืนยันรหัสผ่าน",
+    //                equalTo: "รหัสไม่ตรงกัน"
+    //            }
+    //        },
+    //        submitHandler: function (form) {
+    //            form.submit();
+    //        }
+    //    });
 
 
-    $(document).ready(function () {
-
-        $('#register-form').validate({
-            rules: {
-                first_name: {
-                    required: true,
-                },
-                last_name: {
-                    required: true,
-                },
-                email: {
-                    required: true,
-                    email: true,
-                    remote: {
-                        url: "<?php echo base_url('check_email_already')?>",
-                        type: "post"
-                    }
-                },
-                phone: {
-                    required: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                },
-                cpassword: {
-                    required: true,
-                    equalTo: "#password"
-                }
-            },
-            // set validation messages for the rules are set previously
-            messages: {
-                first_name: {
-                    required: "กรุณากรอกชื่อ"
-                },
-                last_name: {
-                    required: "กรุณากรอกนามสกุล"
-                },
-                phone: {
-                    required: "กรุณากรอกเบอร์โทรศัพท์"
-                },
-                email: {
-                    required: "กรุณากรอกอีเมล",
-                    email: "รูปแบบอีเมลไม่ถูกต้อง",
-                    remote: "อีเมลนี้มีการใช้งานแล้ว"
-                },
-                password: {
-                    required: "กรุณากรอกรหัสผ่าน",
-                    minlength: "ความยาวของรหัสผ่านอย่างน้อย 6 ตัวอักษร"
-                },
-                cpassword: {
-                    required: "กรุณากรอกยืนยันรหัสผ่าน",
-                    equalTo: "รหัสไม่ตรงกัน"
-                }
-            },
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-
-
-    });
+   // });
 </script>
 <!-- Validation JS file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>

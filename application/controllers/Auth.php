@@ -89,28 +89,29 @@ class Auth extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function reSendMail(){
+    public function reSendMail()
+    {
         $email = $this->input->get('email');
         $type = $this->input->get('type');
 
-        $newCode = random_int(111111,999999);
+        $newCode = random_int(111111, 999999);
 
-        if($type == 'member'){
+        if ($type == 'member') {
             $member = $this->MembersModel->detailByEmail($email);
 
             $data = [
                 'email_verification_code' => $newCode
             ];
 
-            $this->MembersModel->update($data,$member->MEMBERIDCARD);
-        }else if($type == 'clinic'){
+            $this->MembersModel->update($data, $member->MEMBERIDCARD);
+        } else if ($type == 'clinic') {
             $clinic = $this->ClinicModel->detailByEmail($email);
 
             $data = [
                 'email_verification_code' => $newCode
             ];
 
-            $this->ClinicModel->updateById($data,$clinic->IDCLINIC);
+            $this->ClinicModel->updateById($data, $clinic->IDCLINIC);
         }
 
         $subject = "โปรดยืนยันอีเมลของคุณ";
@@ -121,7 +122,7 @@ class Auth extends CI_Controller
             'type' => $type
         ];
 
-        $message = $this->load->view('email_layout_template', $dataEmail,true);
+        $message = $this->load->view('email_layout_template', $dataEmail, true);
         $this->sendMail($email, $subject, $message);
 
         $data = [
@@ -145,10 +146,10 @@ class Auth extends CI_Controller
         $type = $this->input->post('type');
 
         if ($this->form_validation->run() == false) {
-            if($type == 'clinic'){
+            if ($type == 'clinic') {
                 $this->load->view('template/header_doctor');
                 $this->load->view('clinic/login');
-            }else{
+            } else {
                 $this->load->view('template/header');
                 $this->load->view('auth/login');
             }
@@ -160,18 +161,18 @@ class Auth extends CI_Controller
 
             $user = false;
 
-            if($type == 'member'){
+            if ($type == 'member') {
                 $user = $this->MembersModel->login($email, $password);
             }
 
-            if($type == 'clinic'){
+            if ($type == 'clinic') {
                 $user = $this->ClinicModel->login($email, $password);
             }
 
             if ($user) {
                 $userdata = array();
 
-                if($type == 'member') {
+                if ($type == 'member') {
                     $userdata = array(
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
@@ -181,7 +182,7 @@ class Auth extends CI_Controller
                         'type' => 'member',
                         'image' => $user->IMAGE
                     );
-                }else{
+                } else {
                     $userdata = array(
                         'id' => $user->tbclinic,
                         'name' => $user->CLINICNAME,
@@ -210,7 +211,8 @@ class Auth extends CI_Controller
     public function addMember()
     {
         $image = '';
-        if (!empty($_FILES["files"])) {
+
+        if(file_exists($_FILES['files']['tmp_name']) && is_uploaded_file($_FILES['files']['tmp_name'])) {
             $dir = dirname($_FILES["files"]["tmp_name"]);
             $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["files"]["name"];
             rename($_FILES["files"]["tmp_name"], $destination);
@@ -312,7 +314,7 @@ class Auth extends CI_Controller
 
     public function checkEmailAlready()
     {
-        $email = $this->input->post('email');
+        $email = $this->input->get('email');
         $check = $this->MembersModel->checkDuplicate($email);
         if ($check == false) {
             echo 'true';
@@ -354,7 +356,8 @@ class Auth extends CI_Controller
         }
     }
 
-    public function sendMail($to, $subject, $message){
+    public function sendMail($to, $subject, $message)
+    {
         //Postmark Service Mail
         $config = array(
             'useragent' => 'nutmor.com',
