@@ -198,8 +198,8 @@
 
                         <div class="tab-pane fade <?php if (empty($this->session->flashdata('tab')) || $this->session->flashdata('tab') == 'history'): ?> show active <?php endif; ?>" id="history" role="tabpanel" aria-labelledby="general-tab">
                             <div class="search_bar_list mb-4">
-                                <input type="text" class="form-control" placeholder="ค้นหาจากชื่อแพทย์ หมายเลขจองคิว หรือชื่อคลีนิก">
-                                <input type="submit" value="ค้นหา">
+                                <input type="text" id="textSearch" class="form-control" placeholder="ค้นหาจากชื่อแพทย์ หมายเลขจองคิว หรือชื่อคลินิก">
+                                <input type="button" onClick="loadPagination(0)" value="ค้นหา">
                             </div>
                             <div id='result'></div>
                         </div>
@@ -416,9 +416,12 @@
     });
 
     function loadPagination(pagno) {
+        var textSearch = $('#textSearch').val();
+        console.log(textSearch);
         $.ajax({
             url: '<?php echo base_url('loadBooking')?>/' + pagno,
             type: 'get',
+            data : {textSearch : textSearch},
             // dataType: 'json',
             success: function (response) {
                 // console.log(response.result);

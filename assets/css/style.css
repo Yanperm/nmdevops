@@ -1774,6 +1774,31 @@ iframe {
   background-color: #e74e84;
 }
 
+.search_bar_list input[type='button'] {
+    position: absolute;
+    right: -1px;
+    color: #fff;
+    font-weight: 600;
+    top: 0;
+    border: 0;
+    padding: 0 15px;
+    height: 40px;
+    cursor: pointer;
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    -ms-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+    background-color: #74d1c6;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.search_bar_list input[type='button']:hover {
+    background-color: #e74e84;
+}
+
 .box_list {
   background-color: #fff;
   display: block;
