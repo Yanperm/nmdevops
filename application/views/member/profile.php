@@ -42,7 +42,7 @@
                         <li><?php echo $countBooking; ?> คิว</li>
                     </ul>
                     <ul class="contacts">
-                        <li><h6>อีเมล</h6><?php echo $member->EMAIL; ?></li>
+                        <li><h6>เมลล์</h6><?php echo $member->EMAIL; ?></li>
                         <li><h6>หมายเลขโทรศัพท์</h6><a href="tel://<?php echo $member->PHONE; ?>"><?php echo $member->PHONE; ?></a></li>
                     </ul>
 
@@ -83,10 +83,17 @@
                                 <div class="row">
                                     <div class="col-md-6 ">
                                         <div class="form-group">
-                                            <label>ชื่อ - นามสกุล</label>
-                                            <input type="text" class="form-control" name="name" value="<?php echo $member->CUSTOMERNAME; ?>">
+                                            <label>ชื่อ</label>
+                                            <input type="text" class="form-control" name="fname" value="<?php if (!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[0]; endif; ?>">
                                         </div>
                                     </div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label>นามสกุล</label>
+                                            <input type="text" class="form-control" name="lname" value="<?php if (!empty($member) && !empty(explode(" ", $member->CUSTOMERNAME)[1])): echo explode(" ", $member->CUSTOMERNAME)[1]; endif; ?>">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>วันเกิด</label>
@@ -98,30 +105,30 @@
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>ไลน์ไอดี</label>
                                             <input type="text" class="form-control" value="<?php echo $member->LINEID; ?>" name="line_id">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>หมายเลขโทรศัพท์</label>
                                             <input type="number" class="form-control" value="<?php echo $member->PHONE; ?>" name="phone">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>อีเมล</label>
+                                            <label>เมลล์</label>
                                             <input type="email" class="form-control" value="<?php echo $member->EMAIL; ?>" name="email">
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <div class="container">
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
@@ -131,7 +138,7 @@
                                         <div class="avatar-preview">
                                             <input type="hidden" value="<?= $member->IMAGE ?>" name="old_image">
                                             <?php if ($member->IMAGE == ''): ?>
-                                                <div id="imagePreview" style="background-image: url('https://www.efood2you.com/uploads/avatar.png');">
+                                                <div id="imagePreview" style="background-image: url(https://www.efood2you.com/uploads/avatar.png);">
                                                 </div>
                                             <?php endif; ?>
 
@@ -142,7 +149,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-center add_top_30"><input type="submit" class="btn_1" value="บันทึกการแก้ไข"></p>
+                                <p class="text-center add_top_30">
+                                    <input type="submit" class="btn_1" value="บันทึกการแก้ไข">
+                                </p>
                             </form>
                         </div>
 
@@ -292,7 +301,7 @@
 <!--<script>-->
 <!--    Swal.fire(-->
 <!--        'หมายเหตุ!',-->
-<!--        'ใส่ข้อมูลอีเมลให้ถูกต้องเพื่อทำการส่งอีเมล<br>ส่วนการส่งอีเมลถึงแพทย์รอการเชื่อมฐานข้อมูลก็ส่งได้เลยค่ะ<br> (ข้อมูลพร้อมลงฐานข้อมูลแล้วค่ะ)',-->
+<!--        'ใส่ข้อมูลเมลล์ให้ถูกต้องเพื่อทำการส่งเมลล์<br>ส่วนการส่งเมลล์ถึงแพทย์รอการเชื่อมฐานข้อมูลก็ส่งได้เลยค่ะ<br> (ข้อมูลพร้อมลงฐานข้อมูลแล้วค่ะ)',-->
 <!--        'warning'-->
 <!--    )-->
 <!--</script>-->
@@ -333,7 +342,10 @@
         //validate profile tab
         $('#profile-form').validate({
             rules: {
-                name: {
+                fname: {
+                    required: true,
+                },
+                lname: {
                     required: true,
                 },
                 email: {
@@ -350,16 +362,19 @@
 
             },
             messages: {
-                name: {
-                    required: "กรุณากรอกชื่อ - สกุล"
+                fname: {
+                    required: "กรุณากรอกชื่อ"
+                },
+                lname: {
+                    required: "กรุณากรอกนามสกุล"
                 },
                 phone: {
                     required: "กรุณากรอกเบอร์โทรศัพท์"
                 },
                 email: {
-                    required: "กรุณากรอกอีเมล",
-                    email: "รูปแบบอีเมลไม่ถูกต้อง",
-                    remote: "อีเมลนี้มีการใช้งานแล้ว"
+                    required: "กรุณากรอกเมลล์",
+                    email: "รูปแบบเมลล์ไม่ถูกต้อง",
+                    remote: "เมลล์นี้มีการใช้งานแล้ว"
                 },
             },
             submitHandler: function (form) {
@@ -421,7 +436,7 @@
         $.ajax({
             url: '<?php echo base_url('loadBooking')?>/' + pagno,
             type: 'get',
-            data : {textSearch : textSearch},
+            data: {textSearch: textSearch},
             // dataType: 'json',
             success: function (response) {
                 // console.log(response.result);

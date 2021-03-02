@@ -16,7 +16,9 @@
             <?php if ($item["BOOKTIME"] != ''): ?>
                 <li>เวลา <span class="history_span"><?php echo $item["BOOKTIME"]; ?></span></li>
             <?php endif; ?>
-            <li><a href="javascript:void(0)" onClick='checkInMember("<?php echo base_url('profile/checkin') ?>?vn=<?php echo $item["BOOKINGID"]; ?>&email=<?php echo $item["EMAIL"]; ?>")'>เช็คอิน</a></li>
+            <li>
+                <a href="javascript:void(0)" onClick="cancel('<?php echo $item["BOOKINGID"]; ?>')">ยกเลิกคิว</a>
+                <a href="javascript:void(0)" onClick='checkInMember("<?php echo base_url('profile/checkin') ?>?vn=<?php echo $item["BOOKINGID"]; ?>&email=<?php echo $item["EMAIL"]; ?>")'>เช็คอิน</a></li>
 
         </ul>
     </div>
