@@ -40,7 +40,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>นามสกุล</label>
-                                        <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="" value="<?php if (!empty($member)): echo explode(" ", $member->CUSTOMERNAME)[1]; endif; ?>">
+                                        <input type="text" class="form-control" id="lastname_booking" name="lastname_booking" placeholder="" value="<?php if (!empty($member) && !empty(explode(" ", $member->CUSTOMERNAME)[1])): echo explode(" ", $member->CUSTOMERNAME)[1]; endif; ?>">
                                     </div>
                                 </div>
                             </div>
