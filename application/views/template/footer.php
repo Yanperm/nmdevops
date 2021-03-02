@@ -69,7 +69,7 @@
         <!-- COMMON SCRIPTS -->
 <!--        <script src="--><?php //echo base_url() ?><!--assets/js/jquery-2.2.4.min.js"></script>-->
         <script src="<?php echo base_url() ?>assets/js/common_scripts.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/js/functions.js"></script>
+        <script src="<?php echo base_url() ?>assets/js/functions.js?v=1.0.3"></script>
         <script src="<?php echo base_url() ?>assets/js/tables_func.js"></script>
 
 
