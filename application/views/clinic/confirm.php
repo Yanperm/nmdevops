@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('detail/'.$clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME;?></a></li>
+                <li><a href="<?php echo base_url('detail/' . $clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
                 <li>ยืนยันการนัดหมอ</li>
             </ul>
         </div>
@@ -22,11 +22,18 @@
                             </g>
                         </svg>
                     </div>
-                    <h2>ทำการนัดหมอสำเร็จ!</h2>
-                    <p>คุณจะได้รับรายละเอียดการนัดหมอที่อีเมล</p>
+                    <h2>ทำการนัดหมอสำเร็จ</h2>
+                    <p>คุณจะได้รับรายละเอียดการนัดหมอที่เมลล์</p>
                 </div>
             </div>
         </div>
+        <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated')): ?>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="<?php echo base_url('member/profile'); ?>" class="btn_1">ไปหน้าบัญชีผู้ใช้</a>
+                </div>
+            </div>
+        <?php endif; ?>
         <!-- /row -->
     </div>
     <!-- /container -->

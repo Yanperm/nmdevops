@@ -84,14 +84,15 @@ class Member extends CI_Controller
 
     public function profileUpdate()
     {
-        $name = $this->input->post('name');
+        $fname = $this->input->post('fname');
+        $lname = $this->input->post('lname');
         $birthDate = $this->input->post('birth_date');
         $lineId = $this->input->post('line_id');
         $phone = $this->input->post('phone');
         $email = $this->input->post('email');
         $image = $this->input->post('old_image');
 
-        if (!empty($_FILES["file"])) {
+        if(file_exists($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
             $dir = dirname($_FILES["file"]["tmp_name"]);
             $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
             rename($_FILES["file"]["tmp_name"], $destination);
@@ -105,7 +106,7 @@ class Member extends CI_Controller
         }
 
         $data = [
-            'CUSTOMERNAME' => $name,
+            'CUSTOMERNAME' => $fname." ".$lname,
             'BIRTHDAY' => $birthDate,
             'LINEID' => $lineId,
             'EMAIL' => $email,
