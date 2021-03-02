@@ -19,7 +19,7 @@ class Member extends CI_Controller
     {
         if (!$this->session->userdata('authenticated')) {
             redirect(base_url('login'));
-        } else if($this->session->userdata('authenticated') && !$this->session->userdata('activate')){
+        } else if ($this->session->userdata('authenticated') && !$this->session->userdata('activate')) {
             if (!$this->session->userdata('activate')) {
                 redirect(base_url('verify') . "?email=" . $this->session->userdata('email') . "&type=member");
             }
@@ -51,12 +51,12 @@ class Member extends CI_Controller
 
     public function cancelBooking()
     {
-        if(!empty($this->input->get('vn'))){
+        if (!empty($this->input->get('vn'))) {
             $booking = $this->BookingModel->getDataById($this->input->get('vn'));
 
-            if($booking->TYPE == 0){
+            if ($booking->TYPE == 0) {
                 $this->BookingModel->delete($this->input->get('vn'));
-            }else{
+            } else {
                 $this->BookingModel->cancel($this->input->get('vn'));
             }
         }
@@ -66,8 +66,8 @@ class Member extends CI_Controller
 
     public function checkInMember()
     {
-        if(!empty($this->input->get('vn'))){
-           $this->BookingModel->checkin($this->input->get('vn'));
+        if (!empty($this->input->get('vn'))) {
+            $this->BookingModel->checkin($this->input->get('vn'));
         }
 
         $this->session->set_flashdata('msg', 'ทำการเช็คอินเรียบร้อย');
@@ -99,7 +99,7 @@ class Member extends CI_Controller
             $this->session->set_userdata('image', $image);
 
             //remove old image S3
-            if($this->input->post('old_image') != ''){
+            if ($this->input->post('old_image') != '') {
                 $this->s3_upload->deleteFile(basename($this->input->post('old_image')));
             }
         }
@@ -134,7 +134,7 @@ class Member extends CI_Controller
             $this->session->set_userdata('image', $image);
 
             //remove old image S3
-            if($this->input->post('old_image1') != ''){
+            if ($this->input->post('old_image1') != '') {
                 $this->s3_upload->deleteFile(basename($this->input->post('old_image1')));
             }
         }
@@ -168,6 +168,7 @@ class Member extends CI_Controller
 
     public function loadBooking()
     {
+        $textSearch = $this->input->get('textSearch');
         $rowno = $this->uri->segment('2');
 
         $rowperpage = 5;
@@ -176,9 +177,14 @@ class Member extends CI_Controller
             $rowno = ($rowno - 1) * $rowperpage;
         }
 
-        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'), $rowperpage, $rowno);
+        $booking = $this->BookingModel->getBookingByUserId($this->session->userdata('id'), $rowperpage, $rowno, $textSearch);
 
-        $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
+        $allcount = 0;
+        if ($textSearch == '') {
+            $allcount = $this->db->where('MEMBERIDCARD', $this->session->userdata('id'))->count_all_results('tbbooking');
+        } else {
+            $allcount = $this->BookingModel->getBookingByUserIdSearch($this->session->userdata('id'), $textSearch);
+        }
 
         $config['base_url'] = base_url() . 'loadBooking';
         $config['use_page_numbers'] = TRUE;

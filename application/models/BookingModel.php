@@ -26,7 +26,7 @@ class BookingModel extends CI_Model
 
     public function getDataById($id)
     {
-        $query = $this->db->query('SELECT * FROM tbbooking where BOOKINGID = "'.$id.'"');
+        $query = $this->db->query('SELECT * FROM tbbooking where BOOKINGID = "' . $id . '"');
         if ($query->num_rows() > 0) {
             return $query->row();
         } else {
@@ -36,7 +36,7 @@ class BookingModel extends CI_Model
 
     public function getDataAllByClinic($clicnicId)
     {
-        $query = $this->db->query('SELECT count(BOOKINGID) AS ALLBOOKING FROM tbbooking where CLINICID = "' . $clicnicId.'"');
+        $query = $this->db->query('SELECT count(BOOKINGID) AS ALLBOOKING FROM tbbooking where CLINICID = "' . $clicnicId . '"');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
@@ -46,7 +46,7 @@ class BookingModel extends CI_Model
 
     public function getDataTodayByClinic($clicnicId)
     {
-        $query = $this->db->query('SELECT count(BOOKINGID) AS TODAYBOOKING FROM tbbooking where BOOKDATE  = "'.date('Y-m-d').'" AND CLINICID = "' . $clicnicId.'"');
+        $query = $this->db->query('SELECT count(BOOKINGID) AS TODAYBOOKING FROM tbbooking where BOOKDATE  = "' . date('Y-m-d') . '" AND CLINICID = "' . $clicnicId . '"');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
@@ -99,21 +99,60 @@ class BookingModel extends CI_Model
         }
     }
 
-    public function getBookingByUserId($userId, $rowperpage, $rowno)
+    public function getBookingByUserId($userId, $rowperpage, $rowno, $textSearch)
+    {
+        if ($textSearch != '') {
+            $query = $this->db->query('
+            SELECT * FROM tbbooking as booking 
+            left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
+            left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
+            where booking.MEMBERIDCARD = "' . $userId . '"
+            AND (clinic.CLINICNAME like "%' . $textSearch . '%"
+            OR clinic.DOCTORNAME like "%' . $textSearch . '%"
+            OR booking.BOOKINGID like "%' . $textSearch . '%"
+            )
+            order by booking.BOOKDATE DESC
+            limit ' . $rowno . ',' . $rowperpage);
+
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+            } else {
+                return array();
+            }
+        } else {
+            $query = $this->db->query('
+            SELECT * FROM tbbooking as booking 
+            left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
+            left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
+            where booking.MEMBERIDCARD = "' . $userId . '"
+            order by booking.BOOKDATE DESC
+            limit ' . $rowno . ',' . $rowperpage);
+
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+            } else {
+                return array();
+            }
+        }
+
+    }
+
+    public function getBookingByUserIdSearch($userId, $textSearch)
     {
         $query = $this->db->query('
             SELECT * FROM tbbooking as booking 
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.MEMBERIDCARD = "' . $userId . '"
-            limit ' . $rowno . ',' . $rowperpage);
-
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return array();
-        }
+            AND (clinic.CLINICNAME like "%' . $textSearch . '%"
+            OR clinic.DOCTORNAME like "%' . $textSearch . '%"
+            OR booking.BOOKINGID like "%' . $textSearch . '%"
+            )
+            order by booking.BOOKDATE DESC'
+        );
+        return $query->num_rows();
     }
+
 
     public function getBookingByUserIdCheckin($userId, $rowperpage, $rowno)
     {
@@ -149,7 +188,7 @@ class BookingModel extends CI_Model
         }
     }
 
-    public function getDataListByDate($clinicId,$date, $rowperpage, $rowno)
+    public function getDataListByDate($clinicId, $date, $rowperpage, $rowno)
     {
 
         $query = $this->db->query('
@@ -208,7 +247,7 @@ class BookingModel extends CI_Model
         return true;
     }
 
-    public function quesCall($id,$clinicId)
+    public function quesCall($id, $clinicId)
     {
         $query = $this->db->query('
             SELECT * FROM tbbooking as booking
@@ -218,8 +257,8 @@ class BookingModel extends CI_Model
             AND booking.STATUS = 1'
         );
         if ($query->num_rows() > 0) {
-           $result =  $query->result();
-            foreach ($result as $item){
+            $result = $query->result();
+            foreach ($result as $item) {
                 $this->db->set('SHOWS', 3);
                 $this->db->where('BOOKINGID', $item->BOOKINGID);
                 $this->db->update('tbbooking');
