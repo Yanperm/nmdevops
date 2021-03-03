@@ -25,8 +25,17 @@ class Clinic extends CI_Controller
 
     public function register()
     {
+        $type = '2';
+        if(!empty($this->input->get('type'))){
+            $type = $this->input->get('type');
+        }
+
+        $data = [
+            'type' => $type
+        ];
+
         $this->load->view('template/header_doctor');
-        $this->load->view('clinic/register');
+        $this->load->view('clinic/register', $data);
         $this->load->view('template/footer');
     }
 

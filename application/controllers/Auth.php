@@ -15,6 +15,7 @@ class Auth extends CI_Controller
         $this->load->library('S3');
         $this->load->model('MembersModel');
         $this->load->model('ClinicModel');
+        $this->load->model('AdminModel');
 
     }
 
@@ -198,6 +199,90 @@ class Auth extends CI_Controller
             } else {
                 $this->session->set_flashdata('message', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
                 redirect(base_url('login'));
+            }
+        }
+    }
+
+    public function loginAdmin()
+    {
+        $this->form_validation->set_rules('email', 'username', 'trim|required');
+        $this->form_validation->set_rules('password', 'password', 'required');
+
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        $type = $this->input->post('type');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('template/header');
+            $this->load->view('admin/login');
+            $this->load->view('template/footer');
+
+        } else {
+            $email = $this->security->xss_clean($this->input->post('email'));
+            $password = $this->security->xss_clean($this->input->post('password'));
+
+            $user = false;
+
+            if ($type == 'member') {
+                $user = $this->MembersModel->login($email, $password);
+            }
+
+            if ($type == 'clinic') {
+                $user = $this->ClinicModel->login($email, $password);
+            }
+
+            if ($type == 'admin') {
+                $user = $this->AdminModel->login($email, $password);
+            }
+
+            if ($user) {
+
+                $userdata = array();
+
+                if ($type == 'member') {
+                    $userdata = array(
+                        'id' => $user->MEMBERIDCARD,
+                        'name' => $user->CUSTOMERNAME,
+                        'authenticated' => TRUE,
+                        'activate' => $user->ACTIVATE_STATUS,
+                        'email' => $user->EMAIL,
+                        'type' => 'member',
+                        'image' => $user->IMAGE
+                    );
+                    $this->session->set_userdata($userdata);
+
+                    redirect(base_url(''));
+                } else if ($type == 'clinic')  {
+                    $userdata = array(
+                        'id' => $user->IDCLINIC,
+                        'name' => $user->CLINICNAME,
+                        'authenticated' => TRUE,
+                        'activate' => $user->ACTIVATE,
+                        'email' => $user->USERNAME,
+                        'type' => 'clinic',
+                        'image' => $user->image
+                    );
+                    $this->session->set_userdata($userdata);
+
+                    redirect(base_url('physician/dashboard'));
+                }
+                else if ($type == 'admin')  {
+                    $userdata = array(
+                        'id' => $user->ID,
+                        'name' => $user->NAME,
+                        'authenticated' => TRUE,
+                        'type' => 'admin',
+                        'image' => $user->IMAGE
+                    );
+                    $this->session->set_userdata($userdata);
+
+                    redirect(base_url('admin/dashboard'));
+                }
+
+            } else {
+                $this->session->set_flashdata('message', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+                redirect(base_url('admin'));
             }
         }
     }

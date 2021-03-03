@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ClinicModel extends CI_Model
+class AdminModel extends CI_Model
 {
     public function search($textSearch, $typeSearch)
     {
@@ -24,16 +24,6 @@ class ClinicModel extends CI_Model
     public function getData()
     {
         $query = $this->db->query('SELECT * FROM tbclinic WHERE MOBILE = 1');
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-
-    public function getAll()
-    {
-        $query = $this->db->query('SELECT * FROM tbclinic');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
@@ -114,8 +104,8 @@ class ClinicModel extends CI_Model
     {
         $this->db->where('USERNAME', $email);
         $this->db->where('PASSWORD', md5($password));
-        $this->db->where('ACTIVATE', 1);
-        $query = $this->db->get('tbclinic');
+        $this->db->where('STATUS', 1);
+        $query = $this->db->get('tbadmin');
 
         if ($query->num_rows() == 1) {
             return $query->row();
