@@ -262,7 +262,7 @@ class Auth extends CI_Controller
     public function addClinic()
     {
         $image = '';
-        if (!empty($_FILES["files_clinic"])) {
+        if(file_exists($_FILES['files_clinic']['tmp_name']) && is_uploaded_file($_FILES['files_clinic']['tmp_name'])) {
             $dir = dirname($_FILES["files_clinic"]["tmp_name"]);
             $destination = $dir . DIRECTORY_SEPARATOR . $_FILES['files_clinic']["name"];
             rename($_FILES["files_clinic"]["tmp_name"], $destination);
@@ -276,21 +276,26 @@ class Auth extends CI_Controller
         $lineId = $this->input->post('line_id_clinic');
         $password = $this->input->post('password_clinic');
         $website = $this->input->post('website');
+        $package = $this->input->post('package');
 
         $dateNow = new DateTime();
         $currentTime = $dateNow->getTimestamp();
-        $userId = $currentTime;
+        $clicniId ="CL".random_int(111, 999);
+
         $code = random_int(111111, 999999);
 
         $data = [
-            'IDCLINIC' => $userId,
+            'IDCLINIC' => $clicniId,
+            'CLINICID' => $clicniId,
             'CLINICNAME' => $clinicName,
             'DOCTORNAME' => $doctorName,
             'LINE' => $lineId,
             'USERNAME' => $email,
             'PASSWORD' => md5($password),
             'PHONE' => $telephone,
+            'TYPE' => $package,
             'image' => $image,
+            'ACTIVATE' => 0,
             'email_verification_code' => $code,
             'DOMAIN' => $website,
         ];
@@ -308,7 +313,7 @@ class Auth extends CI_Controller
         $this->sendMail($email, $subject, $message);
 
         $this->load->view('template/header_doctor');
-        $this->load->view('auth/confirm_register');
+        $this->load->view('auth/confirm_register_clinic');
         $this->load->view('template/footer');
     }
 
@@ -325,7 +330,7 @@ class Auth extends CI_Controller
 
     public function checkEmailClinicAlready()
     {
-        $email = $this->input->post('email_clinic');
+        $email = $this->input->get('email_clinic');
         $check = $this->ClinicModel->checkDuplicate($email);
         if ($check == false) {
             echo 'true';
