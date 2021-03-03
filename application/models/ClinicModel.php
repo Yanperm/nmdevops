@@ -104,6 +104,7 @@ class ClinicModel extends CI_Model
     {
         $this->db->where('USERNAME', $email);
         $this->db->where('PASSWORD', md5($password));
+        $this->db->where('ACTIVATE', 1);
         $query = $this->db->get('tbclinic');
 
         if ($query->num_rows() == 1) {
