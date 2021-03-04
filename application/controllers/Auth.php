@@ -124,7 +124,7 @@ class Auth extends CI_Controller
         ];
 
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        $this->sendMail($email, $subject, $message);
+        $this->sendgrid($email, $subject, $message);
 
         $data = [
             'email' => $email,
@@ -337,7 +337,7 @@ class Auth extends CI_Controller
         ];
 
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        $this->sendMail($email, $subject, $message);
+        $this->sendgrid($email, $subject, $message);
 
         $this->load->view('template/header');
         $this->load->view('auth/confirm_register');
@@ -395,7 +395,7 @@ class Auth extends CI_Controller
         ];
 
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        $this->sendMail($email, $subject, $message);
+        $this->sendgrid($email, $subject, $message);
 
         $this->load->view('template/header_doctor');
         $this->load->view('auth/confirm_register_clinic');
@@ -462,12 +462,36 @@ class Auth extends CI_Controller
         );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('no-reply@nutmor.com', "Pharmacy Nutmor.com");
+        $this->email->from('no-reply@nutmor.com', "Nutmor.com");
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->send();
 
         return true;
+    }
+
+    public function sendgrid($to, $subject, $message){
+        $this->load->library('email');
+        $this->email->initialize(array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.sendgrid.net',
+            'smtp_user' => 'apikey',
+            'smtp_pass' => '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',
+            'smtp_port' => 587,
+            'mailtype' => 'html',
+            'crlf' => "\r\n",
+            'newline' => "\r\n"
+        ));
+
+        $this->email->from('no-reply@nutmor.com', 'Nutmor.com');
+        $this->email->to($to);
+       // $this->email->cc('partchayanan.y@outlook.co.th');
+       // $this->email->bcc('partchayanan@oulook.com');
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+
+        echo $this->email->print_debugger();
     }
 }

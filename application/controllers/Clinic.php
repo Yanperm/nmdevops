@@ -193,7 +193,7 @@ class Clinic extends CI_Controller
             username : " . $email . "\r\n
             password : " . $telephone . "\r\n
             \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
-            $this->sendMail($email, $subject, $message);
+            $this->sendgrid($email, $subject, $message);
         }
 
         //insert booking
@@ -228,7 +228,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($email != '') {
-            $this->sendMail($email, $subject, $message);
+            $this->sendgrid($email, $subject, $message);
         }
 
         $data = [
@@ -312,7 +312,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($booking[0]->EMAIL != '') {
-            $this->sendMail($booking[0]->EMAIL, $subject, $message);
+            $this->sendgrid($booking[0]->EMAIL, $subject, $message);
         }
 
         $this->load->view('template/header');
@@ -425,5 +425,29 @@ class Clinic extends CI_Controller
         $this->email->send();
 
         return true;
+    }
+
+    public function sendgrid($to, $subject, $message){
+        $this->load->library('email');
+        $this->email->initialize(array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.sendgrid.net',
+            'smtp_user' => 'apikey',
+            'smtp_pass' => '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',
+            'smtp_port' => 587,
+            'mailtype' => 'html',
+            'crlf' => "\r\n",
+            'newline' => "\r\n"
+        ));
+
+        $this->email->from('no-reply@nutmor.com', 'Nutmor.com');
+        $this->email->to($to);
+        // $this->email->cc('partchayanan.y@outlook.co.th');
+        // $this->email->bcc('partchayanan@oulook.com');
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+
+        echo $this->email->print_debugger();
     }
 }
