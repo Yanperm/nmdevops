@@ -14,6 +14,49 @@ class BookingModel extends CI_Model
         }
     }
 
+    public function getAll()
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getAllChecked()
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking where CHECKIN = 1');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getAllQueueToday()
+    {
+        $query = $this->db->query("SELECT * FROM tbbooking where BOOKDATE = '".date('Y-m-d')."'");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getAllQueueTomorrow()
+    {
+        $tomorrow = date('Y-m-d',strtotime(date('Y-m-d') . "+1 days"));
+        $query = $this->db->query("SELECT * FROM tbbooking where BOOKDATE = '".$tomorrow."'");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+
+
     public function getDataExtra($clicnicId, $date)
     {
         $query = $this->db->query('SELECT * FROM tbbooking where TYPE = 1 AND CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');

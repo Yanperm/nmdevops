@@ -146,7 +146,7 @@
                                         <li class="pricing-feature">10 Appointments a day</li>
                                         <li class="pricing-feature">Free App for All Clinic Patients</li>
                                     </ul>
-                                    <button type="button" onclick="selectPackage(1)" class="pricing-action">1,000 ฿ Yearly</button>
+                                    <button id="type1" type="button" onclick="selectPackage(1)" class="pricing-action">1,000 ฿ Yearly</button>
                                 </div>
                                 <div class="pricing-item features-item ja-animate pricing__item--featured" data-animation="move-from-bottom" data-delay="item-1" style="min-height: 497px;">
                                     <div class="pricing-deco" style="background: linear-gradient(135deg,#a93bfe,#584efd)">
@@ -167,7 +167,7 @@
                                         <li class="pricing-feature">Unlimited Appointment</li>
                                         <li class="pricing-feature">Nutmor App</li>
                                     </ul>
-                                    <button type="button" onclick="selectPackage(2)" class="pricing-action">5,900 ฿ Yearly</button>
+                                    <button id="type2" type="button" onclick="selectPackage(2)" class="pricing-action">5,900 ฿ Yearly</button>
                                 </div>
                                 <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom" data-delay="item-2" style="min-height: 497px;">
                                     <div class="pricing-deco">
@@ -190,10 +190,10 @@
                                         <li class="pricing-feature">Electronic Patient Records</li>
                                         <li class="pricing-feature">Nm Inventory</li>
                                     </ul>
-                                    <button type="button" onclick="selectPackage(3)" class="pricing-action">59,000 ฿ Yearly</button>
+                                    <button id="type3" type="button" onclick="selectPackage(3)" class="pricing-action">59,000 ฿ Yearly</button>
                                 </div>
                             </div>
-                            <input type="hidden" id="package" name="package">
+                            <input type="hidden" id="package" name="package" value="<?php echo $type;?>" data-rule-required="true"  data-msg-required="กรุณากรุณาเลือกแพ็กเกจ" >
                             <input type="button" data-page="3" name="previous" class="previous action-button" value="ก่อนหน้า"/>
                             <input type="button" data-page="3" name="next" class="submit action-button" value="สมัครสมาชิก"/>
 
@@ -1134,6 +1134,9 @@
     function selectPackage(id) {
         $('#package').val(id);
     }
+
+    let package = $('#package').val();
+    $("#type"+package).css("background", "linear-gradient(135deg, #e84e84, #b9204d)");
 </script>
 
 <!-- Validation JS file -->

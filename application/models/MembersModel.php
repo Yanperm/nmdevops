@@ -25,6 +25,33 @@ class MembersModel extends CI_Model
         }
     }
 
+    public function find_with_page($param){
+        $keyword = $param['keyword'];
+        $this->db->select('*');
+
+        $condition = "1=1";
+        if(!empty($keyword)){
+            $condition .= " and (CUSTOMERNAME like '%{$keyword}%' or PHONE like '%{$keyword}%')";
+        }
+
+        $this->db->where($condition);
+        $this->db->limit($param['page_size'], $param['start']);
+        $this->db->order_by($param['column'], $param['dir']);
+
+        $query = $this->db->get('tbmembers');
+        $data = [];
+        if($query->num_rows() > 0){
+            foreach($query->result() as $row){
+                $data[] = $row;
+            }
+        }
+
+        $count_condition = $this->db->from('tbmembers')->where($condition)->count_all_results();
+        $count = $this->db->from('tbmembers')->count_all_results();
+        $result = array('count'=>$count,'count_condition'=>$count_condition,'data'=>$data,'error_message'=>'');
+        return $result;
+    }
+
     public function detailByEmail($mail)
     {
         $query = $this->db->query('SELECT * FROM tbmembers where EMAIL = "' . $mail . '"');

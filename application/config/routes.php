@@ -120,3 +120,5 @@ $route['profile/change/image'] = 'member/profileChangeImage';
 $route['password/update'] = 'member/passwordUpdate';
 $route['profile/checkin'] = 'member/checkInMember';
 
+$route['admin'] = 'auth/loginAdmin';
+
