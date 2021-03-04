@@ -47,7 +47,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="<?php echo base_url('physician/dashboard'); ?>">
+                <a class="nav-link" href="<?php echo base_url('admin/dashboard'); ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Dashboard</span>
                 </a>
@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                <a class="nav-link" href="<?php echo base_url('admin/clinic'); ?>">
+                <a class="nav-link" href="<?php echo base_url('admin/patient'); ?>">
                     <i class="fa fa-fw fa-calendar-check-o"></i>
                     <span class="nav-link-text">
                         PATIENT

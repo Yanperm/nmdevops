@@ -55,4 +55,46 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard', $data);
         $this->load->view('template/footer_physician');
     }
+
+    public  function clinic(){
+        $clinic = $this->ClinicModel->getAll();
+
+        $data = [
+            'clinic' => $clinic
+        ];
+
+        $this->load->view('template/header_admin');
+        $this->load->view('admin/clinic', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public  function patient(){
+        $patient = $this->MembersModel->getData();
+
+        $data = [
+            'patient' => $patient
+        ];
+
+        $this->load->view('template/header_admin');
+        $this->load->view('admin/patient', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function patientData()
+    {
+        $order_index = $this->input->get('order[0][column]');
+        $param['page_size'] = $this->input->get('length');
+        $param['start'] = $this->input->get('start');
+        $param['draw'] = $this->input->get('draw');
+        $param['keyword'] = trim($this->input->get('search[value]'));
+        $param['column'] = $this->input->get("columns[{$order_index}][data]");
+        $param['dir'] = $this->input->get('order[0][dir]');
+        $results = $this->MembersModel->find_with_page($param);
+        $data['draw'] = $param['draw'];
+        $data['recordsTotal'] = $results['count'];
+        $data['recordsFiltered'] = $results['count_condition'];
+        $data['data'] = $results['data'];
+        $data['error'] = $results['error_message'];
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
 }
