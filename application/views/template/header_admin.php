@@ -69,7 +69,7 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                <a class="nav-link" href="<?php echo base_url('admin/clinic'); ?>">
+                <a class="nav-link" href="<?php echo base_url('admin/advertise'); ?>">
                     <i class="fa fa-fw fa-calendar-check-o"></i>
                     <span class="nav-link-text">
                         ADVERTISE
