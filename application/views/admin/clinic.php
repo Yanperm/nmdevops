@@ -59,7 +59,7 @@
                                 <?php endif;?>
                             </td>
                             <td>
-                                <i class="ri-edit-2-line"></i>
+                                <a href="<?php echo base_url('admin/clinic/detail/'.$item->IDCLINIC)?>"><i class="ri-edit-2-line"></i></a>
                                 <i class="ri-delete-bin-2-line"></i>
                             </td>
                         </tr>

@@ -69,6 +69,19 @@ class Admin extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
+    public  function clinicDetail(){
+        $idClinic = $this->uri->segment('4');
+        $clinic = $this->ClinicModel->detailById($idClinic);
+
+        $data = [
+            'clinic' => $clinic
+        ];
+
+        $this->load->view('template/header_admin');
+        $this->load->view('admin/clinic_detail', $data);
+        $this->load->view('template/footer_physician');
+    }
+
     public  function patient(){
         $patient = $this->MembersModel->getData();
 
