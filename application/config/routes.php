@@ -122,3 +122,5 @@ $route['profile/checkin'] = 'member/checkInMember';
 
 $route['admin'] = 'auth/loginAdmin';
 
+$route['admin/clinic/detail/(:any)'] = 'admin/clinicDetail';
+
