@@ -3,17 +3,102 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ClinicModel extends CI_Model
 {
-    public function search($textSearch, $typeSearch)
+    public function search($textSearch, $typeSearch, $lat, $long, $sort)
     {
         $query = '';
         if ($typeSearch == 'all') {
-            $query = $this->db->query('SELECT * FROM tbclinic where  MOBILE = 1  AND (CLINICNAME LIKE "%' . $typeSearch . '%" OR DOCTORNAME LIKE "%' . $textSearch . '%")');
+            $query = 'SELECT * FROM tbclinic where  MOBILE = 1  AND (CLINICNAME LIKE "%' . $typeSearch . '%" OR DOCTORNAME LIKE "%' . $textSearch . '%")';
         } else if ($typeSearch == 'doctor') {
-            $query = $this->db->query('SELECT * FROM tbclinic where MOBILE = 1  AND DOCTORNAME LIKE "%' . $textSearch . '%"');
+            $query = 'SELECT * FROM tbclinic where MOBILE = 1  AND DOCTORNAME LIKE "%' . $textSearch . '%"';
         } else if ($typeSearch == 'clinic') {
-            $query = $this->db->query('SELECT * FROM tbclinic where MOBILE = 1  AND CLINICNAME LIKE "%' . $textSearch . '%"');
+            $query = 'SELECT * FROM tbclinic where MOBILE = 1  AND CLINICNAME LIKE "%' . $textSearch . '%"';
+        } else if ($typeSearch == 'nearby') {
+            $query = 'SELECT * FROM (
+    SELECT *, 
+        (
+            (
+                (
+                    acos(
+                        sin(( '.$lat.' * pi() / 180))
+                        *
+                        sin(( `LAT` * pi() / 180)) + cos(( '.$lat.' * pi() /180 ))
+                        *
+                        cos(( `LAT` * pi() / 180)) * cos((( '.$long.' - `LONG`) * pi()/180)))
+                ) * 180/pi()
+            ) * 60 * 1.1515 * 1.609344
+        )
+    as distance FROM `tbclinic`
+) tbclinic
+WHERE distance <= 100
+AND (CLINICNAME LIKE "%'.$textSearch.'%" OR PROFICIENT LIKE "%'.$textSearch.'%") 
+';
         }
 
+        if($sort == 'view'){
+
+            $query .= 'order by view_count desc';
+        }
+       // $query .= ' limit 1,2';
+
+        $query = $this->db->query($query);
+//echo $query;
+//exit();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function searchPage($textSearch, $typeSearch, $lat, $long, $sort, $rowperpage, $rowno)
+    {
+        $query = '';
+        if ($typeSearch == 'all') {
+            $query = 'SELECT * FROM tbclinic where  MOBILE = 1  AND (CLINICNAME LIKE "%' . $typeSearch . '%" OR DOCTORNAME LIKE "%' . $textSearch . '%")';
+        } else if ($typeSearch == 'doctor') {
+            $query = 'SELECT * FROM tbclinic where MOBILE = 1  AND DOCTORNAME LIKE "%' . $textSearch . '%"';
+        } else if ($typeSearch == 'clinic') {
+            $query = 'SELECT * FROM tbclinic where MOBILE = 1  AND CLINICNAME LIKE "%' . $textSearch . '%"';
+        } else if ($typeSearch == 'nearby') {
+            $query = 'SELECT * FROM (
+    SELECT *, 
+        (
+            (
+                (
+                    acos(
+                        sin(( '.$lat.' * pi() / 180))
+                        *
+                        sin(( `LAT` * pi() / 180)) + cos(( '.$lat.' * pi() /180 ))
+                        *
+                        cos(( `LAT` * pi() / 180)) * cos((( '.$long.' - `LONG`) * pi()/180)))
+                ) * 180/pi()
+            ) * 60 * 1.1515 * 1.609344
+        )
+    as distance FROM `tbclinic`
+) tbclinic
+WHERE distance <= 100
+AND (CLINICNAME LIKE "%'.$textSearch.'%" OR PROFICIENT LIKE "%'.$textSearch.'%") 
+';
+        }
+
+        if($sort == 'view'){
+
+            $query .= 'order by view_count desc';
+        }
+        $query .= ' limit ' . $rowno . ',' . $rowperpage;
+
+       // echo $query;
+        $query = $this->db->query($query);
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function  getSort(){
+        $query = $this->db->query('SELECT distinct(PROFICIENT) FROM tbclinic WHERE MOBILE = 1');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {

@@ -12,19 +12,20 @@
 		mapObject,
 		markers = [],
 		markersData = {
-			'Doctors': [
-                {
-                    name: 'คลินิกหมอรัฐวิชญ์',
-                    location_latitude: 17.8737049,
-                    location_longitude: 102.7343848,
-                    map_image_url: 'assets/img/doctor_listing_1.jpg',
-                    type: 'เฉพาะทางสูติ-นรีเวช',
-                    url_detail: 'detail-page.html',
-                    name_point: 'นายแพทย์รัฐวิชญ์ สุนทร',
-                    description_point: '84/9-10 ถนนพนังชลประทาน ตำบลในเมือง อำเภอเมือง จังหวัดหนองคาย 43000',
-                    get_directions_start_address: '',
-                    phone: '095-169-3971'
-                }
+			'Doctors': doctor
+                // [
+                // {
+                //     name: 'คลินิกหมอรัฐวิชญ์',
+                //     location_latitude: 17.8737049,
+                //     location_longitude: 102.7343848,
+                //     map_image_url: 'assets/img/doctor_listing_1.jpg',
+                //     type: 'เฉพาะทางสูติ-นรีเวช',
+                //     url_detail: 'detail-page.html',
+                //     name_point: 'นายแพทย์รัฐวิชญ์ สุนทร',
+                //     description_point: '84/9-10 ถนนพนังชลประทาน ตำบลในเมือง อำเภอเมือง จังหวัดหนองคาย 43000',
+                //     get_directions_start_address: '',
+                //     phone: '095-169-3971'
+                // }
 			// },
 			// 	{
 			// 	name: 'Dr. Robert Carl',
@@ -50,13 +51,13 @@
 			// 	get_directions_start_address: '',
 			// 	phone: '+3934245255'
 			// }
-			]
+			//]
 
 		};
 
 			var mapOptions = {
-				zoom: 12,
-				center: new google.maps.LatLng(17.8737049, 102.7343848),
+				zoom: 10,
+				center: new google.maps.LatLng(doctor[0]["location_latitude"], doctor[0]["location_longitude"]),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 
 				mapTypeControl: false,
@@ -195,7 +196,7 @@
 					marker = new google.maps.Marker({
 						position: new google.maps.LatLng(item.location_latitude, item.location_longitude),
 						map: mapObject,
-						icon: 'assets/img/pins/' + key + '.png',
+						icon: base_url+'/assets/img/pins/' + key + '.png',
 					});
 
 					if ('undefined' === typeof markers[key])
@@ -260,7 +261,7 @@
 				maxWidth: 0,
 				pixelOffset: new google.maps.Size(10, 105),
 				closeBoxMargin: '',
-				closeBoxURL: "assets/img/close_infobox.png",
+				closeBoxURL: base_url+"/assets/img/close_infobox.png",
 				isHidden: false,
 				alignBottom: true,
 				pane: 'floatPane',
