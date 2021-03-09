@@ -50,7 +50,14 @@ class Clinic extends CI_Controller
     {
         $clinicName = $this->uri->segment('2');
 
-        $clinic = $this->ClinicModel->detail($clinicName);
+        $clinic = $this->ClinicModel->detailById($clinicName);
+
+        //add view
+        $data = [
+            'view_count' => $clinic->view_count + 1
+        ];
+        $this->ClinicModel->updateById($data,$clinic->IDCLINIC);
+
 
         $data = [
             'clinic' => $clinic
@@ -450,4 +457,5 @@ class Clinic extends CI_Controller
 
         echo $this->email->print_debugger();
     }
+
 }
