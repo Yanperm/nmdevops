@@ -60,7 +60,44 @@
         border-radius: 4px;
         cursor: pointer;
     }
+
+    #cookie {
+        position: fixed;
+        display: block;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 99990;
+    }
+    #cookie input {
+        display: none;
+    }
+    #cookie input:not(:checked) ~ span::before {
+        content: "";
+        display: inline;
+    }
+    #cookie input:checked ~ * {
+        display: none;
+        pointer-events: none;
+    }
+    #cookie {
+        color: white;
+        background-color: black;
+        text-align: center;
+    }
+    #cookie > * {
+        margin: 0.5em;
+    }
 </style>
+<div id="cookie">
+    <input type="checkbox" id="accept" />
+
+    <span>โดยการใช้เว็บไซต์ของเราคุณรับทราบว่าคุณได้อ่านและทำความเข้าใจ
+        <a href="https://pdpa.pro/policies/view/th/GEukMy5v2TfiAX2B2h6mEH21">นโยบายความเป็นส่วนตัว</a> นโยบายคุกกี้นโยบายความเป็นส่วนตัวและข้อกำหนดในการให้บริการ ของเรา</span>
+    <div class="btn btn-success"><label for="accept">ยอมรับ</label></div>
+</div>
 <main>
     <div class="hero_home version_1">
         <div class="content">
