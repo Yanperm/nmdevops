@@ -73,7 +73,7 @@ class Clinic extends CI_Controller
         $clinicId = $this->uri->segment('2');
         $date = $this->input->post('booking_date');
 
-        $clinic = $this->ClinicModel->detail($clinicId);
+        $clinic = $this->ClinicModel->detailById($clinicId);
         $today = date('D');
         $startTime = '';
         $endTime = '';
