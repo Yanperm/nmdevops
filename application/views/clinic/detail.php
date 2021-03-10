@@ -232,7 +232,7 @@
             <!-- /col -->
             <aside class="col-xl-4 col-lg-4" id="sidebar">
                 <div class="box_general_3 booking">
-                    <form method="post" action="<?php echo base_url('time/' . $clinic->CLINICNAME); ?>">
+                    <form method="post" action="<?php echo base_url('time/' . $clinic->IDCLINIC); ?>">
                         <div class="title">
                             <h3>นัดหมายแพทย์</h3>
                             <small>บริการนัดหมายแพทย์ออนไลน์</small>

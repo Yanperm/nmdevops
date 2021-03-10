@@ -21,41 +21,52 @@
                                 <i class="icon_clock_alt"></i>
                                 <h3><?php echo $clinic->CLINICNAME ?? ''; ?><?php echo $date; ?></h3>
                             </div>
-                            <ul>
-                                <?php foreach ($times as $key => $time):
-                                    $textTime = $time->format('H:i') . '-' . $time->add($interval)->format('H:i');
-                                    ?>
-                                    <li><strong><?php echo $textTime; ?></strong>
-                                        <span>A<?php echo $key + 1; ?> </span>
-                                        <?php
-                                        $booked = false;
-                                        foreach ($booking as $i => $item):
-                                            if ($item->QBER == ($key + 1)):
-                                                $booked = true;
-                                            endif;
-                                        endforeach; ?>
+                            <?php
+                            $today = date($date);
+                            $number = date('w', strtotime($today));
+                            ?>
+                            <?php if ($number == $clinic->DAYOFF): ?>
+                                <div class="alert alert-danger text-center" role="alert">
+                                    หยุดทำการ <?php echo $date; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($number != $clinic->DAYOFF): ?>
+                                <ul>
+                                    <?php foreach ($times as $key => $time):
+                                        $textTime = $time->format('H:i') . '-' . $time->add($interval)->format('H:i');
+                                        ?>
+                                        <li><strong><?php echo $textTime; ?></strong>
+                                            <span>A<?php echo $key + 1; ?> </span>
+                                            <?php
+                                            $booked = false;
+                                            foreach ($booking as $i => $item):
+                                                if ($item->QBER == ($key + 1)):
+                                                    $booked = true;
+                                                endif;
+                                            endforeach; ?>
 
-                                        <?php if ($booked): ?>
-                                            <button class="booked" disabled>จองแล้ว</button>
-                                        <?php endif; ?>
+                                            <?php if ($booked): ?>
+                                                <button class="booked" disabled>จองแล้ว</button>
+                                            <?php endif; ?>
 
-                                        <?php if (!$booked): ?>
-                                            <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=" . $textTime . '&ques=A' . ($key + 1) . '&qber=' . ($key + 1)) ?>">จองคิว</a>
-                                        <?php endif; ?>
+                                            <?php if (!$booked): ?>
+                                                <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=" . $textTime . '&ques=A' . ($key + 1) . '&qber=' . ($key + 1)) ?>">จองคิว</a>
+                                            <?php endif; ?>
 
+                                        </li>
+                                    <?php endforeach; ?>
+                                    <!--                                --><?php //foreach ($bookingExtraQues as $key => $item): ?>
+                                    <!--                                    <li style="background: #e9e6ee;"><strong style="width: 105px;">คิวเสริม</strong>-->
+                                    <!--                                        <span>B--><?php //echo $key + 1; ?><!-- </span>-->
+                                    <!--                                        <button class="booked" disabled>จองแล้ว</button>-->
+                                    <!--                                    </li>-->
+                                    <!--                                --><?php //endforeach; ?>
+                                    <li style="background: #e9e6ee;"><strong style="width: 105px;">คิวเสริม</strong>
+                                        <span>B<?php echo count($bookingExtraQues) + 1; ?> </span>
+                                        <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=0&ques=B" . (count($bookingExtraQues) + 1) . '&qber=' . (count($bookingExtraQues) + 1)) ?>">จองคิว</a>
                                     </li>
-                                <?php endforeach; ?>
-<!--                                --><?php //foreach ($bookingExtraQues as $key => $item): ?>
-<!--                                    <li style="background: #e9e6ee;"><strong style="width: 105px;">คิวเสริม</strong>-->
-<!--                                        <span>B--><?php //echo $key + 1; ?><!-- </span>-->
-<!--                                        <button class="booked" disabled>จองแล้ว</button>-->
-<!--                                    </li>-->
-<!--                                --><?php //endforeach; ?>
-                                <li style="background: #e9e6ee;"><strong style="width: 105px;">คิวเสริม</strong>
-                                    <span>B<?php echo count($bookingExtraQues) + 1; ?> </span>
-                                    <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=0&ques=B" . (count($bookingExtraQues) + 1) . '&qber=' . (count($bookingExtraQues) + 1)) ?>">จองคิว</a>
-                                </li>
-                            </ul>
+                                </ul>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <aside class="col-xl-4 col-lg-4" id="sidebar">
