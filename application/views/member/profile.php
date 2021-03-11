@@ -149,7 +149,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-center add_top_30">
+                                <p class="text-right add_top_30">
                                     <input type="submit" class="btn_1" value="บันทึกการแก้ไข">
                                 </p>
                             </form>
