@@ -19,7 +19,7 @@
                         <div class="list_time">
                             <div class="list_title">
                                 <i class="icon_clock_alt"></i>
-                                <h3><?php echo $clinic->CLINICNAME; ?><?php echo $date; ?></h3>
+                                <h3><?php echo $clinic->CLINICNAME; ?> <?php echo $date; ?></h3>
                             </div>
                             <?php
                             $today = date($date);
@@ -30,7 +30,16 @@
                                     หยุดทำการ <?php echo $date; ?>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($number != $clinic->DAYOFF): ?>
+                            <?php if ($statusBooked): ?>
+                                <div class="alert alert-info text-center" role="alert">
+                                    <p> ท่านได้ทำการนัดหมอในวันที่ <?php echo $date; ?></p>
+                                    <p>คิวที่จอง  : <?php echo $queueBooked?></p>
+                                    <p>เรียบร้อยแล้ว</p>
+                                </div>
+                            <?php endif; ?>
+
+
+                            <?php if ($number != $clinic->DAYOFF && !$statusBooked): ?>
                                 <ul>
                                     <?php foreach ($times as $key => $time):
                                         $textTime = $time->format('H:i') . '-' . $time->add($interval)->format('H:i');
