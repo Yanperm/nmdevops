@@ -26,7 +26,7 @@ class Clinic extends CI_Controller
     public function register()
     {
         $type = '2';
-        if(!empty($this->input->get('type'))){
+        if (!empty($this->input->get('type'))) {
             $type = $this->input->get('type');
         }
 
@@ -56,7 +56,7 @@ class Clinic extends CI_Controller
         $data = [
             'view_count' => $clinic->view_count + 1
         ];
-        $this->ClinicModel->updateById($data,$clinic->IDCLINIC);
+        $this->ClinicModel->updateById($data, $clinic->IDCLINIC);
 
 
         $data = [
@@ -111,13 +111,28 @@ class Clinic extends CI_Controller
         $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
         $bookingExtraQues = $this->BookingModel->getDataExtra($clinic->CLINICID, $date);
 
+        //check booked
+        $statusBooked = false;
+        $queueBooked = "";
+        if (!empty($this->session->userdata('id'))) {
+            foreach ($booking as $item) {
+                if ($item->MEMBERIDCARD == $this->session->userdata('id')) {
+                    $statusBooked = true;
+                    $queueBooked = $item->QUES;
+                }
+            }
+        }
+
+
         $data = [
             'date' => $date,
             'clinic' => $clinic,
             'times' => $times,
             'interval' => $interval,
             'booking' => $booking,
-            'bookingExtraQues' => $bookingExtraQues
+            'bookingExtraQues' => $bookingExtraQues,
+            'statusBooked' => $statusBooked,
+            'queueBooked' => $queueBooked
         ];
 
         $this->load->view('template/header');
@@ -135,7 +150,7 @@ class Clinic extends CI_Controller
 
         $clinic = $this->ClinicModel->detailById($clinicId);
         $member = [];
-        if (!empty($this->session->userdata('authenticated'))){
+        if (!empty($this->session->userdata('authenticated'))) {
             $member = $this->MembersModel->detail($this->session->userdata('id'));
         }
 
@@ -147,8 +162,6 @@ class Clinic extends CI_Controller
             'qber' => $qber,
             'member' => $member
         ];
-
-
 
 
         $this->load->view('template/header');
@@ -171,7 +184,7 @@ class Clinic extends CI_Controller
         $qber = $this->input->post('qber');
 
         $type = 0;
-        if($time == '0'){
+        if ($time == '0') {
             $type = 1;
             $time = '';
         }
@@ -231,7 +244,7 @@ class Clinic extends CI_Controller
             'time' => $time,
             'ques' => $ques
         ];
-        $subject = "ยืนยันการนัดหมอ ".$clinic->CLINICNAME;
+        $subject = "ยืนยันการนัดหมอ " . $clinic->CLINICNAME;
         $message = $this->load->view('email_template', $dataEmail, true);
 
         //sendmail
@@ -411,7 +424,8 @@ class Clinic extends CI_Controller
         }
     }
 
-    public function sendMail($to, $subject, $message){
+    public function sendMail($to, $subject, $message)
+    {
         //Postmark Service Mail
         $config = array(
             'useragent' => 'nutmor.com',
@@ -435,7 +449,8 @@ class Clinic extends CI_Controller
         return true;
     }
 
-    public function sendgrid($to, $subject, $message){
+    public function sendgrid($to, $subject, $message)
+    {
         $this->load->library('email');
         $this->email->initialize(array(
             'protocol' => 'smtp',
