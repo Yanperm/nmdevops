@@ -220,6 +220,7 @@ class Clinic extends CI_Controller
         $clinic = $this->ClinicModel->detailById($clinicId);
 
         $dataEmail = [
+            'clinicName' => $clinic->CLINICNAME,
             'vn' => 'VN' . $currentTime,
             'firstName' => $firstName,
             'lastName' => $lastName,
@@ -230,7 +231,7 @@ class Clinic extends CI_Controller
             'time' => $time,
             'ques' => $ques
         ];
-        $subject = "ยืนยันการนัดหมอ";
+        $subject = "ยืนยันการนัดหมอ ".$clinic->CLINICNAME;
         $message = $this->load->view('email_template', $dataEmail, true);
 
         //sendmail
