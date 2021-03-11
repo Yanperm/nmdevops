@@ -38,8 +38,6 @@
                                 <div class="col-lg-7 col-md-8">
                                     <small><?php echo $clinic->DETAIL; ?></small>
                                     <h1><?php echo $clinic->DOCTORNAME; ?></h1>
-
-
                                     <span class="rating">
 											<i class="icon_star voted"></i>
 											<i class="icon_star voted"></i>
@@ -48,9 +46,7 @@
 											<i class="icon_star voted"></i>
 											<small>(145)</small>
                                         <!--<a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="img/badges/badge_1.svg" width="15" height="15" alt=""></a>-->
-										</span>
-
-
+                                    </span>
                                     <ul class="statistic">
                                         <li><a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" style="color: #ffffff;">เช็คอิน</a></li>
                                         <li onclick="getQues()" style="cursor: pointer">ดูคิว</li>
@@ -64,7 +60,7 @@
                                             <a href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@<?php echo $clinic->LAT; ?>,<?php echo $clinic->LONG; ?>,14z/data=!4m15!1m6!3m5!1s0x0:0xa6a9af76b1e2d899!2sAssistance+%E2%80%93+H%C3%B4pitaux+De+Paris!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361" target="_blank"> <strong>ดูบนแผนที่</strong></a>
                                         </li>
                                         <li>
-                                            <h6>Contact</h6> โทร:<a href="tel://006<?php echo $clinic->PHONE; ?>"> <?php echo $clinic->PHONE; ?></a> Line: <a href="http://line.me/ti/p/<?php echo $clinic->LINE; ?>" target="_blank"> <?php echo $clinic->LINE; ?></a></li>
+                                            <h6>Contact</h6> โทร:<a href="tel:<?php echo $clinic->PHONE; ?>"> <?php echo $clinic->PHONE; ?></a> Line: <a href="http://line.me/ti/p/<?php echo $clinic->LINE; ?>" target="_blank"> <?php echo $clinic->LINE; ?></a></li>
                                     </ul>
                                 </div>
                             </div>
