@@ -109,7 +109,7 @@
                                 <?php if ($time != '0'): ?>
                                     <li>เวลา: <strong class="float-right"><?php echo $time; ?></strong></li>
                                 <?php endif; ?>
-                                <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME ?? ''; ?></strong></li>
+                                <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME; ?></strong></li>
                             </ul>
                         </div>
                         <!--                        <ul class="treatments checkout clearfix">-->

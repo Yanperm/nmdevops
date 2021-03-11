@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('detail/' . $clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME ?? ''; ?></a></li>
+                <li><a href="<?php echo base_url('detail/' . $clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
                 <li>เลือกเวลา</li>
             </ul>
         </div>
@@ -19,7 +19,7 @@
                         <div class="list_time">
                             <div class="list_title">
                                 <i class="icon_clock_alt"></i>
-                                <h3><?php echo $clinic->CLINICNAME ?? ''; ?><?php echo $date; ?></h3>
+                                <h3><?php echo $clinic->CLINICNAME; ?><?php echo $date; ?></h3>
                             </div>
                             <?php
                             $today = date($date);
@@ -78,7 +78,7 @@
                             <div class="summary">
                                 <ul>
                                     <li>วันที่: <strong class="float-right"><?php echo $date; ?></strong></li>
-                                    <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME ?? ''; ?></strong></li>
+                                    <li>แพทย์: <strong class="float-right"><?php echo $clinic->DOCTORNAME; ?></strong></li>
                                 </ul>
                             </div>
                             <hr>
