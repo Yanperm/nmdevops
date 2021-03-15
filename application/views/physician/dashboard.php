@@ -48,9 +48,9 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-calendar-check-o"></i>
                         </div>
-                        <div class="mr-5"><h5>8,000 LIKE</h5></div>
+                        <div class="mr-5"><h5><?php echo number_format($clinic->view_count);?> Page Visit</h5></div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="bookings.html">
+                    <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('physician/dashboard');?>">
                         <span class="float-left">รายละเอียด</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -64,9 +64,9 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-heart"></i>
                         </div>
-                        <div class="mr-5"><h5>10,000 Page Visit</h5></div>
+                        <div class="mr-5"><h5><?php echo number_format($like);?> LIKE</h5></div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="bookmarks.html">
+                    <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('physician/dashboard');?>">
                         <span class="float-left">View Details</span>
                         <span class="float-right">
                             <i class="fa fa-angle-right"></i>
@@ -86,3 +86,9 @@
     </div>
     <!-- /.container-fluid-->
 </div>
+
+<style>
+    #myAreaChart{
+        width: 100% !important;
+    }
+</style>

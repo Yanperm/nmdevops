@@ -76,6 +76,7 @@ AND (CLINICNAME LIKE "%'.$textSearch.'%" OR PROFICIENT LIKE "%'.$textSearch.'%")
         )
     as distance FROM `tbclinic`
 ) tbclinic
+
 WHERE distance <= 100
 AND (CLINICNAME LIKE "%'.$textSearch.'%" OR PROFICIENT LIKE "%'.$textSearch.'%") 
 ';

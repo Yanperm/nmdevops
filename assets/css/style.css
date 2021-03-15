@@ -2012,9 +2012,33 @@ a.wish_bt:after {
   font-family: 'ElegantIcons';
   content: "\e030";
 }
-a.wish_bt:hover:after {
+a.wish_bt:hover:after:active {
   content: "\e089";
   color: #e74e84;
+}
+a.wish_bt {
+
+}
+a.wish_bt_active {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 2;
+    background-color: black;
+    background-color: rgb(240 196 211);
+    padding: 9px 10px;
+    display: inline-block;
+    color: #fff;
+    line-height: 1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .strip_list {
