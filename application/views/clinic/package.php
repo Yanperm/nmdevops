@@ -35,7 +35,7 @@
                     <li class="pricing-feature">10 Appointments a day</li>
                     <li class="pricing-feature">Free App for All Clinic Patients</li>
                 </ul>
-                <a href="<?php echo base_url('physician/register').'?type=1';?>" class="pricing-action">1,000 ฿ Yearly</a>
+                <a href="<?php echo base_url('physician/register') . '?type=1'; ?>" class="pricing-action">1,000 ฿ Yearly</a>
             </div>
             <div class="pricing-item features-item ja-animate pricing__item--featured" data-animation="move-from-bottom" data-delay="item-1" style="min-height: 497px;">
                 <div class="pricing-deco" style="background: linear-gradient(135deg,#a93bfe,#584efd)">
@@ -56,7 +56,7 @@
                     <li class="pricing-feature">Unlimited Appointment</li>
                     <li class="pricing-feature">Nutmor App</li>
                 </ul>
-                <a href="<?php echo base_url('physician/register').'?type=2';?>" class="pricing-action">5,900 ฿ Yearly</a>
+                <a href="<?php echo base_url('physician/register') . '?type=2'; ?>" class="pricing-action">5,900 ฿ Yearly</a>
             </div>
             <div class="pricing-item features-item ja-animate" data-animation="move-from-bottom" data-delay="item-2" style="min-height: 497px;">
                 <div class="pricing-deco">
@@ -79,7 +79,7 @@
                     <li class="pricing-feature">Electronic Patient Records</li>
                     <li class="pricing-feature">Nm Inventory</li>
                 </ul>
-                <a href="<?php echo base_url('physician/register').'?type=3';?>" class="pricing-action">59,000 ฿ Yearly</a>
+                <a href="<?php echo base_url('physician/register') . '?type=3'; ?>" class="pricing-action">59,000 ฿ Yearly</a>
             </div>
         </div>
 
@@ -121,7 +121,7 @@
                             </div>
                             <!-- /pricing-body -->
                             <footer class="pricing-footer">
-                                <a class="select-plan" href="<?php echo base_url('physician/register').'?type=1';?>">Select</a>
+                                <a class="select-plan" href="<?php echo base_url('physician/register') . '?type=1'; ?>">Select</a>
                             </footer>
                         </li>
                         <li data-type="yearly" class="is-hidden">
@@ -147,7 +147,7 @@
                             </div>
                             <!-- /pricing-body -->
                             <footer class="pricing-footer">
-                                <a class="select-plan" href="<?php echo base_url('physician/register').'?type=2';?>">Select</a>
+                                <a class="select-plan" href="<?php echo base_url('physician/register') . '?type=2'; ?>">Select</a>
                             </footer>
                         </li>
                     </ul>
@@ -203,7 +203,7 @@
                             </div>
                             <!-- /pricing-body -->
                             <footer class="pricing-footer">
-                                <a class="select-plan" href="<?php echo base_url('physician/register').'?type=3';?>">Select</a>
+                                <a class="select-plan" href="<?php echo base_url('physician/register') . '?type=3'; ?>">Select</a>
                             </footer>
                         </li>
                     </ul>
@@ -246,7 +246,7 @@
                                     <span class="price-duration">yr</span>
                                 </div>
                             </header>
-                            <!-- /pricing-header -->
+
                             <div class="pricing-body">
                                 <ul class="pricing-features">
                                     <li><em>One Time</em> Fee</li>
@@ -257,56 +257,21 @@
                                     <li><em>24/7</em> Support</li>
                                 </ul>
                             </div>
-                            <!-- /pricing-body -->
+
                             <footer class="pricing-footer">
                                 <a class="select-plan" href="#0">Select</a>
                             </footer>
                         </li>
                     </ul>
-                    <!-- /pricing-wrapper -->
+
                 </li>
             </ul>
-            <!-- /pricing-list -->
-        </div>
-        <!-- /pricing-container -->
-    </div>
-    <!-- /margin_60_35 -->
 
-    <div class="container margin_60_35">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="box_faq">
-                    <i class="icon_info_alt"></i>
-                    <h4>Porro soleat pri ex, at has lorem accusamus?</h4>
-                    <p>Ut unum diceret eos, mel cu velit principes, ut quo inani dolorem mediocritatem. Mea in justo posidonium necessitatibus. Augue honestatis vis no, ius quot mazim forensibus in, per sale virtute legimus ne. Mea dicta facilisis eu.</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="box_faq">
-                    <i class="icon_info_alt"></i>
-                    <h4>Ut quo inani dolorem mediocritatem?</h4>
-                    <p>Ut unum diceret eos, mel cu velit principes, ut quo inani dolorem mediocritatem. Mea in justo posidonium necessitatibus. Augue honestatis vis no, ius quot mazim forensibus in, per sale virtute legimus ne. Mea dicta facilisis eu.</p>
-                </div>
-            </div>
-        </div><!-- /row  -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="box_faq">
-                    <i class="icon_info_alt"></i>
-                    <h4>Per sale virtute legimus ne?</h4>
-                    <p>Ut unum diceret eos, mel cu velit principes, ut quo inani dolorem mediocritatem. Mea in justo posidonium necessitatibus. Augue honestatis vis no, ius quot mazim forensibus in, per sale virtute legimus ne. Mea dicta facilisis eu.</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="box_faq">
-                    <i class="icon_info_alt"></i>
-                    <h4>Mea in justo posidonium necessitatibus?</h4>
-                    <p>Ut unum diceret eos, mel cu velit principes, ut quo inani dolorem mediocritatem. Mea in justo posidonium necessitatibus. Augue honestatis vis no, ius quot mazim forensibus in, per sale virtute legimus ne. Mea dicta facilisis eu.</p>
-                </div>
-            </div>
-        </div><!-- /row  -->
+        </div>
+
     </div>
-    <!-- /container -->
+
+
 </main>
 
 <style>
@@ -363,6 +328,7 @@
         .pricing-palden .pricing-item {
             margin: 1em -0.5em;
         }
+
         .pricing-palden .pricing__item--featured {
             margin: 0;
             z-index: 10;
