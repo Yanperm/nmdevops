@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4><strong>ข้อมูล <?php echo number_format(count($clinic));?></strong> จาก <?php echo number_format($total_rows);?> รายการ</h4>
+                        <h4><strong>ข้อมูล <?php echo number_format(count($clinic)); ?></strong> จาก <?php echo number_format($total_rows); ?> รายการ</h4>
                     </div>
                     <div class="col-md-6">
                         <div class="search_bar_list">
@@ -66,15 +66,33 @@
             <div class="col-lg-7">
                 <?php foreach ($clinic as $key => $item): ?>
                     <div class="strip_list wow fadeIn">
-                        <a href="#0" class="wish_bt"></a>
+                        <?php if (empty($this->session->userdata('authenticated'))): ?>
+                            <a href="<?php echo base_url('login'); ?>" class="wish_bt"></a>
+                        <?php endif; ?>
+                        <?php if (!empty($this->session->userdata('authenticated'))): ?>
+                            <?php
+                            $likeStatus = false;
+                            foreach ($like as $l):
+                                if ($l->CLINICID == $item->IDCLINIC) {
+                                    $likeStatus = true;
+                                }
+                            endforeach;
+                            ?>
+                            <?php if ($likeStatus): ?>
+                                <a href="#0" id="like<?php echo $item->IDCLINIC; ?>" onClick="like('<?php echo $item->IDCLINIC ?>')" class=" wish_bt_active"><i style="color: #e91e63;" class="icon-heart"></i></a>
+                            <?php endif; ?>
+                            <?php if (!$likeStatus): ?>
+                                <a href="#0" id="like<?php echo $item->IDCLINIC; ?>" onClick="like('<?php echo $item->IDCLINIC ?>')" class="wish_bt"></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
                         <figure>
                             <a href="<?php echo base_url('clinic/' . $item->CLINICID); ?>"><img src="<?php echo $item->image; ?>" alt=""></a>
                         </figure>
-                        <small><?php echo $item->DETAIL ? : ''; ?></small>
-                        <h3><?php echo $item->CLINICNAME ? : ''; ?></h3>
+                        <small><?php echo $item->DETAIL ?: ''; ?></small>
+                        <h3><?php echo $item->CLINICNAME ?: ''; ?></h3>
                         <p><?php echo $item->SERVICE ?: ''; ?></p>
                         <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="<?php echo base_url()?>/assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
+                        <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="<?php echo base_url() ?>/assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
                         <ul>
                             <li><a href="#0" onclick="onHtmlClick('Doctors', <?php echo $key; ?>)" class="btn_listing">ดูบนแผนที่</a></li>
                             <li><a href="https://www.google.com/maps/dir//<?php echo $item->CLINICNAME; ?>/@<?php echo $item->LAT; ?>,<?php echo $item->LONG; ?>,14z" target="_blank">การเดินทาง</a></li>
@@ -116,12 +134,14 @@
     </div>
     <!-- /container -->
 </main>
+
 <textarea id="data" style="display: none"><?php echo $map; ?></textarea>
 <!-- SPECIFIC SCRIPTS -->
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDHFd8roCGXvkpRiNV3bEiyVMkqSL6qoPU"></script>
 
 <script>
     var base_url = '<?php echo base_url();?>';
+
     function near() {
         document.getElementById("form-search").submit();
     }
@@ -142,9 +162,21 @@
 
     var doctor = JSON.parse($('#data').val());
 
+    function like(id) {
+        $.ajax({
+            url: '<?=base_url()?>like',
+            method: 'post',
+            data: {id: id},
+            dataType: 'json',
+            success: function (response) {
+                location.reload();
+            }
+        });
+    }
+
 </script>
 
 
 <script src="<?php echo base_url() ?>assets/js/markerclusterer.js"></script>
-<script src="<?php echo base_url() ?>assets/js/map_listing.js?v=<?=time()?>"></script>
+<script src="<?php echo base_url() ?>assets/js/map_listing.js?v=<?= time() ?>"></script>
 <script src="<?php echo base_url() ?>assets/js/infobox.js"></script>

@@ -12,7 +12,7 @@
     <div class="margin_60_35">
         <div class="container">
             <div class="main_title">
-                <h1>Pricing Tables</h1>
+                <h1>สมัครแพ็กเกจ</h1>
             </div>
         </div>
         <div class="pricing pricing-palden">

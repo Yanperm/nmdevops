@@ -8,7 +8,9 @@ class Search extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ClinicModel');
+        $this->load->model('LikeModel');
         $this->load->library('pagination');
+
     }
 
     public function listData()
@@ -20,20 +22,20 @@ class Search extends CI_Controller
         if ($rowno != 0) {
             $rowno = ($rowno - 1) * $rowperpage;
         }
-       // $rowno = 4;
+        // $rowno = 4;
 //echo $rowno;
 //exit();
         $textSearch = $this->input->get('text_search');
         $typeSearch = $this->input->get('type_search');
         $sort = $this->input->get('sort');
-        if($sort == ''){
+        if ($sort == '') {
             $sort = 'view';
         }
 
         $lat = 0;
         $long = 0;
 
-        if($typeSearch == 'nearby'){
+        if ($typeSearch == 'nearby') {
             $lat = $this->input->get('lat');
             $long = $this->input->get('long');
         }
@@ -101,6 +103,7 @@ class Search extends CI_Controller
 
         $data["map"] = json_encode($mapData);
 
+        $data["like"] = $this->LikeModel->getDataByMember($this->session->userdata('id'));
 
 
         $data["textSearch"] = $textSearch;

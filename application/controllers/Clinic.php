@@ -14,7 +14,10 @@ class Clinic extends CI_Controller
         $this->load->model('ClinicModel');
         $this->load->model('BookingModel');
         $this->load->model('MembersModel');
+        $this->load->model('StatModel');
+        $this->load->model('LikeModel');
     }
+
 
     public function index()
     {
@@ -52,6 +55,15 @@ class Clinic extends CI_Controller
 
         $clinic = $this->ClinicModel->detailById($clinicName);
 
+        //add stat
+        $userId = $_SERVER['REMOTE_ADDR'];
+        $data = [
+            "IP" => $userId,
+            "IDCLINIC" => $clinic->IDCLINIC,
+            "CREATEDATE" => date('Y-m-d H:i:s')
+        ];
+        $this->StatModel->insert($data);
+
         //add view
         $data = [
             'view_count' => $clinic->view_count + 1
@@ -66,6 +78,25 @@ class Clinic extends CI_Controller
         $this->load->view('template/header');
         $this->load->view('clinic/detail', $data);
         $this->load->view('template/footer');
+    }
+
+    public function like(){
+        $id = $_POST['id'];
+
+        $check = $this->LikeModel->getDataById($this->session->userdata('id'), $id);
+        if(empty($check)){
+            $data = [
+                'MEMBERID' => $this->session->userdata('id'),
+                'CLINICID' => $id,
+                'CREATEDATE' => date('Y-m-d H:i:s')
+            ];
+
+            $this->LikeModel->insert($data);
+            echo true;
+        }else{
+            $this->LikeModel->delete($this->session->userdata('id'), $id);
+            echo true;
+        }
     }
 
     public function time()

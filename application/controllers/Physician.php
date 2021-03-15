@@ -12,6 +12,7 @@ class Physician extends CI_Controller
         $this->load->model('BookingModel');
         $this->load->model('CloseModel');
         $this->load->model('YoutubeModel');
+        $this->load->model('LikeModel');
         $this->load->library('pagination');
         $this->load->library('S3_upload');
         $this->load->library('S3');
@@ -32,10 +33,14 @@ class Physician extends CI_Controller
     {
         $allBooking = $this->BookingModel->getDataAllByClinic($this->session->userdata('id'));
         $todayBooking = $this->BookingModel->getDataTodayByClinic($this->session->userdata('id'));
+        $like = $this->LikeModel->getCount($this->session->userdata('id'));
+        $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
 
         $data = [
             'allBooking' => $allBooking[0]->ALLBOOKING,
-            'todayBooking' => $todayBooking[0]->TODAYBOOKING
+            'todayBooking' => $todayBooking[0]->TODAYBOOKING,
+            'like' => $like,
+            'clinic' => $clinic
         ];
 
         $this->load->view('template/header_physician');
