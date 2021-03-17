@@ -198,8 +198,8 @@
 
                     <?php foreach ($clinic as $row): ?>
                         <div class="item">
-                            <form method="post" action="<?php echo base_url('clinic/' . $row->IDCLINIC) ?>">
-                                <div class="views"><i class="icon-eye-7"></i>3000</div>
+                            <form method="post" action="<?php echo base_url('clinic/' . $row->ENNAME);?>">
+                                <div class="views"><i class="icon-eye-7"></i><?php echo number_format($row->view_count);?></div>
                                 <div class="title">
                                     <button class="btn btn-block btn-info" type="submit"><?php echo $row->CLINICNAME; ?><br/><em><?php echo $row->DETAIL; ?></em></button>
                                 </div>
@@ -275,8 +275,8 @@
                 </div>
                 <div class="col-md-6">
                     <small>Application</small>
-                    <h3>Download <strong>Nutmor App</strong> Now!</h3>
-                    <p class="lead">Tota omittantur necessitatibus mei ei. Quo paulo perfecto eu, errem percipit ponderum no eos. Has eu mazim sensibus. Ad nonumes dissentiunt qui, ei menandri electram eos. Nam iisque consequuntur cu.</p>
+                    <h3>ดาวน์โหลด <strong>นัดหมอ แอป</strong> ได้เลย</h3>
+                    <p class="lead">นัดหมอ ทำให้คนไข้พบหมอได้เลย ไม่ต้องรอนาน คนไข้สามารถดาวน์โหลด แอปนัดหมอ เพื่อใช้ในการนัดหมายแพทย์ เช็คอิน ดูคิว ออนไลน์ ได้ทุกที่ทุกเวลา มาถึงคลินิกก่อนเวลานัดหมาย ประมาณ 5-10 นาที ก็สามารถพบแพทย์ได้เลย ไม่ต้องมารอที่คลินิกเป็นเวลานาน โหลดได้ทั้ง App store และ play store แบบไม่มีค่าใช้่จ่าย</p>
                     <div class="app_buttons wow" data-wow-offset="100">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
                         <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>

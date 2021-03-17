@@ -2,7 +2,7 @@
     <div class="strip_list wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
         <a onClick="cancel('<?php echo $item["BOOKINGID"]; ?>')" style="float: right;cursor: pointer" href="javascript:void(0)">X</a>
         <figure style="width: 64px;height: 64px;">
-            <a href="<?php echo base_url('clinic/' . $item["CLINICNAME"]); ?>"><img src="<?php echo $item['image']; ?>" alt="" style="    width: 68px;height: 79px;"></a>
+            <a href="<?php echo base_url('clinic/' . $item["ENNAME"]); ?>"><img src="<?php echo $item['image']; ?>" alt="" style="    width: 68px;height: 79px;"></a>
         </figure>
         <small><?php echo $item['PROFICIENT']; ?></small>
         <h3><?php echo $item['CLINICNAME']; ?></h3>

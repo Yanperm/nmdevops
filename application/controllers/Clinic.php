@@ -16,6 +16,7 @@ class Clinic extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('StatModel');
         $this->load->model('LikeModel');
+        $this->load->model('CloseModel');
     }
 
 
@@ -53,7 +54,7 @@ class Clinic extends CI_Controller
     {
         $clinicName = $this->uri->segment('2');
 
-        $clinic = $this->ClinicModel->detailById($clinicName);
+        $clinic = $this->ClinicModel->detailByEnName($clinicName);
 
         //add stat
         $userId = $_SERVER['REMOTE_ADDR'];
@@ -80,11 +81,12 @@ class Clinic extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function like(){
+    public function like()
+    {
         $id = $_POST['id'];
 
         $check = $this->LikeModel->getDataById($this->session->userdata('id'), $id);
-        if(empty($check)){
+        if (empty($check)) {
             $data = [
                 'MEMBERID' => $this->session->userdata('id'),
                 'CLINICID' => $id,
@@ -93,7 +95,7 @@ class Clinic extends CI_Controller
 
             $this->LikeModel->insert($data);
             echo true;
-        }else{
+        } else {
             $this->LikeModel->delete($this->session->userdata('id'), $id);
             echo true;
         }
@@ -108,6 +110,14 @@ class Clinic extends CI_Controller
         $today = date('D');
         $startTime = '';
         $endTime = '';
+
+        $close = $this->CloseModel->listData($clinicId);
+        $closeStatus = false;
+        foreach ($close as $item) {
+            if ($item->CLOSEDATE == $date) {
+                $closeStatus = true;
+            }
+        }
 
         if ($today == 'Sun') {
             $startTime = $clinic->TIME_OPEN;
@@ -163,7 +173,8 @@ class Clinic extends CI_Controller
             'booking' => $booking,
             'bookingExtraQues' => $bookingExtraQues,
             'statusBooked' => $statusBooked,
-            'queueBooked' => $queueBooked
+            'queueBooked' => $queueBooked,
+            'closeStatus' => $closeStatus
         ];
 
         $this->load->view('template/header');

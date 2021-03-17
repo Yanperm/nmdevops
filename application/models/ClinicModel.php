@@ -137,6 +137,18 @@ AND (CLINICNAME LIKE "%'.$textSearch.'%" OR PROFICIENT LIKE "%'.$textSearch.'%")
         }
     }
 
+    public function detailByEnName($clinicName)
+    {
+        $query = $this->db->query('SELECT * FROM tbclinic where ENNAME like "' . $clinicName . '"');
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
+
+
     public function detailByEmail($email)
     {
         $query = $this->db->query('SELECT * FROM tbclinic where USERNAME = "' . $email . '"');
