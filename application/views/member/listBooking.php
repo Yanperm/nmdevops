@@ -2,7 +2,7 @@
 
     <div class="strip_list wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
         <figure>
-            <a href="<?php echo base_url('clinic/' . $item["CLINICNAME"]); ?>"><img src="<?php echo $item['image']; ?>" alt=""></a>
+            <a href="<?php echo base_url('clinic/' . $item["ENNAME"]); ?>"><img src="<?php echo $item['image']; ?>" alt=""></a>
         </figure>
         <small><?php echo $item['PROFICIENT']; ?></small>
         <h3><?php echo $item['CLINICNAME']; ?></h3>

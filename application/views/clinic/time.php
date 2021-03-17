@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('clinic/' . $clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
+                <li><a href="<?php echo base_url('clinic/' . $clinic->ENNAME); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
                 <li>เลือกเวลา</li>
             </ul>
         </div>

@@ -54,7 +54,7 @@ class Clinic extends CI_Controller
     {
         $clinicName = $this->uri->segment('2');
 
-        $clinic = $this->ClinicModel->detailById($clinicName);
+        $clinic = $this->ClinicModel->detailByEnName($clinicName);
 
         //add stat
         $userId = $_SERVER['REMOTE_ADDR'];
