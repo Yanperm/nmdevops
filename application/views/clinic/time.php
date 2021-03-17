@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li><a href="<?php echo base_url(''); ?>">หน้าแรก</a></li>
-                <li><a href="<?php echo base_url('detail/' . $clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
+                <li><a href="<?php echo base_url('clinic/' . $clinic->CLINICID); ?>"><?php echo $clinic->CLINICNAME; ?></a></li>
                 <li>เลือกเวลา</li>
             </ul>
         </div>
@@ -25,7 +25,7 @@
                             $today = date($date);
                             $number = date('w', strtotime($today));
                             ?>
-                            <?php if ($number == $clinic->DAYOFF): ?>
+                            <?php if ($number == $clinic->DAYOFF || $closeStatus): ?>
                                 <div class="alert alert-danger text-center" role="alert">
                                     หยุดทำการ <?php echo $date; ?>
                                 </div>
@@ -39,7 +39,7 @@
                             <?php endif; ?>
 
 
-                            <?php if ($number != $clinic->DAYOFF && !$statusBooked): ?>
+                            <?php if ($number != $clinic->DAYOFF && !$statusBooked && !$closeStatus): ?>
                                 <ul>
                                     <?php foreach ($times as $key => $time):
                                         $textTime = $time->format('H:i') . '-' . $time->add($interval)->format('H:i');
