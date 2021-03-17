@@ -68,7 +68,7 @@
                         <div class="box_list wow fadeIn">
                             <a href="#0" class="wish_bt"></a>
                             <figure>
-                                <a href="<?php echo base_url('detail/'.$item->CLINICID); ?>"><img src="<?php echo $item->image;?>" class="img-fluid" alt="">
+                                <a href="<?php echo base_url('detail/'.$item->ENNAME); ?>"><img src="<?php echo $item->image;?>" class="img-fluid" alt="">
                                     <div class="preview"><span>นัดหมอ</span></div>
                                 </a>
                             </figure>
@@ -83,7 +83,7 @@
                             <ul>
                                 <li><a href="#0" onclick="onHtmlClick('Doctors', <?php echo $key; ?>)" class="btn_listing">ดูบนแผนที่</a></li>
                                 <li><a href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@48.8606548,2.3348734,14z/data=!4m15!1m6!3m5!1s0x0:0xa6a9af76b1e2d899!2sAssistance+%E2%80%93+H%C3%B4pitaux+De+Paris!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361" target="_blank"><i class="icon_pin_alt"></i>Directions</a></li>
-                                <li><a href="<?php echo base_url('detail/'.$item->CLINICID); ?>">นัดหมอ</a></li>
+                                <li><a href="<?php echo base_url('detail/'.$item->ENNAME); ?>">นัดหมอ</a></li>
                             </ul>
                         </div>
                     </div>

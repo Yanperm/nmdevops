@@ -86,7 +86,7 @@
                             <?php endif; ?>
                         <?php endif; ?>
                         <figure>
-                            <a href="<?php echo base_url('clinic/' . $item->CLINICID); ?>"><img src="<?php echo $item->image; ?>" alt=""></a>
+                            <a href="<?php echo base_url('clinic/' . $item->ENNAME); ?>"><img src="<?php echo $item->image; ?>" alt=""></a>
                         </figure>
                         <small><?php echo $item->DETAIL ?: ''; ?></small>
                         <h3><?php echo $item->CLINICNAME ?: ''; ?></h3>
@@ -96,7 +96,7 @@
                         <ul>
                             <li><a href="#0" onclick="onHtmlClick('Doctors', <?php echo $key; ?>)" class="btn_listing">ดูบนแผนที่</a></li>
                             <li><a href="https://www.google.com/maps/dir//<?php echo $item->CLINICNAME; ?>/@<?php echo $item->LAT; ?>,<?php echo $item->LONG; ?>,14z" target="_blank">การเดินทาง</a></li>
-                            <li><a href="<?php echo base_url('clinic/' . $item->CLINICID); ?>">นัดหมอ</a></li>
+                            <li><a href="<?php echo base_url('clinic/' . $item->ENNAME); ?>">นัดหมอ</a></li>
                         </ul>
                     </div>
                 <?php endforeach; ?>
