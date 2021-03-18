@@ -42,7 +42,14 @@
 <!-- Custom scripts for all pages-->
 <script src="<?php echo base_url() ?>assets/physician/js/admin.js"></script>
 <!-- Custom scripts for this page-->
-<script src="<?php echo base_url() ?>assets/physician/js/admin-charts.js"></script>
+<!--<script src="--><?php //echo base_url() ?><!--assets/physician/js/admin-charts.js"></script>-->
+<?php
+if(!empty($js)):
+    foreach ($js as $item):?>
+        <script src="<?php echo $item;?>"></script>
+   <?php endforeach;
+endif;
+?>
 
 </body>
 </html>

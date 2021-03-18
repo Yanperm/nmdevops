@@ -13,6 +13,7 @@ class Physician extends CI_Controller
         $this->load->model('CloseModel');
         $this->load->model('YoutubeModel');
         $this->load->model('LikeModel');
+        $this->load->model('StatModel');
         $this->load->library('pagination');
         $this->load->library('S3_upload');
         $this->load->library('S3');
@@ -35,17 +36,34 @@ class Physician extends CI_Controller
         $todayBooking = $this->BookingModel->getDataTodayByClinic($this->session->userdata('id'));
         $like = $this->LikeModel->getCount($this->session->userdata('id'));
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+        $stat = $this->StatModel->stat($this->session->userdata('id'));
+
+        $statData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $num = 0;
+            foreach ($stat as $item) {
+                if (intval($item->MONTH) == $i) {
+                    $num = intval($item->NUM);
+                }
+            }
+            array_push($statData, $num);
+        }
 
         $data = [
             'allBooking' => $allBooking[0]->ALLBOOKING,
             'todayBooking' => $todayBooking[0]->TODAYBOOKING,
             'like' => $like,
-            'clinic' => $clinic
+            'clinic' => $clinic,
+            'statData' => $statData
+        ];
+
+        $js = [
+            base_url() . 'assets/physician/js/admin-charts.js?v=' . time()
         ];
 
         $this->load->view('template/header_physician');
         $this->load->view('physician/dashboard', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_physician', ['js' => $js]);
     }
 
     public function manage()
@@ -143,7 +161,7 @@ class Physician extends CI_Controller
             $rowno = $this->uri->segment('3');
         }
 
-        $rowperpage = 5;
+        $rowperpage = 100;
 
         if ($rowno != 0) {
             $rowno = ($rowno - 1) * $rowperpage;
@@ -196,7 +214,7 @@ class Physician extends CI_Controller
 
     public function quesCall()
     {
-        $this->BookingModel->quesCall($this->input->get('id'),$this->session->userdata('id'));
+        $this->BookingModel->quesCall($this->input->get('id'), $this->session->userdata('id'));
 
         redirect(base_url('physician/ques'));
     }
@@ -394,27 +412,37 @@ class Physician extends CI_Controller
     {
 
         // Load package path
-       // $this->load->add_package_path(FCPATH.'application/vendor/romainrg/ratchet_client');
+        // $this->load->add_package_path(FCPATH.'application/vendor/romainrg/ratchet_client');
         //$this->load->library('ratchet_client');
-       // $this->load->remove_package_path(FCPATH.'application/vendor/romainrg/ratchet_client');
+        // $this->load->remove_package_path(FCPATH.'application/vendor/romainrg/ratchet_client');
 
         // Run server
-      //this->ratchet_client->run();
-     //   $youtube = $this->ClinicModel->getYoutube($this->session->userdata('id'));
+        //this->ratchet_client->run();
+        //   $youtube = $this->ClinicModel->getYoutube($this->session->userdata('id'));
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+        $youtube = $this->YoutubeModel->getYoutube($this->session->userdata('id'));
+        $youtubeLink = "https://www.youtube.com/embed/MCJLW8O5-dg?autoplay=1&mute=1&loop=1";
+        if (count($youtube) > 0) {
+            $pos = strpos($youtube[0]->LINK, '=');
+            $link = substr($youtube[0]->LINK,$pos+1);
+           // echo $link;
+            $youtubeLink = "https://www.youtube.com/embed/".$link."?autoplay=1&mute=1&loop=1";
+        }
 
         $data = [
-            'clinic' => $clinic
+            'clinic' => $clinic,
+            'youtubeLink' => $youtubeLink
         ];
 
         $this->load->view('physician/show_ques', $data);
     }
 
-    public function order(){
+    public function order()
+    {
         $booking = $this->BookingModel->getCurrentQues($this->session->userdata('id'));
-        if(count($booking) > 0){
+        if (count($booking) > 0) {
             echo $booking[0]->QUES;
-        }else{
+        } else {
             echo '-';
         }
     }
@@ -494,7 +522,8 @@ class Physician extends CI_Controller
         redirect(base_url('physician/login'));
     }
 
-    public function chat(){
+    public function chat()
+    {
         $arr['message'] = "RESPONSE";
         $arr['date'] = date('m-d-Y');
         $arr['msgcount'] = 30;

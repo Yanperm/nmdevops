@@ -44,27 +44,52 @@
             </div>
             <div class="patient row">
                 <?php foreach ($ques as $item): ?>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <h6><?php echo $item['CUSTOMERNAME'].$item["SHOWS"]; ?></h6>
-                            <?php
-                            if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
-                                <a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)" ><div class="title title--common"><i class="fa fa-fw fa-check-circle-o"></i>เรียกคิว</div></a>
-                            <?php endif; ?>
-                            <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
-                                <a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" ><div class="title title--epic"><i class="fa fa-fw fa-check-circle-o"></i>เรียกซ้ำ</div></a>
-                            <?php endif; ?>
+                    <div class="col-lg-12">
+                        <div class="row card">
+                            <div class="col-lg-3">
+                                <h6>
+                                    <?php if($item['IMAGE'] != ''):?>
+                                        <img class="avatar-patient" src="<?php echo $item['IMAGE'];?>">
+                                    <?php endif;?>
+                                    <?php if($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นาย') !==  false OR strpos($item['CUSTOMERNAME'], 'ด.ช.'  OR strpos($item['CUSTOMERNAME'], 'ชาย') !==  false ))):?>
+                                        <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/man.png">
+<!--                                        <img class="avatar-patient" src="--><?php //echo $item['IMAGE'] ? $item['IMAGE'] : 'https://i.pinimg.com/736x/29/7d/8b/297d8bc1fdfd08c7bdabe8b45e1504b3.jpg'; ?><!--">-->
+                                    <?php elseif($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นางสาว') !==  false OR strpos($item['CUSTOMERNAME'], 'น.ส.') !==  false OR strpos($item['CUSTOMERNAME'], 'หญิง') !==  false) ):?>
+                                        <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/woman.png">
+                                        <!--                                        <img class="avatar-patient" src="--><?php //echo $item['IMAGE'] ? $item['IMAGE'] : 'https://i.pinimg.com/736x/29/7d/8b/297d8bc1fdfd08c7bdabe8b45e1504b3.jpg'; ?><!--">-->
+                                    <?php elseif($item['IMAGE'] == ''  ):?>
+                                        <img class="avatar-patient" src="https://png.pngitem.com/pimgs/s/130-1300400_user-hd-png-download.png">
 
-                            <div class="desc"><?php echo $item['DETAIL']; ?></div>
-                            <img class="avatar-patient" src="<?php echo $item['IMAGE'] ? $item['IMAGE'] : 'https://i.pinimg.com/736x/29/7d/8b/297d8bc1fdfd08c7bdabe8b45e1504b3.jpg' ; ?>">
+                                    <?php endif;?>
+<!--                                    https://image.flaticon.com/icons/png/512/149/149071.png-->
 
+                                    <?php echo $item['CUSTOMERNAME']; ?>
+                                </h6>
+                            </div>
+                            <div class="col-lg-2">
+                                <?php
+                                if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
+                                    <a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)">
+                                        <div class="title title--common"><i class="fa fa-fw fa-check-circle-o"></i>เรียกคิว</div>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
+                                    <a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')">
+                                        <div class="title title--epic"><i class="fa fa-fw fa-check-circle-o"></i>เรียกซ้ำ</div>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="desc"><?php echo $item['DETAIL']; ?></div>
+                            </div>
 
-                            <p class="queue <?php if(!empty($currentQues[0]->QUES)&&$item['QUES'] == $currentQues[0]->QUES):?> blink_me <?php endif;?>">คิวที่ <?php echo $item['QUES']; ?></p>
-
-
-                            <div>
-                                <p> เบอร์โทรศัพท์ &nbsp; </p>
-                                <p><?php echo $item['PHONE']; ?></p>
+                            <div class="col-lg-2">
+                                <p class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>">คิวที่ <?php echo $item['QUES']; ?></p>
+                            </div>
+                            <div class="col-lg-2">
+                                <div>
+                                    <p> <i class="fa fa-fw fa-phone"></i> &nbsp<?php echo $item['PHONE']; ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -120,12 +145,15 @@
     }
 
     @keyframes blinker {
-        50% { opacity: 0; }
+        50% {
+            opacity: 0;
+        }
     }
+
     .avatar-patient {
         border-radius: 50%;
-        width: 100px;
-        height: 100px;
+        width: 30px;
+        height: 30px;
         margin: 10px;
         border: 1px solid #3f4078;
     }
@@ -134,6 +162,7 @@
         /*margin: 1rem;*/
         /*width: 300px;*/
         /*height: 500px;*/
+        flex-direction: row !important;
         padding: 0.5rem 1rem;
         background-color: #f9f9f9;
         border-radius: 8px;
@@ -148,7 +177,8 @@
     .patient .card:hover {
         transform: translateY(-5px);
     }
-    .patient .card .queue{
+
+    .patient .card .queue {
         font-size: 25px;
         color: #979a99;
     }
@@ -187,7 +217,7 @@
     }
 
     .patient .card .desc {
-        text-align: center;
+        text-align: left;
     }
 
     .patient .card .actions {

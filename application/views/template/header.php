@@ -65,7 +65,7 @@
                         <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && $this->session->userdata('type') == 'member'): ?>
                             <li><a href="<?php echo base_url('member/profile') ?>">จัดการนัดหมาย</a></li>
                         <?php endif ?>
-                        <li><a href="<?php echo base_url('physician') ?>">สำหรับคลินิก</a></li>
+                        <li><a href="<?php echo base_url('physician') ?>" target="_blank">สำหรับคลินิก</a></li>
                         <!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
                         <!--                        <li class="submenu">-->
                         <!--                            <a class="show-submenu">คู่มือการใช้งาน<i class="icon-down-open-mini"></i></a>-->
