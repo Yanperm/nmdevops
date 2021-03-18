@@ -220,7 +220,7 @@ class BookingModel extends CI_Model
             SELECT * FROM tbbooking as booking 
             INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
             where booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . date('Y-m-d') . '"
-            order by booking.BOOKTIME ASC
+            order by booking.QBER ASC
             limit ' . $rowno . ',' . $rowperpage
         );
 
@@ -257,7 +257,8 @@ class BookingModel extends CI_Model
             where booking.CLINICID = "' . $clinicId . '" 
             AND booking.BOOKDATE = "' . date('Y-m-d') . '"
             AND booking.SHOWS = 2
-            AND booking.CALLED = 1'
+            AND booking.CALLED = 1
+            ORDER BY QUES ASC'
         );
 
         if ($query->num_rows() > 0) {

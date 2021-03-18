@@ -255,7 +255,7 @@ class Clinic extends CI_Controller
             username : " . $email . "\r\n
             password : " . $telephone . "\r\n
             \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
-            $this->sendgrid($email, $subject, $message);
+            $this->sendMail($email, $subject, $message);
         }
 
         //insert booking
@@ -291,7 +291,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($email != '') {
-            $this->sendgrid($email, $subject, $message);
+            $this->sendMail($email, $subject, $message);
         }
 
         $data = [
@@ -375,7 +375,7 @@ class Clinic extends CI_Controller
 
         //sendmail
         if ($booking[0]->EMAIL != '') {
-            $this->sendgrid($booking[0]->EMAIL, $subject, $message);
+            $this->sendMail($booking[0]->EMAIL, $subject, $message);
         }
 
         $this->load->view('template/header');
@@ -474,8 +474,8 @@ class Clinic extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.postmarkapp.com',
             'smtp_port' => 25,
-            'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
-            'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+            'smtp_user' => $this->config->item('username_email'),
+            'smtp_pass' => $this->config->item('password_email'),
             'smtp_crypto' => 'TLS',
             'mailtype' => 'html',
             'charset' => 'utf-8',

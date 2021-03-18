@@ -19,7 +19,8 @@
             <div class="row justify-content-between">
                 <div class="col-lg-6">
                     <figure class="add_bottom_30">
-                        <img src="https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com/nutmor_member_image/nm_physician.png" class="img-fluid" alt="">
+                        <img  class="img-fluid" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/gtbt.jpeg">
+<!--                        <img src="https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com/nutmor_member_image/nm_physician.png" class="img-fluid" alt="">-->
                     </figure>
                 </div>
                 <div class="col-lg-5">

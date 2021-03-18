@@ -41,6 +41,7 @@
                             <th>ชื่อสกุลคนไข้ที่จองคิวตรวจ</th>
                             <th>เบอร์โทร</th>
                             <th>LINE</th>
+                            <th>ช่องทางการจอง</th>
                             <th>สถานะ</th>
                             <th>Action</th>
                         </tr>
@@ -55,6 +56,7 @@
                                 <td><?php echo $item['CUSTOMERNAME']; ?></td>
                                 <td><?php echo $item['PHONE']; ?></td>
                                 <td><?php echo $item['LINEID']; ?></td>
+                                <td><?php echo $item['BOOK_ON']; ?></td>
                                 <td>
                                     <?php if ($item["TYPE"] == 0): ?>
                                         <?php if (!$item["CHECKIN"]): ?> <span class="badge badge-warning">ยังไม่เช็คอิน</span> <?php endif; ?>

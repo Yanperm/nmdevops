@@ -311,7 +311,7 @@
     </div>
     <div class="row mt-5">
         <div class="col-md-8">
-            <iframe style="width: 100%;height:550px" src="https://www.youtube.com/embed/MCJLW8O5-dg?autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe style="width: 100%;height:550px" src="<?php echo $youtubeLink;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="col-md-4">
             <div id="qber">

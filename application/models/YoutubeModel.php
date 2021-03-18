@@ -13,6 +13,16 @@ class YoutubeModel extends CI_Model
         }
     }
 
+    public function getYoutube($clinicId)
+    {
+        $query = $this->db->query('SELECT * FROM tblyoutube where STATUS = 1 AND CLINICID = "'. $clinicId .'"');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
     public function insert($data)
     {
         $this->db->insert('tblyoutube', $data);
