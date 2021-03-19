@@ -271,7 +271,7 @@ class BookingModel extends CI_Model
     public function quesReset($clinicId)
     {
 
-        $this->db->set('SHOWS', 1);
+        $this->db->set('SHOWS', 0);
         $this->db->set('STATUS', 0);
         $this->db->set('CALLED', 0);
         $this->db->where('CLINICID', $clinicId);
