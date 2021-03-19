@@ -533,5 +533,5 @@ $config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771
 
 
 //sendmail
-$config['username_email'] = '';
-$config['password_email'] = '';
+$config['username_email'] = '597b7fe5-3e36-4621-af8f-a94bf89ea52b';
+$config['password_email'] = '597b7fe5-3e36-4621-af8f-a94bf89ea52b';
