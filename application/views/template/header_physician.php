@@ -30,7 +30,7 @@
     <!-- Your custom styles -->
     <link href="<?php echo base_url() ?>assets/physician/css/admin.css" rel="stylesheet">
 
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -63,7 +63,7 @@
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
                 <a class="nav-link" href="<?php echo base_url('physician/ques');?>">
-                    <i class="fa fa-fw fa-envelope-open"></i>
+                    <i class="fa fa-users" aria-hidden="true"></i>
                     <span class="nav-link-text">เรียกคิว</span>
                 </a>
             </li>
@@ -75,7 +75,7 @@
             </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
                 <a class="nav-link" href="<?php echo base_url('physician/ques/show');?>" target="_blank">
-                    <i class="fa fa-fw fa-bullhorn"></i>
+                    <i class="fa fa-desktop" aria-hidden="true"></i>
                     <span class="nav-link-text">ประกาศคิว</span>
                 </a>
             </li>

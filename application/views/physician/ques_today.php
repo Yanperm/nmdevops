@@ -17,7 +17,7 @@
                             หมายเลขคิว
                         </div>
                         <div class="card-body">
-                            <p class="card-title" style="text-align: center;font-size: 49px;color: #3f51b5;"><?php if (!empty($currentQues[0]->QUES)): echo $currentQues[0]->QUES; endif; ?></p>
+                            <p class="card-title" style="animation: blinker 1s linear infinite;text-align: center;font-size: 49px;color: #3f51b5;"><?php if (!empty($currentQues[0]->QUES)): echo $currentQues[0]->QUES; endif; ?></p>
 
                         </div>
                     </div>
@@ -46,51 +46,61 @@
                 <?php foreach ($ques as $item): ?>
                     <div class="col-lg-12">
                         <div class="row card">
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <?php if($item['IMAGE'] != ''):?>
+                                            <img class="avatar-patient" src="<?php echo $item['IMAGE'];?>">
+                                        <?php endif;?>
+                                        <?php if($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นาย') !==  false OR strpos($item['CUSTOMERNAME'], 'ด.ช.'  OR strpos($item['CUSTOMERNAME'], 'ชาย') !==  false ))):?>
+                                            <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/man.png">
+                                        <?php elseif($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นางสาว') !==  false OR strpos($item['CUSTOMERNAME'], 'น.ส.') !==  false OR strpos($item['CUSTOMERNAME'], 'หญิง') !==  false) ):?>
+                                            <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/woman.png">
+                                        <?php elseif($item['IMAGE'] == ''  ):?>
+                                            <img class="avatar-patient" src="https://png.pngitem.com/pimgs/s/130-1300400_user-hd-png-download.png">
+                                        <?php endif;?>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h6 class="name_patient">
+                                            <?php echo $item['CUSTOMERNAME']; ?>
+
+                                        </h6>
+                                        <p><?php echo $item['DETAIL']; ?></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2" style="text-align: center">
+                                <?php if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
+                                    <i class="unread">รอเรียกคิว...</i>
+                                <?php endif;?>
+                                <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
+                                    <i class="read">เรียกตรวจแล่้ว</i>
+                                <?php endif;?>
+                            </div>
+                            <div class="col-lg-1" style="text-align: center">
+                                <p class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>"> <?php echo $item['QUES']; ?><br><span style="font-size: 18px">คิวที่</span></p>
+                            </div>
                             <div class="col-lg-3">
-                                <h6>
-                                    <?php if($item['IMAGE'] != ''):?>
-                                        <img class="avatar-patient" src="<?php echo $item['IMAGE'];?>">
-                                    <?php endif;?>
-                                    <?php if($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นาย') !==  false OR strpos($item['CUSTOMERNAME'], 'ด.ช.'  OR strpos($item['CUSTOMERNAME'], 'ชาย') !==  false ))):?>
-                                        <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/man.png">
-<!--                                        <img class="avatar-patient" src="--><?php //echo $item['IMAGE'] ? $item['IMAGE'] : 'https://i.pinimg.com/736x/29/7d/8b/297d8bc1fdfd08c7bdabe8b45e1504b3.jpg'; ?><!--">-->
-                                    <?php elseif($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นางสาว') !==  false OR strpos($item['CUSTOMERNAME'], 'น.ส.') !==  false OR strpos($item['CUSTOMERNAME'], 'หญิง') !==  false) ):?>
-                                        <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/woman.png">
-                                        <!--                                        <img class="avatar-patient" src="--><?php //echo $item['IMAGE'] ? $item['IMAGE'] : 'https://i.pinimg.com/736x/29/7d/8b/297d8bc1fdfd08c7bdabe8b45e1504b3.jpg'; ?><!--">-->
-                                    <?php elseif($item['IMAGE'] == ''  ):?>
-                                        <img class="avatar-patient" src="https://png.pngitem.com/pimgs/s/130-1300400_user-hd-png-download.png">
-
-                                    <?php endif;?>
-<!--                                    https://image.flaticon.com/icons/png/512/149/149071.png-->
-
-                                    <?php echo $item['CUSTOMERNAME']; ?>
-                                </h6>
+                                <p> <i class="fa fa-fw fa-phone" style="color: #3f4078;font-size: 19px;"></i> &nbsp<?php echo $item['PHONE']; ?></p>
+                                <p> <i class="ri-line-fill" style="color: #00c300;font-size: 19px;"></i> &nbsp<?php echo $item['LINEID']; ?></p>
                             </div>
                             <div class="col-lg-2">
+
                                 <?php
                                 if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
-                                    <a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)">
-                                        <div class="title title--common"><i class="fa fa-fw fa-check-circle-o"></i>เรียกคิว</div>
+                                    <a style="color: white;cursor: pointer" class="btn btn-success" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)">
+                                        <i class="fa fa-fw fa-check-circle-o"></i>เรียกคิว
                                     </a>
                                 <?php endif; ?>
                                 <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
-                                    <a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')">
-                                        <div class="title title--epic"><i class="fa fa-fw fa-check-circle-o"></i>เรียกซ้ำ</div>
+                                    <a style="color: white;cursor: pointer" class="btn btn-primary" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')">
+                                       <i class="fa fa-fw fa-check-circle-o"></i>เรียกซ้ำ
                                     </a>
                                 <?php endif; ?>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="desc"><?php echo $item['DETAIL']; ?></div>
-                            </div>
 
-                            <div class="col-lg-2">
-                                <p class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>">คิวที่ <?php echo $item['QUES']; ?></p>
-                            </div>
-                            <div class="col-lg-2">
-                                <div>
-                                    <p> <i class="fa fa-fw fa-phone"></i> &nbsp<?php echo $item['PHONE']; ?></p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -152,16 +162,27 @@
 
     .avatar-patient {
         border-radius: 50%;
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         margin: 10px;
         border: 1px solid #3f4078;
+    }
+
+    .name_patient{
+        font-size: 22px;
+    }
+
+    .card p{
+        padding: 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .patient .card {
         /*margin: 1rem;*/
         /*width: 300px;*/
         /*height: 500px;*/
+        margin-bottom: 6px;
         flex-direction: row !important;
         padding: 0.5rem 1rem;
         background-color: #f9f9f9;
@@ -270,11 +291,20 @@
     }
 
     .active {
-        background-color: #00b16a;
+        /*background-color: #00b16a;*/
     }
 
     button::-moz-focus-inner {
         border: 0;
+    }
+    .card-header {
+        text-align: center;
+        font-size: 22px;
+        color: #ffffff;
+        padding: .75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgb(63 64 120);
+        border-bottom: 1px solid rgb(63 64 119);
     }
 </style>
 <script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js'); ?>"></script>
