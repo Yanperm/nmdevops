@@ -355,7 +355,7 @@
 
     socket.on('queue', function( data ) {});
 
-    socket.on('<?php echo $this->session->userdata('id');?>', function( data ) {
+    socket.on('<?php echo $clinic->IDCLINIC;?>', function( data ) {
         $('#order').html(data.message)
     });
 
