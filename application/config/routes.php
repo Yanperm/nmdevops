@@ -54,6 +54,8 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['clinic/(:any)/queue'] = 'welcome/showQues';
+
 $route['search/(:any)'] = 'search/listData';
 $route['search'] = 'search/listData';
 

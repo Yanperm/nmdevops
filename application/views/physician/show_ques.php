@@ -222,7 +222,9 @@
 <body style="padding-top: 1rem;font-family: 'Prompt', sans-serif;background-color: #fff!important;    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulpZNGZBaAfPS0zcLUU8ACHLIfrDVaIPc1w&usqp=CAU);" class="bg-dark text-white">
+    /*background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulpZNGZBaAfPS0zcLUU8ACHLIfrDVaIPc1w&usqp=CAU);*/
+"
+      class="bg-dark text-white">
 
 <div class="container-fluid">
     <?php
@@ -307,11 +309,12 @@
         <div class="col-md-2" style="display: flex">
             <img style="width: 38px;border-radius: 50%;height: 38px;" src="<?php echo $clinic->image;?>">
             <h3 style="       font-size: 1.2em; color: #3f4078;"><?php echo $clinic->CLINICNAME;?></h3></div>
-        <div class="col-md-2"><img style="width: 256px;" src="<?php echo base_url(); ?>/assets/img/nutmor_logo.png"></div>
+        <div class="col-md-2"><img style="width: 55px;" src="<?php echo base_url(); ?>/assets/img/nutmor_logo02.png"><span style="color: #565656;font-size: 30px;padding-left: 9px;padding-top: 22px;">Nutmor</span></div>
     </div>
     <div class="row mt-5">
         <div class="col-md-8">
             <iframe style="width: 100%;height:550px" src="<?php echo $youtubeLink;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!--            <iframe style="position: absolute; top: 0; left: 0;" src="https://www.youtube.com/embed/8HSr8BjcufM?autoplay=1&controls=1&loop=1&playlist=8HSr8BjcufM&amp;showinfo=0" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
         </div>
         <div class="col-md-4">
             <div id="qber">
