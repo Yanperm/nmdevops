@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 <main>
     <div id="breadcrumb">
         <div class="container">
@@ -77,10 +78,6 @@
 
                         <div class="wrapper_indent">
                             <p><?php echo $clinic->PROFICIENT; ?></p>
-
-                             <h5>สถานที่ทำงานปัจจุบัน</h5>
-                             <p><?php echo $clinic->ADDRESS; ?></p>
-                       
                             <?php if ($clinic->SERVICE != ''): ?>
                                 <h5>บริการของทางคลินิก</h5>
                                 <div class="row">
@@ -96,7 +93,12 @@
                         </div>
 
                         <!-- /row-->
-
+                         <hr>
+                        <div class="indent_title_in">
+                            <i class="ri-hospital-line"></i>
+                            <h3>สถานที่ทำงานปัจจุบัน</h3>
+                            <p><?php echo $clinic->ADDRESS; ?></p>
+                       </div>
 
                         <hr>
 
@@ -317,7 +319,7 @@
                         </ul>  -->
 
                         <hr>
-                        <button class="btn_1 full-width" type="submit">เลือก</button>
+                        <button class="btn_1 full-width" type="submit">นัดหมอทันที</button>
                     </form>
                 </div>
                 <!-- /box_general -->

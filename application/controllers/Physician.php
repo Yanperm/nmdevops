@@ -81,7 +81,7 @@ class Physician extends CI_Controller
 
         $data['date'] = $date;
 
-        $rowperpage = 5;
+        $rowperpage = 50;
 
         if ($rowno != 0) {
             $rowno = ($rowno - 1) * $rowperpage;
@@ -137,7 +137,7 @@ class Physician extends CI_Controller
 
     public function cancel()
     {
-        if (!empty($this->input->get('vn'))) {
+        if (!empty($this->input->get('id'))) {
             $booking = $this->BookingModel->getDataById($this->input->get('id'));
 
             if ($booking->TYPE == 0) {

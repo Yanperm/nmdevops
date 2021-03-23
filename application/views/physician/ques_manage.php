@@ -33,9 +33,9 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                        <tr>
+                        <tr class="text-center font-bold">
                             <th>บัตรคิว</th>
-                            <th>วันที่</th>
+                            <!-- <th>วันที่</th> -->
                             <th>เวลา</th>
                             <th>สาเหตุ</th>
                             <th>ชื่อสกุลคนไข้ที่จองคิวตรวจ</th>
@@ -50,13 +50,20 @@
                         <?php foreach ($ques as $item): ?>
                             <tr>
                                 <td><?php echo $item['QUES']; ?></td>
-                                <td><?php echo $item['BOOKDATE']; ?></td>
+                               <!-- <td><?php echo $item['BOOKDATE']; ?></td> -->
                                 <td><?php echo $item['BOOKTIME']; ?></td>
                                 <td><?php echo $item['DETAIL']; ?></td>
                                 <td><?php echo $item['CUSTOMERNAME']; ?></td>
                                 <td><?php echo $item['PHONE']; ?></td>
                                 <td><?php echo $item['LINEID']; ?></td>
-                                <td><?php echo $item['BOOK_ON']; ?></td>
+                                <td class="text-center">
+                                    <?php if($item['BOOK_ON'] == 'WEBSITE'):?>
+                                        <span class="badge badge-secondary"><?php echo $item['BOOK_ON']; ?></span>
+                                    <?php endif;?>
+                                    <?php if($item['BOOK_ON'] == 'MOBILE'):?>
+                                        <span class="badge badge-info"><?php echo $item['BOOK_ON']; ?></span>
+                                    <?php endif;?>
+                                    </td>
                                 <td>
                                     <?php if ($item["TYPE"] == 0): ?>
                                         <?php if (!$item["CHECKIN"]): ?> <span class="badge badge-warning">ยังไม่เช็คอิน</span> <?php endif; ?>

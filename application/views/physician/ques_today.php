@@ -17,7 +17,7 @@
                             หมายเลขคิว
                         </div>
                         <div class="card-body">
-                            <p class="card-title" style="animation: blinker 1s linear infinite;text-align: center;font-size: 49px;color: #3f51b5;"><?php if (!empty($currentQues[0]->QUES)): echo $currentQues[0]->QUES; endif; ?></p>
+                            <p id="show-queue" class="card-title" style="text-align: center;font-size: 49px;color: #3f51b5;"><?php if (!empty($currentQues[0]->QUES)): echo $currentQues[0]->QUES; endif; ?></p>
 
                         </div>
                     </div>
@@ -25,28 +25,79 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            ช่องที่
+                            บริการที่
                         </div>
                         <div class="card-body">
                             <p class="card-title" style="text-align: center;font-size: 49px;color: #3f51b5;"><?php if (!empty($currentQues[0]->QUES)): ?> 1<?php endif; ?></p>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
         <div class="box_general">
-
-
             <div class="header_box">
                 <h2 class="d-inline-block">รายการจองคิววันนี้</h2>
             </div>
-            <div class="patient row">
+            <div class="list_general">
+                <ul>
+                    <?php foreach ($ques as $item): ?>
+                        <li style="height: 100px">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                     <figure>
+                                        <?php if($item['IMAGE'] != ''):?>
+                                            <img src="<?php echo $item['IMAGE'];?>">
+                                        <?php endif;?>
+                                        <?php if($item['IMAGE'] == ''  ):?>
+                                            <img src="https://png.pngitem.com/pimgs/s/130-1300400_user-hd-png-download.png">
+                                        <?php endif;?>
+                                    </figure>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h4>
+                                        <?php echo $item['CUSTOMERNAME']; ?>
+                                        <?php if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
+                                            <i class="unread">รอเรียกคิว...</i>
+                                        <?php endif;?>
+                                        <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
+                                            <i class="read">เรียกตรวจแล่้ว</i>
+                                        <?php endif;?>
+                                    </h4>
+                                    <p><?php echo $item['DETAIL']; ?></p>
+                                     
+                                </div>
+                                <div class="col-lg-2 text-center">
+                                    <p style="margin: 0px;    font-size: 22px;" class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>"> <?php echo $item['QUES']; ?></p>
+                                    <p style="margin: 0px;color: #aaaaaa;"><?php echo $item['BOOKTIME']; ?></span>
+                                </div>
+                                <div class="col-lg-2 text-left">
+                                    <p style="margin: 0px;"> <i class="fa fa-fw fa-mobile" style="color: #3f4078;font-size: 19px;"></i> &nbsp<?php echo $item['PHONE']; ?></p>
+                                    <p style="margin: 0px;">  <i class="ri-line-fill" style="color: #3e4c3e;font-size: 19px;"></i> &nbsp<?php echo $item['LINEID']; ?></p>
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <span>
+                                         <?php if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
+                                                <a style="color: white;cursor: pointer" class="btn btn-success" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)">
+                                                    <i class="fa fa-fw fa-check-circle-o"></i>เรียกคิว
+                                                </a>
+                                        <?php endif; ?>
+                                        <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
+                                                <a style="color: white;cursor: pointer" class="btn btn-primary" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')">
+                                                   <i class="fa fa-fw fa-check-circle-o"></i>เรียกซ้ำ
+                                                </a>
+                                        <?php endif; ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+            <div class="patient row" style="display: none">
                 <?php foreach ($ques as $item): ?>
                     <div class="col-lg-12">
                         <div class="row card">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <?php if($item['IMAGE'] != ''):?>
@@ -63,27 +114,24 @@
                                     <div class="col-md-10">
                                         <h6 class="name_patient">
                                             <?php echo $item['CUSTOMERNAME']; ?>
-
+                                             <?php if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
+                                                <i class="unread">รอเรียกคิว...</i>
+                                            <?php endif;?>
+                                            <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
+                                                <i class="read">เรียกตรวจแล่้ว</i>
+                                            <?php endif;?>
                                         </h6>
                                         <p><?php echo $item['DETAIL']; ?></p>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="col-lg-2" style="text-align: center">
-                                <?php if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
-                                    <i class="unread">รอเรียกคิว...</i>
-                                <?php endif;?>
-                                <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
-                                    <i class="read">เรียกตรวจแล่้ว</i>
-                                <?php endif;?>
-                            </div>
+                           
                             <div class="col-lg-1" style="text-align: center">
-                                <p class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>"> <?php echo $item['QUES']; ?><br><span style="font-size: 18px">คิวที่</span></p>
+                                <p class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>"> <?php echo $item['QUES']; ?></p><span style="font-size: 18px">คิวที่</span>
                             </div>
                             <div class="col-lg-3">
-                                <p> <i class="fa fa-fw fa-phone" style="color: #3f4078;font-size: 19px;"></i> &nbsp<?php echo $item['PHONE']; ?></p>
-                                <p> <i class="ri-line-fill" style="color: #00c300;font-size: 19px;"></i> &nbsp<?php echo $item['LINEID']; ?></p>
+                                <p> <i class="fa fa-fw fa-mobile" style="color: #3f4078;font-size: 19px;"></i> &nbsp<?php echo $item['PHONE']; ?></p>
+                                <p> <i class="ri-line-fill" style="color: #3e4c3e;font-size: 19px;"></i> &nbsp<?php echo $item['LINEID']; ?></p>
                             </div>
                             <div class="col-lg-2">
 
@@ -99,45 +147,9 @@
                                     </a>
                                 <?php endif; ?>
                             </div>
-
-
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-            <div class="list_general" style="display: none">
-                <ul>
-                    <?php foreach ($ques as $item): ?>
-                        <li>
-                            <figure><img src="<?php echo $item['IMAGE']; ?>" alt=""></figure>
-                            <h4>
-                                <?php echo $item['CUSTOMERNAME']; ?>
-                                <?php if ($item['CHECKIN']): ?>
-                                    <i class="approved">เช็คอินแล้ว</i>
-                                <?php endif; ?>
-                                <?php if (!$item['CHECKIN']): ?>
-                                    <i class="pending">ยังไม่เช็คอิน</i>
-                                <?php endif; ?>
-                            </h4>
-                            <ul class="booking_details">
-                                <li><strong>คิวที่</strong> <?php echo $item['QUES']; ?></li>
-                                <li><strong>วันที่จอง</strong> <?php echo $item['BOOKDATE']; ?></li>
-                                <li><strong>เวลาที่จอง</strong> <?php echo $item['BOOKTIME']; ?></li>
-                                <li><strong>เบอร์โทรศัพท์</strong> <?php echo $item['PHONE']; ?></li>
-                                <li><strong>สาเหตุ</strong> <?php echo $item['DETAIL']; ?></li>
-                            </ul>
-                            <ul class="buttons">
-                                <?php
-                                if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
-                                    <li><a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> เรียกคิว</a></li>
-                                <?php endif; ?>
-                                <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
-                                    <li><a onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> เรียกซ้ำ</a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
             </div>
         </div>
         <nav aria-label="...">
@@ -147,7 +159,33 @@
 </div>
 <style>
     @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
-
+.list_general > ul > li {
+    margin: 0 -30px 0 -30px;
+    position: relative;
+    padding: 30px 30px 5px  20px;
+    border-top: 1px solid #ededed;
+}
+.list_general > ul > li figure {
+    width: 70px;
+    height: 70px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    left: 30px;
+    top: -17px;
+}
+.unread, .cancel {
+    background-color: #ff9800;
+}
+.list_general > ul h4 {
+    font-size: 1rem;
+}
+    .blink{
+        animation: blinker 1s linear infinite;
+    }
     .blink_me {
         animation: blinker 1s linear infinite;
         font-size: 25px;
@@ -310,6 +348,11 @@
 <script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js'); ?>"></script>
 
 <script>
+    $('#show-queue').addClass( "blink" );
+       
+    setTimeout(function(){ 
+        $('#show-queue').removeClass( "blink" );
+    }, 3000);
 
     function call(id, q) {
         window.location.replace("<?php echo base_url('physician/ques/call');?>" + "?id=" + id);
@@ -318,5 +361,8 @@
             id: '<?php echo $this->session->userdata("id");?>',
             message: q
         });
+
+
+       
     }
 </script>
