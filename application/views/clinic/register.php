@@ -2,27 +2,35 @@
     <div id="hero_register">
         <div class="container mt-5 pt-5">
             <div class="row">
-                <div class="col-lg-4">
-                    <h1>It's time to find you!</h1>
-                    <p class="lead">Te pri adhuc simul. No eros errem mea. Diam mandamus has ad. Invenire senserit ad has, has ei quis iudico, ad mei nonumes periculis.</p>
+                <div class="col-lg-6">
+                    <h1>คนไข้จำนวนมากกำลังรออยู่...</h1>
+                    <p class="lead">ถึงเวลาแล้วที่จะทำให้คนไข้จำนวนมาก ค้นหาคลินิกของคุณหมอ
+พบได้ทุกช่องทาง และทำการ นัดหมอ ได้ทันทีตลอด 24 ชั่วโมง
+บน Nutmor Platorm</p>
                     <div class="box_feat_2">
                         <i class="pe-7s-map-2"></i>
-                        <h3>Let patients to Find you!</h3>
-                        <p>Ut nam graece accumsan cotidieque. Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet.</p>
+                        <h3>SEO ทำให้คนไข้พบ คลินิก บน Google</h3>
+                        <p>เมื่อเจ็บป่วย คนไข้จะค้นหาแพทย์ ผ่าน Google จะพบคลินิกเป็นลำดับต้นๆ คนไข้จะ
+เข้าไปหาข้อมูลเพื่อหาคลินิกที่ตรงกับความต้องการ ความพิเศษของนัดหมอ คือ คนไข้
+จะสามารถนัดหมายแพทย์ได้ทันที ตั้งแต่ครั้งแรกที่คนไข้ค้นหาข้อมูลคลินิก</p>
                     </div>
                     <div class="box_feat_2">
                         <i class="pe-7s-date"></i>
-                        <h3>Easly manage Bookings</h3>
-                        <p>Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet. Eum no atqui putant democritum, velit nusquam sententiae vis no.</p>
+                        <h3>ไม่พลาดทุกการนัดหมาย จัดการได้ง่าย ทุกที่ทุกเวลา</h3>
+                        <p>ด้วยระบบนัดหมาย เช็คอิน ดูคิว แจ้งเตือน ออนไลน์ จะไม่ทำให้คนไข้ลืมการนัดหมาย
+ที่สำคัญ คลินิกสามารถรู้ Cheif Complain ของผู้ป่วยได้ล่วงหน้า สามารถบริหาร
+จัดการนัดหมายในแต่ละวันได้อย่างมีประสิทธิภาพ</p>
                     </div>
                     <div class="box_feat_2">
                         <i class="pe-7s-phone"></i>
-                        <h3>Instantly via Mobile</h3>
-                        <p>Eos eu epicuri eleifend suavitate, te primis placerat suavitate his. Nam ut dico intellegat reprehendunt, everti audiam diceret in pri, id has clita consequat suscipiantur.</p>
+                        <h3>นัดหมอ ได้ทันที ด้วย Mobile App</h3>
+                        <p>คนไข้สามารถ Download Application ได้ทั้ง App Store และ Play Store ใช้
+เวลาในการนัดหมายแพทย์ผ่าน Application แต่ละครั้ง ไม่เกิน 3 วินาที รวดเร็ว และ
+ไม่จำเป็นต้องมารอหมอที่คลินิกเป็นเวลานาน</p>
                     </div>
                 </div>
                 <!-- /col -->
-                <div class="col-lg-8 ml-auto ">
+                <div class="col-lg-6 ml-auto ">
                     <div class="row justify-content-center">
 
                         <div class="col-lg-12">
@@ -494,19 +502,31 @@
         background: white;
         border-radius: 50%;
         margin: 0 auto 3px auto;
+            z-index: 2;
+    position: relative;
     }
 
     /*progressbar connectors*/
     #progressbar li:after {
-        content: '';
+        /*content: '';
         width: 100%;
         height: 2px;
         background: white;
         position: absolute;
         left: -50%;
         top: 21px;
-        z-index: -1;
+        z-index: -1;*/
+            width: 100%;
+    height: 2px;
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    top: 22px;
+    left: -50%;
+    z-index: 0;
     }
+
+
 
     #progressbar li:first-child:after {
         /*connector not needed before the first step*/

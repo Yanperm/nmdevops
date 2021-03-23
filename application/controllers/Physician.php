@@ -366,6 +366,7 @@ class Physician extends CI_Controller
             'LAT' => $this->input->post('lat'),
             'LONG' => $this->input->post('long'),
             'SERVICE' => $service,
+            'ADDRESS' => $this->input->post('address'),
         ];
 
         $this->ClinicModel->updateById($data, $this->session->userdata('id'));

@@ -68,7 +68,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>รายละเอียดที่อยู่</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" name="address"><?php echo $clinic->ADDRESS;?></textarea>
                     </div>
                 </div>
 
