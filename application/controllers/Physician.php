@@ -81,7 +81,7 @@ class Physician extends CI_Controller
 
         $data['date'] = $date;
 
-        $rowperpage = 5;
+        $rowperpage = 50;
 
         if ($rowno != 0) {
             $rowno = ($rowno - 1) * $rowperpage;
