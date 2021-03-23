@@ -502,19 +502,31 @@
         background: white;
         border-radius: 50%;
         margin: 0 auto 3px auto;
+            z-index: 2;
+    position: relative;
     }
 
     /*progressbar connectors*/
     #progressbar li:after {
-        content: '';
+        /*content: '';
         width: 100%;
         height: 2px;
         background: white;
         position: absolute;
         left: -50%;
         top: 21px;
-        z-index: -1;
+        z-index: -1;*/
+            width: 100%;
+    height: 2px;
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    top: 22px;
+    left: -50%;
+    z-index: 0;
     }
+
+
 
     #progressbar li:first-child:after {
         /*connector not needed before the first step*/
