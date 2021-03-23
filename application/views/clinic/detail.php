@@ -74,8 +74,13 @@
                             <h3>สาขาวิชาที่เชี่ยวชาญ</h3>
                             <!--<p>สาขาวิชาที่เชี่ยวชาญ</p>-->
                         </div>
+
                         <div class="wrapper_indent">
                             <p><?php echo $clinic->PROFICIENT; ?></p>
+
+                             <h5>สถานที่ทำงานปัจจุบัน</h5>
+                             <p><?php echo $clinic->ADDRESS; ?></p>
+                       
                             <?php if ($clinic->SERVICE != ''): ?>
                                 <h5>บริการของทางคลินิก</h5>
                                 <div class="row">
