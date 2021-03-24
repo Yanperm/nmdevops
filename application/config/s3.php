@@ -33,7 +33,7 @@ $config['verify_peer'] = TRUE;
 |
 */
 
-$config['access_key'] = 'AKIAJLBOTBCHGDTVEBRQ';
+$config['access_key'] = 'AKIAYI7L5TNPXKCSH4G7';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ $config['access_key'] = 'AKIAJLBOTBCHGDTVEBRQ';
 |
 */
 
-$config['secret_key'] = 'v0fzLXpwbRH8q0AP/osP1U+FE84GvXquvZtYylxn';
+$config['secret_key'] = 'KH2OeAzOUNzTfsjar+QVwIwmEsr7cnd4U8lmXm0S';
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ $config['secret_key'] = 'v0fzLXpwbRH8q0AP/osP1U+FE84GvXquvZtYylxn';
 |
 */
 
-$config['bucket_name'] = 'elasticbeanstalk-ap-southeast-1-169851560771';
+$config['bucket_name'] = 'nutmor';
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ $config['folder_name'] = 'nutmor_member_image/';
 |
 */
 
-$config['s3_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com';
+$config['s3_url'] = 'https://nutmor.s3-ap-southeast-1.amazonaws.com';
 
 /*
 |--------------------------------------------------------------------------
