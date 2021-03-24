@@ -13,17 +13,17 @@
                         <h5>About</h5>
                         <ul class="links">
                             <li><a href="">About us</a></li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="">FAQ</a></li>
-                            <li><a href="">Login</a></li>
-                            <li><a href="">Register</a></li>
+                            <li><a href="<?php echo base_url('');?>">Blog</a></li>
+                            <li><a href="<?php echo base_url('');?>">FAQ</a></li>
+                            <li><a href="<?php echo base_url('login');?>">Login</a></li>
+                            <li><a href="<?php echo base_url('register');?>">Register</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-4">
                         <h5>Useful links</h5>
                         <ul class="links">
-                            <li><a href="">Doctors</a></li>
-                            <li><a href="">Clinics</a></li>
+                            <li><a href="<?php echo base_url('search');?>?text_search=&type_search=all">Doctors</a></li>
+                            <li><a href="<?php echo base_url('search');?>?text_search=&type_search=all">Clinics</a></li>
                             <li><a href="">Specialization</a></li>
                             <li><a href="">Join as a Doctor</a></li>
                             <li><a href="">Download App</a></li>
@@ -56,7 +56,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <div id="copy">© 2020 Nutmor.com</div>
+                        <div id="copy">© <?php echo  date('Y');?> Nutmor.com</div>
                     </div>
                 </div>
             </div>

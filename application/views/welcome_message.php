@@ -91,12 +91,11 @@
         margin: 0.5em;
     }
 </style>
-<div id="cookie">
+<div id="cookie" style="display: none">
     <input type="checkbox" id="accept" />
-
-    <span>โดยการใช้เว็บไซต์ของเราคุณรับทราบว่าคุณได้อ่านและทำความเข้าใจ
+        <span>โดยการใช้เว็บไซต์ของเราคุณรับทราบว่าคุณได้อ่านและทำความเข้าใจ
         <a href="https://pdpa.pro/policies/view/th/GEukMy5v2TfiAX2B2h6mEH21">นโยบายความเป็นส่วนตัว</a> นโยบายคุกกี้นโยบายความเป็นส่วนตัวและข้อกำหนดในการให้บริการ ของเรา</span>
-    <div class="btn btn-success"><label for="accept">ยอมรับ</label></div>
+    <div class="btn btn-success" id="btn-accept"><label for="accept">ยอมรับ</label></div>
 </div>
 <main>
     <div class="hero_home version_1">
@@ -335,4 +334,27 @@
             },
         }
     });
+
+
+    $("#btn-accept").click(function() {
+        document.cookie = "cookie=true";
+    });
+
+    let cookie = readCookie('cookie');
+    if(cookie === 'true'){
+        $('#cookie').hide();
+    }else{
+        $('#cookie').show();
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
 </script>

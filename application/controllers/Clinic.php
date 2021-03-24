@@ -452,7 +452,8 @@ class Clinic extends CI_Controller
                         'activate' => $user->ACTIVATE,
                         'email' => $user->USERNAME,
                         'type' => 'clinic',
-                        'image' => $user->image
+                        'image' => $user->image,
+                        'goldMember' => $user->GOLD_MEMBER_STATUS
                     );
                     $this->session->set_userdata($userdata);
 
