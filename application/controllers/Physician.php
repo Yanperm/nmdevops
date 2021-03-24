@@ -462,6 +462,19 @@ class Physician extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
+    public function subscription()
+    {
+        $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+
+        $data = [
+            'clinic' => $clinic,
+        ];
+
+        $this->load->view('template/header_physician');
+        $this->load->view('physician/subscription', $data);
+        $this->load->view('template/footer_physician');
+    }
+
     public function profileUpdate()
     {
         $image = $this->input->post('old_image');

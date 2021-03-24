@@ -118,6 +118,9 @@
                     <li>
                         <a href="<?php echo base_url('physician/profile');?>">ตั้งค่าบัญชี</a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('physician/subscription');?>">Subscription</a>
+                    </li>
                 </ul>
             </li>
         </ul>
