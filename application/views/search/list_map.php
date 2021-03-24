@@ -1,10 +1,11 @@
 <div class="container-fluid full-height">
     <div class="row row-height">
+        <?php if(count($clinic) == 0):?>
         <div class="col-lg-5 content-left">
             <form action="<?php echo base_url('search/1') ?>" method="get" id="form-search">
                 <div class="search_bar_wrapper">
                     <div class="search_bar_list">
-                        <input type="text" class="form-control" name="text_search" placeholder="<?php echo $textSearch; ?>">
+                        <input type="text" class="form-control" name="text_search" value="<?php echo $textSearch; ?>">
                         <input type="hidden" name="lat" id="lat" value="13.7465971">
                         <input type="hidden" name="long" id="long" value="100.5371214">
                         <input type="submit" value="ค้นหา">
@@ -76,8 +77,14 @@
             </div>
             <!-- map-->
         </div>
-        <!-- /map-right-->
+        <?php endif;?>
 
+        <?php if(count($clinic) == 0):?>
+            <div class="col-lg-12 text-center" >
+                <span class="pe-7s-search" style="font-size: 3em;color: #aeaeae;"></span>
+                <p class="mt-3">ไม่พบข้อมูลที่ค้นหา...</p>
+            </div>
+        <?php endif;?>
     </div>
     <!-- /row-->
 </div>

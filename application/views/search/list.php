@@ -63,77 +63,66 @@
 
     <div class="container margin_60_35">
         <div class="row">
+            <?php if(count($clinic) > 0):?>
             <div class="col-lg-7">
-                <?php foreach ($clinic as $key => $item): ?>
-                    <div class="strip_list wow fadeIn">
-                        <?php if (empty($this->session->userdata('authenticated'))): ?>
-                            <a href="<?php echo base_url('login'); ?>" class="wish_bt"></a>
-                        <?php endif; ?>
-                        <?php if (!empty($this->session->userdata('authenticated'))): ?>
-                            <?php
-                            $likeStatus = false;
-                            foreach ($like as $l):
-                                if ($l->CLINICID == $item->IDCLINIC) {
-                                    $likeStatus = true;
-                                }
-                            endforeach;
-                            ?>
-                            <?php if ($likeStatus): ?>
-                                <a href="#0" id="like<?php echo $item->IDCLINIC; ?>" onClick="like('<?php echo $item->IDCLINIC ?>')" class=" wish_bt_active"><i style="color: #e91e63;" class="icon-heart"></i></a>
+                
+                    <?php foreach ($clinic as $key => $item): ?>
+                        <div class="strip_list wow fadeIn">
+                            <?php if (empty($this->session->userdata('authenticated'))): ?>
+                                <a href="<?php echo base_url('login'); ?>" class="wish_bt"></a>
                             <?php endif; ?>
-                            <?php if (!$likeStatus): ?>
-                                <a href="#0" id="like<?php echo $item->IDCLINIC; ?>" onClick="like('<?php echo $item->IDCLINIC ?>')" class="wish_bt"></a>
+                            <?php if (!empty($this->session->userdata('authenticated'))): ?>
+                                <?php
+                                $likeStatus = false;
+                                foreach ($like as $l):
+                                    if ($l->CLINICID == $item->IDCLINIC) {
+                                        $likeStatus = true;
+                                    }
+                                endforeach;
+                                ?>
+                                <?php if ($likeStatus): ?>
+                                    <a href="#0" id="like<?php echo $item->IDCLINIC; ?>" onClick="like('<?php echo $item->IDCLINIC ?>')" class=" wish_bt_active"><i style="color: #e91e63;" class="icon-heart"></i></a>
+                                <?php endif; ?>
+                                <?php if (!$likeStatus): ?>
+                                    <a href="#0" id="like<?php echo $item->IDCLINIC; ?>" onClick="like('<?php echo $item->IDCLINIC ?>')" class="wish_bt"></a>
+                                <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
-                        <figure>
-                            <a href="<?php echo base_url('clinic/' . $item->ENNAME); ?>"><img src="<?php echo $item->image; ?>" alt=""></a>
-                        </figure>
-                        <small><?php echo $item->DETAIL ?: ''; ?></small>
-                        <h3><?php echo $item->CLINICNAME ?: ''; ?></h3>
-                        <p><?php echo $item->SERVICE ?: ''; ?></p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i> <small>(<?php echo number_format($item->view_count);?>)</small></span>
-                        <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="<?php echo base_url() ?>/assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
-                        <ul>
-                            <li><a href="#0" onclick="onHtmlClick('Doctors', <?php echo $key; ?>)" class="btn_listing">ดูบนแผนที่</a></li>
-                            <li><a href="https://www.google.com/maps/dir//<?php echo $item->CLINICNAME; ?>/@<?php echo $item->LAT; ?>,<?php echo $item->LONG; ?>,14z" target="_blank">การเดินทาง</a></li>
-                            <li><a href="<?php echo base_url('clinic/' . $item->ENNAME); ?>">นัดหมอ</a></li>
-                        </ul>
+                            <figure>
+                                <a href="<?php echo base_url('clinic/' . $item->ENNAME); ?>"><img src="<?php echo $item->image; ?>" alt=""></a>
+                            </figure>
+                            <small><?php echo $item->DETAIL ?: ''; ?></small>
+                            <h3><?php echo $item->CLINICNAME ?: ''; ?></h3>
+                            <p><?php echo $item->SERVICE ?: ''; ?></p>
+                            <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i> <small>(<?php echo number_format($item->view_count);?>)</small></span>
+                            <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="<?php echo base_url() ?>/assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
+                            <ul>
+                                <li><a href="#0" onclick="onHtmlClick('Doctors', <?php echo $key; ?>)" class="btn_listing">ดูบนแผนที่</a></li>
+                                <li><a href="https://www.google.com/maps/dir//<?php echo $item->CLINICNAME; ?>/@<?php echo $item->LAT; ?>,<?php echo $item->LONG; ?>,14z" target="_blank">การเดินทาง</a></li>
+                                <li><a href="<?php echo base_url('clinic/' . $item->ENNAME); ?>">นัดหมอ</a></li>
+                            </ul>
+                        </div>
+                    <?php endforeach; ?>
+                
+                    <div id="pagination">
+                        <?php echo $pagination; ?>
                     </div>
-                <?php endforeach; ?>
-                <!-- /strip_list -->
+              
 
-
-                <!--                <nav aria-label="" class="add_top_20">-->
-                <!--                    <ul class="pagination pagination-sm">-->
-                <!--                        <li class="page-item disabled">-->
-                <!--                            <a class="page-link" href="#" tabindex="-1">ก่อนหน้า</a>-->
-                <!--                        </li>-->
-                <!--                        <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
-                <!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-                <!--                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                <!--                        <li class="page-item">-->
-                <!--                            <a class="page-link" href="#">ถัดไป</a>-->
-                <!--                        </li>-->
-                <!--                    </ul>-->
-                <!--                </nav>-->
-                <!-- /pagination -->
-                <div id="pagination">
-                    <?php echo $pagination; ?>
-                </div>
             </div>
-            <!-- /col -->
-
-            <aside class="col-lg-5" id="sidebar">
+           <aside class="col-lg-5" id="sidebar">
                 <div id="map_listing" class="normal_list">
                 </div>
             </aside>
-            <!-- /aside -->
-
+            <?php endif;?>
+            <?php if(count($clinic) == 0):?>
+                    <div class="col-lg-12 mt-5 text-center" >
+                        <span class="pe-7s-search" style="font-size: 3em;color: #aeaeae;"></span>
+                        <p class="mt-3">ไม่พบข้อมูลที่ค้นหา...</p>
+                    </div>
+            <?php endif;?>
+          </div>
         </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</main>
+   </main>
 
 <textarea id="data" style="display: none"><?php echo $map; ?></textarea>
 <!-- SPECIFIC SCRIPTS -->

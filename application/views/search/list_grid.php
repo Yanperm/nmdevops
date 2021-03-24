@@ -61,6 +61,7 @@
 
     <div class="container margin_60_35">
         <div class="row">
+             <?php if(count($clinic) > 0):?>
             <div class="col-lg-8">
                 <div class="row">
                     <?php foreach ($clinic as $key => $item): ?>
@@ -115,8 +116,14 @@
                 <div id="map_listing" class="normal_list">
                 </div>
             </aside>
+            <?php endif;?>
             <!-- /aside -->
-
+            <?php if(count($clinic) == 0):?>
+                    <div class="col-lg-12 mt-5 text-center" >
+                        <span class="pe-7s-search" style="font-size: 3em;color: #aeaeae;"></span>
+                        <p class="mt-3">ไม่พบข้อมูลที่ค้นหา...</p>
+                    </div>
+            <?php endif;?>
         </div>
         <!-- /row -->
     </div>
