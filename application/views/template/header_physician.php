@@ -35,12 +35,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="<?php echo base_url() ?>assets/physician/vendor/jquery/jquery.min.js"></script>
+    <style>
+        .gold_member{
+            font-size: 16px;
+            padding: 5px;
+            background: #ffc107;
+            color: #4a4a4a;
+            border-radius: 3px;
+            margin-left: 15px;
+        }
+    </style>
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
-    <a class="navbar-brand" href="<?php echo base_url('physician')?>"><img src="<?php echo base_url() ?>assets/img/nutmor_logo_white.png" data-retina="true" alt="" width="163" height="36"></a>
+    <a style='margin-right: 0px' class="navbar-brand" href="<?php echo base_url('physician')?>"><img src="<?php echo base_url() ?>assets/img/nutmor_logo_white.png" data-retina="true" alt="" width="163" height="36" ></a>
+    <span style="color: #ffffff;font-size: 21px "><?php echo $this->session->userdata('name'); ?></span>
+    <?php if($this->session->userdata('goldMember')):?><span class="gold_member">GOLD MEMBER</span><?php endif;?>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
