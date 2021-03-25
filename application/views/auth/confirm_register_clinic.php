@@ -21,9 +21,20 @@
                             </g>
                         </svg>
                     </div>
-                    <h2>ขอขอบคุณสำหรับการสมัครสมาชิก!</h2>
-                    <p style="    font-size: 16px;">คุณจะได้รับรายละเอียดการใช้งานที่อีเมล</p>
-                    <p style="    font-size: 17px;">ติดต่อชำระค่าบริการได้ที่</p>
+                    <h5>เราได้รับข้อมูล คลินิก <strong><?php echo $clinicName;?></strong> เรียบร้อยแล้ว</h4>
+                        <h5>โปรดชำระค่า <strong><?php echo $package;?> Package</strong> เป็นเงิน <strong><?php echo  number_format($money);?> </strong>บาท</h5>
+                      <h5 class="mt-5">  โอนเข้า </h5>
+                    <h5>  ธนาคารกสิกรไทย ชื่อบัญชี <strong>หจก. นัดหมอ</strong></h5>
+                    <img style="    width: 40px;margin-top: 20px;margin-bottom: 20px;" src="<?php echo base_url();?>/assets/img/kbank_logo.png">
+                    <h5>เลขที่บัญชี <strong>091-1-73698-5</strong></h5>
+
+                    <h5>โปรดส่งหลักฐานการโอนมาที่ <strong>visinvisible@gmail.com</strong></h5>
+
+
+
+                   <!--  <h2>ขอขอบคุณสำหรับการสมัครสมาชิก!</h2>
+                    <p style="    font-size: 16px;">คุณจะได้รับรายละเอียดการใช้งานที่อีเมล</p> -->
+                    <p class="mt-5" style="    font-size: 17px;">ติดต่อชำระค่าบริการได้ที่</p>
                     <table style="margin: auto;text-align: left;font-size: 17px;font-weight: bold;width: 48%;">
                         <tr>
                             <td><i class="ri-phone-line"></i> เบอร์โทรศัพท์</td>
@@ -38,7 +49,9 @@
                             <td>: @cobenhavn</td>
                         </tr>
                     </table>
+                     <a class="mt-5" href="<?php echo base_url('physician');?>">กลับหน้าหลัก</a>
                 </div>
+               
             </div>
         </div>
         <!-- /row -->

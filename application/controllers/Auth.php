@@ -124,7 +124,7 @@ class Auth extends CI_Controller
         ];
 
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        $this->sendgrid($email, $subject, $message);
+        $this->sendMail($email, $subject, $message);
 
         $data = [
             'email' => $email,
@@ -337,7 +337,7 @@ class Auth extends CI_Controller
         ];
 
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        $this->sendgrid($email, $subject, $message);
+        $this->sendMail($email, $subject, $message);
 
         $this->load->view('template/header');
         $this->load->view('auth/confirm_register');
@@ -394,11 +394,31 @@ class Auth extends CI_Controller
             'type' => 'clinic'
         ];
 
+        $money = 0;
+        if($package == 1){
+            $package = 'COMMUNITY';
+            $money = 1000;
+        }else if($package == 2){
+            $package = 'PRO';
+            $money = 5900;
+        }else if($package == 3){
+            $package = 'ULTIMATE';
+            $money = 59000;
+        }
+
+
+        $data = [
+            'clinicName' => $clinicName,
+            'package' => $package,
+            'money' => $money
+        ];
+
+        
         $message = $this->load->view('email_layout_template', $dataEmail, true);
-        $this->sendgrid($email, $subject, $message);
+        $this->sendMail($email, $subject, $message);
 
         $this->load->view('template/header_doctor');
-        $this->load->view('auth/confirm_register_clinic');
+        $this->load->view('auth/confirm_register_clinic', $data);
         $this->load->view('template/footer');
     }
 
