@@ -524,8 +524,8 @@ $config['proxy_ips'] = '';
 
 $config['folder_name'] = 'nutmor_member_image/';
 
-$config['s3_access_key'] = 'AKIAYI7L5TNP6Y7SF6MN';
-$config['s3_secret_key'] = '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';
+$config['s3_access_key'] = 'AKIAYI7L5TNP2YBOPIEL';
+$config['s3_secret_key'] = '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';
 
 $config['s3_bucket_name'] = 'elasticbeanstalk-ap-southeast-1-169851560771';
 $config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com';
