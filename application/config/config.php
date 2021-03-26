@@ -524,8 +524,8 @@ $config['proxy_ips'] = '';
 
 $config['folder_name'] = 'nutmor_member_image/';
 
-$config['s3_access_key'] = 'AKIAJLBOTBCHGDTVEBRQ';
-$config['s3_secret_key'] = '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';
+$config['s3_access_key'] = 'AKIAYI7L5TNP6Y7SF6MN';
+$config['s3_secret_key'] = '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';
 
 $config['s3_bucket_name'] = 'elasticbeanstalk-ap-southeast-1-169851560771';
 $config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com';
@@ -533,5 +533,5 @@ $config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771
 
 
 //sendmail
-$config['username_email'] = '';
-$config['password_email'] = '';
+$config['username_email'] = '597b7fe5-3e36-4621-af8f-a94bf89ea52b';
+$config['password_email'] = '597b7fe5-3e36-4621-af8f-a94bf89ea52b';
