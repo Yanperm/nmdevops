@@ -2,7 +2,7 @@
     <div class="bg_color_2">
         <div class="container margin_60_35">
             <div id="login-2">
-                <h1>เข้าสู่ระบบ!</h1>
+                <h1>ลงชื่อเข้าใช้งาน สำหรับสมาชิก!</h1>
                 <?php if ($this->session->flashdata('message')) { ?>
                     <div class="alert alert-danger">
                         <?php echo $this->session->flashdata('message') ?>
@@ -11,8 +11,9 @@
                 <?php echo form_open(base_url('login'), array('id' => 'loginForm')) ?>
                 <input type="hidden" value="member" name="type">
                 <div class="box_form clearfix">
-                    <div class="box_login">
-                        <img class="img_login" src="assets/img/nutmor_logo.png">
+                    <div class="box_login text-center">
+                        <img class="img_login" src="<?php echo base_url();?>/assets/img/nutmor_logo_v01.png" style="width:114px;height:109px;margin-top:0px">
+                        <h2 style="color: #818181;">Nutmor</h2>
                     </div>
                     <div class="box_login last">
 
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <?php echo form_close(); ?>
-                <p class="text-center link_bright">เพิ่งเคยเข้ามาใน นัดหมอ ใช่หรือไม่ ? <a href="<?php echo base_url('register') ?>"><strong>สมัครใหม่</strong></a></p>
+                <p class="text-center link_bright">ท่านต้องการสร้างบัญชีใหม่ ใช่หรือไม่ ? <a href="<?php echo base_url('register') ?>"><strong>สร้างบัญชีนัดหมอ</strong></a></p>
                 <!--                <p class="text-center link_bright">Do not have an account yet? <a href="#0"><strong>Register now!</strong></a></p>-->
             </div>
             <!-- /login -->
