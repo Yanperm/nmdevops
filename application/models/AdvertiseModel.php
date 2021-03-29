@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class AdvertiseModel extends CI_Model
 {
@@ -13,18 +13,29 @@ class AdvertiseModel extends CI_Model
         }
     }
 
+    public function detail($id)
+    {
+        $query = $this->db->query('SELECT * FROM advertise  where ADVERTISEID = '.$id);
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
     public function insert($data)
     {
         $this->db->insert('advertise', $data);
         return $this->db->insert_id();
     }
 
-    public function find_with_page($param){
+    public function find_with_page($param)
+    {
         $keyword = $param['keyword'];
         $this->db->select('*');
 
         $condition = "1=1";
-        if(!empty($keyword)){
+        if (!empty($keyword)) {
             $condition .= " and (ADVERTISESUBJECT like '%{$keyword}%' or ADVERTISEDETAIL like '%{$keyword}%')";
         }
 
@@ -34,8 +45,8 @@ class AdvertiseModel extends CI_Model
 
         $query = $this->db->get('advertise');
         $data = [];
-        if($query->num_rows() > 0){
-            foreach($query->result() as $row){
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
                 $data[] = $row;
             }
         }
@@ -44,5 +55,17 @@ class AdvertiseModel extends CI_Model
         $count = $this->db->from('advertise')->count_all_results();
         $result = array('count'=>$count,'count_condition'=>$count_condition,'data'=>$data,'error_message'=>'');
         return $result;
+    }
+
+    public function updateById($data, $id)
+    {
+        $this->db->where('ADVERTISEID', $id);
+        $this->db->update('advertise', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('ADVERTISEID', $id);
+        $this->db->delete('advertise');
     }
 }

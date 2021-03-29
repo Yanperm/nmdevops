@@ -1,9 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -36,8 +35,8 @@ class Admin extends CI_Controller
         $countQueueToday =  count($this->BookingModel->getAllQueueToday());
         $countQueueTomorrow =  count($this->BookingModel->getAllQueueTomorrow());
 
-//echo 'SELECT * FROM tbbooking where BOOKDATE = "'.date('Y-m-d').'"';
-//exit();
+        //echo 'SELECT * FROM tbbooking where BOOKDATE = "'.date('Y-m-d').'"';
+        //exit();
 
 //        $allBooking = $this->BookingModel->getDataAllByClinic($this->session->userdata('id'));
 //        $todayBooking = $this->BookingModel->getDataTodayByClinic($this->session->userdata('id'));
@@ -57,7 +56,8 @@ class Admin extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
-    public  function clinic(){
+    public function clinic()
+    {
         $clinic = $this->ClinicModel->getAll();
 
         $data = [
@@ -69,7 +69,8 @@ class Admin extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
-    public  function clinicDetail(){
+    public function clinicDetail()
+    {
         $idClinic = $this->uri->segment('4');
         $clinic = $this->ClinicModel->detailById($idClinic);
 
@@ -82,7 +83,8 @@ class Admin extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
-    public  function patient(){
+    public function patient()
+    {
         $patient = $this->MembersModel->getData();
 
         $data = [
@@ -112,8 +114,8 @@ class Admin extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
 
-    public  function advertise(){
-
+    public function advertise()
+    {
         $this->load->view('template/header_admin');
         $this->load->view('admin/advertise');
         $this->load->view('template/footer_physician');
@@ -135,5 +137,99 @@ class Admin extends CI_Controller
         $data['data'] = $results['data'];
         $data['error'] = $results['error_message'];
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+
+    public function advertiseAdd()
+    {
+        $this->load->view('template/header_admin');
+        $this->load->view('admin/advertise/form-insert');
+        $this->load->view('template/footer_physician');
+    }
+
+    public function advertiseInsert()
+    {
+        $image = "";
+
+        if (!empty($_FILES["file"]) && dirname($_FILES["file"]["tmp_name"]) !='') {
+            $dir = dirname($_FILES["file"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+            rename($_FILES["file"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+        }
+
+        $dateNow = new DateTime();
+        $currentTime = $dateNow->getTimestamp();
+
+        $data = [
+          'ADVERTISEID' => $currentTime,
+          'ADVERTISESUBJECT' => $this->input->post('subject'),
+          'ADVERTISEDETAIL' => $this->input->post('desc'),
+          'ADVERTISEIMAGE' => $image,
+          'ADVERTISELINK' => $this->input->post('link'),
+      ];
+
+        $this->AdvertiseModel->insert($data);
+
+        redirect(base_url('admin/advertise'));
+    }
+
+    public function advertiseEdit()
+    {
+        $id = $_GET['id'];
+
+        $advertise = $this->AdvertiseModel->detail($id);
+
+        $data = [
+          'advertise' => $advertise
+        ];
+
+        $this->load->view('template/header_admin');
+        $this->load->view('admin/advertise/form-update', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function advertiseUpdate()
+    {
+        $id = $this->input->post('advertise_id');
+        $image = $this->input->post('old_image');
+
+        if (!empty($_FILES["file"]) && dirname($_FILES["file"]["tmp_name"]) !='') {
+            $dir = dirname($_FILES["file"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+            rename($_FILES["file"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+
+            //remove old image S3
+            if ($this->input->post('old_image') != '') {
+                $this->s3_upload->deleteFile(basename($this->input->post('old_image')));
+            }
+        }
+
+        $data = [
+          'ADVERTISESUBJECT' => $this->input->post('subject'),
+          'ADVERTISEDETAIL' => $this->input->post('desc'),
+          'ADVERTISEIMAGE' => $image,
+          'ADVERTISELINK' => $this->input->post('link'),
+      ];
+
+        $this->AdvertiseModel->updateById($data, $id);
+
+        $this->session->set_flashdata('msg', 'บันทึกเรียบร้อย');
+
+        redirect(base_url('admin/advertise-edit?id='.$id));
+    }
+
+    public function advertiseDelete()
+    {
+        $id = $this->input->post('id');
+
+        $advertise = $this->AdvertiseModel->detail($id);
+        if ($advertise->ADVERTISEIMAGE != '') {
+            $this->s3_upload->deleteFile(basename($advertise->ADVERTISEIMAGE));
+        }
+
+        $this->AdvertiseModel->delete($id);
+
+        echo true;
     }
 }

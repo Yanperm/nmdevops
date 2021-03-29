@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = false;
 
 $route['clinic/(:any)/queue'] = 'welcome/showQues';
 
@@ -72,6 +72,7 @@ $route['detail_checkin'] = 'clinic/detailCheckin';
 $route['confirm/checkin/(:any)'] = 'clinic/confirmCheckin';
 $route['clinic_profile'] = 'clinic/profile';
 $route['like'] = 'clinic/like';
+$route['checkinLast'] = 'clinic/checkinLast';
 
 
 $route['physician/dashboard'] = 'physician/dashboard';
@@ -127,5 +128,10 @@ $route['profile/checkin'] = 'member/checkInMember';
 
 $route['admin'] = 'auth/loginAdmin';
 
-$route['admin/clinic/detail/(:any)'] = 'admin/clinicDetail';
+$route['admin/advertise-add'] = 'admin/advertiseAdd';
+$route['admin/advertise-insert'] = 'admin/advertiseInsert';
+$route['admin/advertise-edit'] = 'admin/advertiseEdit';
+$route['admin/advertise-update'] = 'admin/advertiseUpdate';
+$route['admin/advertise-delete'] = 'admin/advertiseDelete';
 
+$route['admin/clinic/detail/(:any)'] = 'admin/clinicDetail';
