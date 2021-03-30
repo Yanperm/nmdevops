@@ -40,16 +40,19 @@
                                     <small><?php echo $clinic->DETAIL; ?></small>
                                     <h1><?php echo $clinic->DOCTORNAME; ?></h1>
                                     <span class="rating">
-											<i class="icon_star voted"></i>
-											<i class="icon_star voted"></i>
-											<i class="icon_star voted"></i>
-											<i class="icon_star voted"></i>
-											<i class="icon_star voted"></i>
-											<small>(145)</small>
-                                        <!--<a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="img/badges/badge_1.svg" width="15" height="15" alt=""></a>-->
+                											<i class="icon_star voted"></i>
+                											<i class="icon_star voted"></i>
+                											<i class="icon_star voted"></i>
+                											<i class="icon_star voted"></i>
+                											<i class="icon_star voted"></i>
+                											<small>(<?php echo number_format($clinic->view_count);?>)</small>
                                     </span>
                                     <ul class="statistic">
-                                        <li><a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" style="color: #ffffff;">เช็คอิน</a></li>
+                                        <li onclick="checkIn()" style="cursor: pointer">
+                                           <!--  <a href="<?php echo base_url('checkin?clinic=' . $clinic->CLINICID); ?>" style="color: #ffffff;"> -->
+                                            เช็คอิน
+                                            <!-- </a> -->
+                                        </li>
                                         <li onclick="getQues()" style="cursor: pointer">ดูคิว</li>
                                     </ul>
 
@@ -375,7 +378,124 @@
     </div>
 </div>
 
+<div class="modal" id="myModalCheckIn">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo $clinic->CLINICNAME; ?></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="show-1">
+                <p>คลินิก</p>
+                <input class="form-control" type="text" name="clinic_name" value="<?php echo $clinic->CLINICNAME; ?>" readonly>
+                 <p class="mt-4">เมลล์</p>
+                 <?php if (empty($this->session->userdata('authenticated'))): ?>
+                    <input class="form-control" id="email" type="mail" name="email" value="">
+                <?php endif;?>
+
+                <?php if (!empty($this->session->userdata('authenticated'))): ?>
+                    <input class="form-control" id="email" type="mail" name="email" value="<?php echo $this->session->userdata('email');?>">
+                <?php endif;?>
+                </div>
+                <div id="show-2" style="display: none">
+                  <input type="hidden" value="" id="idBooking">
+                  <p>คลินิก</p>
+                  <input class="form-control" type="text" name="clinic_name" value="<?php echo $clinic->CLINICNAME; ?>" readonly>
+                  <div class="row" style="    font-size: 16px;font-weight: 600;">
+                    <div class="col-lg-6">
+
+                    <p class="mt-5">วันที่ : <span id="date-show"></span></p>
+                    <p>เวลา : <span id="time-show"></span></p>
+                    <p>สถานะ : <span id="status-show"></span></p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="mt-5">คิวที่ : <span id="queue-show"></span></p>
+                    <p class="mt-5" id="status"></p>
+                  </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                 <button type="button" id="check" class="btn_1" onclick="check('<?php echo $clinic->IDCLINIC; ?>')">ตรวจสอบ</button>
+                 <button type="button" style="display: none" id="checkIn" class="btn_1" onclick="checkInconfirm('<?php echo $clinic->IDCLINIC; ?>')">เช็คอิน</button>
+                <button type="button" class="btn_1 outline" data-dismiss="modal">ปิด</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script>
+
+    function checkIn(){
+        $('#show-1').show();
+        $('#show-2').hide();
+        $('#check').show();
+        $('#checkIn').hide();
+        $('#myModalCheckIn').modal('show');
+    }
+
+    function check(idClinic){
+        $.ajax({
+            url: '<?php echo base_url('checkinLast')?>',
+            type: 'get',
+            // dataType: 'json',
+            data : {
+                idClinic : idClinic,
+                email : $('#email').val()
+            },
+            success: function (response) {
+              //console.log(response);
+              $('#idBooking').val(response.BOOKINGID)
+              $('#date-show').html(response.BOOKDATE);
+              $('#time-show').html(response.BOOKTIME);
+              $('#queue-show').html(response.QUES);
+              if(response.CHECKIN == "0"){
+                $('#status-show').html('<span class="badge badge-warning">รอการเช็คอิน</span>');
+                $('#checkIn').show();
+              }else if(response.CHECKIN == "1"){
+                $('#status-show').html('<span class="badge badge-success">เช็คอินแล้ว</span>');
+                $('#checkIn').hide();
+              }
+
+              if(response.CONFIRM == "0"){
+
+                $('#status').html('<span class="badge badge-primary">ยังไม่ยืนยันการจอง</span>');
+              }else if(response.CONFIRM == "1"){
+
+                $('#status').html('<span class="badge badge-info">รอการเช็คอิน</span>');
+              }
+
+              $('#show-1').hide();
+              $('#show-2').show();
+              $('#check').hide();
+
+            }
+        });
+    }
+
+    function checkInconfirm(idClinic){
+
+      $.ajax({
+          url: '<?php echo base_url('checkinFast')?>',
+          type: 'get',
+          // dataType: 'json',
+          data : {
+              idClinic : idClinic,
+              id : $('#idBooking').val()
+          },
+          success: function (response) {
+            check(idClinic);
+          }
+      });
+    }
 
     function getQues() {
         let today = new Date();
@@ -418,5 +538,3 @@
         $('#myModal').modal('show');
     }
 </script>
-
-
