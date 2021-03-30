@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://nmdevops.nmepr.com/';
+$config['base_url'] = 'https://nutmor.com/';
 
 /*
 |--------------------------------------------------------------------------
@@ -524,14 +524,15 @@ $config['proxy_ips'] = '';
 
 $config['folder_name'] = 'nutmor_member_image/';
 
-$config['s3_access_key'] = 'AKIAJLBOTBCHGDTVEBRQ';
-$config['s3_secret_key'] = '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';
+$config['s3_access_key'] = 'AKIAYI7L5TNP2YBOPIEL';
+$config['s3_secret_key'] = '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';
 
 $config['s3_bucket_name'] = 'elasticbeanstalk-ap-southeast-1-169851560771';
 $config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com';
-
+$config['access_key_envname'] = 'AKIAJLBOTBCHGDTVEBRQ';
+$config['secret_key_envname'] = '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';
 
 
 //sendmail
-$config['username_email'] = 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f';
-$config['password_email'] = 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f';
+$config['username_email'] = '597b7fe5-3e36-4621-af8f-a94bf89ea52b';
+$config['password_email'] = '597b7fe5-3e36-4621-af8f-a94bf89ea52b';
