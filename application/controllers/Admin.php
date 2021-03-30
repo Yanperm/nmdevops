@@ -11,6 +11,7 @@ class Admin extends CI_Controller
         $this->load->model('AdvertiseModel');
         $this->load->model('ClinicModel');
         $this->load->model('BookingModel');
+        $this->load->model('StatModel');
         $this->load->model('MembersModel');
         $this->load->model('CloseModel');
         $this->load->model('YoutubeModel');
@@ -34,26 +35,34 @@ class Admin extends CI_Controller
         $countBookingChecked =  count($this->BookingModel->getAllChecked());
         $countQueueToday =  count($this->BookingModel->getAllQueueToday());
         $countQueueTomorrow =  count($this->BookingModel->getAllQueueTomorrow());
-
-        //echo 'SELECT * FROM tbbooking where BOOKDATE = "'.date('Y-m-d').'"';
-        //exit();
-
-//        $allBooking = $this->BookingModel->getDataAllByClinic($this->session->userdata('id'));
-//        $todayBooking = $this->BookingModel->getDataTodayByClinic($this->session->userdata('id'));
-//
+        $stat = $this->StatModel->statByAdmin();
+        $statData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $num = 0;
+            foreach ($stat as $item) {
+                if (intval($item->MONTH) == $i) {
+                    $num = intval($item->NUM);
+                }
+            }
+            array_push($statData, $num);
+        }
         $data = [
             'countClinic' => $countClinic,
             'countPatient' => $countPatient,
             'countBooking' => $countBooking,
             'countBookingChecked' => $countBookingChecked,
             'countQueueToday' => $countQueueToday,
-            'countQueueTomorrow' => $countQueueTomorrow
-           // 'todayBooking' => $todayBooking[0]->TODAYBOOKING
+            'countQueueTomorrow' => $countQueueTomorrow,
+            'statData' => $statData
+        ];
+
+        $js = [
+            base_url() . 'assets/physician/js/admin-charts.js?v=' . time()
         ];
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/dashboard', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_physician', ['js' => $js]);
     }
 
     public function clinic()
