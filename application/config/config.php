@@ -529,7 +529,8 @@ $config['s3_secret_key'] = 'v8E5e40gJHndWUGDeODUnPpHfIBInX1bBAsrw+Lo';
 
 $config['s3_bucket_name'] = 'elasticbeanstalk-ap-southeast-1-169851560771';
 $config['s3_bucket_url'] = 'https://elasticbeanstalk-ap-southeast-1-169851560771.s3-ap-southeast-1.amazonaws.com';
-
+$config['access_key_envname'] = 'AKIAJLBOTBCHGDTVEBRQ';
+$config['secret_key_envname'] = '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';
 
 
 //sendmail
