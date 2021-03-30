@@ -73,6 +73,7 @@ $route['confirm/checkin/(:any)'] = 'clinic/confirmCheckin';
 $route['clinic_profile'] = 'clinic/profile';
 $route['like'] = 'clinic/like';
 $route['checkinLast'] = 'clinic/checkinLast';
+$route['checkinFast'] = 'clinic/checkinFast';
 
 
 $route['physician/dashboard'] = 'physician/dashboard';

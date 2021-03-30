@@ -1,9 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class BookingModel extends CI_Model
 {
-
     public function getData($clicnicId, $date)
     {
         $query = $this->db->query('SELECT * FROM tbbooking where TYPE = 0 AND CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
@@ -46,7 +45,7 @@ class BookingModel extends CI_Model
 
     public function getAllQueueTomorrow()
     {
-        $tomorrow = date('Y-m-d',strtotime(date('Y-m-d') . "+1 days"));
+        $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . "+1 days"));
         $query = $this->db->query("SELECT * FROM tbbooking where BOOKDATE = '".$tomorrow."'");
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -100,7 +99,7 @@ class BookingModel extends CI_Model
     public function detail($bookingId)
     {
         $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.BOOKINGID like "' . $bookingId . '" ');
@@ -115,13 +114,13 @@ class BookingModel extends CI_Model
     public function getCheckin($clicnicId, $email)
     {
         $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where member.EMAIL like "' . $email . '" AND booking.CLINICID = "' . $clicnicId . '"');
 
         if ($query->num_rows() > 0) {
-            return $query->result();
+            return $query->row();
         } else {
             return array();
         }
@@ -130,7 +129,7 @@ class BookingModel extends CI_Model
     public function getCheckinByVN($vnId, $email)
     {
         $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where member.EMAIL like "' . $email . '" AND booking.BOOKINGID = "' . $vnId . '"');
@@ -146,7 +145,7 @@ class BookingModel extends CI_Model
     {
         if ($textSearch != '') {
             $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.MEMBERIDCARD = "' . $userId . '"
@@ -164,7 +163,7 @@ class BookingModel extends CI_Model
             }
         } else {
             $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.MEMBERIDCARD = "' . $userId . '"
@@ -177,13 +176,13 @@ class BookingModel extends CI_Model
                 return array();
             }
         }
-
     }
 
     public function getBookingByUserIdSearch($userId, $textSearch)
     {
-        $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+        $query = $this->db->query(
+            '
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.MEMBERIDCARD = "' . $userId . '"
@@ -200,10 +199,10 @@ class BookingModel extends CI_Model
     public function getBookingByUserIdCheckin($userId, $rowperpage, $rowno)
     {
         $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+            SELECT * FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
-            where booking.MEMBERIDCARD = "' . $userId . '" AND booking.CHECKIN != 1 AND booking.STATUS != 2 
+            where booking.MEMBERIDCARD = "' . $userId . '" AND booking.CHECKIN != 1 AND booking.STATUS != 2
             limit ' . $rowno . ',' . $rowperpage);
 
         if ($query->num_rows() > 0) {
@@ -215,9 +214,9 @@ class BookingModel extends CI_Model
 
     public function getDataList($clinicId, $rowperpage, $rowno)
     {
-
-        $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+        $query = $this->db->query(
+            '
+            SELECT * FROM tbbooking as booking
             INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
             where (booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . date('Y-m-d') . '" AND BOOKTIME != "")
             OR (STATUS !=2 AND BOOKTIME = "" AND booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . date('Y-m-d') . '" )
@@ -234,9 +233,9 @@ class BookingModel extends CI_Model
 
     public function getDataListByDate($clinicId, $date, $rowperpage, $rowno)
     {
-
-        $query = $this->db->query('
-            SELECT * FROM tbbooking as booking 
+        $query = $this->db->query(
+            '
+            SELECT * FROM tbbooking as booking
             INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
             where booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . $date . '"
             order by booking.BOOKTIME ASC
@@ -252,10 +251,10 @@ class BookingModel extends CI_Model
 
     public function getCurrentQues($clinicId)
     {
-
-        $query = $this->db->query('
-            SELECT QUES FROM tbbooking as booking 
-            where booking.CLINICID = "' . $clinicId . '" 
+        $query = $this->db->query(
+            '
+            SELECT QUES FROM tbbooking as booking
+            where booking.CLINICID = "' . $clinicId . '"
             AND booking.BOOKDATE = "' . date('Y-m-d') . '"
             AND booking.SHOWS = 2
             AND booking.CALLED = 1
@@ -273,6 +272,7 @@ class BookingModel extends CI_Model
     {
 
         $this->db->set('SHOWS', 0);
+
         $this->db->set('STATUS', 0);
         $this->db->set('CALLED', 0);
         $this->db->where('CLINICID', $clinicId);
@@ -286,7 +286,7 @@ class BookingModel extends CI_Model
 
     public function checkin($bookingId)
     {
-        $this->db->set('CHECKIN', '1', FALSE);
+        $this->db->set('CHECKIN', '1', false);
         $this->db->where('BOOKINGID', $bookingId);
         $this->db->update('tbbooking');
 
@@ -295,7 +295,8 @@ class BookingModel extends CI_Model
 
     public function quesCall($id, $clinicId)
     {
-        $query = $this->db->query('
+        $query = $this->db->query(
+            '
             SELECT * FROM tbbooking as booking
             where booking.CLINICID = "' . $clinicId . '"
             AND booking.BOOKDATE = "' . date('Y-m-d') . '"

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Clinic extends CI_Controller
 {
@@ -122,22 +122,22 @@ class Clinic extends CI_Controller
         if ($today == 'Sun') {
             $startTime = $clinic->TIME_OPEN;
             $endTime = $clinic->TIME_CLOSE;
-        } else if ($today == 'Mon') {
+        } elseif ($today == 'Mon') {
             $startTime = $clinic->TIME1;
             $endTime = $clinic->CLOSE1;
-        } else if ($today == 'Tue') {
+        } elseif ($today == 'Tue') {
             $startTime = $clinic->TIME2;
             $endTime = $clinic->CLOSE2;
-        } else if ($today == 'Wed') {
+        } elseif ($today == 'Wed') {
             $startTime = $clinic->TIME3;
             $endTime = $clinic->CLOSE3;
-        } else if ($today == 'Thu') {
+        } elseif ($today == 'Thu') {
             $startTime = $clinic->TIME4;
             $endTime = $clinic->CLOSE4;
-        } else if ($today == 'Fri') {
+        } elseif ($today == 'Fri') {
             $startTime = $clinic->TIME5;
             $endTime = $clinic->CLOSE5;
-        } else if ($today == 'Sat') {
+        } elseif ($today == 'Sat') {
             $startTime = $clinic->TIME6;
             $endTime = $clinic->CLOSE6;
         }
@@ -332,6 +332,37 @@ class Clinic extends CI_Controller
         $this->load->view('template/footer');
     }
 
+    public function checkinLast()
+    {
+        $email = $_GET['email'];
+        $clinicId = $_GET['idClinic'];
+        $check = $this->BookingModel->getCheckin($clinicId, $email);
+
+        header('Content-Type: application/json');
+        echo json_encode($check);
+    }
+
+    public function checkinFast()
+    {
+        $id = $_GET['id'];
+        $check = $this->BookingModel->checkin($id);
+
+        $booking = $this->BookingModel->detail($id);
+
+        $subject = "ยืนยันการเช็คอิน";
+        $message = "ยืนยันการเช็คอิน การจองหมายเลข : " . $booking[0]->BOOKINGID . "\n";
+        $message .= "วันที่ : " . $booking[0]->BOOKDATE . "\n";
+        $message .= "เวลา : " . $booking[0]->BOOKTIME . "\n";
+        $message .= "คิว : " . $booking[0]->QUES . "\n";
+
+        //sendmail
+        if ($booking[0]->EMAIL != '') {
+            $this->sendMail($booking[0]->EMAIL, $subject, $message);
+        }
+        echo "true";
+    }
+
+
     public function detailCheckin()
     {
         $email = $this->input->post('email');
@@ -408,11 +439,9 @@ class Clinic extends CI_Controller
         $type = $this->input->post('type');
 
         if ($this->form_validation->run() == false) {
-
             $this->load->view('template/header_doctor');
             $this->load->view('clinic/login');
             $this->load->view('template/footer');
-
         } else {
             $email = $this->security->xss_clean($this->input->post('email'));
             $password = $this->security->xss_clean($this->input->post('password'));
@@ -428,14 +457,13 @@ class Clinic extends CI_Controller
             }
 
             if ($user) {
-
                 $userdata = array();
 
                 if ($type == 'member') {
                     $userdata = array(
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'activate' => $user->ACTIVATE_STATUS,
                         'email' => $user->EMAIL,
                         'type' => 'member',
@@ -448,7 +476,7 @@ class Clinic extends CI_Controller
                     $userdata = array(
                         'id' => $user->IDCLINIC,
                         'name' => $user->CLINICNAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'activate' => $user->ACTIVATE,
                         'email' => $user->USERNAME,
                         'type' => 'clinic',
@@ -459,7 +487,6 @@ class Clinic extends CI_Controller
 
                     redirect(base_url('physician/dashboard'));
                 }
-
             } else {
                 $this->session->set_flashdata('message', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
                 redirect(base_url('physician/login'));
@@ -516,5 +543,4 @@ class Clinic extends CI_Controller
 
         echo $this->email->print_debugger();
     }
-
 }
