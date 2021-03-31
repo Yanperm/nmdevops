@@ -15,6 +15,7 @@ class Admin extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('CloseModel');
         $this->load->model('YoutubeModel');
+        $this->load->model('InfoModel');
         $this->load->library('pagination');
         $this->load->library('S3_upload');
         $this->load->library('S3');
@@ -88,7 +89,7 @@ class Admin extends CI_Controller
         ];
 
         $this->load->view('template/header_admin');
-        $this->load->view('admin/clinic_detail', $data);
+        $this->load->view('admin/clinic/form', $data);
         $this->load->view('template/footer_physician');
     }
 
@@ -240,5 +241,49 @@ class Admin extends CI_Controller
         $this->AdvertiseModel->delete($id);
 
         echo true;
+    }
+
+    public function setting()
+    {
+        $title = "";
+        $meta = "";
+
+        $info = $this->InfoModel->listData();
+
+        foreach ($info as $key => $value) {
+            if ($value->info_name == 'title') {
+                $title = $value->detail;
+            }
+            if ($value->info_name == 'meta_description') {
+                $meta = $value->detail;
+            }
+        }
+
+        $data = [
+          'title' => $title,
+          'metaDesc' => $meta
+        ];
+
+        $this->load->view('template/header_admin');
+        $this->load->view('admin/setting', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function settingUpdate()
+    {
+        $title = $this->input->post('title');
+        $desc = $this->input->post('desc');
+
+        $data = [
+          'detail' => $title
+        ];
+        $this->InfoModel->update($data, 'title');
+
+        $data = [
+          'detail' => $desc
+        ];
+        $this->InfoModel->update($data, 'meta_description');
+
+        $this->setting();
     }
 }

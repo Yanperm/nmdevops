@@ -135,4 +135,6 @@ $route['admin/advertise-edit'] = 'admin/advertiseEdit';
 $route['admin/advertise-update'] = 'admin/advertiseUpdate';
 $route['admin/advertise-delete'] = 'admin/advertiseDelete';
 
+$route['admin/setting-update'] = 'admin/settingUpdate';
+
 $route['admin/clinic/detail/(:any)'] = 'admin/clinicDetail';

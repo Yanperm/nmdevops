@@ -40,11 +40,11 @@
 <script src="<?php echo base_url() ?>assets/physician/vendor/retina-replace.min.js"></script>
 <script src="<?php echo base_url() ?>assets/physician/vendor/jquery.magnific-popup.min.js"></script>
 <!-- Custom scripts for all pages-->
-<script src="<?php echo base_url() ?>assets/physician/js/admin.js"></script>
+<script src="<?php echo base_url() ?>assets/physician/js/admin.js?v=<?php echo time();?>"></script>
 <!-- Custom scripts for this page-->
-<!--<script src="--><?php //echo base_url() ?><!--assets/physician/js/admin-charts.js"></script>-->
+<!--<script src="--><?php //echo base_url()?><!--assets/physician/js/admin-charts.js"></script>-->
 <?php
-if(!empty($js)):
+if (!empty($js)):
     foreach ($js as $item):?>
         <script src="<?php echo $item;?>"></script>
    <?php endforeach;

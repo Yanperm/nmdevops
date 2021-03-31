@@ -1,9 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Physician extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -23,7 +22,7 @@ class Physician extends CI_Controller
     {
         if (!$this->session->userdata('authenticated')) {
             redirect(base_url('login'));
-        } else if ($this->session->userdata('authenticated') && !$this->session->userdata('activate')) {
+        } elseif ($this->session->userdata('authenticated') && !$this->session->userdata('activate')) {
             if (!$this->session->userdata('activate')) {
                 redirect(base_url('verify') . "?email=" . $this->session->userdata('email') . "&type=clinic");
             }
@@ -94,7 +93,7 @@ class Physician extends CI_Controller
             ->count_all_results('tbbooking');
 
         $config['base_url'] = base_url() . 'physician/manage';
-        $config['use_page_numbers'] = TRUE;
+        $config['use_page_numbers'] = true;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
         $config['reuse_query_string'] = true;
@@ -176,7 +175,7 @@ class Physician extends CI_Controller
             ->count_all_results('tbbooking');
 
         $config['base_url'] = base_url() . 'physician/ques';
-        $config['use_page_numbers'] = TRUE;
+        $config['use_page_numbers'] = true;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
 
@@ -196,8 +195,8 @@ class Physician extends CI_Controller
         $config['last_tag_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
-//echo "<pre>";
-//print_r($ques);
+        //echo "<pre>";
+        //print_r($ques);
 //        echo "</pre>";
 //        exit();
         $data['ques'] = $ques;
@@ -244,7 +243,6 @@ class Physician extends CI_Controller
 
     public function timeUpdate()
     {
-
         $data = [
             'DAYOFF' => $this->input->post('DAYOFF'),
             'TIME_OPEN' => $this->input->post('TIME_OPEN'),
@@ -288,7 +286,6 @@ class Physician extends CI_Controller
 
     public function timeHolidayDelete()
     {
-
         $this->CloseModel->delete($this->input->get('id'));
 
         $this->session->set_flashdata('msg_holiday', 'ลบวันหยุดเรียบร้อย');
@@ -396,11 +393,17 @@ class Physician extends CI_Controller
             $degree = implode(",", $this->input->post('degree'));
         }
 
+        $workplace = '';
+        if (count($this->input->post('workplace')) > 0) {
+            $workplace = implode(",", $this->input->post('workplace'));
+        }
+
         $data = [
             'DOCTORNAME' => $this->input->post('doctor_name'),
             'PROFICIENT' => $this->input->post('proficient'),
             'DIPLOMA' => $this->input->post('diploma'),
             'DEGREE' => $degree,
+            'WORKPLACE' => $workplace,
         ];
 
         $this->ClinicModel->updateById($data, $this->session->userdata('id'));
@@ -425,8 +428,8 @@ class Physician extends CI_Controller
         $youtubeLink = "https://www.youtube.com/embed/MCJLW8O5-dg?autoplay=1&mute=1&loop=1";
         if (count($youtube) > 0) {
             $pos = strpos($youtube[0]->LINK, '=');
-            $link = substr($youtube[0]->LINK,$pos+1);
-           // echo $link;
+            $link = substr($youtube[0]->LINK, $pos+1);
+            // echo $link;
             $youtubeLink = "https://www.youtube.com/embed/".$link."?autoplay=1&mute=1&loop=1";
         }
 

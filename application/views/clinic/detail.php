@@ -98,9 +98,17 @@
                         <!-- /row-->
                          <hr>
                         <div class="indent_title_in">
-                            <i class="ri-hospital-line"></i>
+                            <i class="pe-7s-portfolio"></i>
                             <h3>สถานที่ทำงานปัจจุบัน</h3>
-                            <p><?php echo $clinic->ADDRESS; ?></p>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="bullets">
+                                        <?php foreach (explode(",", $clinic->WORKPLACE) as $item): ?>
+                                            <li><?php echo $item; ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
                        </div>
 
                         <hr>
