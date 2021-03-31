@@ -54,7 +54,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
                 <a class="nav-link" href="<?php echo base_url('admin/clinic'); ?>">
-                    <i class="fa fa-fw fa-calendar-check-o"></i>
+                    <i class="fa fa-fw fa-user-md"></i>
                     <span class="nav-link-text">
                         CLINIC
                     </span>
@@ -62,7 +62,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
                 <a class="nav-link" href="<?php echo base_url('admin/patient'); ?>">
-                    <i class="fa fa-fw fa-calendar-check-o"></i>
+                    <i class="fa fa-fw fa-user"></i>
                     <span class="nav-link-text">
                         PATIENT
                     </span>
@@ -70,9 +70,17 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
                 <a class="nav-link" href="<?php echo base_url('admin/advertise'); ?>">
-                    <i class="fa fa-fw fa-calendar-check-o"></i>
+                    <i class="fa fa-fw fa-newspaper-o"></i>
                     <span class="nav-link-text">
                         ADVERTISE
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
+                <a class="nav-link" href="<?php echo base_url('admin/setting'); ?>">
+                    <i class="fa fa-fw fa-cog"></i>
+                    <span class="nav-link-text">
+                        Website Setting
                     </span>
                 </a>
             </li>
