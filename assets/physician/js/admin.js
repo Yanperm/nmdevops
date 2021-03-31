@@ -42,44 +42,80 @@
     }, 1000, 'easeInOutExpo');
     event.preventDefault();
   });
-  
+
   // Inline popups
-  $('.inline-popups').each(function () {
-  	$(this).magnificPopup({
-  		delegate: 'a',
-  		removalDelay: 500, //delay removal by X to allow out-animation
-  		callbacks: {
-  			beforeOpen: function () {
-  				this.st.mainClass = this.st.el.attr('data-effect');
-  			}
-  		},
-  		midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-  	});
+  $('.inline-popups').each(function() {
+    $(this).magnificPopup({
+      delegate: 'a',
+      removalDelay: 500, //delay removal by X to allow out-animation
+      callbacks: {
+        beforeOpen: function() {
+          this.st.mainClass = this.st.el.attr('data-effect');
+        }
+      },
+      midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+    });
   });
 
- // Bookmarks
- $('.wishlist_close').on('click', function (c) {
- 	$(this).parent().parent().parent().fadeOut('slow', function (c) {});
- });
-	
+  // Bookmarks
+  $('.wishlist_close').on('click', function(c) {
+    $(this).parent().parent().parent().fadeOut('slow', function(c) {});
+  });
+
   // Selectbox
   $(".selectbox").selectbox();
-  
+
   // Pricing add
-	function newMenuItem() {
-		var newElem = $('tr.pricing-list-item').first().clone();
-		newElem.find('input').val('');
-		newElem.appendTo('table#pricing-list-container');
-	}
-	if ($("table#pricing-list-container").is('*')) {
-		$('.add-pricing-list-item').on('click', function (e) {
-			e.preventDefault();
-			newMenuItem();
-		});
-		$(document).on("click", "#pricing-list-container .delete", function (e) {
-			e.preventDefault();
-			$(this).parent().parent().parent().remove();
-		});
-	}
-	
+  function newMenuItem() {
+    var newElem = $('tr.pricing-list-item').first().clone();
+    newElem.find('input').val('');
+    newElem.appendTo('table#pricing-list-container');
+  }
+
+  function newMenuItemWorkplace() {
+    var newElem = $('tr.workplace-list-item').first().clone();
+    newElem.find('input').val('');
+    newElem.appendTo('table#workplace-list-container');
+  }
+
+  function newMenuItemService() {
+    var newElem = $('tr.service-list-item').first().clone();
+    newElem.find('input').val('');
+    newElem.appendTo('table#service-list-container');
+  }
+
+  if ($("table#pricing-list-container").is('*')) {
+    $('.add-pricing-list-item').on('click', function(e) {
+      e.preventDefault();
+      newMenuItem();
+    });
+    $(document).on("click", "#pricing-list-container .delete", function(e) {
+      e.preventDefault();
+      $(this).parent().parent().parent().remove();
+    });
+  }
+
+  if ($("table#workplace-list-container").is('*')) {
+    $('.add-workplace-list-item').on('click', function(e) {
+      e.preventDefault();
+      newMenuItemWorkplace();
+    });
+    $(document).on("click", "#workplace-list-container .delete", function(e) {
+      e.preventDefault();
+      $(this).parent().parent().parent().remove();
+    });
+  }
+
+
+  if ($("table#service-list-container").is('*')) {
+    $('.add-service-list-item').on('click', function(e) {
+      e.preventDefault();
+      newMenuItemService();
+    });
+    $(document).on("click", "#service-list-container .delete", function(e) {
+      e.preventDefault();
+      $(this).parent().parent().parent().remove();
+    });
+  }
+
 })(jQuery); // End of use strict

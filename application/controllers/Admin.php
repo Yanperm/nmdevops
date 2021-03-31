@@ -89,7 +89,7 @@ class Admin extends CI_Controller
         ];
 
         $this->load->view('template/header_admin');
-        $this->load->view('admin/clinic_detail', $data);
+        $this->load->view('admin/clinic/form', $data);
         $this->load->view('template/footer_physician');
     }
 

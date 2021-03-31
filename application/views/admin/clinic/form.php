@@ -13,6 +13,7 @@
                 <h2><i class="fa fa-file"></i>ข้อมูลคลินิก</h2>
             </div>
             <div class="row">
+              <div class="col-md-6">
                 <input type="hidden" value="<?=$clinic->image?>" name="old_image">
                 <?php if ($this->session->flashdata('msg')): ?>
                     <div class="alert alert-success  alert-dismissible fade show">
@@ -44,6 +45,7 @@
                         </div>
                     </div>
                 </div>
+              </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -59,6 +61,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <!-- /row-->
             <div class="row">
                 <div class="col-md-6">
@@ -74,9 +77,36 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="row">
+              <div class="col-md-6">
+                  <?php $workplace = explode(",", $clinic->WORKPLACE);?>
+
+                      <h6>สถานที่ทำงาน</h6>
+                      <table id="workplace-list-container" style="width:100%;">
+                          <?php foreach ($workplace as $item):?>
+                          <tr class="workplace-list-item">
+                              <td>
+                                  <div class="row">
+                                      <div class="col-md-10">
+                                          <div class="form-group">
+                                              <input type="text" class="form-control" name="workplace[]" value="<?php echo $item;?>">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-2">
+                                          <div class="form-group">
+                                              <a class="delete" href="#"><i class="fa fa-fw fa-remove"></i></a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </td>
+                          </tr>
+                          <?php endforeach;?>
+                      </table>
+                      <a href="#0" class="btn_1 gray add-workplace-list-item"><i class="fa fa-fw fa-plus-circle"></i>เพิ่มสถานที่ทำงาน</a>
+              </div>
                 <div class="col-md-6">
-                    <?php $degree = explode(",",$clinic->DEGREE);?>
+                    <?php $degree = explode(",", $clinic->DEGREE);?>
 
                         <h6>วุฒิบัตร</h6>
                         <table id="pricing-list-container" style="width:100%;">
@@ -101,41 +131,73 @@
                         </table>
                         <a href="#0" class="btn_1 gray add-pricing-list-item"><i class="fa fa-fw fa-plus-circle"></i>เพิ่มวุฒิบัตร</a>
                 </div>
-<!--                <div class="col-md-6">-->
-<!--                    --><?php //$service = explode(",",$clinic->SERVICE);?>
-<!---->
-<!---->
-<!--                    <h6>บริการของคลินิก</h6>-->
-<!--                    <table id="pricing-list-container" style="width:100%;">-->
-<!--                        --><?php //foreach ($service as $item):?>
-<!--                            <tr class="pricing-list-item">-->
-<!--                                <td>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-10">-->
-<!--                                            <div class="form-group">-->
-<!--                                                <input type="text" class="form-control" name="service[]" value="--><?php //echo $item;?><!--">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-md-2">-->
-<!--                                            <div class="form-group">-->
-<!--                                                <a class="delete" href="#"><i class="fa fa-fw fa-remove"></i></a>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        --><?php //endforeach;?>
-<!--                    </table>-->
-<!--                    <a href="#1" class="btn_1 gray add-pricing-list-item"><i class="fa fa-fw fa-plus-circle"></i>เพิ่มบริการของคลินิก</a>-->
-<!--                </div>-->
 
+
+
+
+
+
+
+
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+              <?php $service = explode(",", $clinic->SERVICE);?>
+
+                  <h6>บริการของคลินิก</h6>
+                  <table id="service-list-container" style="width:100%;">
+                      <?php foreach ($service as $item):?>
+                      <tr class="service-list-item">
+                          <td>
+                              <div class="row">
+                                  <div class="col-md-10">
+                                      <div class="form-group">
+                                          <input type="text" class="form-control" name="service[]" value="<?php echo $item;?>">
+                                      </div>
+                                  </div>
+                                  <div class="col-md-2">
+                                      <div class="form-group">
+                                          <a class="delete" href="#"><i class="fa fa-fw fa-remove"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </td>
+                      </tr>
+                      <?php endforeach;?>
+                  </table>
+                  <a href="#0" class="btn_1 gray add-service-list-item"><i class="fa fa-fw fa-plus-circle"></i>เพิ่มบริการของคลินิก</a>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-0">Latitude</p>
+            <input type='text' class="form-control" name="latitude" value="<?php echo $clinic->LAT;?>">
+            <p class="mt-3 mb-0">Longtitude</p>
+            <input type='text' class="form-control" name="latitude" value="<?php echo $clinic->LONG;?>">
+            <p class="mt-3 mb-0">เบอร์โทรศัพท์</p>
+            <input type='text' class="form-control" name="phone" value="<?php echo $clinic->PHONE;?>">
+            <p class="mt-3 mb-0">ไลน์</p>
+            <input type='text' class="form-control" name="line" value="<?php echo $clinic->LINE;?>">
+            <p class="mt-3 mb-0">Link</p>
+            <input type='text' class="form-control" name="line" value="<?php echo $clinic->ENNAME;?>">
+            <p class="mt-3 mb-0">Gold member</p>
+            <div class="form-check" style="margin-left:20px">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                ใช่
+              </label>
             </div>
-
+            <div class="form-check" style="margin-left:20px">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+              <label class="form-check-label" for="exampleRadios2">
+                ไม่ใช่
+              </label>
+            </div>
+          </div>
         </div>
         <!-- /box_general-->
 
         <!-- /box_general-->
-            <p><button class="btn_1 medium" type="submit">บันทึก</button></p>
+            <p class="mt-5"><button class="btn_1 medium" type="submit">บันทึกการแก้ไขคลินิก</button></p>
 
         </form>
     </div>

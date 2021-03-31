@@ -1,7 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
-if ( ! function_exists('sendmail'))
-{
+if (! function_exists('sendmail')) {
     function sendmail($to, $subject, $message)
     {
         $ci =& get_instance();
@@ -27,5 +28,13 @@ if ( ! function_exists('sendmail'))
         $ci->email->send();
 
         return true;
+    }
+}
+
+
+if (! function_exists('getTitle')) {
+    function getTitle($id = '')
+    {
+        return $id;
     }
 }
