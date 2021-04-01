@@ -7,7 +7,8 @@
             </li>
             <li class="breadcrumb-item active">Clinic update</li>
         </ol>
-        <form action="#" enctype="multipart/form-data">
+        <form action="<?php echo base_url('admin/clinic-update');?>" enctype="multipart/form-data" method="post">
+        <input type='hidden' value="<?php echo $clinic->IDCLINIC;?>" name='clinic_id'>
         <div class="box_general padding_bottom">
             <div class="header_box version_2">
                 <h2><i class="fa fa-file"></i>ข้อมูลคลินิก</h2>
@@ -51,13 +52,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>ชื่อคลินิก</label>
-                        <input type="text" class="form-control" value="<?php echo $clinic->CLINICNAME;?>">
+                        <input type="text" class="form-control" name="clinic_name" value="<?php echo $clinic->CLINICNAME;?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>แพทย์</label>
-                        <input type="text" class="form-control" value="<?php echo $clinic->DOCTORNAME;?>">
+                        <input type="text" class="form-control" name="doctor_name" value="<?php echo $clinic->DOCTORNAME;?>">
                     </div>
                 </div>
             </div>
@@ -67,13 +68,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>สาขาวิชาที่เชี่ยวชาญ</label>
-                        <input type="text" class="form-control"  value="<?php echo $clinic->PROFICIENT;?>" >
+                        <input type="text" class="form-control" name="proficient"  value="<?php echo $clinic->PROFICIENT;?>" >
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>ปริญญาบัตรและสถาบันการศึกษา</label>
-                        <input type="text" class="form-control" value="<?php echo $clinic->DIPLOMA;?>">
+                        <input type="text" class="form-control" name="diploma" value="<?php echo $clinic->DIPLOMA;?>">
                     </div>
                 </div>
             </div>
@@ -131,14 +132,6 @@
                         </table>
                         <a href="#0" class="btn_1 gray add-pricing-list-item"><i class="fa fa-fw fa-plus-circle"></i>เพิ่มวุฒิบัตร</a>
                 </div>
-
-
-
-
-
-
-
-
         </div>
         <hr>
         <div class="row">
@@ -170,9 +163,11 @@
           </div>
           <div class="col-md-6">
             <p class="mb-0">Latitude</p>
-            <input type='text' class="form-control" name="latitude" value="<?php echo $clinic->LAT;?>">
+            <input type='text' class="form-control" name="lat" value="<?php echo $clinic->LAT;?>">
             <p class="mt-3 mb-0">Longtitude</p>
-            <input type='text' class="form-control" name="latitude" value="<?php echo $clinic->LONG;?>">
+            <input type='text' class="form-control" name="long" value="<?php echo $clinic->LONG;?>">
+            <p class="mt-3 mb-0">ที่อยู่</p>
+            <textarea class="form-control" name="address"><?php echo $clinic->ADDRESS;?></textarea>
             <p class="mt-3 mb-0">เบอร์โทรศัพท์</p>
             <input type='text' class="form-control" name="phone" value="<?php echo $clinic->PHONE;?>">
             <p class="mt-3 mb-0">ไลน์</p>
@@ -181,17 +176,27 @@
             <input type='text' class="form-control" name="line" value="<?php echo $clinic->ENNAME;?>">
             <p class="mt-3 mb-0">Gold member</p>
             <div class="form-check" style="margin-left:20px">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <input class="form-check-input" type="radio" name="gold_member_status" id="exampleRadios1" value="1" <?php if ($clinic->GOLD_MEMBER_STATUS == "1"):?>checked <?php endif;?>>
               <label class="form-check-label" for="exampleRadios1">
                 ใช่
               </label>
             </div>
             <div class="form-check" style="margin-left:20px">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+              <input class="form-check-input" type="radio" name="gold_member_status" id="exampleRadios2" value="0" <?php if ($clinic->GOLD_MEMBER_STATUS == "0"):?>checked <?php endif;?>>
               <label class="form-check-label" for="exampleRadios2">
                 ไม่ใช่
               </label>
             </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+            <p class="mt-3 mb-0">SEO TITLE</p>
+            <textarea class="form-control" name="seo_title"><?php echo $clinic->SEO_TITLE;?></textarea>
+            <p class="mt-3 mb-0">SEO META</p>
+            <textarea class="form-control" name="seo_meta"><?php echo $clinic->SEO_META;?></textarea>
           </div>
         </div>
         <!-- /box_general-->

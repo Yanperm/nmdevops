@@ -93,6 +93,63 @@ class Admin extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
+    public function clinicUpdate()
+    {
+        $clnicId = $this->input->post('clinic_id');
+
+        $service = '';
+        if (count($this->input->post('service')) > 0) {
+            $service = implode(",", $this->input->post('service'));
+        }
+
+        $degree = '';
+        if (count($this->input->post('degree')) > 0) {
+            $degree = implode(",", $this->input->post('degree'));
+        }
+
+        $workplace = '';
+        if (count($this->input->post('workplace')) > 0) {
+            $workplace = implode(",", $this->input->post('workplace'));
+        }
+
+        $image = $this->input->post('old_image');
+
+        if (!empty($_FILES["file"]) && $_FILES["file"]["name"] !='') {
+            $dir = dirname($_FILES["file"]["tmp_name"]);
+            $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+            rename($_FILES["file"]["tmp_name"], $destination);
+            $image = $this->s3_upload->upload_file($destination);
+            $this->session->set_userdata('image', $image);
+
+            //remove old image S3
+            if ($this->input->post('old_image') != '') {
+                $this->s3_upload->deleteFile(basename($this->input->post('old_image')));
+            }
+        }
+
+
+        $data = [
+          'CLINICNAME' => $this->input->post('clinic_name'),
+          'LINE' => $this->input->post('line'),
+          'PHONE' => $this->input->post('phone'),
+          'LONG' => $this->input->post('long'),
+          'ADDRESS' => $this->input->post('address'),
+          'DOCTORNAME' => $this->input->post('doctor_name'),
+          'PROFICIENT' => $this->input->post('proficient'),
+          'DIPLOMA' => $this->input->post('diploma'),
+          'DEGREE' => $degree,
+          'WORKPLACE' => $workplace,
+          'SERVICE' => $service,
+          'SEO_TITLE' => $this->input->post('seo_title'),
+          'SEO_META' => $this->input->post('seo_meta'),
+          'GOLD_MEMBER_STATUS' => $this->input->post('gold_member_status'),
+          'image' => $image
+        ];
+
+        $this->ClinicModel->updateById($data, $clnicId);
+        redirect(base_url('admin/clinic'));
+    }
+
     public function patient()
     {
         $patient = $this->MembersModel->getData();
