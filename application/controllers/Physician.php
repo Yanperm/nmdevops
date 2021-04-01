@@ -547,4 +547,44 @@ class Physician extends CI_Controller
         $arr['success'] = true;
         echo json_encode($arr);
     }
+
+    public function cancelService()
+    {
+        $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+
+        $subject = "แจ้งยกเลิกบริการคลินิก ".$clinic->CLINICNAME;
+        $message = "แจ้งยกเลิกบริการคลินิก ".$clinic->CLINICNAME . " \r\n
+        ข้อมูลของคลินิก\r\n
+        เบอร์โทรศัพท์ : " . $clinic->PHONE . "\r\n
+        Line : " . $clinic->LINE . "\r\n
+        ";
+        $this->sendMail('visinvisible@gmail.com', $subject, $message);
+
+        echo "true";
+    }
+
+    public function sendMail($to, $subject, $message)
+    {
+        //Postmark Service Mail
+        $config = array(
+            'useragent' => 'nutmor.com',
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.postmarkapp.com',
+            'smtp_port' => 25,
+            'smtp_user' => $this->config->item('username_email'),
+            'smtp_pass' => $this->config->item('password_email'),
+            'smtp_crypto' => 'TLS',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('no-reply@nutmor.com', "Nutmor.com");
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+
+        return true;
+    }
 }

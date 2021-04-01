@@ -45,10 +45,10 @@
                             <div class="row">
                                 <div class="col-lg-1">
                                      <figure>
-                                        <?php if($item['IMAGE'] != ''):?>
+                                        <?php if ($item['IMAGE'] != ''):?>
                                             <img src="<?php echo $item['IMAGE'];?>">
                                         <?php endif;?>
-                                        <?php if($item['IMAGE'] == ''  ):?>
+                                        <?php if ($item['IMAGE'] == ''):?>
                                             <img src="https://png.pngitem.com/pimgs/s/130-1300400_user-hd-png-download.png">
                                         <?php endif;?>
                                     </figure>
@@ -64,7 +64,7 @@
                                         <?php endif;?>
                                     </h4>
                                     <p><?php echo $item['DETAIL']; ?></p>
-                                     
+
                                 </div>
                                 <div class="col-lg-2 text-center">
                                     <p style="margin: 0px;    font-size: 22px;" class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>"> <?php echo $item['QUES']; ?></p>
@@ -77,12 +77,12 @@
                                 <div class="col-lg-3 ">
                                     <span>
                                          <?php if ($item["SHOWS"] != 2 && $item["SHOWS"] != 3): ?>
-                                                <a style="color: white;cursor: pointer" class="btn btn-success" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)">
+                                                <a style="color: white;cursor: pointer" class="btn btn-warning" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')" href="javascript:void(0)">
                                                     <i class="fa fa-fw fa-check-circle-o"></i>เรียกคิว
                                                 </a>
                                         <?php endif; ?>
                                         <?php if ($item["SHOWS"] == 3 || $item["SHOWS"] == 2): ?>
-                                                <a style="color: white;cursor: pointer" class="btn btn-primary" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')">
+                                                <a style="color: white;cursor: pointer" class="btn btn-success" onclick="call('<?php echo $item['BOOKINGID']; ?>','<?php echo $item["QUES"]; ?>')">
                                                    <i class="fa fa-fw fa-check-circle-o"></i>เรียกซ้ำ
                                                 </a>
                                         <?php endif; ?>
@@ -100,14 +100,14 @@
                             <div class="col-lg-6">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <?php if($item['IMAGE'] != ''):?>
+                                        <?php if ($item['IMAGE'] != ''):?>
                                             <img class="avatar-patient" src="<?php echo $item['IMAGE'];?>">
                                         <?php endif;?>
-                                        <?php if($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นาย') !==  false OR strpos($item['CUSTOMERNAME'], 'ด.ช.'  OR strpos($item['CUSTOMERNAME'], 'ชาย') !==  false ))):?>
+                                        <?php if ($item['IMAGE'] == '' and (strpos($item['CUSTOMERNAME'], 'นาย') !==  false or strpos($item['CUSTOMERNAME'], 'ด.ช.'  or strpos($item['CUSTOMERNAME'], 'ชาย') !==  false))):?>
                                             <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/man.png">
-                                        <?php elseif($item['IMAGE'] == '' AND (strpos($item['CUSTOMERNAME'], 'นางสาว') !==  false OR strpos($item['CUSTOMERNAME'], 'น.ส.') !==  false OR strpos($item['CUSTOMERNAME'], 'หญิง') !==  false) ):?>
+                                        <?php elseif ($item['IMAGE'] == '' and (strpos($item['CUSTOMERNAME'], 'นางสาว') !==  false or strpos($item['CUSTOMERNAME'], 'น.ส.') !==  false or strpos($item['CUSTOMERNAME'], 'หญิง') !==  false)):?>
                                             <img class="avatar-patient" src="https://nutmor.s3-ap-southeast-1.amazonaws.com/woman.png">
-                                        <?php elseif($item['IMAGE'] == ''  ):?>
+                                        <?php elseif ($item['IMAGE'] == ''):?>
                                             <img class="avatar-patient" src="https://png.pngitem.com/pimgs/s/130-1300400_user-hd-png-download.png">
                                         <?php endif;?>
                                     </div>
@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <div class="col-lg-1" style="text-align: center">
                                 <p class="queue <?php if (!empty($currentQues[0]->QUES) && $item['QUES'] == $currentQues[0]->QUES): ?> blink_me <?php endif; ?>"> <?php echo $item['QUES']; ?></p><span style="font-size: 18px">คิวที่</span>
                             </div>
@@ -349,8 +349,8 @@
 
 <script>
     $('#show-queue').addClass( "blink" );
-       
-    setTimeout(function(){ 
+
+    setTimeout(function(){
         $('#show-queue').removeClass( "blink" );
     }, 3000);
 
@@ -363,6 +363,6 @@
         });
 
 
-       
+
     }
 </script>

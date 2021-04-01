@@ -220,7 +220,7 @@ class BookingModel extends CI_Model
             INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
             where (booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . date('Y-m-d') . '" AND BOOKTIME != "")
             OR (STATUS !=2 AND BOOKTIME = "" AND booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . date('Y-m-d') . '" )
-            order by booking.QUES ASC
+            order by booking.QBER ASC
             limit ' . $rowno . ',' . $rowperpage
         );
 
@@ -270,7 +270,6 @@ class BookingModel extends CI_Model
 
     public function quesReset($clinicId)
     {
-
         $this->db->set('SHOWS', 0);
 
         $this->db->set('STATUS', 0);
