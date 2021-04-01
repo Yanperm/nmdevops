@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <p>Membership & Billing</p>
-                    <button class="btn">ยกเลิกสมาชิก</button>
+                    <button class="btn" onclick="cancel()" style='cursor:pointer'>ยกเลิกสมาชิก</button>
                 </div>
                 <div class="col-lg-6">
                     <p class="mb-0"><?php echo $clinic->USERNAME;?></p>
@@ -33,35 +33,61 @@
             <div class="row">
                 <div class="col-lg-3">
                     <p>Package Detail</p>
-                    
+
                 </div>
                 <div class="col-lg-6">
                     <p class="mb-0">
-                          <?php if($clinic->TYPE == 1 || $clinic->TYPE == 'Community'):?>
+                          <?php if ($clinic->TYPE == 1 || $clinic->TYPE == 'Community'):?>
                             Community
-                          <?php elseif($clinic->TYPE == 2 || $clinic->TYPE == 'Pro'):?>
+                          <?php elseif ($clinic->TYPE == 2 || $clinic->TYPE == 'Pro'):?>
                             Pro
-                            <?php elseif($clinic->TYPE == 3 || $clinic->TYPE == 'ULTIMATE' || $clinic->TYPE == 'Ultimate'):?>
+                          <?php elseif ($clinic->TYPE == 3 || $clinic->TYPE == 'ULTIMATE' || $clinic->TYPE == 'Ultimate'):?>
                                 Ultimate
-                          <?php endif;?>  
+                          <?php endif;?>
                     </p>
                     <p style="color: #03a9f4;">Package</p>
                 </div>
-                <div class="col-lg-3"></div>
+                <div class="col-lg-3">
+                  <p style="margin-bottom:0px"><?php echo $clinic->EXP_DATE;?></p>
+                  <p style="color: #03a9f4;">วันหมดอายุ</p>
+                </div>
             </div>
-            
-
-
         </div>
     </div>
 </div>
 
 <style>
-   
+
 </style>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    
 
+function cancel(){
+  Swal.fire({
+    title: 'คุณต้องการยกเลิกหรือไม่?',
+    text: "",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText: 'ยกเลิก'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      $.ajax({
+          url: '<?php echo base_url('physician/cancelService')?>',
+          type: 'post',
+          success: function (response) {
+            Swal.fire(
+              'แจ้งการยกเลิก',
+              'การยกเลิกจะสำเร็จก็ต่อเมื่อเจ้าหน้าที่ยืนยันเรียบร้อยแล้ว',
+              'success'
+            )
+          }
+      });
+
+    }
+  })
+}
 </script>
-
-
