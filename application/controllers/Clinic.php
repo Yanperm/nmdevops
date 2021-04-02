@@ -109,9 +109,11 @@ class Clinic extends CI_Controller
     {
         $clinicId = $this->uri->segment('2');
         $date = $this->input->post('booking_date');
+        $datetime = new DateTime($date);
+        $today = $datetime->format('D');
 
         $clinic = $this->ClinicModel->detailById($clinicId);
-        $today = date('D');
+        //  $today = date('D');
         $startTime = '';
         $endTime = '';
 
@@ -149,7 +151,7 @@ class Clinic extends CI_Controller
         $begin = new DateTime($startTime);
         $end = new DateTime($endTime);
 
-        $interval = DateInterval::createFromDateString('15 min');
+        $interval = DateInterval::createFromDateString('10 min');
 
         $times = new DatePeriod($begin, $interval, $end);
 

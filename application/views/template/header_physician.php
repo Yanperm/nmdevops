@@ -97,12 +97,7 @@
                 <span class="nav-link-text">Bookings <span class="badge badge-pill badge-primary">6 New</span></span>
               </a>
             </li>-->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                <a class="nav-link" href="<?php echo base_url('physician/ques/show');?>" target="_blank">
-                    <i class="fa fa-desktop" aria-hidden="true"></i>
-                    <span class="nav-link-text">ประกาศคิว</span>
-                </a>
-            </li>
+
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookmarks">
                 <a class="nav-link" href="<?php echo base_url('physician/time');?>">
                     <i class="fa fa-fw fa-clock-o"></i>
@@ -134,6 +129,18 @@
                         <a href="<?php echo base_url('physician/subscription');?>">Subscription</a>
                     </li>
                 </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
+                <a class="nav-link" href="<?php echo base_url('physician/seo');?>">
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                    <span class="nav-link-text">SEO</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
+                <a class="nav-link" href="<?php echo base_url('physician/ques/show');?>" target="_blank">
+                    <i class="fa fa-desktop" aria-hidden="true"></i>
+                    <span class="nav-link-text">ประกาศคิว</span>
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
