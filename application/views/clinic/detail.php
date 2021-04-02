@@ -101,7 +101,7 @@
                             <i class="pe-7s-portfolio"></i>
                             <h3>สถานที่ทำงานปัจจุบัน</h3>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <ul class="bullets">
                                         <?php foreach (explode(",", $clinic->WORKPLACE) as $item): ?>
                                             <li><?php echo $item; ?></li>
