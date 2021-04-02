@@ -33,8 +33,37 @@ if (! function_exists('sendmail')) {
 
 
 if (! function_exists('getTitle')) {
-    function getTitle($id = '')
+    function getTitle($type = '')
     {
-        return $id;
+        $ci=& get_instance();
+        $ci->load->database();
+
+        if ($type == "") {
+            $ci->db->select('*');
+            $ci->db->where('info_name', 'title');
+            $row = $ci->db->get('tbinfo')->row();
+            $title = $row->detail;
+            return $title;
+        } else {
+            return $type;
+        }
+    }
+}
+
+if (! function_exists('getMetaDesc')) {
+    function getMetaDesc($type = '')
+    {
+        $ci=& get_instance();
+        $ci->load->database();
+
+        if ($type == "") {
+            $ci->db->select('*');
+            $ci->db->where('info_name', 'meta_description');
+            $row = $ci->db->get('tbinfo')->row();
+            $meta = $row->detail;
+            return $meta;
+        } else {
+            return $type;
+        }
     }
 }

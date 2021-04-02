@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Find easily a doctor and book online an appointment">
     <meta name="author" content="Ansonika">
-    <title>นัดหมอ - นัดหมายแพทย์ เช็คอิน ดูคิวออนไลน์ ไม่ต้องรอนาน</title>
+    <title><?php
+    if (empty($title)):
+      echo getTitle('');
+    else:
+      echo $title;
+    endif;
+    ?></title>
     <!-- Favicons-->
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/nutmor_logo_icon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
@@ -53,9 +59,9 @@
             <nav class="col-lg-9 col-6">
                 <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href=""><span>เมนูของระบบ</span></a>
                 <ul id="top_access">
-                    <!--                            <li><a href="--><?php //echo base_url('login') ?><!--"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>-->
-                    <!--                            <li><a href="--><?php //echo base_url('link/signin') ?><!--"><i class="pe-7s-user"></i></a></li>-->
-                    <!--                            <li><a href="--><?php //echo base_url('link/signup') ?><!--"><i class="pe-7s-add-user"></i></a></li>-->
+                    <!--                            <li><a href="--><?php //echo base_url('login')?><!--"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>-->
+                    <!--                            <li><a href="--><?php //echo base_url('link/signin')?><!--"><i class="pe-7s-user"></i></a></li>-->
+                    <!--                            <li><a href="--><?php //echo base_url('link/signup')?><!--"><i class="pe-7s-add-user"></i></a></li>-->
                 </ul>
                 <div class="main-menu">
 
@@ -66,16 +72,16 @@
                             <li><a href="<?php echo base_url('member/profile') ?>">จัดการนัดหมาย</a></li>
                         <?php endif ?>
                         <li><a href="<?php echo base_url('physician') ?>" target="_blank">สำหรับคลินิก</a></li>
-                        <!--                        <li><a href="--><?php //echo base_url('link/package') ?><!--">แพ็คเก็จใช้งาน</a></li>-->
+                        <!--                        <li><a href="--><?php //echo base_url('link/package')?><!--">แพ็คเก็จใช้งาน</a></li>-->
                         <!--                        <li class="submenu">-->
                         <!--                            <a class="show-submenu">คู่มือการใช้งาน<i class="icon-down-open-mini"></i></a>-->
                         <!--                            <ul>-->
-                        <!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การลงทะเบียน</a></li>-->
-                        <!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การยืนยันบัญชีสมาชิก</a></li>-->
-                        <!--                                <li><a href="--><?php //echo base_url('link/manual') ?><!--">การเปลี่ยนแปลงรหัสผ่าน</a></li>-->
+                        <!--                                <li><a href="--><?php //echo base_url('link/manual')?><!--">การลงทะเบียน</a></li>-->
+                        <!--                                <li><a href="--><?php //echo base_url('link/manual')?><!--">การยืนยันบัญชีสมาชิก</a></li>-->
+                        <!--                                <li><a href="--><?php //echo base_url('link/manual')?><!--">การเปลี่ยนแปลงรหัสผ่าน</a></li>-->
                         <!--                            </ul>-->
                         <!--                        </li>-->
-                        <!--                        <li><a href="--><?php //echo base_url('link/contact') ?><!--">ติดต่อเรา</a></li>-->
+                        <!--                        <li><a href="--><?php //echo base_url('link/contact')?><!--">ติดต่อเรา</a></li>-->
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
                             <li><a href="<?php echo base_url('login') ?>"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>
                         <?php endif; ?>

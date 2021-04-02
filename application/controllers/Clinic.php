@@ -71,12 +71,16 @@ class Clinic extends CI_Controller
         ];
         $this->ClinicModel->updateById($data, $clinic->IDCLINIC);
 
+        $dataHeader = [
+          'title' => $clinic->SEO_TITLE,
+          'meta' => $clinic->SEO_META
+        ];
 
         $data = [
             'clinic' => $clinic
         ];
 
-        $this->load->view('template/header');
+        $this->load->view('template/header', $dataHeader);
         $this->load->view('clinic/detail', $data);
         $this->load->view('template/footer');
     }
@@ -177,7 +181,13 @@ class Clinic extends CI_Controller
             'closeStatus' => $closeStatus
         ];
 
-        $this->load->view('template/header');
+        $dataHeader = [
+          'title' => $clinic->SEO_TITLE,
+          'meta' => $clinic->SEO_META
+        ];
+
+
+        $this->load->view('template/header', $dataHeader);
         $this->load->view('clinic/time', $data);
         $this->load->view('template/footer');
     }
@@ -205,8 +215,12 @@ class Clinic extends CI_Controller
             'member' => $member
         ];
 
+        $dataHeader = [
+          'title' => $clinic->SEO_TITLE,
+          'meta' => $clinic->SEO_META
+        ];
 
-        $this->load->view('template/header');
+        $this->load->view('template/header', $dataHeader);
         $this->load->view('clinic/booking', $data);
         $this->load->view('template/footer');
     }
@@ -298,7 +312,12 @@ class Clinic extends CI_Controller
             'clinic' => $clinic
         ];
 
-        $this->load->view('template/header');
+        $dataHeader = [
+          'title' => $clinic->SEO_TITLE,
+          'meta' => $clinic->SEO_META
+        ];
+
+        $this->load->view('template/header', $dataHeader);
         $this->load->view('clinic/confirm', $data);
         $this->load->view('template/footer');
     }
