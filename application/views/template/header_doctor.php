@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Find easily a doctor and book online an appointment">
     <meta name="author" content="Ansonika">
-    <title>นัดหมอ - นัดหมายแพทย์ เช็คอิน ดูคิวออนไลน์ ไม่ต้องรอนาน</title>
+    <title><?php
+    if (empty($title)):
+      echo getTitle('');
+    else:
+      echo $title;
+    endif;
+    ?></title>
     <!-- Favicons-->
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/nutmor_logo_icon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
@@ -53,9 +59,9 @@
             <nav class="col-lg-9 col-6">
                 <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href=""><span>เมนูของระบบ</span></a>
                 <ul id="top_access">
-                    <!--                            <li><a href="--><?php //echo base_url('login') ?><!--"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>-->
-                    <!--                            <li><a href="--><?php //echo base_url('link/signin') ?><!--"><i class="pe-7s-user"></i></a></li>-->
-                    <!--                            <li><a href="--><?php //echo base_url('link/signup') ?><!--"><i class="pe-7s-add-user"></i></a></li>-->
+                    <!--                            <li><a href="--><?php //echo base_url('login')?><!--"><i class="icon-user-7"></i> คนไข้ล็อคอิน/สมัครสมาชิก</a></li>-->
+                    <!--                            <li><a href="--><?php //echo base_url('link/signin')?><!--"><i class="pe-7s-user"></i></a></li>-->
+                    <!--                            <li><a href="--><?php //echo base_url('link/signup')?><!--"><i class="pe-7s-add-user"></i></a></li>-->
                 </ul>
                 <div class="main-menu">
 

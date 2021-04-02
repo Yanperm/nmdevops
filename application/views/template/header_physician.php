@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>นัดหมอ - นัดหมายแพทย์ เช็คอิน ดูคิวออนไลน์ ไม่ต้องรอนาน</title>
+    <title><?php
+    if (empty($title)):
+      echo getTitle('');
+    else:
+      echo $title;
+    endif;
+    ?></title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -52,7 +58,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
     <a style='margin-right: 0px' class="navbar-brand" href="<?php echo base_url('physician')?>"><img src="<?php echo base_url() ?>assets/img/nutmor_logo_white.png" data-retina="true" alt="" width="163" height="36" ></a>
     <span style="color: #ffffff;font-size: 21px "><?php echo $this->session->userdata('name'); ?></span>
-    <?php if($this->session->userdata('goldMember')):?><span class="gold_member">GOLD MEMBER</span><?php endif;?>
+    <?php if ($this->session->userdata('goldMember')):?><span class="gold_member">GOLD MEMBER</span><?php endif;?>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
