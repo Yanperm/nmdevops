@@ -521,6 +521,32 @@ class Physician extends CI_Controller
         redirect(base_url('physician/profile'));
     }
 
+    public function seo()
+    {
+        $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+
+        $data = [
+          'clinic' => $clinic
+      ];
+
+        $this->load->view('template/header_physician');
+        $this->load->view('physician/seo', $data);
+        $this->load->view('template/footer_physician');
+    }
+
+    public function seoUpdate()
+    {
+        $data = [
+          'SEO_TITLE' => $this->input->post('title'),
+          'SEO_META' => $this->input->post('desc'),
+      ];
+
+        $this->ClinicModel->updateById($data, $this->session->userdata('id'));
+
+        $this->session->set_flashdata('msg', 'แก้ไขข้อมูล SEO เรียบร้อย');
+        redirect(base_url('physician/seo'));
+    }
+
 
     public function check_old_password()
     {
