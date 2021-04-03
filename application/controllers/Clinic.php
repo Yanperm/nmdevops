@@ -151,7 +151,7 @@ class Clinic extends CI_Controller
         $begin = new DateTime($startTime);
         $end = new DateTime($endTime);
 
-        $interval = DateInterval::createFromDateString('10 min');
+        $interval = DateInterval::createFromDateString($clinic->QUETIME.' min');
 
         $times = new DatePeriod($begin, $interval, $end);
 
