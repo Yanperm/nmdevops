@@ -1,0 +1,9 @@
+div.datedropper.softubon {
+  --dd-color1: #fd4741;
+  --dd-color2: #FFF;
+  --dd-color3: #4D4D4D;
+  --dd-color4: #FFF;
+  --dd-radius: 8px;
+  --dd-width: 180px;
+  --dd-shadow: 0 0 32px 0px rgba(0, 0, 0, 0.1)
+}

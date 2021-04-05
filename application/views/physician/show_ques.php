@@ -9,18 +9,18 @@
     <title>โปรแกรมนัดหมอออนไลน์ เต็มรูปแบบ ใช้งานง่ายขึ้นกว่าเดิม สำหรับคลินิกที่ต้องการความสะดวก ลดความแออัด</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js" type="f0314693281be9dc0159a340-text/javascript"></script>
     <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic//css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic//css/bootstrap-reboot.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic//css/bootstrap-grid.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic/css/corusal.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic/css/anmimation.css" rel="stylesheet">
-    <link href="https://nutmor.com/rathawitclinic/css/softubon.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/bootstrap-reboot.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/bootstrap-grid.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/corusal.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/anmimation.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/softubon.css" rel="stylesheet">
 <!--    <link href="https://nutmor.com/rathawitclinic/css/productc.css" rel="stylesheet">-->
-    <link href="https://nutmor.com/rathawitclinic/js/jquery-ui-1.11.4.custom.css" rel="stylesheet"/>
-    <script src="https://nutmor.com/rathawitclinic/js/jquery-1.12.3.js" type="f0314693281be9dc0159a340-text/javascript"></script>
-    <script src="https://nutmor.com/rathawitclinic/js/jquery-ui-1.11.4.custom.js" type="f0314693281be9dc0159a340-text/javascript"></script>
-    <script src="https://nutmor.com/rathawitclinic/js/datepicker.js" type="f0314693281be9dc0159a340-text/javascript"></script>
+    <link href="<?php echo base_url() ?>assets/physician/queue/css/jquery-ui-1.11.4.custom.css" rel="stylesheet"/>
+    <script src="<?php echo base_url() ?>assets/physician/queue/js/jquery-1.12.3.js" type="f0314693281be9dc0159a340-text/javascript"></script>
+    <script src="<?php echo base_url() ?>assets/physician/queue/js/jquery-ui-1.11.4.custom.js" type="f0314693281be9dc0159a340-text/javascript"></script>
+    <script src="<?php echo base_url() ?>assets/physician/queue/js/datepicker.js" type="f0314693281be9dc0159a340-text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery-2.2.4.min.js"></script>
 <!--    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
     <style>
