@@ -7,14 +7,14 @@ class StatModel extends CI_Model
     {
         $year = date("Y");
         $query = $this->db->query("SELECT
-    COUNT(*) AS NUM, SUBSTRING(CREATEDATE, 6, 2)  AS MONTH 
+    COUNT(*) AS NUM, SUBSTRING(CREATEDATE, 6, 2)  AS MONTH
 FROM
     dbnutmor.tbstat
 WHERE
     IDCLINIC != '' AND IP != '::1'
         AND SUBSTRING(CREATEDATE, 1, 5) LIKE '%" . $year . "%'
         AND IDCLINIC = '" . $clinicId . "'
-GROUP BY SUBSTRING(CREATEDATE, 0, 6) , IDCLINIC");
+GROUP BY MONTH , IDCLINIC");
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
