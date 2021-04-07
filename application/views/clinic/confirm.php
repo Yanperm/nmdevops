@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated')): ?>
+        <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && $this->session->userdata('type') == 'member'): ?>
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <a href="<?php echo base_url('member/profile'); ?>" class="btn_1">ไปหน้าบัญชีผู้ใช้</a>
