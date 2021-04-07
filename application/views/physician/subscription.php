@@ -47,10 +47,17 @@
                     </p>
                     <p style="color: #03a9f4;">Package</p>
                 </div>
+                <?php if ($clinic->EXP_DATE != '0000-00-00'):?>
                 <div class="col-lg-3">
                   <p style="margin-bottom:0px"><?php echo $clinic->EXP_DATE;?></p>
                   <p style="color: #03a9f4;">วันหมดอายุ</p>
                 </div>
+                <?php endif;?>
+                <?php if ($clinic->EXP_DATE == '0000-00-00'):?>
+                <div class="col-lg-3">
+                  <p style="margin-bottom:0px">Infinity</p>
+                  </div>
+              <?php endif;?>
             </div>
         </div>
     </div>
