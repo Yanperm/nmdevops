@@ -1,4 +1,4 @@
-<styletype="text/css">
+<style type="text/css">
     .email-content{
       width: 55%
     }
