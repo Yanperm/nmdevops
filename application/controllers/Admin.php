@@ -63,7 +63,7 @@ class Admin extends CI_Controller
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/dashboard', $data);
-        $this->load->view('template/footer_physician', ['js' => $js]);
+        $this->load->view('template/footer_admin', ['js' => $js]);
     }
 
     public function clinic()
@@ -76,7 +76,7 @@ class Admin extends CI_Controller
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/clinic', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function clinicDetail()
@@ -90,7 +90,7 @@ class Admin extends CI_Controller
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/clinic/form', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function clinicUpdate()
@@ -160,7 +160,7 @@ class Admin extends CI_Controller
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/patient', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function patientData()
@@ -185,7 +185,7 @@ class Admin extends CI_Controller
     {
         $this->load->view('template/header_admin');
         $this->load->view('admin/advertise');
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function advertiseData()
@@ -210,7 +210,7 @@ class Admin extends CI_Controller
     {
         $this->load->view('template/header_admin');
         $this->load->view('admin/advertise/form-insert');
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function advertiseInsert()
@@ -252,7 +252,7 @@ class Admin extends CI_Controller
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/advertise/form-update', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function advertiseUpdate()
@@ -323,7 +323,7 @@ class Admin extends CI_Controller
 
         $this->load->view('template/header_admin');
         $this->load->view('admin/setting', $data);
-        $this->load->view('template/footer_physician');
+        $this->load->view('template/footer_admin');
     }
 
     public function settingUpdate()
@@ -342,5 +342,11 @@ class Admin extends CI_Controller
         $this->InfoModel->update($data, 'meta_description');
 
         $this->setting();
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url('admin'));
     }
 }
