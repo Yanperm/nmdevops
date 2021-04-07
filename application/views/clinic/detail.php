@@ -163,7 +163,14 @@
                                             <td>วันจันทร์</td>
                                             <td><?php echo $clinic->TIME1; ?> - <?php echo $clinic->CLOSE1; ?></td>
                                         </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันจันทร์</td>
+                                            <td>วันหยุด</td>
+                                        </tr>
                                     <?php endif; ?>
+
+
                                     <?php if ($clinic->DAYOFF != 2):
                                         if ($dayNow == 2):
                                             $start = $clinic->TIME2;
@@ -173,6 +180,11 @@
                                         <tr>
                                             <td>วันอังคาร</td>
                                             <td><?php echo $clinic->TIME2; ?> - <?php echo $clinic->CLOSE2; ?></td>
+                                        </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันอังคาร</td>
+                                            <td>วันหยุด</td>
                                         </tr>
                                     <?php endif; ?>
                                     <?php if ($clinic->DAYOFF != 3):
@@ -185,6 +197,11 @@
                                             <td>วันพุธ</td>
                                             <td><?php echo $clinic->TIME3; ?> - <?php echo $clinic->CLOSE3; ?></td>
                                         </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันพุธ</td>
+                                            <td>วันหยุด</td>
+                                        </tr>
                                     <?php endif; ?>
                                     <?php if ($clinic->DAYOFF != 4):
                                         if ($dayNow == 4):
@@ -195,6 +212,11 @@
                                         <tr>
                                             <td>วันพฤหัสบดี</td>
                                             <td><?php echo $clinic->TIME4; ?> - <?php echo $clinic->CLOSE4; ?></td>
+                                        </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันพฤหัสบดี</td>
+                                            <td>วันหยุด</td>
                                         </tr>
                                     <?php endif; ?>
                                     <?php if ($clinic->DAYOFF != 5):
@@ -207,6 +229,11 @@
                                             <td>วันศุกร์</td>
                                             <td><?php echo $clinic->TIME5; ?> - <?php echo $clinic->CLOSE5; ?></td>
                                         </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันศุกร์</td>
+                                            <td>วันหยุด</td>
+                                        </tr>
                                     <?php endif; ?>
                                     <?php if ($clinic->DAYOFF != 6):
                                         if ($dayNow == 6):
@@ -218,6 +245,11 @@
                                             <td>วันเสาร์</td>
                                             <td><?php echo $clinic->TIME6; ?> - <?php echo $clinic->CLOSE6; ?></td>
                                         </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันเสาร์</td>
+                                            <td>วันหยุด</td>
+                                        </tr>
                                     <?php endif; ?>
                                     <?php if ($clinic->DAYOFF != 0):
                                         if ($dayNow == 0):
@@ -228,6 +260,11 @@
                                         <tr>
                                             <td>วันอาทิตย์</td>
                                             <td><?php echo $clinic->TIME_OPEN; ?> - <?php echo $clinic->TIME_CLOSE; ?></td>
+                                        </tr>
+                                      <?php else:?>
+                                        <tr>
+                                            <td>วันอาทิตย์</td>
+                                            <td>วันหยุด</td>
                                         </tr>
                                     <?php endif; ?>
 
