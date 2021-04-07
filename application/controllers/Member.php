@@ -1,9 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Member extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -19,7 +18,7 @@ class Member extends CI_Controller
     {
         if (!$this->session->userdata('authenticated')) {
             redirect(base_url('login'));
-        } else if ($this->session->userdata('authenticated') && !$this->session->userdata('activate')) {
+        } elseif ($this->session->userdata('authenticated') && !$this->session->userdata('activate')) {
             if (!$this->session->userdata('activate')) {
                 redirect(base_url('verify') . "?email=" . $this->session->userdata('email') . "&type=member");
             }
@@ -70,6 +69,19 @@ class Member extends CI_Controller
             $this->BookingModel->checkin($this->input->get('vn'));
         }
 
+        $booking = $this->BookingModel->detail($this->input->get('vn'));
+
+        $subject = "ยืนยันการเช็คอิน";
+        $message = "ยืนยันการเช็คอิน การจองหมายเลข : " . $booking[0]->BOOKINGID . "\n";
+        $message .= "วันที่ : " . $booking[0]->BOOKDATE . "\n";
+        $message .= "เวลา : " . $booking[0]->BOOKTIME . "\n";
+        $message .= "คิว : " . $booking[0]->QUES . "\n";
+
+        //sendmail
+        if ($booking[0]->EMAIL != '') {
+            $this->sendMail($booking[0]->EMAIL, $subject, $message);
+        }
+
         $this->session->set_flashdata('msg', 'ทำการเช็คอินเรียบร้อย');
 
         redirect(base_url('member/profile'));
@@ -92,7 +104,7 @@ class Member extends CI_Controller
         $email = $this->input->post('email');
         $image = $this->input->post('old_image');
 
-        if(file_exists($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
+        if (file_exists($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
             $dir = dirname($_FILES["file"]["tmp_name"]);
             $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
             rename($_FILES["file"]["tmp_name"], $destination);
@@ -188,7 +200,7 @@ class Member extends CI_Controller
         }
 
         $config['base_url'] = base_url() . 'loadBooking';
-        $config['use_page_numbers'] = TRUE;
+        $config['use_page_numbers'] = true;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
 
@@ -234,7 +246,7 @@ class Member extends CI_Controller
             ->count_all_results('tbbooking');
 
         $config['base_url'] = base_url() . 'loadBooking';
-        $config['use_page_numbers'] = TRUE;
+        $config['use_page_numbers'] = true;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
 
@@ -260,5 +272,30 @@ class Member extends CI_Controller
         $data['pagination'] = $this->pagination->create_links();
 
         return $this->load->view('member/listCheckin', $data);
+    }
+
+    public function sendMail($to, $subject, $message)
+    {
+        //Postmark Service Mail
+        $config = array(
+            'useragent' => 'nutmor.com',
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.postmarkapp.com',
+            'smtp_port' => 25,
+            'smtp_user' => $this->config->item('username_email'),
+            'smtp_pass' => $this->config->item('password_email'),
+            'smtp_crypto' => 'TLS',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('no-reply@nutmor.com', "Nutmor.com");
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->send();
+
+        return true;
     }
 }
