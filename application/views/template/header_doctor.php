@@ -85,7 +85,7 @@
                         <li><a href="<?php echo base_url('physician/register'); ?>">สมัครสมาชิกคลินิก</a></li>
                         <?php endif;?>
                         <li><a href="<?php echo base_url('package') ?>">แพ็คเก็จใช้งาน</a></li>
-
+                        <li><a href="<?php echo base_url('') ?>">สำหรับคนไข้</a></li>
                         <?php if (empty($this->session->userdata('authenticated'))): ?>
                             <li><a href="<?php echo base_url('physician/login') ?>"><i class="icon-user-7"></i> ล็อคอิน/เข้าสู่ระบบคลินิก</a></li>
                         <?php endif; ?>
