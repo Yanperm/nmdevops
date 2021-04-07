@@ -1,4 +1,16 @@
-<div style="width: 55%">
+<styletype="text/css">
+    .email-content{
+      width: 55%
+    }
+
+    @media (max-width: 768px) {
+      .email-content{
+        width: 100%
+      }
+    }
+</style>
+
+<div class="email-content" >
     <h2 style="    background: #401e7b;
     color: #ffffff;
     padding: 20px;
@@ -24,4 +36,3 @@
     </div>
 </div>
 <br><br><br>
-
