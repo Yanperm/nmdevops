@@ -33,7 +33,7 @@ GROUP BY MONTH , IDCLINIC");
     WHERE
     IDCLINIC != '' AND IP != '::1'
         AND SUBSTRING(CREATEDATE, 1, 5) LIKE '%" . $year . "%'
-       ");
+      GROUP BY MONTH ");
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
