@@ -55,6 +55,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
 
 $route['clinic/(:any)/queue'] = 'welcome/showQues';
+$route['alert/checkin'] = 'welcome/notificationCheckin';
 
 $route['search/(:any)'] = 'search/listData';
 $route['search'] = 'search/listData';
@@ -74,6 +75,8 @@ $route['clinic_profile'] = 'clinic/profile';
 $route['like'] = 'clinic/like';
 $route['checkinLast'] = 'clinic/checkinLast';
 $route['checkinFast'] = 'clinic/checkinFast';
+$route['current-queue'] = 'clinic/currentQueue';
+
 
 
 $route['physician/dashboard'] = 'physician/dashboard';
