@@ -87,6 +87,15 @@ class BookingModel extends CI_Model
         }
     }
 
+    public function alertBooking($date)
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking where BOOKDATE = "'.$date.'"');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
 
     public function getDataAllByClinic($clicnicId)
     {

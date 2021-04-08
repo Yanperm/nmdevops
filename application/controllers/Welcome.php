@@ -54,7 +54,7 @@ class Welcome extends CI_Controller
     {
         $nextTwoDate = date('Y-m-d', strtotime(date("Y-m-d") .' +2 day'));
         $booking = $this->BookingModel->alert($nextTwoDate);
-      
+
         foreach ($booking as $key => $value) {
             $booking = $this->BookingModel->detail($value->BOOKINGID);
 
@@ -73,6 +73,32 @@ class Welcome extends CI_Controller
             $subject = "แจ้งเตือนการนัดหมอ " . $booking[0]->CLINICNAME;
             $message = $this->load->view('email_checkin', $dataEmail, true);
             $this->sendMail($booking[0]->EMAIL, $subject, $message);
+        }
+    }
+
+    public function notificationBooking()
+    {
+        $today = date('Y-m-d');
+        $booking = $this->BookingModel->alertBooking($today);
+
+        foreach ($booking as $key => $value) {
+            $booking = $this->BookingModel->detail('VN1617870169');
+
+            $dataEmail = [
+              'clinicName' => $booking[0]->CLINICNAME,
+              'vn' => $booking[0]->BOOKINGID,
+              'name' => $booking[0]->CUSTOMERNAME,
+              'telephone' => $booking[0]->PHONE,
+              'lineId' => $booking[0]->LINEID,
+              'cause' => $booking[0]->cause,
+              'date' => $booking[0]->BOOKDATE,
+              'time' => $booking[0]->BOOKTIME,
+              'ques' => $booking[0]->QUES,
+            ];
+            //$this->load->view('email_checkin', $dataEmail);
+            $subject = "แจ้งเตือนวันพบแพทย์ " . $booking[0]->CLINICNAME;
+            $message = $this->load->view('email_detail', $dataEmail, true);
+            $this->sendMail("purinetwork12@gmail.com", $subject, $message);
         }
     }
 

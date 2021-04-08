@@ -56,6 +56,7 @@ $route['translate_uri_dashes'] = false;
 
 $route['clinic/(:any)/queue'] = 'welcome/showQues';
 $route['alert/checkin'] = 'welcome/notificationCheckin';
+$route['alert/booking'] = 'welcome/notificationBooking';
 
 $route['search/(:any)'] = 'search/listData';
 $route['search'] = 'search/listData';
