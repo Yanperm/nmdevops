@@ -79,7 +79,7 @@ class BookingModel extends CI_Model
 
     public function alert($date)
     {
-        $query = $this->db->query('SELECT * FROM tbbooking where CHECKIN = 0 AND BOOKDATE between "'.date("Y-m-d").'" AND "'.$date.'"');
+        $query = $this->db->query('SELECT * FROM tbbooking where CHECKIN = 0 AND BOOKDATE = "'.$date.'"');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
