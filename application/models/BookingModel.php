@@ -76,6 +76,18 @@ class BookingModel extends CI_Model
         }
     }
 
+
+    public function alert($date)
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking where CHECKIN = 0 AND BOOKDATE between "'.date("Y-m-d").'" AND "'.$date.'"');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+
     public function getDataAllByClinic($clicnicId)
     {
         $query = $this->db->query('SELECT count(BOOKINGID) AS ALLBOOKING FROM tbbooking where CLINICID = "' . $clicnicId . '"');
@@ -99,7 +111,7 @@ class BookingModel extends CI_Model
     public function detail($bookingId)
     {
         $query = $this->db->query('
-            SELECT * FROM tbbooking as booking
+            SELECT *,booking.DETAIL as cause FROM tbbooking as booking
             left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
             left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
             where booking.BOOKINGID like "' . $bookingId . '" ');
