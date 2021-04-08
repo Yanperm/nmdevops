@@ -515,6 +515,15 @@ class Clinic extends CI_Controller
         }
     }
 
+    public function currentQueue()
+    {
+        $clinicId = $_GET["clinic_id"];
+        $currentQues = $this->BookingModel->getCurrentQues($clinicId);
+        
+        header('Content-type: application/json');
+        echo json_encode($currentQues);
+    }
+
     public function sendMail($to, $subject, $message)
     {
         //Postmark Service Mail

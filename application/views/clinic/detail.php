@@ -53,7 +53,7 @@
                                             เช็คอิน
                                             <!-- </a> -->
                                         </li>
-                                        <li onclick="getQues()" style="cursor: pointer">ดูคิว</li>
+                                        <li onclick="getQues('<?php echo $clinic->IDCLINIC;?>')" style="cursor: pointer">ดูคิว</li>
                                     </ul>
 
 
@@ -542,44 +542,64 @@
       });
     }
 
-    function getQues() {
-        let today = new Date();
-        let dateToday = ('0' + (today.getMonth() + 1)).slice(-2) + "/" + ('0' + today.getDate()).slice(-2) + "/" + today.getFullYear();
-        let dayOff = $('#day_off').val();
-        let start = Date.parse(dateToday + " " + $('#start').val());
-        let end = Date.parse(dateToday + " " + $('#end').val());
-        let currentTime = Date.parse(dateToday + " " + today.getHours() + ":" + today.getMinutes());
-        //let currentTime = Date.parse(dateToday + " " + "20:59");
-        if (isNaN(dayOff) || today.getDay() == dayOff) {
-            $('#stop').show();
-            $('#close').hide();
-            $('#open').hide();
-        } else if (start > currentTime || end < currentTime) {
-            $('#close').show();
-            $('#open').hide();
-            $('#stop').hide();
-        } else if (start <= currentTime || end >= currentTime) {
-            $('#close').hide();
-            $('#open').show();
-            $('#stop').hide();
+    function getQues(id) {
+      $.ajax({
+          url: '<?php echo base_url('current-queue')?>',
+          type: 'get',
+          // dataType: 'json',
+          data : {
+              clinic_id : id,
 
-            let minutesToAdd = 15;
-            let time = start;
-            let ques = 1;
-            let quesShow = 0;
+          },
+          success: function (response) {
 
-            while (time < end) {
-                time = new Date(time + minutesToAdd * 60000);
-                time = Date.parse(time);
-                if (currentTime <= time && quesShow == 0) {
-                    quesShow = ques;
-                }
-                ques++;
+            if(response.length > 0){
+              $('#close').hide();
+              $('#open').show();
+              $('#stop').hide();
+              $('#qber').html(response[0].QUES);
+              $('#myModal').modal('show');
+            }else{
+              let today = new Date();
+              let dateToday = ('0' + (today.getMonth() + 1)).slice(-2) + "/" + ('0' + today.getDate()).slice(-2) + "/" + today.getFullYear();
+              let dayOff = $('#day_off').val();
+              let start = Date.parse(dateToday + " " + $('#start').val());
+              let end = Date.parse(dateToday + " " + $('#end').val());
+              let currentTime = Date.parse(dateToday + " " + today.getHours() + ":" + today.getMinutes());
+              //let currentTime = Date.parse(dateToday + " " + "20:59");
+              if (isNaN(dayOff) || today.getDay() == dayOff) {
+                  $('#stop').show();
+                  $('#close').hide();
+                  $('#open').hide();
+              } else if (start > currentTime || end < currentTime) {
+                  $('#close').show();
+                  $('#open').hide();
+                  $('#stop').hide();
+              } else if (start <= currentTime || end >= currentTime) {
+                  $('#close').hide();
+                  $('#open').show();
+                  $('#stop').hide();
+
+                  let minutesToAdd = 15;
+                  let time = start;
+                  let ques = 1;
+                  let quesShow = 0;
+
+                  while (time < end) {
+                      time = new Date(time + minutesToAdd * 60000);
+                      time = Date.parse(time);
+                      if (currentTime <= time && quesShow == 0) {
+                          quesShow = ques;
+                      }
+                      ques++;
+                  }
+
+                  $('#qber').html("A" + quesShow);
+              }
+
+              $('#myModal').modal('show');
             }
-
-            $('#qber').html("A" + quesShow);
-        }
-
-        $('#myModal').modal('show');
+          }
+      });
     }
 </script>
