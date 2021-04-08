@@ -151,7 +151,7 @@
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;">
 								<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f3e6f8;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:650px"><tr class="layout-full-width" style="background-color:transparent"><![endif]-->
 								<!--[if (mso)|(IE)]><td align="center" width="650" style="background-color:transparent;width:650px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
-							
+
 								<!--[if (mso)|(IE)]></td></tr></table><![endif]-->
 								<!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
 							</div>
@@ -191,14 +191,14 @@
 											<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" valign="top">
 												<tr style="vertical-align: top;" valign="top">
 													<td style="word-break: break-word; vertical-align: top; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 35px; text-align: center; width: 100%;" width="100%" align="center" valign="top">
-														<h1 style="color:#8412c0;direction:ltr;font-family:'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:28px;font-weight:normal;letter-spacing:normal;line-height:120%;text-align:center;margin-top:0;margin-bottom:0;"><strong>แจ้งเตือนการนัดหมอของคุณ</strong></h1>
+														<h1 style="color:#8412c0;direction:ltr;font-family:'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:28px;font-weight:normal;letter-spacing:normal;line-height:120%;text-align:center;margin-top:0;margin-bottom:0;"><strong>เช็คอิน</strong></h1>
 													</td>
 												</tr>
 											</table>
 											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 45px; padding-left: 45px; padding-top: 10px; padding-bottom: 0px; font-family: Arial, sans-serif"><![endif]-->
 											<div style="color:#393d47;font-family:'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif;line-height:1.5;padding-top:10px;padding-right:45px;padding-bottom:0px;padding-left:45px;">
 												<div class="txtTinyMce-wrapper" style="line-height: 1.5; font-size: 12px; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #393d47; mso-line-height-alt: 18px;">
-													<p style="text-align: center; line-height: 1.5; word-break: break-word; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 18px; margin: 0;"><span style="color: #aa67cf;"><span style="font-size: 18px;">รายละเอียดการนัดหมอ</span></span></p>
+													<p style="text-align: center; line-height: 1.5; word-break: break-word; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 18px; margin: 0;"><span style="color: #aa67cf;"><span style="font-size: 18px;">โปรดทำการเช็คอินการนัดหมอ</span></span></p>
                           <p style="line-height: 1.5; word-break: break-word; text-align: left; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 18px; margin: 0;"><span style="color: #aa67cf;"><span style="font-size: 18px;">ชื่อ : <?php echo $name;?></span></span></p>
 													<p style="line-height: 1.5; word-break: break-word; text-align: left; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 18px; margin: 0;"><span style="color: #aa67cf;"><span style="font-size: 18px;">วันที่ : <?php echo $date;?></span></span></p>
 													<p style="line-height: 1.5; word-break: break-word; text-align: left; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; mso-line-height-alt: 18px; margin: 0;"><span style="color: #aa67cf;"><span style="font-size: 18px;">เวลา : <?php echo $time;?></span></span></p>
