@@ -13,7 +13,7 @@
     <div class="bg_color_1">
         <div class="container margin_120_95">
             <div class="main_title">
-                <h1>"เข้าถึงคนไข้จำนวนมาก เพิ่มการนัดหมายแพทย์ทุกช่องทาง"</h1>
+                <h1>“โปรแกรมบริหารจัดการคลินิก นัดหมอ ให้คลินิก Go Online”</h1>
                 <p>สมัครสมาชิก นัดหมอ กับเรา ให้คนไข้ นัดหมาย เช็คอิน ดูคิว ออนไลน์</p>
             </div>
             <div class="row justify-content-between">
@@ -90,7 +90,7 @@
     <!-- /FINISH DEV -->
     <div class="container margin_120_95">
         <div class="main_title">
-            <h2>ทำไมถึงต้องเลือก นัดหมอ?</h2>
+            <h2>ทำไมถึงเลือกใช้ โปรแกรม นัดหมอ?</h2>
             <p><strong>6</strong> เหตุผลหลัก ที่ทำให้คุณหมอเลือกใช้งาน <strong>Nutmor Platform </strong></p>
         </div>
         <div class="row">
