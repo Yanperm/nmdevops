@@ -82,7 +82,7 @@ class Welcome extends CI_Controller
         $booking = $this->BookingModel->alertBooking($today);
 
         foreach ($booking as $key => $value) {
-            $booking = $this->BookingModel->detail('VN1617870169');
+            $booking = $this->BookingModel->detail($value->BOOKINGID);
 
             $dataEmail = [
               'clinicName' => $booking[0]->CLINICNAME,
