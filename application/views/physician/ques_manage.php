@@ -9,7 +9,9 @@
         </ol>
         <!-- Example DataTables Card-->
         <div class="card mb-3">
-            <div class="card-header">ตัวเลือกการค้นหา</div>
+            <div class="card-header">ตัวเลือกการค้นหา
+              <a href="<?php echo base_url('physician/addQueueForm');?>" style="float:right" class="btn btn-success">เพิ่มคิว</a>
+            </div>
             <div class="card-body">
                 <form action="<?php echo base_url('physician/manage'); ?>" method="get">
                     <div class="row">
@@ -57,10 +59,10 @@
                                 <td><?php echo $item['PHONE']; ?></td>
                                 <td><?php echo $item['LINEID']; ?></td>
                                 <td class="text-center">
-                                    <?php if($item['BOOK_ON'] == 'WEBSITE'):?>
+                                    <?php if ($item['BOOK_ON'] == 'WEBSITE'):?>
                                         <span class="badge badge-secondary"><?php echo $item['BOOK_ON']; ?></span>
                                     <?php endif;?>
-                                    <?php if($item['BOOK_ON'] == 'MOBILE'):?>
+                                    <?php if ($item['BOOK_ON'] == 'MOBILE'):?>
                                         <span class="badge badge-info"><?php echo $item['BOOK_ON']; ?></span>
                                     <?php endif;?>
                                     </td>

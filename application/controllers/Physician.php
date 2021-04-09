@@ -124,6 +124,189 @@ class Physician extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
+    public function addQueueForm()
+    {
+        $this->load->view('template/header_physician');
+        $this->load->view('physician/queue_form');
+        $this->load->view('template/footer_physician');
+    }
+
+    public function getQueue()
+    {
+        $clinicId =  $this->session->userdata('id');
+        $date = $this->input->get('date');
+        $datetime = new DateTime($date);
+        $today = $datetime->format('D');
+
+        $clinic = $this->ClinicModel->detailById($clinicId);
+        //  $today = date('D');
+        $startTime = '';
+        $endTime = '';
+
+        $close = $this->CloseModel->listData($clinicId);
+        $closeStatus = false;
+        foreach ($close as $item) {
+            if ($item->CLOSEDATE == $date) {
+                $closeStatus = true;
+            }
+        }
+
+        if ($today == 'Sun') {
+            $startTime = $clinic->TIME_OPEN;
+            $endTime = $clinic->TIME_CLOSE;
+        } elseif ($today == 'Mon') {
+            $startTime = $clinic->TIME1;
+            $endTime = $clinic->CLOSE1;
+        } elseif ($today == 'Tue') {
+            $startTime = $clinic->TIME2;
+            $endTime = $clinic->CLOSE2;
+        } elseif ($today == 'Wed') {
+            $startTime = $clinic->TIME3;
+            $endTime = $clinic->CLOSE3;
+        } elseif ($today == 'Thu') {
+            $startTime = $clinic->TIME4;
+            $endTime = $clinic->CLOSE4;
+        } elseif ($today == 'Fri') {
+            $startTime = $clinic->TIME5;
+            $endTime = $clinic->CLOSE5;
+        } elseif ($today == 'Sat') {
+            $startTime = $clinic->TIME6;
+            $endTime = $clinic->CLOSE6;
+        }
+
+        $begin = new DateTime($startTime);
+        $end = new DateTime($endTime);
+
+        $interval = DateInterval::createFromDateString($clinic->QUETIME.' min');
+
+        $times = new DatePeriod($begin, $interval, $end);
+
+        $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
+        $bookingExtraQues = $this->BookingModel->getDataExtra($clinic->CLINICID, $date);
+
+        //check booked
+        $statusBooked = false;
+        $queueBooked = "";
+        if (!empty($this->session->userdata('id'))) {
+            foreach ($booking as $item) {
+                if ($item->MEMBERIDCARD == $this->session->userdata('id')) {
+                    $statusBooked = true;
+                    $queueBooked = $item->QUES;
+                }
+            }
+        }
+
+
+        $data = [
+          'date' => $date,
+          'clinic' => $clinic,
+          'times' => $times,
+          'interval' => $interval,
+          'booking' => $booking,
+          'bookingExtraQues' => $bookingExtraQues,
+          'statusBooked' => $statusBooked,
+          'queueBooked' => $queueBooked,
+          'closeStatus' => $closeStatus
+      ];
+
+        $this->load->view('physician/list_queue_form', $data);
+    }
+
+    public function insertQueue()
+    {
+        $firstName = $this->input->post('firstname_booking');
+        $lastName = $this->input->post('lastname_booking');
+        $email = $this->input->post('email');
+        $telephone = $this->input->post('telephone');
+        $lineId = $this->input->post('line_id');
+        $cause = $this->input->post('cause');
+        $date = $this->input->post('date');
+        $time = $this->input->post('time');
+        $clinicId = $this->input->post('clinic_id');
+        $ques = $this->input->post('queue');
+        $qber = $this->input->post('qber');
+
+        $type = 0;
+        if ($time == '0') {
+            $type = 1;
+            $time = '';
+        }
+
+        $dateNow = new DateTime();
+        $currentTime = $dateNow->getTimestamp();
+
+        //Duplicate email check
+        $userId = $this->MembersModel->checkDuplicate($email);
+
+        if ($userId == false) {
+            $userId = $currentTime;
+            //insert member
+            $data = [
+                'MEMBERIDCARD' => $currentTime,
+                'CUSTOMERNAME' => $firstName . " " . $lastName,
+                'LINEID' => $lineId,
+                'EMAIL' => $email,
+                'PASSWORD' => md5($telephone),
+                'PHONE' => $telephone,
+            ];
+            $this->MembersModel->insert($data);
+            $subject = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor";
+            $message = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor\r\nขอบคุณ คุณ " . $firstName . " " . $lastName . " ที่ให้ความไว้วางใจสมัครสมาชิกเพื่อใช้บริการกับเรา\r\n
+            ข้อมูลการเข้าสู่ระบบ\r\n
+            username : " . $email . "\r\n
+            password : " . $telephone . "\r\n
+            \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
+            $this->sendMail($email, $subject, $message);
+        }
+
+        //insert booking
+        $data = [
+            'BOOKINGID' => 'VN' . $currentTime,
+            'QUES' => $ques,
+            'QBER' => $qber,
+            'TYPE' => $type,
+            'MEMBERIDCARD' => $userId,
+            'CLINICID' => $clinicId,
+            'BOOKDATE' => $date,
+            'BOOKTIME' => $time,
+            'DETAIL' => $cause
+        ];
+        $this->ClinicModel->insert($data);
+
+        $clinic = $this->ClinicModel->detailById($clinicId);
+
+        $dataEmail = [
+            'clinicName' => $clinic->CLINICNAME,
+            'vn' => 'VN' . $currentTime,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'telephone' => $telephone,
+            'lineId' => $lineId,
+            'cause' => $cause,
+            'date' => $date,
+            'time' => $time,
+            'ques' => $ques
+        ];
+        $subject = "ยืนยันการนัดหมอ " . $clinic->CLINICNAME;
+        $message = $this->load->view('email_template', $dataEmail, true);
+
+        //sendmail
+        if ($email != '') {
+            $this->sendMail($email, $subject, $message);
+        }
+
+        $data = [
+            'clinic' => $clinic
+        ];
+
+        $dataHeader = [
+          'title' => $clinic->SEO_TITLE,
+          'meta' => $clinic->SEO_META
+        ];
+
+        $this->manage();
+    }
+
     public function checkin()
     {
         if (!empty($this->input->get('id'))) {
