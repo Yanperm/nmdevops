@@ -98,7 +98,7 @@ class Welcome extends CI_Controller
             //$this->load->view('email_checkin', $dataEmail);
             $subject = "แจ้งเตือนวันพบแพทย์ " . $booking[0]->CLINICNAME;
             $message = $this->load->view('email_detail', $dataEmail, true);
-            $this->sendMail("purinetwork12@gmail.com", $subject, $message);
+            $this->sendMail($booking[0]->EMAIL, $subject, $message);
         }
     }
 
