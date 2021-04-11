@@ -136,7 +136,7 @@
             <p>เมื่อเราเจ็บป่วย ทุกคนต้องการที่จะพบหมอโดยเร็ว ตรวจร่างกาย แล้วได้พบหมอ เพื่อจะได้รักษาอาการที่เป็น</p>
         </div>
 
-        <?php if(count($advertise) > 0):?>
+        <?php if (count($advertise) > 0):?>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <?php  foreach ($advertise as $item):?>
@@ -182,7 +182,7 @@
         <!--            </div>-->
         <!--        </div>-->
         <!-- /row -->
-<!--        <p class="text-center"><a href="--><?php //echo base_url('link/list') ?><!--" class="btn_1 medium">นัดหมอ</a></p>-->
+<!--        <p class="text-center"><a href="--><?php //echo base_url('link/list')?><!--" class="btn_1 medium">นัดหมอ</a></p>-->
 
     </div>
     <!-- /container -->
@@ -262,7 +262,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div> -->
 
 
@@ -275,7 +275,7 @@
                 <div class="col-md-6">
                     <small>Application</small>
                     <h3>ดาวน์โหลด <strong>นัดหมอ แอป</strong> ได้เลย</h3>
-                    <p class="lead">นัดหมอ ทำให้คนไข้พบหมอได้เลย ไม่ต้องรอนาน คนไข้สามารถดาวน์โหลด แอปนัดหมอ เพื่อใช้ในการนัดหมายแพทย์ เช็คอิน ดูคิว ออนไลน์ ได้ทุกที่ทุกเวลา มาถึงคลินิกก่อนเวลานัดหมาย ประมาณ 5-10 นาที ก็สามารถพบแพทย์ได้เลย ไม่ต้องมารอที่คลินิกเป็นเวลานาน โหลดได้ทั้ง App store และ play store แบบไม่มีค่าใช้่จ่าย</p>
+                    <p class="lead">นัดหมอ ทำให้คนไข้พบหมอได้เลย ไม่ต้องรอนาน คนไข้สามารถดาวน์โหลด แอปนัดหมอ เพื่อใช้ในการนัดหมายแพทย์ เช็คอิน ดูคิว ออนไลน์ ได้ทุกที่ทุกเวลา มาถึงคลินิกก่อนเวลานัดหมาย ประมาณ 5-10 นาที ก็สามารถพบแพทย์ได้เลย ไม่ต้องมารอที่คลินิกเป็นเวลานาน โหลดได้ทั้ง App store และ play store แบบไม่มีค่าใช้จ่าย</p>
                     <div class="app_buttons wow" data-wow-offset="100">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 43.1 85.9" style="enable-background:new 0 0 43.1 85.9;" xml:space="preserve">
                         <path stroke-linecap="round" stroke-linejoin="round" class="st0 draw-arrow" d="M11.3,2.5c-5.8,5-8.7,12.7-9,20.3s2,15.1,5.3,22c6.7,14,18,25.8,31.7,33.1"/>
