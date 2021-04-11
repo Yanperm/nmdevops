@@ -32,8 +32,8 @@
                     <div class="col-lg-3 col-md-4">
                         <h5>Contact with Us</h5>
                         <ul class="contacts">
-                            <li><a href="tel://0636459900"><i class="icon_mobile"></i> + 66 63 645 9900</a></li>
-                            <li><a href=""><i class="icon_mail_alt"></i> info@nutmor.com</a></li>
+                            <li><a href="tel://0636459900"><i class="icon_mobile"></i> 083-645-9900</a></li>
+                            <li><a href=""><i class="icon_mail_alt"></i> nutmor@yahoo.com</a></li>
                         </ul>
                         <div class="follow_us">
                             <h5>Follow us</h5>
@@ -67,7 +67,7 @@
         <!-- Back to top button -->
 
         <!-- COMMON SCRIPTS -->
-<!--        <script src="--><?php //echo base_url() ?><!--assets/js/jquery-2.2.4.min.js"></script>-->
+<!--        <script src="--><?php //echo base_url()?><!--assets/js/jquery-2.2.4.min.js"></script>-->
         <script src="<?php echo base_url() ?>assets/js/common_scripts.min.js"></script>
         <script src="<?php echo base_url() ?>assets/js/functions.js?v=1.0.3"></script>
         <script src="<?php echo base_url() ?>assets/js/tables_func.js"></script>
