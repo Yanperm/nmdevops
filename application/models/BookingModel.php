@@ -54,8 +54,6 @@ class BookingModel extends CI_Model
         }
     }
 
-
-
     public function getDataExtra($clicnicId, $date)
     {
         $query = $this->db->query('SELECT * FROM tbbooking where TYPE = 1 AND CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
@@ -65,6 +63,27 @@ class BookingModel extends CI_Model
             return array();
         }
     }
+
+    public function getDataExtraC($clicnicId, $date)
+    {
+        $query = $this->db->query('SELECT * FROM tbbooking where TYPE = 2  AND CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    public function getMaxQueue($clicnicId, $date)
+    {
+        $query = $this->db->query('SELECT max(QBER) as max_id FROM tbbooking where  CLINICID = "' . $clicnicId . '" AND BOOKDATE = "' . $date . '" ORDER BY QBER ASC');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
 
     public function getDataById($id)
     {

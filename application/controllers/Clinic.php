@@ -158,6 +158,15 @@ class Clinic extends CI_Controller
         $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
         $bookingExtraQues = $this->BookingModel->getDataExtra($clinic->CLINICID, $date);
 
+        if ($clinicId == 'CL299') {
+            $bookingExtraQuesC = $this->BookingModel->getDataExtraC($clinic->CLINICID, $date);
+        } else {
+            $bookingExtraQuesC = null;
+        }
+
+        $maxQber = $this->BookingModel->getMaxQueue($clinic->CLINICID, $date);
+
+
         //check booked
         $statusBooked = false;
         $queueBooked = "";
@@ -178,6 +187,8 @@ class Clinic extends CI_Controller
             'interval' => $interval,
             'booking' => $booking,
             'bookingExtraQues' => $bookingExtraQues,
+            'bookingExtraQuesC' => $bookingExtraQuesC,
+            'maxQber' => $maxQber,
             'statusBooked' => $statusBooked,
             'queueBooked' => $queueBooked,
             'closeStatus' => $closeStatus
@@ -242,8 +253,13 @@ class Clinic extends CI_Controller
         $qber = $this->input->post('qber');
 
         $type = 0;
-        if ($time == '0') {
+        if ($time == '0' && substr($ques, 0, 1) == 'B') {
             $type = 1;
+            $time = '';
+        }
+
+        if ($time == '0' && substr($ques, 0, 1) == 'C') {
+            $type = 2;
             $time = '';
         }
 
