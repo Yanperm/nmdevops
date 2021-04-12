@@ -259,7 +259,7 @@ class BookingModel extends CI_Model
             SELECT * FROM tbbooking as booking
             INNER join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD OR member.IDCARD = booking.IDCARD
             where booking.CLINICID = "' . $clinicId . '" AND booking.BOOKDATE = "' . $date . '"
-            order by booking.BOOKTIME ASC
+            order by booking.QBER ASC
             limit ' . $rowno . ',' . $rowperpage
         );
 
