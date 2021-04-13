@@ -166,6 +166,21 @@ class BookingModel extends CI_Model
         }
     }
 
+    public function getCheckinLast($clicnicId, $email)
+    {
+        $query = $this->db->query('
+            SELECT * FROM tbbooking as booking
+            left join tbmembers as member on member.MEMBERIDCARD = booking.MEMBERIDCARD
+            left join tbclinic as clinic on clinic.CLINICID = booking.CLINICID
+            where  booking.BOOKDATE >  "'.date("Y-m-d").'" AND member.EMAIL like "' . $email . '" AND booking.CLINICID = "' . $clicnicId . '"');
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
     public function getCheckinByVN($vnId, $email)
     {
         $query = $this->db->query('

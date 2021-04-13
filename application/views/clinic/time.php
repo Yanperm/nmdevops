@@ -75,10 +75,12 @@
                                         <span>B<?php echo count($bookingExtraQues) + 1; ?> </span>
                                         <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=0&ques=B" . (count($bookingExtraQues) + 1) . '&qber=' . (50+count($bookingExtraQues) + 1)) ?>">จองคิว</a>
                                     </li>
+                                    <?php if ($bookingExtraQuesC != null):?>
                                     <li style="background: #e9e6ee;"><strong style="width: 120px;">ฉีดยา/ทำแผล</strong>
                                         <span>C<?php echo count($bookingExtraQuesC) + 1; ?> </span>
                                         <a href="<?php echo base_url('/booking/' . $clinic->CLINICID . '?booking_date=' . $date . "&booking_time=0&ques=C" . (count($bookingExtraQuesC) + 1) . '&qber=' . (100+count($bookingExtraQuesC) + 1)) ?>">จองคิว</a>
                                     </li>
+                                  <?php endif;?>
 
                                 </ul>
                             <?php endif; ?>
