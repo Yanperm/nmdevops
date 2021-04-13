@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 |
 */
 
-$config['use_ssl'] = TRUE;
+$config['use_ssl'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ $config['use_ssl'] = TRUE;
 |
 */
 
-$config['verify_peer'] = TRUE;
+$config['verify_peer'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ $config['verify_peer'] = TRUE;
 |
 */
 
-$config['access_key'] = 'AKIAYI7L5TNPXKCSH4G7';
+$config['access_key'] = 'AKIAYI7L5TNPRCXISQEN';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ $config['access_key'] = 'AKIAYI7L5TNPXKCSH4G7';
 |
 */
 
-$config['secret_key'] = 'KH2OeAzOUNzTfsjar+QVwIwmEsr7cnd4U8lmXm0S';
+$config['secret_key'] = '7kL1VYzqLcx0ezA3rmIaEYpfsdq/daOQB5a7xLQ6';
 
 /*
 |--------------------------------------------------------------------------
@@ -89,7 +89,7 @@ $config['s3_url'] = 'https://nutmor.s3-ap-southeast-1.amazonaws.com';
 |
 */
 
-$config['get_from_enviroment'] = FALSE;
+$config['get_from_enviroment'] = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,8 +118,7 @@ $config['secret_key_envname'] = 'v0fzLXpwbRH8q0AP/osP1U+FE84GvXquvZtYylxn';
 |
 */
 
-if ($config['get_from_enviroment']){
+if ($config['get_from_enviroment']) {
     $config['access_key'] = getenv($config['access_key_envname']);
     $config['secret_key'] = getenv($config['secret_key_envname']);
-
 }
