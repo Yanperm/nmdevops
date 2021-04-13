@@ -373,7 +373,7 @@ class Clinic extends CI_Controller
     {
         $email = $_GET['email'];
         $clinicId = $_GET['idClinic'];
-        $check = $this->BookingModel->getCheckin($clinicId, $email);
+        $check = $this->BookingModel->getCheckinLast($clinicId, $email);
 
         header('Content-Type: application/json');
         echo json_encode($check);
