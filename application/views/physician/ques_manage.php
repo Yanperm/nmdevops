@@ -10,7 +10,8 @@
         <!-- Example DataTables Card-->
         <div class="card mb-3">
             <div class="card-header">ตัวเลือกการค้นหา
-              <a href="<?php echo base_url('physician/addQueueForm');?>" style="float:right" class="btn btn-success">เพิ่มคิว</a>
+              <!-- <a href="<?php echo base_url('physician/addQueueForm');?>" style="float:right" class="btn btn-success">เพิ่มคิว</a> -->
+              <button style="float:right" class="btn btn-success" data-toggle="modal" data-target="#modal-add-queue">เพิ่มคิว</button>
             </div>
             <div class="card-body">
                 <form action="<?php echo base_url('physician/manage'); ?>" method="get">
@@ -97,3 +98,161 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="modal-add-queue" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">เพิ่มคิว วันที่ <?php echo $date; ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="queue-modal-content">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.list_time ul li  {
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    position: relative;
+    font-weight: bold;
+    color: #3f4078;
+}
+.list_time ul li  strong {
+    background-color: #f8f8f8;
+    float: left;
+    color: #3f4078;
+    font-size: 18px;
+    line-height: 1;
+    padding: 6px;
+    display: inline-block;
+    margin-right: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+}
+.list_time ul li  a {
+    background: #fff;
+    border: 2px solid #e74e84;
+    float: right;
+    color: #e74e84;
+    padding: 5px 20px;
+    font-weight: 500;
+    line-height: 1;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.list_time ul li  button {
+    background: #fff;
+    border: 2px solid #e74e84;
+    float: right;
+    color: #e74e84;
+    padding: 5px 20px;
+    font-weight: 500;
+    line-height: 1;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.booked {
+    background: #dfdfdf !important;
+    border: 2px solid #eaeaea !important;
+    color: #3f4078 !important;
+    cursor: no-drop !important;
+}
+
+
+.list_time ul li  button:hover {
+    background: #e74e84;
+    color: #fff;
+}
+
+.list_title {
+    background-color: #3f4079;
+    color: #fff;
+    margin-bottom: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.text_queue{
+  padding-left: 15px;
+  color: #e84e84;
+}
+</style>
+<script>
+function getQueue(){
+  let date = $('#date').val();
+
+  $.ajax({
+      url: '<?php echo base_url('physician/getQueue')?>',
+      type: 'get',
+      data : {
+          date : date,
+      },
+      success: function (response) {
+        $('#show-queue').html(response);
+      }
+  });
+}
+
+function queue(time,queue,qber){
+  $('#text-time').html(time);
+  $('#text-queue').html(queue);
+
+  $('#time').val(time);
+  $('#queue').val(queue);
+  $('#qber').val(qber);
+  $('#form-queue').css('display','');
+
+}
+</script>
+<script>
+ function getQueue(){
+   $.ajax({
+     url: '<?php echo base_url('physician/addQueueFormAjax')?>',
+     type: 'get',
+     success: function(response) {
+       $('#queue-modal-content').html(response);
+     }
+   });
+ }
+
+ getQueue();
+</script>

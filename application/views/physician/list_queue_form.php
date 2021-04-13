@@ -1,8 +1,9 @@
+<div class="row">
 <div class="col-xl-6 col-lg-6 col-md-6">
     <div class="list_time">
         <div class="list_title">
             <i class="icon_clock_alt"></i>
-            <h3 style='color:#ffffff !important'><?php echo $clinic->CLINICNAME; ?> <?php echo $date; ?></h3>
+            <h5 style='color:#ffffff !important'><?php echo $clinic->CLINICNAME; ?> <?php echo $date; ?></h3>
         </div>
         <?php
         $today = date($date);
@@ -126,5 +127,6 @@
 
 
   </form>
+</div>
 </div>
 </div>
