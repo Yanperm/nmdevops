@@ -184,6 +184,14 @@ class Physician extends CI_Controller
         $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
         $bookingExtraQues = $this->BookingModel->getDataExtra($clinic->CLINICID, $date);
 
+        if ($clinic->CLINICID == 'CL299') {
+            $bookingExtraQuesC = $this->BookingModel->getDataExtraC($clinic->CLINICID, $date);
+        } else {
+            $bookingExtraQuesC = null;
+        }
+
+        $maxQber = $this->BookingModel->getMaxQueue($clinic->CLINICID, $date);
+
         //check booked
         $statusBooked = false;
         $queueBooked = "";
@@ -204,6 +212,8 @@ class Physician extends CI_Controller
           'interval' => $interval,
           'booking' => $booking,
           'bookingExtraQues' => $bookingExtraQues,
+          'bookingExtraQuesC' => $bookingExtraQuesC,
+          'maxQber' => $maxQber,
           'statusBooked' => $statusBooked,
           'queueBooked' => $queueBooked,
           'closeStatus' => $closeStatus
@@ -760,6 +770,11 @@ class Physician extends CI_Controller
     public function cancelService()
     {
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
+
+        $data = [
+        'DELETE_STATE' => 1
+      ];
+        $this->ClinicModel->updateById($data, $this->session->userdata('id'));
 
         $subject = "แจ้งยกเลิกบริการคลินิก ".$clinic->CLINICNAME;
         $message = "แจ้งยกเลิกบริการคลินิก ".$clinic->CLINICNAME . " \r\n
