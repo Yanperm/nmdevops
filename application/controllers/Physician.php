@@ -131,6 +131,97 @@ class Physician extends CI_Controller
         $this->load->view('template/footer_physician');
     }
 
+    public function addQueueFormAjax()
+    {
+        $clinicId =  $this->session->userdata('id');
+        $date = date('Y-m-d');
+        $datetime = new DateTime($date);
+        $today = $datetime->format('D');
+
+        $clinic = $this->ClinicModel->detailById($clinicId);
+        //  $today = date('D');
+        $startTime = '';
+        $endTime = '';
+
+        $close = $this->CloseModel->listData($clinicId);
+        $closeStatus = false;
+        foreach ($close as $item) {
+            if ($item->CLOSEDATE == $date) {
+                $closeStatus = true;
+            }
+        }
+
+        if ($today == 'Sun') {
+            $startTime = $clinic->TIME_OPEN;
+            $endTime = $clinic->TIME_CLOSE;
+        } elseif ($today == 'Mon') {
+            $startTime = $clinic->TIME1;
+            $endTime = $clinic->CLOSE1;
+        } elseif ($today == 'Tue') {
+            $startTime = $clinic->TIME2;
+            $endTime = $clinic->CLOSE2;
+        } elseif ($today == 'Wed') {
+            $startTime = $clinic->TIME3;
+            $endTime = $clinic->CLOSE3;
+        } elseif ($today == 'Thu') {
+            $startTime = $clinic->TIME4;
+            $endTime = $clinic->CLOSE4;
+        } elseif ($today == 'Fri') {
+            $startTime = $clinic->TIME5;
+            $endTime = $clinic->CLOSE5;
+        } elseif ($today == 'Sat') {
+            $startTime = $clinic->TIME6;
+            $endTime = $clinic->CLOSE6;
+        }
+
+        $begin = new DateTime($startTime);
+        $end = new DateTime($endTime);
+
+        $interval = DateInterval::createFromDateString($clinic->QUETIME.' min');
+
+        $times = new DatePeriod($begin, $interval, $end);
+
+        $booking = $this->BookingModel->getData($clinic->CLINICID, $date);
+        $bookingExtraQues = $this->BookingModel->getDataExtra($clinic->CLINICID, $date);
+
+        if ($clinic->CLINICID == 'CL299') {
+            $bookingExtraQuesC = $this->BookingModel->getDataExtraC($clinic->CLINICID, $date);
+        } else {
+            $bookingExtraQuesC = null;
+        }
+
+        $maxQber = $this->BookingModel->getMaxQueue($clinic->CLINICID, $date);
+
+        //check booked
+        $statusBooked = false;
+        $queueBooked = "";
+        if (!empty($this->session->userdata('id'))) {
+            foreach ($booking as $item) {
+                if ($item->MEMBERIDCARD == $this->session->userdata('id')) {
+                    $statusBooked = true;
+                    $queueBooked = $item->QUES;
+                }
+            }
+        }
+
+
+        $data = [
+        'date' => $date,
+        'clinic' => $clinic,
+        'times' => $times,
+        'interval' => $interval,
+        'booking' => $booking,
+        'bookingExtraQues' => $bookingExtraQues,
+        'bookingExtraQuesC' => $bookingExtraQuesC,
+        'maxQber' => $maxQber,
+        'statusBooked' => $statusBooked,
+        'queueBooked' => $queueBooked,
+        'closeStatus' => $closeStatus
+    ];
+
+        $this->load->view('physician/list_queue_form', $data);
+    }
+
     public function getQueue()
     {
         $clinicId =  $this->session->userdata('id');
