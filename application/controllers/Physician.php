@@ -134,7 +134,7 @@ class Physician extends CI_Controller
     public function addQueueFormAjax()
     {
         $clinicId =  $this->session->userdata('id');
-        $date = date('Y-m-d');
+        $date = $_GET['date'];
         $datetime = new DateTime($date);
         $today = $datetime->format('D');
 
@@ -225,7 +225,7 @@ class Physician extends CI_Controller
     public function getQueue()
     {
         $clinicId =  $this->session->userdata('id');
-        $date = $this->input->get('date');
+        $date = $_GET['date'];
         $datetime = new DateTime($date);
         $today = $datetime->format('D');
 

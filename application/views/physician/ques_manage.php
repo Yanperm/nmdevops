@@ -217,20 +217,21 @@
 }
 </style>
 <script>
-function getQueue(){
-  let date = $('#date').val();
-
-  $.ajax({
-      url: '<?php echo base_url('physician/getQueue')?>',
-      type: 'get',
-      data : {
-          date : date,
-      },
-      success: function (response) {
-        $('#show-queue').html(response);
-      }
-  });
-}
+// function getQueue(){
+//   let date = $('#date').val();
+//
+//   $.ajax({
+//       url: '<?php echo base_url('physician/getQueue')?>',
+//       type: 'get',
+//       data : {date : '<?php echo $date; ?>'},
+//       data : {
+//           date : date,
+//       },
+//       success: function (response) {
+//         $('#show-queue').html(response);
+//       }
+//   });
+// }
 
 function queue(time,queue,qber){
   $('#text-time').html(time);
@@ -248,6 +249,7 @@ function queue(time,queue,qber){
    $.ajax({
      url: '<?php echo base_url('physician/addQueueFormAjax')?>',
      type: 'get',
+     data : {date : '<?php echo $date; ?>'},
      success: function(response) {
        $('#queue-modal-content').html(response);
      }
