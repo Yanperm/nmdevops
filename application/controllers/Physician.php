@@ -370,7 +370,8 @@ class Physician extends CI_Controller
             'CLINICID' => $clinicId,
             'BOOKDATE' => $date,
             'BOOKTIME' => $time,
-            'DETAIL' => $cause
+            'DETAIL' => $cause,
+            'CHECKIN' => 1
         ];
         $this->ClinicModel->insert($data);
 
