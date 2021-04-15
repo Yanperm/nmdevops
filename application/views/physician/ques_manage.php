@@ -89,6 +89,9 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
+                                  <?php if ($item["STATUS"] == 2): ?>
+                                       <a style="width: 100%;    cursor: no-drop;" class="btn btn-secondary" href="javascript:void(0);" disabled> ยกเลิกแล้ว </a> 
+                                  <?php endif; ?>
                                     <?php if ($item["STATUS"] != 2): ?>
                                         <?php if (!$item["CHECKIN"]): ?> <a style="width: 100%" class="btn btn-warning" href="<?php echo base_url('physician/manage/checkin') . "?id=" . $item["BOOKINGID"]; ?>"> เช็คอินให้ </a> <?php endif; ?>
                                     <?php endif; ?>

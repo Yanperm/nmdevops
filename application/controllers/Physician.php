@@ -360,6 +360,13 @@ class Physician extends CI_Controller
             $this->sendMail($email, $subject, $message);
         }
 
+        $type = 0;
+        if (substr($ques, 0, 1) == 'B') {
+            $type = 1;
+        } elseif (substr($ques, 0, 1) == 'C') {
+            $type = 2;
+        }
+
         //insert booking
         $data = [
             'BOOKINGID' => 'VN' . $currentTime,
