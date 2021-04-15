@@ -7,6 +7,12 @@
             </li>
             <li class="breadcrumb-item active">จัดการคิว</li>
         </ol>
+        <?php if ($this->session->flashdata('msg')): ?>
+            <div class="alert alert-success  alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>สำเร็จ!</strong> <?php echo $this->session->flashdata('msg'); ?>
+            </div>
+        <?php endif; ?>
         <!-- Example DataTables Card-->
         <div class="card mb-3">
             <div class="card-header">ตัวเลือกการค้นหา

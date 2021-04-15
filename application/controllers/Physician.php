@@ -406,7 +406,8 @@ class Physician extends CI_Controller
           'meta' => $clinic->SEO_META
         ];
 
-        $this->manage();
+        $this->session->set_flashdata('msg', 'เพิ่มคิวเรียบร้อย');
+        redirect(base_url().'physician/manage?date='.$date, 'refresh');
     }
 
     public function checkin()
