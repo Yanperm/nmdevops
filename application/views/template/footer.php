@@ -39,9 +39,9 @@
                             <h5>Follow us</h5>
                             <ul>
                                 <li><a href="https://www.facebook.com/nutmoronline"><i class="social_facebook"></i></a></li>
-                                <li><a href="#0"><i class="social_twitter"></i></a></li>
-                                <li><a href="#0"><i class="social_linkedin"></i></a></li>
-                                <li><a href="#0"><i class="social_instagram"></i></a></li>
+                                <li><a href="https://twitter.com/Nutmor1"><i class="social_twitter"></i></a></li>
+                                <li><a href="https://www.youtube.com/channel/UCVh-001Irj0BapAvEzzrHHQ"><i class="social_youtube"></i></a></li>
+                                <li><a href="https://www.instagram.com/nutmoronline/"><i class="social_instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
