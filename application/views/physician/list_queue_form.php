@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="col-md-6">
-  <form action="<?php echo base_url('physician/insertQueue'); ?>" method="post">
+  <form action="<?php echo base_url('physician/insertQueue'); ?>" method="post" id="add-queue-form">
 
     <input type="hidden" value="<?php echo $this->session->userdata('id'); ?>" name="clinic_id">
 
@@ -121,7 +121,7 @@
         <textarea class="form-control" name="cause" required></textarea>
     </div>
     <div class="form-group">
-        <button class="btn btn-success" type="submit">ยืนยันการนัดหมอ</button>
+        <button class="btn btn-success" type="button" onclick="addQueue()">ยืนยันการนัดหมอ</button>
         <button class="btn btn-default"type="reset">ล้างข้อมูล</button>
     </div>
 

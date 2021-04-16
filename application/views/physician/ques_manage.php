@@ -90,12 +90,16 @@
                                 </td>
                                 <td>
                                   <?php if ($item["STATUS"] == 2): ?>
-                                       <a style="width: 100%;    cursor: no-drop;" class="btn btn-secondary" href="javascript:void(0);" disabled> ยกเลิกแล้ว </a> 
+                                       <a style="width: 100%;    cursor: no-drop;" class="btn btn-secondary" href="javascript:void(0);" disabled> ยกเลิกแล้ว </a>
                                   <?php endif; ?>
                                     <?php if ($item["STATUS"] != 2): ?>
                                         <?php if (!$item["CHECKIN"]): ?> <a style="width: 100%" class="btn btn-warning" href="<?php echo base_url('physician/manage/checkin') . "?id=" . $item["BOOKINGID"]; ?>"> เช็คอินให้ </a> <?php endif; ?>
                                     <?php endif; ?>
-                                    <?php if ($item["CHECKIN"] && $item["STATUS"] != 2): ?><a href="<?php echo base_url('physician/manage/cancel')."?id=".$item["BOOKINGID"];?>" style="width: 100%" class="btn btn-danger" href="#"> <i class="fa fa-fw fa-trash"></i> </a> <?php endif; ?>
+                                    <?php if ($item["CHECKIN"] && $item["STATUS"] != 2): ?>
+                                      <button onclick="delConfirm('<?=$item["BOOKINGID"]?>')" style="width: 100%" class="btn btn-danger" >
+                                        <i class="fa fa-fw fa-trash"></i>
+                                      </button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -225,6 +229,7 @@
   color: #e84e84;
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 // function getQueue(){
 //   let date = $('#date').val();
@@ -266,4 +271,35 @@ function queue(time,queue,qber){
  }
 
  getQueue();
+
+ function addQueue(){
+   Swal.fire({
+     title: 'ยืนยันการเพิ่มคิว?',
+     showCancelButton: true,
+     confirmButtonColor: '#3085d6',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'ใช่',
+     cancelButtonText: 'ยกเลิก'
+   }).then((result) => {
+     if (result.isConfirmed) {
+       $('#add-queue-form').submit();
+     }
+   })
+ }
+
+ function delConfirm(id){
+   Swal.fire({
+     title: 'ยืนยันการลบคิว?',
+     showCancelButton: true,
+     confirmButtonColor: '#3085d6',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'ใช่',
+     cancelButtonText: 'ยกเลิก'
+   }).then((result) => {
+     if (result.isConfirmed) {
+       window.location.replace("<?php echo base_url('physician/manage/cancel').'?id=';?>"+id);
+     }
+   })
+
+ }
 </script>
