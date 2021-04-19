@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class MembersModel extends CI_Model
 {
@@ -25,12 +25,13 @@ class MembersModel extends CI_Model
         }
     }
 
-    public function find_with_page($param){
+    public function find_with_page($param)
+    {
         $keyword = $param['keyword'];
         $this->db->select('*');
 
         $condition = "1=1";
-        if(!empty($keyword)){
+        if (!empty($keyword)) {
             $condition .= " and (CUSTOMERNAME like '%{$keyword}%' or PHONE like '%{$keyword}%')";
         }
 
@@ -40,8 +41,8 @@ class MembersModel extends CI_Model
 
         $query = $this->db->get('tbmembers');
         $data = [];
-        if($query->num_rows() > 0){
-            foreach($query->result() as $row){
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
                 $data[] = $row;
             }
         }
@@ -104,7 +105,7 @@ class MembersModel extends CI_Model
         $this->db->where('PASSWORD', md5($password));
         $query = $this->db->get('tbmembers');
 
-        if ($query->num_rows() == 1) {
+        if ($query->num_rows() > 0) {
             return $query->row();
         }
 
@@ -138,5 +139,4 @@ class MembersModel extends CI_Model
         $this->db->update('tbmembers', $data);
         return true;
     }
-
 }
