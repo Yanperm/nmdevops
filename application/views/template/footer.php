@@ -32,6 +32,7 @@
                     <div class="col-lg-3 col-md-4">
                         <h5>Contact with Us</h5>
                         <ul class="contacts">
+                            <li><a href="https://line.me/ti/p/@cobenhavn" target="_blank"><i class="ri-line-line" style='    font-size: 19px;'></i> @cobenhavn</a></li>
                             <li><a href="tel://0636459900"><i class="icon_mobile"></i> 083-645-9900</a></li>
                             <li><a href=""><i class="icon_mail_alt"></i> nutmor@yahoo.com</a></li>
                         </ul>
