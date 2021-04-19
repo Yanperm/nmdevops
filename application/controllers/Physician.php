@@ -488,10 +488,10 @@ class Physician extends CI_Controller
         $config['last_tag_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
-        //echo "<pre>";
-        //print_r($ques);
-//        echo "</pre>";
-//        exit();
+        // echo "<pre>";
+        // print_r($ques);
+        // echo "</pre>";
+        // exit();
         $data['ques'] = $ques;
         $data['row'] = $rowno;
         $data['pagination'] = $this->pagination->create_links();
