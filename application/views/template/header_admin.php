@@ -100,6 +100,14 @@ a.appendChild(r);
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
+                <a class="nav-link" href="<?php echo base_url('admin/blog'); ?>">
+                    <i class="fa fa-fw fa-newspaper-o"></i>
+                    <span class="nav-link-text">
+                        Blog
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
                 <a class="nav-link" href="<?php echo base_url('admin/setting'); ?>">
                     <i class="fa fa-fw fa-cog"></i>
                     <span class="nav-link-text">

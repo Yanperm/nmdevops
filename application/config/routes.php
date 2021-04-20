@@ -78,7 +78,8 @@ $route['checkinLast'] = 'clinic/checkinLast';
 $route['checkinFast'] = 'clinic/checkinFast';
 $route['current-queue'] = 'clinic/currentQueue';
 
-
+$route['blog/(:any)'] = 'blog/listBlog';
+//$route['listBlog'] = 'blog/listBlog';
 
 $route['physician/dashboard'] = 'physician/dashboard';
 
@@ -138,6 +139,13 @@ $route['admin/advertise-insert'] = 'admin/advertiseInsert';
 $route['admin/advertise-edit'] = 'admin/advertiseEdit';
 $route['admin/advertise-update'] = 'admin/advertiseUpdate';
 $route['admin/advertise-delete'] = 'admin/advertiseDelete';
+
+$route['admin/blog'] = 'admin/blog';
+$route['admin/blog-add'] = 'admin/blogAdd';
+$route['admin/blog-insert'] = 'admin/blogInsert';
+$route['admin/blog-edit'] = 'admin/blogEdit';
+$route['admin/blog-update'] = 'admin/blogUpdate';
+$route['admin/blog-delete'] = 'admin/blogDelete';
 
 $route['admin/setting-update'] = 'admin/settingUpdate';
 
