@@ -53,7 +53,7 @@
               <div class="post_info">
                 <small><?php echo $item['created_at'];?></small>
                 <h3><a href="<?php echo base_url('blog/single/'.$item['id']);?>"><?php echo $item['title'];?></a></h3>
-                <p class="desc-blog"><?php echo $item['description'];?></p>
+                <p class="desc-blog"><?php //echo $item['description'];?></p>
                 <ul>
                   <li>
                     <div class="thumb"><img src="http://via.placeholder.com/100x100.jpg" alt=""></div> <?php echo $item['NAME'];?>
@@ -97,7 +97,7 @@
                   <?php if ($item['image_path'] != ''):?>
                     <img src="<?php echo $item['image_path'];?>" alt="">
                   <?php endif;?>
-                  
+
                   <?php if ($item['youtube_link'] != ''):
                     $pos = strpos($item['youtube_link'], '=');
                     $link = substr($item['youtube_link'], $pos+1);

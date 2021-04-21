@@ -1,3 +1,5 @@
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
 <div class="content-wrapper">
     <div class="container-fluid">
         <!-- Breadcrumbs-->
@@ -24,9 +26,9 @@
                   <?php endif; ?>
                   </div>
 
-                  <div class="col-md-5">
+                  <div class="col-md-12">
 
-                          <h5>รูปภาพ</h5>
+                          <h5>รูปภาพ/Youtube</h5>
 
                           <div class="container">
                               <hr>
@@ -62,7 +64,7 @@
 
 
                   </div>
-                  <div class="col-md-7">
+                  <div class="col-md-12">
                       <h5>รายละเอียด</h5>
                       <hr>
                       <div class="row justify-content-center mt-3">
@@ -91,7 +93,8 @@
                                     รายละเอียด
                                 </div>
                                 <div class="col-md-9 ">
-                                    <textarea class="form-control" name='desc' id='desc' ><?php echo $blog->description;?></textarea>
+                                  <div class="editor" id='editor'><?php echo $blog->description;?></div>
+                                    <textarea class="form-control" name='desc' id='desc' style='display:none'><?php echo $blog->description;?></textarea>
                                 </div>
                             </div>
 
@@ -161,7 +164,7 @@
 
     .avatar-upload .avatar-preview {
       width: 100%;
-      height: 200px;
+      height: 500px;
       position: relative;
       border-radius: 0;
       border: 6px solid #F8F8F8;
@@ -181,6 +184,59 @@
 </style>
 <script>
     $(document).ready(function () {
+      var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        // ['blockquote', 'code-block'],
+
+        [{
+          'header': 1
+        }, {
+          'header': 2
+        }], // custom button values
+        [{
+          'list': 'ordered'
+        }, {
+          'list': 'bullet'
+        }],
+        [{
+          'script': 'sub'
+        }, {
+          'script': 'super'
+        }], // superscript/subscript
+        [{
+          'indent': '-1'
+        }, {
+          'indent': '+1'
+        }], // outdent/indent
+        [{
+          'direction': 'rtl'
+        }],
+        ['image', 'code-block'], // text direction
+
+        [{
+          'header': [1, 2, 3, 4, 5, 6, false]
+        }],
+
+        [{
+          'color': []
+        }, {
+          'background': []
+        }], // dropdown with defaults from theme
+        [{
+          'align': []
+        }],
+
+        // ['clean']                                         // remove formatting button
+      ];
+      quill = new Quill('#editor', {
+        modules: {
+          toolbar: toolbarOptions
+        },
+        theme: 'snow'
+      });
+      quill.on('text-change', function(delta, oldDelta, source) {
+        $('#desc').val(quill.root.innerHTML);
+      });
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
