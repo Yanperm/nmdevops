@@ -30,6 +30,11 @@
 
                           <div class="container">
                               <hr>
+                              <select class="form-control" onchange="typeBlogfn(this.value)" id='typeBlog'>
+                                <option value="0" <?php if ($blog->image_path != ''):?>selected<?php endif;?>>Image</option>
+                                <option value="1" <?php if ($blog->youtube_link != ''):?>selected<?php endif;?>>Youtube</option>
+                              </select>
+                              <div id='image' class='mt-3'>
                               <div class="avatar-upload">
                                   <div class="avatar-edit">
                                       <input type='file' id="imageUpload" name="file" accept=".png, .jpg, .jpeg"/>
@@ -48,6 +53,11 @@
                                       <?php endif; ?>
                                   </div>
                               </div>
+                            </div>
+                            <div id='youtube' class='mt-3' style='display:none'>
+                              <h5>Youtube link</h5>
+                              <input type='text' class='form-control' value="<?php echo $blog->youtube_link;?>" name="youtube_link" id="youtube_link">
+                            </div>
                           </div>
 
 
@@ -188,6 +198,22 @@
         });
 
     });
+
+    var typeBlogId = $('#typeBlog').val();
+    typeBlogfn(typeBlogId);
+
+    function typeBlogfn(id) {
+      if (id == 0) {
+        $('#image').show();
+        $('#youtube').hide();
+        $('#youtube_link').val('');
+      }
+      if (id == 1) {
+        $('#image').hide();
+        $('#imageUpload').val('');
+        $('#youtube').show();
+      }
+    }
 
 </script>
 

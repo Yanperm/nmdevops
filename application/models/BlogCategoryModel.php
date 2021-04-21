@@ -13,6 +13,20 @@ class BlogCategoryModel extends CI_Model
         }
     }
 
+    public function countBlog()
+    {
+        $query = $this->db->query('SELECT category.*,count(blog.id) as numBlog FROM tbblog_category as category
+          left join tbblog as blog on blog.category_id = category.id
+          GROUP BY category.id
+          ORDER BY category.name asc
+        ');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
     public function insert($data)
     {
         $this->db->insert('tbblog_category', $data);

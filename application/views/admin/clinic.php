@@ -25,6 +25,7 @@
                     <th>หมายเลขโทรศัพท์</th>
                     <th>แพ็คเก็จ</th>
                     <th>สถานะ</th>
+                    <th>แจ้งลบ</th>
                     <th>จัดการ</th>
                 </tr>
                 </thead>
@@ -40,22 +41,36 @@
                             <td><?php echo $item->PROVINCE;?></td>
                             <td><?php echo $item->PHONE;?></td>
                             <td>
-                                <?php if($item->TYPE == 1 || $item->TYPE == 'Community'):?>
+                                <?php if ($item->TYPE == 1 || $item->TYPE == 'Community'):?>
                                     <span class="badge badge-primary">Community</span>
                                 <?php endif;?>
-                                <?php if($item->TYPE == 2 || $item->TYPE == 'Pro'):?>
+                                <?php if ($item->TYPE == 2 || $item->TYPE == 'Pro'):?>
                                     <span class="badge badge-secondary">PRO</span>
                                 <?php endif;?>
-                                <?php if($item->TYPE == 3 || $item->TYPE == 'ULTIMATE' || $item->TYPE == 'Ultimate'):?>
+                                <?php if ($item->TYPE == 3 || $item->TYPE == 'ULTIMATE' || $item->TYPE == 'Ultimate'):?>
                                     <span class="badge badge-success">ULTIMATE</span>
                                 <?php endif;?>
                             </td>
                             <td>
-                                <?php if($item->ACTIVATE == 1):?>
+                                <?php if ($item->ACTIVATE == 1):?>
                                     <span class="badge badge-success">เปิดใช้งาน</span>
                                 <?php endif;?>
-                                <?php if($item->ACTIVATE != 1):?>
+                                <?php if ($item->ACTIVATE != 1):?>
                                     <span class="badge badge-danger">ปิดใช้งาน</span>
+                                <?php endif;?>
+                            </td>
+                            <td>
+                              <?php if ($item->DELETE_STATE == null):?>
+                                  -
+                              <?php endif;?>
+                                <?php if ($item->DELETE_STATE == 1):?>
+                                    <span class="badge badge-warning" style="cursor:pointer" onclick="deleteConfirm('<?php echo $item->IDCLINIC;?>')">แจ้งลบ</span>
+                                <?php endif;?>
+                                <?php if ($item->DELETE_STATE == 2):?>
+                                    <span class="badge badge-danger">ยืนยันการลบ</span>
+                                <?php endif;?>
+                                <?php if ($item->DELETE_STATE == 3):?>
+                                    <span class="badge badge-success">ยกเลิก</span>
                                 <?php endif;?>
                             </td>
                             <td>
@@ -84,10 +99,41 @@
 </style>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bulma.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript" class="init">
 
     $(document).ready(function() {
         $('#example').DataTable();
     } );
+
+    function deleteConfirm(id){
+      Swal.fire({
+        title: 'ยืนยันการยกเลิก?',
+        text: "",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่ใช่'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          $.ajax({
+              url: '<?php echo base_url('admin/confirmDelete')?>',
+              type: 'post',
+              data : {id : id},
+              success: function (response) {
+                Swal.fire(
+                  'การยกเลิกสำเร็จ',
+                  'การยกเลิกจะสำเร็จและสามารถใช้ต่อเนื่องได้ 3 เดือนหลังจากนี้',
+                  'success'
+                )
+              }
+          });
+
+        }
+      })
+    }
 
 </script>

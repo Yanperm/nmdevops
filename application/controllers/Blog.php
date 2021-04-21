@@ -9,6 +9,8 @@ class Blog extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('BlogModel');
         $this->load->model('BlogCategoryModel');
+        $this->load->model('BlogCommentModel');
+        $this->load->model('BlogReplyModel');
         $this->load->library('pagination');
         $this->load->library('S3_upload');
         $this->load->library('S3');
@@ -31,6 +33,12 @@ class Blog extends CI_Controller
     public function listBlog()
     {
         $textSearch = $this->input->get('textSearch');
+
+        $category = "";
+        if (!empty($this->input->get('category'))) {
+            $category = $this->input->get('category');
+        }
+
         $rowno = $this->uri->segment('2');
 
         $rowperpage = 5;
@@ -39,19 +47,15 @@ class Blog extends CI_Controller
             $rowno = ($rowno - 1) * $rowperpage;
         }
 
-        $blog = $this->BlogModel->getBlog($rowperpage, $rowno, $textSearch);
+        $blog = $this->BlogModel->getBlog($rowperpage, $rowno, $textSearch, $category);
         $lastBlog = $this->BlogModel->getLastBlog();
-
-        // echo '<pre>';
-        // print_r($lastBlog);
-        // echo '</pre>';
-        // exit();
+        $category = $this->BlogCategoryModel->countBlog();
 
         $allcount = 0;
         if ($textSearch == '') {
             $allcount = $this->db->count_all_results('tbblog');
         } else {
-            $allcount = count($booking);
+            $allcount = count($blog);
         }
 
         $config['base_url'] = base_url() . 'blog';
@@ -78,6 +82,8 @@ class Blog extends CI_Controller
 
         $data['blog'] = $blog;
         $data['lastBlog'] = $lastBlog;
+        $data['category'] = $category;
+        $data['textSearch'] = $textSearch;
         $data['row'] = $rowno;
         $data['pagination'] = $this->pagination->create_links();
         $this->load->view('template/header');
@@ -87,8 +93,53 @@ class Blog extends CI_Controller
 
     public function single()
     {
+        $id = $this->uri->segment('3');
+
+        $blog = $this->BlogModel->single($id);
+        $lastBlog = $this->BlogModel->getLastBlog();
+        $category = $this->BlogCategoryModel->countBlog();
+
+        $comment = $this->BlogCommentModel->listdata($id);
+
+        $data = [
+          'blog' => $blog,
+          'lastBlog' => $lastBlog,
+          'category' => $category,
+          'comment' => $comment
+        ];
+
         $this->load->view('template/header');
-        $this->load->view('blog/single');
+        $this->load->view('blog/single', $data);
         $this->load->view('template/footer');
+    }
+
+    public function comment()
+    {
+        $data = [
+          'blog_id' => $this->input->post('blog_id'),
+          'name' => $this->input->post('name'),
+          'description' => $this->input->post('comments'),
+          'created_at' => date('Y-m-d')
+        ];
+
+        $this->BlogCommentModel->insert($data);
+
+        redirect(base_url('blog/single/'.$this->input->post('blog_id')));
+    }
+
+    public function reply()
+    {
+        $blogId = $this->input->post('blog_id');
+        $commentId = $this->input->post('comment_id');
+        $data = [
+          'comment_id' => $this->input->post('comment_id'),
+          'name' => $this->input->post('name_'.$commentId),
+          'description' => $this->input->post('comment_'.$commentId),
+          'created_at' => date('Y-m-d')
+        ];
+
+        $this->BlogReplyModel->insert($data);
+
+        redirect(base_url('blog/single/'.$this->input->post('blog_id')));
     }
 }

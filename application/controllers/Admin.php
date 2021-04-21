@@ -429,6 +429,7 @@ class Admin extends CI_Controller
           'title' => $this->input->post('subject'),
           'description' => $this->input->post('desc'),
           'image_path' => $image,
+          'youtube_link' => $this->input->post('youtube_link'),
           'category_id' => $this->input->post('category'),
           'created_at' => date('Y-m-d H:i:s'),
           'created_by' => $this->session->userdata('id')
@@ -460,6 +461,9 @@ class Admin extends CI_Controller
     {
         $id = $this->input->post('blog_id');
         $image = $this->input->post('old_image');
+        if ($this->input->post('youtube_link') != '') {
+            $image = '';
+        }
 
         if (!empty($_FILES["file"]) && dirname($_FILES["file"]["tmp_name"]) !='') {
             $dir = dirname($_FILES["file"]["tmp_name"]);
@@ -477,6 +481,7 @@ class Admin extends CI_Controller
           'title' => $this->input->post('subject'),
           'description' => $this->input->post('desc'),
           'image_path' => $image,
+          'youtube_link' => $this->input->post('youtube_link'),
           'category_id' => $this->input->post('category'),
         ];
 

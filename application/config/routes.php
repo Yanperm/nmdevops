@@ -79,7 +79,8 @@ $route['checkinFast'] = 'clinic/checkinFast';
 $route['current-queue'] = 'clinic/currentQueue';
 
 $route['blog/(:any)'] = 'blog/listBlog';
-//$route['listBlog'] = 'blog/listBlog';
+$route['comment'] = 'blog/comment';
+$route['reply'] = 'blog/reply';
 
 $route['physician/dashboard'] = 'physician/dashboard';
 

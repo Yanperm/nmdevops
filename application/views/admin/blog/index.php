@@ -21,8 +21,9 @@
       <table id="example" class="table is-striped" style="width:100%">
         <thead>
           <tr>
-            <th>หัวข้อ</th>
+            <th style='width:150px'>หัวข้อ</th>
             <th>รูปภาพ</th>
+            <th>Youtube</th>
             <th>วันที่สร้าง</th>
             <th>จัดการ</th>
           </tr>
@@ -100,7 +101,23 @@
         {
           data: 'image_path',
           render: function(data, type, row) {
-            return "<img style='    width: 200px;height:100px' src='" + data + "'>"
+            if(data != ''){
+              return "<img style='    width: 200px;height:100px' src='" + data + "'>"
+            }else{
+              return '';
+            }
+
+          }
+        },
+        {
+          data: 'youtube_link',
+          render: function(data, type, row) {
+            return data;
+            // if(data != null){
+            //   var pos = data.indexOf("=");
+            //   var link = data.substring(pos);
+            //   return '<iframe width="420" height="315"src="https://www.youtube.com/embed/tgbNymZ7vqY'+link+'"></iframe>'
+            // }
           }
         },
         {

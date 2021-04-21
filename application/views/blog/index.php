@@ -32,7 +32,19 @@
           <div class="row no-gutters">
             <div class="col-lg-7">
               <figure>
-                <a href="#"><img src="<?php echo $item['image_path'];?>" alt="">
+                <a href="<?php echo base_url('blog/single/'.$item['id']);?>">
+                  <?php if ($item['image_path'] != ''):?>
+                    <img src="<?php echo $item['image_path'];?>" alt="">
+                  <?php endif;?>
+                  <?php if ($item['youtube_link'] != ''):
+                    $pos = strpos($item['youtube_link'], '=');
+                    $link = substr($item['youtube_link'], $pos+1);
+
+                    $youtubeLink = $link;
+
+                    ?>
+                    <iframe width="420" height="315" src="https://www.youtube.com/embed/<?php echo $youtubeLink;?>"></iframe>
+                  <?php endif;?>
                   <div class="preview"><span>อ่านต่อ</span></div>
                 </a>
               </figure>
@@ -40,7 +52,7 @@
             <div class="col-lg-5">
               <div class="post_info">
                 <small><?php echo $item['created_at'];?></small>
-                <h3><a href="#"><?php echo $item['title'];?></a></h3>
+                <h3><a href="<?php echo base_url('blog/single/'.$item['id']);?>"><?php echo $item['title'];?></a></h3>
                 <p class="desc-blog"><?php echo $item['description'];?></p>
                 <ul>
                   <li>
@@ -64,9 +76,9 @@
 
       <aside class="col-lg-3">
         <div class="widget">
-          <form>
+          <form action="<?php echo base_url('blog/1');?>" method="get">
             <div class="form-group">
-              <input type="text" name="search" id="search" class="form-control" placeholder="ค้นหา...">
+              <input type="text" name="textSearch" id="textSearch" class="form-control" value="<?php echo $textSearch;?>"  placeholder="ค้นหา...">
             </div>
             <button type="submit" id="submit" class="btn_1"> ค้นหา</button>
           </form>
@@ -81,10 +93,24 @@
             <?php foreach ($lastBlog as $item):?>
             <li>
               <div class="alignleft">
-                <a href="#0"><img src="<?php echo $item['image_path'];?>" alt=""></a>
+                <a href="<?php echo base_url('blog/single/'.$item['id']);?>">
+                  <?php if ($item['image_path'] != ''):?>
+                    <img src="<?php echo $item['image_path'];?>" alt="">
+                  <?php endif;?>
+                  
+                  <?php if ($item['youtube_link'] != ''):
+                    $pos = strpos($item['youtube_link'], '=');
+                    $link = substr($item['youtube_link'], $pos+1);
+
+                    $youtubeLink = $link;
+
+                    ?>
+                    <iframe width="420" height="315" src="https://www.youtube.com/embed/<?php echo $youtubeLink;?>"></iframe>
+                  <?php endif;?>
+                </a>
               </div>
               <small><?php echo $item['created_at'];?></small>
-              <h3><a href="#" title="" class='desc-blog'><?php echo $item['title'];?></a></h3>
+              <h3><a href="<?php echo base_url('blog/single/'.$item['id']);?>" title="" class='desc-blog'><?php echo $item['title'];?></a></h3>
             </li>
             <?php endforeach;?>
           </ul>
@@ -96,11 +122,10 @@
             <h4>Blog Categories</h4>
           </div>
           <ul class="cats">
-            <li><a href="#">Treatments <span>(12)</span></a></li>
-            <li><a href="#">News <span>(21)</span></a></li>
-            <li><a href="#">Events <span>(44)</span></a></li>
-            <li><a href="#">New treatments <span>(09)</span></a></li>
-            <li><a href="#">Focus in the lab <span>(31)</span></a></li>
+            <?php foreach ($category as $item):?>
+            <li><a href="<?php echo base_url('blog/1');?>?category=<?php echo $item->id;?>"><?php echo $item->name;?> <span>(<?php echo $item->numBlog;?>)</span></a></li>
+          <?php endforeach;?>
+
           </ul>
         </div>
         <!-- /widget -->

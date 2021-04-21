@@ -68,6 +68,19 @@ class BlogModel extends CI_Model
             return array();
         }
     }
+
+    public function single($id)
+    {
+        $query = $this->db->query('SELECT blog.*,category.name,admin.NAME FROM tbblog as blog
+          left join tbblog_category as category on category.id = blog.category_id
+          left join tbadmin as admin on admin.ID = blog.created_by
+          where blog.id = '.$id);
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
     public function getLastBlog()
     {
         $query = $this->db->query('
@@ -82,14 +95,20 @@ class BlogModel extends CI_Model
         }
     }
 
-    public function getBlog($rowperpage, $rowno, $textSearch)
+    public function getBlog($rowperpage, $rowno, $textSearch, $category)
     {
+        $categoryCondition = " ";
+
+
         if ($textSearch != '') {
+            if ($category != '') {
+                $categoryCondition = " AND blog.category_id = ".$category." ";
+            }
             $query = $this->db->query('
             SELECT * FROM tbblog as blog
             left join tbadmin as admin on admin.ID = blog.created_by
-            where title like "'.$textSearch.'" or description like "'.$textSearch.'"
-            order by created_at DESC
+            where (blog.title like "%'.$textSearch.'%" or blog.description like "%'.$textSearch.'%")'.$categoryCondition.'
+            order by blog.created_at DESC
             limit ' . $rowno . ',' . $rowperpage);
 
             if ($query->num_rows() > 0) {
@@ -98,10 +117,15 @@ class BlogModel extends CI_Model
                 return array();
             }
         } else {
+            if ($category != '') {
+                $categoryCondition = " where blog.category_id = ".$category;
+            }
             $query = $this->db->query('
             SELECT * FROM tbblog as blog
             left join tbadmin as admin on admin.ID = blog.created_by
+            '.$categoryCondition.'
             order by created_at DESC
+
             limit ' . $rowno . ',' . $rowperpage);
 
             if ($query->num_rows() > 0) {
