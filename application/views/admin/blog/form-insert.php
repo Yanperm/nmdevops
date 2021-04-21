@@ -5,7 +5,7 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="<?php echo base_url('admin/advertise') ?>">Blog</a>
+        <a href="<?php echo base_url('admin/blog') ?>">Blog</a>
       </li>
       <li class="breadcrumb-item active">Blog Add</li>
     </ol>
@@ -181,7 +181,7 @@
 <script>
   $(document).ready(function() {
     var toolbarOptions = [
-      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+      ['bold', 'italic', 'underline', 'strike', 'link'], // toggled buttons
       // ['blockquote', 'code-block'],
 
       [{
@@ -222,7 +222,7 @@
         'align': []
       }],
 
-      // ['clean']                                         // remove formatting button
+      //['clean'] // remove formatting button
     ];
     quill = new Quill('#editor', {
       modules: {

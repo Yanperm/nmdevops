@@ -185,7 +185,7 @@
 <script>
     $(document).ready(function () {
       var toolbarOptions = [
-        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['bold', 'italic', 'underline', 'strike','link'], // toggled buttons
         // ['blockquote', 'code-block'],
 
         [{
