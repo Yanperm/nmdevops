@@ -13,7 +13,7 @@
                         <h5>About</h5>
                         <ul class="links">
                             <li><a href="">About us</a></li>
-                            <li><a href="<?php echo base_url('');?>">Blog</a></li>
+                            <li><a href="<?php echo base_url('blog/1');?>">Blog</a></li>
                             <li><a href="<?php echo base_url('');?>">FAQ</a></li>
                             <li><a href="<?php echo base_url('login');?>">Login</a></li>
                             <li><a href="<?php echo base_url('register');?>">Register</a></li>
