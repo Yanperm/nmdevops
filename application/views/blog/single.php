@@ -70,7 +70,11 @@
               </div>
               <div class="comment_right clearfix">
                 <div class="comment_info">
-                  By <a href="#"><?php echo $item['name'];?></a><span>|</span><?php echo $item['created_at']?></a><span>|</span><a href="javascript:void(0)" onclick='reply(<?php echo $item['id'];?>)'>Reply</a>
+                  By <a href="#"><?php echo $item['name'];?></a><span>|</span><?php echo $item['created_at']?></a><span>|</span>
+                  <a href="javascript:void(0)" onclick='reply(<?php echo $item['id'];?>)'>Reply</a>
+                  <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && ($this->session->userdata('type') == 'admin')) : ?>
+                      <span>|</span><a href="javascript:void(0)" onclick='delComment(<?php echo $item['id'];?>)'>Delete</a>
+                  <?php endif;?>
                 </div>
                 <p>
                   <?php echo $item['description'];?></a>
@@ -100,6 +104,9 @@
                   <div class="comment_right clearfix">
                     <div class="comment_info">
                       By <a href="#"><?php echo $reply["name"];?></a><span>|</span><?php echo $reply["created_at"];?><span>
+                        <?php if (!empty($this->session->userdata('authenticated')) && $this->session->userdata('authenticated') && ($this->session->userdata('type') == 'admin')) : ?>
+                            <span>|</span><a href="javascript:void(0)" onclick='delReply(<?php echo $reply['id'];?>)'>Delete</a>
+                        <?php endif;?>
                     </div>
                     <p>
                       <?php echo $reply["comment"];?>
@@ -204,9 +211,66 @@
   </div>
   <!-- /container -->
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 function reply(id){
   $('#reply_'+id).show();
+}
+
+function delComment(id){
+  Swal.fire({
+  title: 'ต้องการลบหรือไม่?',
+  text: "",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'ตกลง',
+  cancelButtonText: 'ยกเลิก'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+      url: '<?php echo base_url('del-comment');?>',
+      type: 'post',
+      // dataType: 'json',
+      data: {
+        id: id
+      },
+      success: function(response) {
+        location.reload();
+      }
+    });
+  }
+})
+
+}
+
+function delReply(id){
+
+  Swal.fire({
+  title: 'ต้องการลบหรือไม่?',
+  text: "",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'ตกลง',
+  cancelButtonText: 'ยกเลิก'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+      url: '<?php echo base_url('del-reply');?>',
+      type: 'post',
+      // dataType: 'json',
+      data: {
+        id: id
+      },
+      success: function(response) {
+        location.reload();
+      }
+    });
+  }
+})
+
 }
 </script>

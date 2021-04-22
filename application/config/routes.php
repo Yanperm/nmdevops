@@ -81,6 +81,8 @@ $route['current-queue'] = 'clinic/currentQueue';
 $route['blog/(:any)'] = 'blog/listBlog';
 $route['comment'] = 'blog/comment';
 $route['reply'] = 'blog/reply';
+$route['del-comment'] = 'blog/deleteComment';
+$route['del-reply'] = 'blog/deleteReply';
 
 $route['physician/dashboard'] = 'physician/dashboard';
 

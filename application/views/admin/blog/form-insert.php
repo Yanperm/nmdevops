@@ -183,7 +183,7 @@
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike', 'link'], // toggled buttons
       // ['blockquote', 'code-block'],
-
+      [{}],
       [{
         'header': 1
       }, {
@@ -224,6 +224,39 @@
 
       //['clean'] // remove formatting button
     ];
+
+    var Link = Quill.import('formats/link');
+
+    class MyLink extends Link {
+    	static create(value) {
+    		let node = Link.create(value);
+    		value = Link.sanitize(value);
+    		node.setAttribute('href', value);
+    		if (value.startsWith("https://quilljs.com")) {
+    			node.removeAttribute('target');
+    		} else {
+    			node.setAttribute("target", "_blank");
+    		}
+    		return node;
+    	}
+
+    	format(name, value) {
+    		super.format(name, value);
+
+    		if (name !== this.statics.blotName || !value) {
+    			return;
+    		}
+
+    		if (value.startsWith("https://quilljs.com")) {
+    			this.domNode.removeAttribute("target");
+    		} else {
+    			this.domNode.setAttribute("target", "_blank");
+    		}
+    	}
+    }
+
+    Quill.register(MyLink);
+
     quill = new Quill('#editor', {
       modules: {
         toolbar: toolbarOptions

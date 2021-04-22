@@ -5,7 +5,7 @@ class BlogCommentModel extends CI_Model
 {
     public function listData($blogId)
     {
-        $sql = 'select comment.*, reply.description as reply_comment, reply.name as reply_name, reply.created_at as reply_created_at
+        $sql = 'select comment.*,reply.id as reply_id, reply.description as reply_comment, reply.name as reply_name, reply.created_at as reply_created_at
         from tbblog_comment as comment
         left join tbblog_reply as reply on reply.comment_id=comment.id
         where comment.blog_id = '.$blogId.'
@@ -30,6 +30,11 @@ class BlogCommentModel extends CI_Model
                         'name' => $row['name'],
                         'created_at' => $row['created_at'],
                         'reply' => array());
+            }
+
+            if ($row['reply_id'] != null) {
+                // Push B item onto sub array
+                $shaped_result[$id]['reply'][$key]['id'] = $row['reply_id'];
             }
 
             if ($row['reply_comment'] != null) {

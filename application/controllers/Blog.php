@@ -142,4 +142,16 @@ class Blog extends CI_Controller
 
         redirect(base_url('blog/single/'.$this->input->post('blog_id')));
     }
+
+    public function deleteComment()
+    {
+        $commentId = $this->input->post('id');
+        $this->BlogCommentModel->delete($commentId);
+    }
+
+    public function deleteReply()
+    {
+        $replyId = $this->input->post('id');
+        $this->BlogReplyModel->delete($replyId);
+    }
 }
