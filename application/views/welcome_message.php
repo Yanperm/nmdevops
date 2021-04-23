@@ -142,7 +142,7 @@
                 <?php  foreach ($advertise as $item):?>
                 <div class="swiper-slide">
                     <div class="box_card">
-                        <img class="advertise_image" src="<?php echo $item->ADVERTISEIMAGE;?>">
+                        <img class="advertise_image" style='cursor:pointer' onclick="link('<?php echo $item->ADVERTISELINK;?>')" src="<?php echo $item->ADVERTISEIMAGE;?>">
                         <h3><?php echo $item->ADVERTISESUBJECT;?></h3>
                         <p><?php echo $item->ADVERTISEDETAIL;?></p>
                         <a href="<?php echo $item->ADVERTISELINK;?>" target="_blank" class="advertise_link">อ่านต่อ</a>
@@ -299,9 +299,9 @@
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 4,
         spaceBetween: 30,
-        slidesPerGroup: 4,
+      //  slidesPerGroup: 4,
         autoplay: {
-            delay: 2500,
+            delay: 4000,
             disableOnInteraction: false,
         },
         loop: true,
@@ -315,25 +315,38 @@
             300: {
                 slidesPerView: 1,
                 spaceBetween: 20,
+                slidesPerGroup: 1,
+                speed: 1000,
             },
             375: {
                 slidesPerView: 1,
                 spaceBetween: 20,
+                speed: 1000,
+                 slidesPerGroup: 1,
             },
             768: {
                 slidesPerView: 2,
                 spaceBetween: 20,
+                 slidesPerGroup: 3,
             },
             1024: {
                 slidesPerView: 3,
                 spaceBetween: 30,
+                 slidesPerGroup: 4,
             },
             1200: {
                 slidesPerView: 4,
                 spaceBetween: 30,
+                slidesPerGroup: 4,
             },
         }
     });
+
+    $(".swiper-container").hover(function() {
+    (this).swiper.autoplay.stop();
+}, function() {
+    (this).swiper.autoplay.start();
+});
 
 
     $("#btn-accept").click(function() {
@@ -356,5 +369,10 @@
             if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
         }
         return null;
+    }
+
+    function link(url){
+    //  window.location.href = url;
+      window.open(url, '_blank');
     }
 </script>
