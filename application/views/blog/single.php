@@ -22,7 +22,10 @@
 
   <div class="container margin_60">
     <div class="main_title">
-      <h1>Nutmor Blog</h1>
+      <h1>ข่าว นัดหมอ อินเทรนด์</h1>
+       <p>ติดตาม ข่าว จาก นัดหมอ เพื่อ อินเทรนด์ สุขภาพ ต้องการมีสุขภาพแบบเท่ห์ follow เราทาง Social Media
+ทุกช่องทาง เราจะตามหาข่าว สุขภาพ วิคราะห์ เจาะลีก รีวิว ในมุมของที่ แตกต่าง พร้อมให้บริการ ส่งตรง
+ข่าวสาร ทุกช่องทาง ติดตามเราได้ ทาง Facebook Twitter YouTube และ IG</p>
     </div>
     <div class="row">
       <div class="col-lg-9">
