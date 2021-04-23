@@ -108,7 +108,12 @@ class Blog extends CI_Controller
           'comment' => $comment
         ];
 
-        $this->load->view('template/header');
+        $dataHeader = [
+          'title' => $blog->title,
+          'meta' => $blog->title
+        ];
+        
+        $this->load->view('template/header', $dataHeader);
         $this->load->view('blog/single', $data);
         $this->load->view('template/footer');
     }
