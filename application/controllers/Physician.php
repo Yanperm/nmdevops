@@ -889,18 +889,27 @@ class Physician extends CI_Controller
 
     public function sendMail($to, $subject, $message)
     {
+        //gmail
+        $config['protocol']  = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+        $config['smtp_user'] = $this->config->item('username_gmail');
+        $config['smtp_pass'] = $this->config->item('password_email');
+        $config['smtp_port'] = 465;
+        $config['charset']   = 'utf-8';
+        $config['mailtype']  = 'html';
+        $config['newline']   = "\r\n";
         //Postmark Service Mail
-        $config = array(
-            'useragent' => 'nutmor.com',
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.postmarkapp.com',
-            'smtp_port' => 25,
-            'smtp_user' => $this->config->item('username_email'),
-            'smtp_pass' => $this->config->item('password_email'),
-            'smtp_crypto' => 'TLS',
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-        );
+        // $config = array(
+        //     'useragent' => 'nutmor.com',
+        //     'protocol' => 'smtp',
+        //     'smtp_host' => 'smtp.postmarkapp.com',
+        //     'smtp_port' => 25,
+        //     'smtp_user' => $this->config->item('username_email'),
+        //     'smtp_pass' => $this->config->item('password_email'),
+        //     'smtp_crypto' => 'TLS',
+        //     'mailtype' => 'html',
+        //     'charset' => 'utf-8',
+        // );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('no-reply@nutmor.com', "Nutmor.com");

@@ -1,10 +1,9 @@
 <?php
 require_once('application/libraries/S3.php');
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +15,6 @@ class Auth extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('ClinicModel');
         $this->load->model('AdminModel');
-
     }
 
     public function register()
@@ -105,7 +103,7 @@ class Auth extends CI_Controller
             ];
 
             $this->MembersModel->update($data, $member->MEMBERIDCARD);
-        } else if ($type == 'clinic') {
+        } elseif ($type == 'clinic') {
             $clinic = $this->ClinicModel->detailByEmail($email);
 
             $data = [
@@ -134,7 +132,6 @@ class Auth extends CI_Controller
         $this->load->view('template/header');
         $this->load->view('auth/verify', $data);
         $this->load->view('template/footer');
-
     }
 
     public function login()
@@ -177,7 +174,7 @@ class Auth extends CI_Controller
                     $userdata = array(
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'activate' => $user->ACTIVATE_STATUS,
                         'email' => $user->EMAIL,
                         'type' => 'member',
@@ -187,7 +184,7 @@ class Auth extends CI_Controller
                     $userdata = array(
                         'id' => $user->tbclinic,
                         'name' => $user->CLINICNAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'activate' => $user->ACTIVATE,
                         'email' => $user->USERNAME,
                         'type' => 'clinic'
@@ -213,11 +210,9 @@ class Auth extends CI_Controller
         $type = $this->input->post('type');
 
         if ($this->form_validation->run() == false) {
-
             $this->load->view('template/header');
             $this->load->view('admin/login');
             $this->load->view('template/footer');
-
         } else {
             $email = $this->security->xss_clean($this->input->post('email'));
             $password = $this->security->xss_clean($this->input->post('password'));
@@ -237,14 +232,13 @@ class Auth extends CI_Controller
             }
 
             if ($user) {
-
                 $userdata = array();
 
                 if ($type == 'member') {
                     $userdata = array(
                         'id' => $user->MEMBERIDCARD,
                         'name' => $user->CUSTOMERNAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'activate' => $user->ACTIVATE_STATUS,
                         'email' => $user->EMAIL,
                         'type' => 'member',
@@ -253,11 +247,11 @@ class Auth extends CI_Controller
                     $this->session->set_userdata($userdata);
 
                     redirect(base_url(''));
-                } else if ($type == 'clinic')  {
+                } elseif ($type == 'clinic') {
                     $userdata = array(
                         'id' => $user->IDCLINIC,
                         'name' => $user->CLINICNAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'activate' => $user->ACTIVATE,
                         'email' => $user->USERNAME,
                         'type' => 'clinic',
@@ -266,12 +260,11 @@ class Auth extends CI_Controller
                     $this->session->set_userdata($userdata);
 
                     redirect(base_url('physician/dashboard'));
-                }
-                else if ($type == 'admin')  {
+                } elseif ($type == 'admin') {
                     $userdata = array(
                         'id' => $user->ID,
                         'name' => $user->NAME,
-                        'authenticated' => TRUE,
+                        'authenticated' => true,
                         'type' => 'admin',
                         'image' => $user->IMAGE
                     );
@@ -279,7 +272,6 @@ class Auth extends CI_Controller
 
                     redirect(base_url('admin/dashboard'));
                 }
-
             } else {
                 $this->session->set_flashdata('message', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
                 redirect(base_url('admin'));
@@ -297,7 +289,7 @@ class Auth extends CI_Controller
     {
         $image = '';
 
-        if(file_exists($_FILES['files']['tmp_name']) && is_uploaded_file($_FILES['files']['tmp_name'])) {
+        if (file_exists($_FILES['files']['tmp_name']) && is_uploaded_file($_FILES['files']['tmp_name'])) {
             $dir = dirname($_FILES["files"]["tmp_name"]);
             $destination = $dir . DIRECTORY_SEPARATOR . $_FILES["files"]["name"];
             rename($_FILES["files"]["tmp_name"], $destination);
@@ -347,7 +339,7 @@ class Auth extends CI_Controller
     public function addClinic()
     {
         $image = '';
-        if(file_exists($_FILES['files_clinic']['tmp_name']) && is_uploaded_file($_FILES['files_clinic']['tmp_name'])) {
+        if (file_exists($_FILES['files_clinic']['tmp_name']) && is_uploaded_file($_FILES['files_clinic']['tmp_name'])) {
             $dir = dirname($_FILES["files_clinic"]["tmp_name"]);
             $destination = $dir . DIRECTORY_SEPARATOR . $_FILES['files_clinic']["name"];
             rename($_FILES["files_clinic"]["tmp_name"], $destination);
@@ -395,13 +387,13 @@ class Auth extends CI_Controller
         ];
 
         $money = 0;
-        if($package == 1){
+        if ($package == 1) {
             $package = 'COMMUNITY';
             $money = 1000;
-        }else if($package == 2){
+        } elseif ($package == 2) {
             $package = 'PRO';
             $money = 5900;
-        }else if($package == 3){
+        } elseif ($package == 3) {
             $package = 'ULTIMATE';
             $money = 59000;
         }
@@ -413,7 +405,7 @@ class Auth extends CI_Controller
             'money' => $money
         ];
 
-        
+
         $message = $this->load->view('email_layout_template', $dataEmail, true);
         $this->sendMail($email, $subject, $message);
 
@@ -468,18 +460,27 @@ class Auth extends CI_Controller
 
     public function sendMail($to, $subject, $message)
     {
+        //gmail
+        $config['protocol']  = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+        $config['smtp_user'] = $this->config->item('username_gmail');
+        $config['smtp_pass'] = $this->config->item('password_email');
+        $config['smtp_port'] = 465;
+        $config['charset']   = 'utf-8';
+        $config['mailtype']  = 'html';
+        $config['newline']   = "\r\n";
         //Postmark Service Mail
-        $config = array(
-            'useragent' => 'nutmor.com',
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.postmarkapp.com',
-            'smtp_port' => 25,
-            'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
-            'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
-            'smtp_crypto' => 'TLS',
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-        );
+        // $config = array(
+        //     'useragent' => 'nutmor.com',
+        //     'protocol' => 'smtp',
+        //     'smtp_host' => 'smtp.postmarkapp.com',
+        //     'smtp_port' => 25,
+        //     'smtp_user' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+        //     'smtp_pass' => 'e4d0462d-b4ff-433b-9f87-fdf266d57c2f',
+        //     'smtp_crypto' => 'TLS',
+        //     'mailtype' => 'html',
+        //     'charset' => 'utf-8',
+        // );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('no-reply@nutmor.com', "Nutmor.com");
@@ -491,7 +492,8 @@ class Auth extends CI_Controller
         return true;
     }
 
-    public function sendgrid($to, $subject, $message){
+    public function sendgrid($to, $subject, $message)
+    {
         $this->load->library('email');
         $this->email->initialize(array(
             'protocol' => 'smtp',
@@ -506,8 +508,8 @@ class Auth extends CI_Controller
 
         $this->email->from('no-reply@nutmor.com', 'Nutmor.com');
         $this->email->to($to);
-       // $this->email->cc('partchayanan.y@outlook.co.th');
-       // $this->email->bcc('partchayanan@oulook.com');
+        // $this->email->cc('partchayanan.y@outlook.co.th');
+        // $this->email->bcc('partchayanan@oulook.com');
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->send();
