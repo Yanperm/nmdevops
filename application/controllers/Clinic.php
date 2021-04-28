@@ -17,6 +17,7 @@ class Clinic extends CI_Controller
         $this->load->model('StatModel');
         $this->load->model('LikeModel');
         $this->load->model('CloseModel');
+        $this->load->model('KeySetting');
     }
 
 
@@ -543,11 +544,12 @@ class Clinic extends CI_Controller
     public function sendMail($to, $subject, $message)
     {
         //gmail
+        $key = $this->KeySetting->getData('gmail');
 
         $config['protocol']  = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-        $config['smtp_user'] = $this->config->item('username_gmail');
-        $config['smtp_pass'] = $this->config->item('password_gmail');
+        $config['smtp_user'] = $key->key1;
+        $config['smtp_pass'] = $key->key2;
         $config['smtp_port'] = 465;
         $config['charset']   = 'utf-8';
         $config['mailtype']  = 'html';

@@ -15,6 +15,7 @@ class Auth extends CI_Controller
         $this->load->model('MembersModel');
         $this->load->model('ClinicModel');
         $this->load->model('AdminModel');
+        $this->load->model('KeySetting');
     }
 
     public function register()
@@ -457,14 +458,16 @@ class Auth extends CI_Controller
             echo 'true';
         }
     }
-  
+
     public function sendMail($to, $subject, $message)
     {
         //gmail
+        $key = $this->KeySetting->getData('gmail');
+
         $config['protocol']  = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-        $config['smtp_user'] = $this->config->item('username_gmail');
-        $config['smtp_pass'] = $this->config->item('password_gmail');
+        $config['smtp_user'] = $key->key1;
+        $config['smtp_pass'] = $key->key2;
         $config['smtp_port'] = 465;
         $config['charset']   = 'utf-8';
         $config['mailtype']  = 'html';

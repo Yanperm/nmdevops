@@ -9,6 +9,7 @@ class Member extends CI_Controller
         $this->logged_in();
         $this->load->model('MembersModel');
         $this->load->model('BookingModel');
+        $this->load->model('KeySetting');
         $this->load->library('pagination');
         $this->load->library('S3_upload');
         $this->load->library('S3');
@@ -278,10 +279,12 @@ class Member extends CI_Controller
     public function sendMail($to, $subject, $message)
     {
         //gmail
+        $key = $this->KeySetting->getData('gmail');
+
         $config['protocol']  = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-        $config['smtp_user'] = $this->config->item('username_gmail');
-        $config['smtp_pass'] = $this->config->item('password_gmail');
+        $config['smtp_user'] = $key->key1;
+        $config['smtp_pass'] = $key->key2;
         $config['smtp_port'] = 465;
         $config['charset']   = 'utf-8';
         $config['mailtype']  = 'html';
