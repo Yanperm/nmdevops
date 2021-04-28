@@ -457,11 +457,7 @@ class Auth extends CI_Controller
             echo 'true';
         }
     }
-    public function testMail()
-    {
-        $this->sendMail('purinetwork12@gmail.com', 'Tsdfsdgs', 'dfgskdfgj;g');
-    }
-
+  
     public function sendMail($to, $subject, $message)
     {
         //gmail
