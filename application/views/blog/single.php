@@ -11,9 +11,9 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
-  .singlepost p {
+  /* .singlepost p {
     line-height: 0.5 !important;
-}
+} */
 </style>
 <main>
   <div id="breadcrumb">
