@@ -1,5 +1,8 @@
 <!-- SPECIFIC CSS -->
 <link href="<?php echo base_url() ?>assets/css/blog.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200&family=Bai+Jamjuree:wght@200&family=Chakra+Petch:wght@300&family=Charm&family=Charmonman&family=Chonburi&family=Itim&family=K2D:wght@100&family=Kanit:wght@200&family=Krub:wght@200&family=Maitree:wght@200&family=Mali:wght@200&family=Mitr:wght@200&family=Niramit:wght@200&family=Pattaya&family=Pridi:wght@200&family=Prompt:wght@300&family=Sarabun:wght@200&family=Sriracha&family=Taviraj:wght@100&family=Thasadith&family=Trirong:wght@100&display=swap" rel="stylesheet">
+
 <style>
   .desc-blog {
     overflow: hidden;
@@ -8,6 +11,9 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
+  .singlepost p {
+    line-height: 0.5 !important;
+}
 </style>
 <main>
   <div id="breadcrumb">

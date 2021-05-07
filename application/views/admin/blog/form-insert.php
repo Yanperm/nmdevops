@@ -1,5 +1,22 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/froala_editor.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/froala_style.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/code_view.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/colors.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/emoticons.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/image_manager.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/image.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/line_breaker.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/table.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/char_counter.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/frola/css/plugins/video.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+
+
 <div class="content-wrapper">
   <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -14,7 +31,7 @@
       <div class="header_box version_2">
         <h2><i class="fa fa-file"></i>Blog Add</h2>
       </div>
-      <form action="<?php echo base_url('admin/blog-insert') ?>" method="post" enctype="multipart/form-data">
+      <form action="<?php echo base_url('admin/blog-insert') ?>" method="post" id='form-insert' enctype="multipart/form-data">
 
         <div class="row">
           <div class="col-lg-12">
@@ -27,6 +44,11 @@
           </div>
 
           <div class="col-md-12">
+
+
+
+
+
 
             <h5>รูปภาพ/Youtube</h5>
 
@@ -88,9 +110,12 @@
                 รายละเอียด
               </div>
               <div class="col-md-9 ">
-                <div class="editor" id='editor'></div>
-                <!-- <textarea class="form-control" style='display:none' id='quiz02_{{$key}}' name="quiz_{{$item->id}}">{!!$ans!!}</textarea> -->
-                <textarea class="form-control" style="display:none" name='desc' id='desc'></textarea>
+                <div id="editor">
+
+                </div>
+
+                <!-- <div class="editor" id='editor'></div>-->
+                <textarea class="form-control"  name='desc' id='desc'></textarea>
               </div>
             </div>
 
@@ -99,7 +124,7 @@
 
               </div>
               <div class="col-md-4 ">
-                <p class="text-center add_top_30"><input type="submit" class="btn_1" value="เพิ่ม"></p>
+                <p class="text-center add_top_30"><input type="submit" id='btn-submit' class="btn_1" value="บันทึกข้อมูล"></p>
               </div>
             </div>
           </div>
@@ -177,95 +202,167 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+
 </style>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200&family=Bai+Jamjuree:wght@200&family=Chakra+Petch:wght@300&family=Charm&family=Charmonman&family=Chonburi&family=Itim&family=K2D:wght@100&family=Kanit:wght@200&family=Krub:wght@200&family=Maitree:wght@200&family=Mali:wght@200&family=Mitr:wght@200&family=Niramit:wght@200&family=Pattaya&family=Pridi:wght@200&family=Prompt:wght@300&family=Sarabun:wght@200&family=Sriracha&family=Taviraj:wght@100&family=Thasadith&family=Trirong:wght@100&display=swap" rel="stylesheet">
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/align.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/code_beautifier.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/code_view.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/draggable.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/emoticons.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/image.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/image_manager.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/line_breaker.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/link.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/paragraph_format.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/paragraph_style.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/table.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/video.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/url.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/entities.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/char_counter.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/inline_style.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/frola/js/plugins/save.min.js"></script>
 <script>
-  $(document).ready(function() {
-    var toolbarOptions = [
-      ['bold', 'italic', 'underline', 'strike', 'link'], // toggled buttons
-      // ['blockquote', 'code-block'],
-      [{}],
-      [{
-        'header': 1
-      }, {
-        'header': 2
-      }], // custom button values
-      [{
-        'list': 'ordered'
-      }, {
-        'list': 'bullet'
-      }],
-      [{
-        'script': 'sub'
-      }, {
-        'script': 'super'
-      }], // superscript/subscript
-      [{
-        'indent': '-1'
-      }, {
-        'indent': '+1'
-      }], // outdent/indent
-      [{
-        'direction': 'rtl'
-      }],
-      ['image', 'code-block'], // text direction
 
-      [{
-        'header': [1, 2, 3, 4, 5, 6, false]
-      }],
-
-      [{
-        'color': []
-      }, {
-        'background': []
-      }], // dropdown with defaults from theme
-      [{
-        'align': []
-      }],
-
-      //['clean'] // remove formatting button
-    ];
-
-    var Link = Quill.import('formats/link');
-
-    class MyLink extends Link {
-    	static create(value) {
-    		let node = Link.create(value);
-    		value = Link.sanitize(value);
-    		node.setAttribute('href', value);
-    		if (value.startsWith("https://quilljs.com")) {
-    			node.removeAttribute('target');
-    		} else {
-    			node.setAttribute("target", "_blank");
-    		}
-    		return node;
-    	}
-
-    	format(name, value) {
-    		super.format(name, value);
-
-    		if (name !== this.statics.blotName || !value) {
-    			return;
-    		}
-
-    		if (value.startsWith("https://quilljs.com")) {
-    			this.domNode.removeAttribute("target");
-    		} else {
-    			this.domNode.setAttribute("target", "_blank");
-    		}
-    	}
+(function () {
+  new FroalaEditor("#editor", {
+    //fullPage: true,
+    fontFamily: {
+      "Prompt,sans-serif": 'Prompt',
+      "Kanit,sans-serif": 'Kanit',
+      "Athiti,sans-serif": 'Athiti ',
+      "Bai Jamjuree,sans-serif": 'Bai Jamjuree ',
+      "Chakra Petch,sans-serif": 'Chakra Petch ',
+      "Charmonman,sans-serif": 'Charmonman ',
+      "Itim,sans-serif": 'Itim ',
+      "K2D,sans-serif": 'K2D ',
+      "Krub,sans-serif": 'Krub ',
+      "Maitree,sans-serif": 'Maitree ',
+      "Mali,sans-serif": 'Mali ',
+      "Mitr,sans-serif": 'Mitr ',
+      "Pattaya,sans-serif": 'Pattaya ',
+      "Pridi,sans-serif": 'Pridi ',
+      "Sarabun,sans-serif": 'Sarabun ',
+      "Sriracha,sans-serif": 'Sriracha ',
+      "Taviraj,sans-serif": 'Taviraj ',
+      "Thasadith,sans-serif": 'Thasadith ',
+      "Trirong,sans-serif": 'Trirong ',
+    },
+    fontFamilySelection: true,
+    events: {
+      initialized: function() {
+      this.events.focus()
+      this.fontSize.apply('14px')
+      this.fontFamily.apply('Prompt')
+    },
+    'contentChanged': function (keydownEvent) {
+      $('#desc').val(this.html.get());
     }
+  }
+  })
+})()
 
-    Quill.register(MyLink);
 
-    quill = new Quill('#editor', {
-      modules: {
-        toolbar: toolbarOptions
-      },
-      theme: 'snow'
-    });
-    quill.on('text-change', function(delta, oldDelta, source) {
-      $('#desc').val(quill.root.innerHTML);
-    });
+  // $(document).ready(function() {
+  //   var toolbarOptions = [
+  //     ['bold', 'italic', 'underline', 'strike', 'link'], // toggled buttons
+  //     // ['blockquote', 'code-block'],
+  //     [{}],
+  //     [{
+  //       'header': 1
+  //     }, {
+  //       'header': 2
+  //     }], // custom button values
+  //     [{
+  //       'list': 'ordered'
+  //     }, {
+  //       'list': 'bullet'
+  //     }],
+  //     [{
+  //       'script': 'sub'
+  //     }, {
+  //       'script': 'super'
+  //     }], // superscript/subscript
+  //     [{
+  //       'indent': '-1'
+  //     }, {
+  //       'indent': '+1'
+  //     }], // outdent/indent
+  //     [{
+  //       'direction': 'rtl'
+  //     }],
+  //     ['image', 'code-block'], // text direction
+  //
+  //     [{
+  //       'header': [1, 2, 3, 4, 5, 6, false]
+  //     }],
+  //
+  //     [{
+  //       'color': []
+  //     }, {
+  //       'background': []
+  //     }], // dropdown with defaults from theme
+  //     [{
+  //       'align': []
+  //     }],
+  //
+  //     //['clean'] // remove formatting button
+  //   ];
+  //
+  //   var Link = Quill.import('formats/link');
+  //
+  //   class MyLink extends Link {
+  //   	static create(value) {
+  //   		let node = Link.create(value);
+  //   		value = Link.sanitize(value);
+  //   		node.setAttribute('href', value);
+  //   		if (value.startsWith("https://quilljs.com")) {
+  //   			node.removeAttribute('target');
+  //   		} else {
+  //   			node.setAttribute("target", "_blank");
+  //   		}
+  //   		return node;
+  //   	}
+  //
+  //   	format(name, value) {
+  //   		super.format(name, value);
+  //
+  //   		if (name !== this.statics.blotName || !value) {
+  //   			return;
+  //   		}
+  //
+  //   		if (value.startsWith("https://quilljs.com")) {
+  //   			this.domNode.removeAttribute("target");
+  //   		} else {
+  //   			this.domNode.setAttribute("target", "_blank");
+  //   		}
+  //   	}
+  //   }
+  //
+  //   Quill.register(MyLink);
+  //
+  //   quill = new Quill('#editor', {
+  //     modules: {
+  //       toolbar: toolbarOptions
+  //     },
+  //     theme: 'snow'
+  //   });
+  //   quill.on('text-change', function(delta, oldDelta, source) {
+  //     $('#desc').val(quill.root.innerHTML);
+  //   });
 
     function readURL(input) {
       if (input.files && input.files[0]) {
@@ -282,7 +379,7 @@
     $("#imageUpload").change(function() {
       readURL(this);
     });
-  });
+  // });
 
   function typeBlog(id) {
     if (id == 0) {
@@ -297,6 +394,8 @@
     }
   }
 </script>
+
+
 
 <!-- Validation JS file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
