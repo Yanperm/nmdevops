@@ -15,7 +15,7 @@
   /* .singlepost p {
     line-height: 0.5 !important;
 } */
-iframe {
+.g-recaptcha iframe {
     height: 76px !important;
     width: 100%;
 }
