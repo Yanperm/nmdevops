@@ -125,15 +125,19 @@ class Blog extends CI_Controller
 
     public function comment()
     {
+        $checkSpam = '';
         if ($this->input->post('comments') != '') {
-            $data = [
-          'blog_id' => $this->input->post('blog_id'),
-          'name' => $this->input->post('name'),
-          'description' => $this->input->post('comments'),
-          'created_at' => date('Y-m-d')
-        ];
+            $checkSpam = strpos($this->input->post('comments'), "ponlinecialisk");
+            if ($checkSpam == '') {
+                $data = [
+              'blog_id' => $this->input->post('blog_id'),
+              'name' => $this->input->post('name'),
+              'description' => $this->input->post('comments'),
+              'created_at' => date('Y-m-d')
+            ];
 
-            $this->BlogCommentModel->insert($data);
+                $this->BlogCommentModel->insert($data);
+            }
         }
         redirect(base_url('blog/single/'.$this->input->post('blog_id')));
     }
@@ -142,15 +146,19 @@ class Blog extends CI_Controller
     {
         $blogId = $this->input->post('blog_id');
         $commentId = $this->input->post('comment_id');
+        $checkSpam = '';
         if ($this->input->post('comment_'.$commentId) != '') {
-            $data = [
+            $checkSpam = strpos($this->input->post('comment_'.$commentId), "ponlinecialisk");
+            if ($checkSpam == '') {
+                $data = [
             'comment_id' => $this->input->post('comment_id'),
             'name' => $this->input->post('name_'.$commentId),
             'description' => $this->input->post('comment_'.$commentId),
             'created_at' => date('Y-m-d')
           ];
 
-            $this->BlogReplyModel->insert($data);
+                $this->BlogReplyModel->insert($data);
+            }
         }
 
         redirect(base_url('blog/single/'.$this->input->post('blog_id')));
