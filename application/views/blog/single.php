@@ -15,6 +15,10 @@
   /* .singlepost p {
     line-height: 0.5 !important;
 } */
+iframe {
+    height: 76px !important;
+    width: 100%;
+}
 </style>
 <main>
   <div id="breadcrumb">
@@ -147,12 +151,13 @@
             <?php endif;?>
           </div>
           <div class="form-group">
-            <textarea class="form-control" name="comments" id="comments" rows="6" placeholder=" ข้อความ"></textarea>
+            <textarea class="form-control" name="comments" id="comments" required rows="6" placeholder=" ข้อความ"></textarea>
           </div>
           <div class="form-group">
-            <div class="g-recaptcha" data-callback="makeaction" data-sitekey="6LeJtM0aAAAAAFIg4lqW-58q4GYmIt8Pb2pBzZsk"></div>
-            <button type="submit" id="submit2" class="btn_1" disabled> แสดงความคิดเห็น</button>
+            <div class="g-recaptcha" data-callback="makeaction" data-sitekey="6Lf63s0aAAAAAJXOJx2ltYw5dqTTH2UYn9GKnbAd"></div>
+            <button type="submit" id="submit2" class="btn_1 mt-3" disabled> แสดงความคิดเห็น</button>
           </div>
+
         </form>
 
       </div>

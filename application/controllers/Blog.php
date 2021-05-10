@@ -96,6 +96,11 @@ class Blog extends CI_Controller
         $id = $this->uri->segment('3');
 
         $blog = $this->BlogModel->single($id);
+
+        if (empty($blog)) {
+            redirect(base_url('blog/1'));
+        }
+
         $lastBlog = $this->BlogModel->getLastBlog();
         $category = $this->BlogCategoryModel->countBlog();
 
@@ -112,7 +117,7 @@ class Blog extends CI_Controller
           'title' => $blog->title,
           'meta' => $blog->title
         ];
-        
+
         $this->load->view('template/header', $dataHeader);
         $this->load->view('blog/single', $data);
         $this->load->view('template/footer');
@@ -120,15 +125,16 @@ class Blog extends CI_Controller
 
     public function comment()
     {
-        $data = [
+        if ($this->input->post('comments') != '') {
+            $data = [
           'blog_id' => $this->input->post('blog_id'),
           'name' => $this->input->post('name'),
           'description' => $this->input->post('comments'),
           'created_at' => date('Y-m-d')
         ];
 
-        $this->BlogCommentModel->insert($data);
-
+            $this->BlogCommentModel->insert($data);
+        }
         redirect(base_url('blog/single/'.$this->input->post('blog_id')));
     }
 
@@ -136,14 +142,16 @@ class Blog extends CI_Controller
     {
         $blogId = $this->input->post('blog_id');
         $commentId = $this->input->post('comment_id');
-        $data = [
-          'comment_id' => $this->input->post('comment_id'),
-          'name' => $this->input->post('name_'.$commentId),
-          'description' => $this->input->post('comment_'.$commentId),
-          'created_at' => date('Y-m-d')
-        ];
+        if ($this->input->post('comment_'.$commentId) != '') {
+            $data = [
+            'comment_id' => $this->input->post('comment_id'),
+            'name' => $this->input->post('name_'.$commentId),
+            'description' => $this->input->post('comment_'.$commentId),
+            'created_at' => date('Y-m-d')
+          ];
 
-        $this->BlogReplyModel->insert($data);
+            $this->BlogReplyModel->insert($data);
+        }
 
         redirect(base_url('blog/single/'.$this->input->post('blog_id')));
     }
