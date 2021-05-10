@@ -128,7 +128,7 @@ class Blog extends CI_Controller
         $checkSpam = '';
         if ($this->input->post('comments') != '') {
             $checkSpam = strpos($this->input->post('comments'), "ponlinecialisk");
-            if ($checkSpam == '') {
+            if ($checkSpam == '' && $checkSpam != 0) {
                 $data = [
               'blog_id' => $this->input->post('blog_id'),
               'name' => $this->input->post('name'),
@@ -149,7 +149,7 @@ class Blog extends CI_Controller
         $checkSpam = '';
         if ($this->input->post('comment_'.$commentId) != '') {
             $checkSpam = strpos($this->input->post('comment_'.$commentId), "ponlinecialisk");
-            if ($checkSpam == '') {
+            if ($checkSpam == '' && $checkSpam != 0) {
                 $data = [
             'comment_id' => $this->input->post('comment_id'),
             'name' => $this->input->post('name_'.$commentId),
