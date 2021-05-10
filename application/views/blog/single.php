@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200&family=Bai+Jamjuree:wght@200&family=Chakra+Petch:wght@300&family=Charm&family=Charmonman&family=Chonburi&family=Itim&family=K2D:wght@100&family=Kanit:wght@200&family=Krub:wght@200&family=Maitree:wght@200&family=Mali:wght@200&family=Mitr:wght@200&family=Niramit:wght@200&family=Pattaya&family=Pridi:wght@200&family=Prompt:wght@300&family=Sarabun:wght@200&family=Sriracha&family=Taviraj:wght@100&family=Thasadith&family=Trirong:wght@100&display=swap" rel="stylesheet">
 
+<script src='https://www.google.com/recaptcha/api.js?hl=th'></script>
 <style>
   .desc-blog {
     overflow: hidden;
@@ -149,7 +150,8 @@
             <textarea class="form-control" name="comments" id="comments" rows="6" placeholder=" ข้อความ"></textarea>
           </div>
           <div class="form-group">
-            <button type="submit" id="submit2" class="btn_1"> แสดงความคิดเห็น</button>
+            <div class="g-recaptcha" data-callback="makeaction" data-sitekey="6LeJtM0aAAAAAFIg4lqW-58q4GYmIt8Pb2pBzZsk"></div>
+            <button type="submit" id="submit2" class="btn_1" disabled> แสดงความคิดเห็น</button>
           </div>
         </form>
 
@@ -224,6 +226,10 @@
 <script>
 function reply(id){
   $('#reply_'+id).show();
+}
+
+function makeaction(){
+      document.getElementById('submit2').disabled = false;
 }
 
 function delComment(id){
