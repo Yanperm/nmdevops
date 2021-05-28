@@ -541,6 +541,36 @@ class Clinic extends CI_Controller
         echo json_encode($currentQues);
     }
 
+    public function getListBooking()
+    {
+        $clinicId = $_GET["idClinic"];
+        $email = $_GET["email"];
+        $date = $_GET["date"];
+        $booking = $this->BookingModel->getBookingByEmailAndDate($clinicId, $email, $date);
+        if(count($booking) > 0){
+            foreach($booking as $item){
+                echo "<p class='text-modal'>หมายเลขการจอง : ".$item->BOOKINGID."</p>";
+                echo "<p class='text-modal'>คิวที่  : ".$item->QUES."</p>";
+                echo "<button class='btn btn-danger' onclick='cancelConfirm(\"".$item->BOOKINGID."\")'>ยกเลิกคิว</button>";
+            }
+        }else{
+            echo "<p  class='text-modal'>ไม่พบข้อมูลการจอง !</p>";
+        }
+    }
+
+    public function cancelBooking()
+    {
+        if (!empty($this->input->get('vn'))) {
+            $booking = $this->BookingModel->getDataById($this->input->get('vn'));
+
+            if ($booking->TYPE == 0) {
+                $this->BookingModel->delete($this->input->get('vn'));
+            } else {
+                $this->BookingModel->cancel($this->input->get('vn'));
+            }
+        }
+    }
+
     public function sendMail($to, $subject, $message)
     {
         //gmail

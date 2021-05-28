@@ -82,6 +82,14 @@ a.appendChild(r);
 </script>
 
 <script data-ad-client="ca-pub-1310150499142891" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="นัตตี้บ็อตผู้ช่วย"
+  agent-id="ab3a617e-f6c1-494f-bb96-3d32d8fba05d"
+  language-code="th"
+></df-messenger>
+
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">

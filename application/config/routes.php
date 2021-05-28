@@ -77,6 +77,8 @@ $route['like'] = 'clinic/like';
 $route['checkinLast'] = 'clinic/checkinLast';
 $route['checkinFast'] = 'clinic/checkinFast';
 $route['current-queue'] = 'clinic/currentQueue';
+$route['list-booking'] = 'clinic/getListBooking';
+$route['cancel-booking'] = 'clinic/cancelBooking';
 
 $route['blog/(:any)'] = 'blog/listBlog';
 $route['comment'] = 'blog/comment';
