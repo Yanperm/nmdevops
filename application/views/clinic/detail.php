@@ -782,7 +782,7 @@
 
     function getQues(id) {
         $.ajax({
-            url: '<?php echo base_url("current-queue "); ?>',
+            url: '<?php echo base_url("current-queue"); ?>',
             type: 'get',
             data: {
                 clinic_id: id,
