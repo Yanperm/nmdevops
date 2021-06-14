@@ -685,16 +685,16 @@
                     $('#time-show').html(response.BOOKTIME);
                     $('#queue-show').html(response.QUES);
                     if (response.CHECKIN == "0") {
-                        $('#status-show').html(' < span class = "badge badge-warning" > รอการเช็ คอิน < /span>');
+                        $('#status-show').html(' <span class = "badge badge-warning"> รอการเช็คอิน </span>');
                         $('#checkIn').show();
                     } else if (response.CHECKIN == "1") {
-                        $('#status-show').html(' < span class = "badge badge-success" > เช็ คอินแล้ ว < /span>');
+                        $('#status-show').html(' <span class = "badge badge-success"> เช็คอินแล้ว </span>');
                         $('#checkIn').hide();
                     }
                     if (response.CONFIRM == "0") {
-                        $('#status').html(' < span class = "badge badge-primary" > ยั งไม่ ยืนยั นการจอง < /span>');
+                        $('#status').html(' <span class = "badge badge-primary" > ยังไม่ยืนยันการจอง </span>');
                     } else if (response.CONFIRM == "1") {
-                        $('#status').html(' < span class = "badge badge-info" > รอการเช็ คอิน < /span>');
+                        $('#status').html(' <span class = "badge badge-info"> รอการเช็คอิน </span>');
                     }
                 }
                 $('#show-1').hide();

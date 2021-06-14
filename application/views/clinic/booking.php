@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>อีเมล</label>
+                                        <label>เมลล์</label>
                                         <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php if (!empty($member)): echo $member->EMAIL; endif; ?>">
                                     </div>
                                 </div>
