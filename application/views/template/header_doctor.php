@@ -55,7 +55,7 @@
     gtag('config', 'G-5ZNQMXS8F4');
     </script>
     <!-- Hotjar Tracking Code for nutmor.com -->
-<script>
+<!-- <script>
 (function(h,o,t,j,a,r){
 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
 h._hjSettings={hjid:2347664,hjsv:6};
@@ -64,8 +64,8 @@ r=o.createElement('script');r.async=1;
 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
 a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-<!-- <script data-ad-client="ca-pub-1310150499142891" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+</script> -->
+<script data-ad-client="ca-pub-1310150499142891" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <df-messenger
   intent="WELCOME"
   chat-title="นัตตี้บ็อตผู้ช่วย"
