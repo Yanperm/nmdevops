@@ -91,6 +91,9 @@
         margin: 0.5em;
     }
 </style>
+
+<script data-ad-client="ca-pub-1310150499142891" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 <div id="cookie" style="display: none">
     <input type="checkbox" id="accept" />
         <span>โดยการใช้เว็บไซต์ของเราคุณรับทราบว่าคุณได้อ่านและทำความเข้าใจ
