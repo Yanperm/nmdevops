@@ -870,7 +870,7 @@ class Physician extends CI_Controller
 
     public function checkEmail(){
         $email = $this->input->get('email');   
-        $member = $this->MembersModel->detailByEmail($email);
+        $member = $this->MembersModel->detailByEmailActive($email);
 
         $data['member'] = $member;
         echo json_encode($data);

@@ -63,6 +63,16 @@ class MembersModel extends CI_Model
         }
     }
 
+    public function detailByEmailActive($mail)
+    {
+        $query = $this->db->query('SELECT * FROM tbmembers where EMAIL = "' . $mail . '" AND ACTIVATE_STATUS = 1 ');
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
     public function checkDuplicate($email)
     {
         $query = $this->db->query('SELECT MEMBERIDCARD FROM tbmembers where EMAIL = "' . $email . '"');
