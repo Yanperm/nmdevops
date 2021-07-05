@@ -97,6 +97,11 @@
     <input type='hidden' id="queue" name='queue'>
     <input type='hidden' id="qber" name='qber'>
     <div class="form-group">
+        <label>เมลล์</label>
+        <input type="email" class="form-control" placeholder="" id="email" name="email" required onBlur="checkEmail(this.value)">
+    </div>
+    <p id="error-email" style="display:none;color: #f44336;">เมลล์นี้มีการใช้งานในระบบ</p>
+    <div class="form-group">
         <label>ชื่อ</label>
         <input type="text" class="form-control" placeholder="" name="firstname_booking" required>
     </div>
@@ -112,16 +117,13 @@
         <label>Line Id</label>
         <input type="text" class="form-control" placeholder="" name="line_id" >
     </div>
-    <div class="form-group">
-        <label>เมลล์</label>
-        <input type="email" class="form-control" placeholder="" name="email" required>
-    </div>
+   
     <div class="form-group">
         <label>สาเหตุที่มาพบแพทย์</label>
         <textarea class="form-control" name="cause" required></textarea>
     </div>
     <div class="form-group">
-        <button class="btn btn-success" type="button" onclick="addQueue()">ยืนยันการนัดหมอ</button>
+        <button class="btn btn-success" type="button" id="btn-add" onclick="addQueue()" disabled="disabled">ยืนยันการนัดหมอ</button>
         <button class="btn btn-default"type="reset">ล้างข้อมูล</button>
     </div>
 
@@ -130,3 +132,23 @@
 </div>
 </div>
 </div>
+<script>
+function checkEmail(email){
+    $.ajax({
+     url: '<?php echo base_url('physician/checkEmail')?>',
+     type: 'get',
+     data : {email : email},
+     success: function(response) {
+      let data  = JSON.parse(response);
+      
+      if(Object.keys(data.member).length === 0 ){
+        $('#error-email').hide();
+        $("#btn-add").prop("disabled", false);
+      }else{
+        $('#error-email').show();
+        $("#btn-add").prop("disabled", true);
+      }
+     }
+   });
+}
+</script>

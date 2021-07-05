@@ -868,6 +868,14 @@ class Physician extends CI_Controller
         echo json_encode($arr);
     }
 
+    public function checkEmail(){
+        $email = $this->input->get('email');   
+        $member = $this->MembersModel->detailByEmail($email);
+
+        $data['member'] = $member;
+        echo json_encode($data);
+    }
+
     public function cancelService()
     {
         $clinic = $this->ClinicModel->detailById($this->session->userdata('id'));
