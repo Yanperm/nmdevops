@@ -391,7 +391,8 @@ class Physician extends CI_Controller
             'BOOKDATE' => $date,
             'BOOKTIME' => $time,
             'DETAIL' => $cause,
-            'CHECKIN' => 1
+            'CHECKIN' => 1,
+            'BOOK_ON' => 'STAFF'
         ];
         $this->ClinicModel->insert($data);
 

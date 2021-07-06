@@ -62,7 +62,7 @@
                                <!-- <td><?php echo $item['BOOKDATE']; ?></td> -->
                                 <td><?php echo $item['BOOKTIME']; ?></td>
                                 <td><?php echo $item['DETAIL']; ?></td>
-                                <td><?php echo $item['CUSTOMERNAME']; ?></td>
+                                <td><?php echo $item['CUSTOMERNAME']?></td>
                                 <td><?php echo $item['PHONE']; ?></td>
                                 <td><?php echo $item['LINEID']; ?></td>
                                 <td class="text-center">
@@ -71,6 +71,9 @@
                                     <?php endif;?>
                                     <?php if ($item['BOOK_ON'] == 'MOBILE'):?>
                                         <span class="badge badge-info"><?php echo $item['BOOK_ON']; ?></span>
+                                    <?php endif;?>
+                                    <?php if ($item['BOOK_ON'] == 'STAFF'):?>
+                                        <span class="badge badge-warning"><?php echo $item['BOOK_ON']; ?></span>
                                     <?php endif;?>
                                     </td>
                                 <td>
