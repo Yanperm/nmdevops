@@ -320,7 +320,7 @@ class Physician extends CI_Controller
         $lastName = $this->input->post('lastname_booking');
 
         
-        $email = $this->input->post('email');
+        //$email = $this->input->post('email');
         $telephone = $this->input->post('telephone');
         $lineId = $this->input->post('line_id');
         $cause = $this->input->post('cause');
@@ -336,44 +336,42 @@ class Physician extends CI_Controller
             $time = '';
         }
 
-       
-
         $dateNow = new DateTime();
         $currentTime = $dateNow->getTimestamp();
 
         //Duplicate email check
-        $userId = $this->MembersModel->checkDuplicate($email);
-        if ($userId){
+        //$userId = $this->MembersModel->checkDuplicate($email);
+        // if ($userId){
 
-            $data = [
-                'CUSTOMERNAME' => $firstName . " " . $lastName,
-                'LINEID' => $lineId,
-                'PHONE' => $telephone,
-            ];
+        //     $data = [
+        //         'CUSTOMERNAME' => $firstName . " " . $lastName,
+        //         'LINEID' => $lineId,
+        //         'PHONE' => $telephone,
+        //     ];
 
-            $this->MembersModel->update($data, $userId);
-        }
+        //     $this->MembersModel->update($data, $userId);
+        // }
 
-        if ($userId == false) {
+       // if ($userId == false) {
             $userId = $currentTime;
             //insert member
             $data = [
                 'MEMBERIDCARD' => $currentTime,
                 'CUSTOMERNAME' => $firstName . " " . $lastName,
                 'LINEID' => $lineId,
-                'EMAIL' => $email,
+                'EMAIL' => $telephone,
                 'PASSWORD' => md5($telephone),
                 'PHONE' => $telephone,
             ];
             $this->MembersModel->insert($data);
-            $subject = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor";
-            $message = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor\r\nขอบคุณ คุณ " . $firstName . " " . $lastName . " ที่ให้ความไว้วางใจสมัครสมาชิกเพื่อใช้บริการกับเรา\r\n
-            ข้อมูลการเข้าสู่ระบบ\r\n
-            username : " . $email . "\r\n
-            password : " . $telephone . "\r\n
-            \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
-            $this->sendMail($email, $subject, $message);
-        }
+            // $subject = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor";
+            // $message = "ยืนยันการสมัครสมาชิก เว็บไซต์ Nutmor\r\nขอบคุณ คุณ " . $firstName . " " . $lastName . " ที่ให้ความไว้วางใจสมัครสมาชิกเพื่อใช้บริการกับเรา\r\n
+            // ข้อมูลการเข้าสู่ระบบ\r\n
+            // username : " . $email . "\r\n
+            // password : " . $telephone . "\r\n
+            // \r\n\r\nขอขอบคุณที่ให้ความไว้วางใจเลือกใช้บริการ Nutmor \r\nทีมงาน Nutmor";
+            // $this->sendMail($email, $subject, $message);
+       // }
 
         $type = 0;
         if (substr($ques, 0, 1) == 'B') {
@@ -399,25 +397,25 @@ class Physician extends CI_Controller
 
         $clinic = $this->ClinicModel->detailById($clinicId);
 
-        $dataEmail = [
-            'clinicName' => $clinic->CLINICNAME,
-            'vn' => 'VN' . $currentTime,
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'telephone' => $telephone,
-            'lineId' => $lineId,
-            'cause' => $cause,
-            'date' => $date,
-            'time' => $time,
-            'ques' => $ques
-        ];
-        $subject = "ยืนยันการนัดหมอ " . $clinic->CLINICNAME;
-        $message = $this->load->view('email_template', $dataEmail, true);
+        // $dataEmail = [
+        //     'clinicName' => $clinic->CLINICNAME,
+        //     'vn' => 'VN' . $currentTime,
+        //     'firstName' => $firstName,
+        //     'lastName' => $lastName,
+        //     'telephone' => $telephone,
+        //     'lineId' => $lineId,
+        //     'cause' => $cause,
+        //     'date' => $date,
+        //     'time' => $time,
+        //     'ques' => $ques
+        // ];
+        // $subject = "ยืนยันการนัดหมอ " . $clinic->CLINICNAME;
+        // $message = $this->load->view('email_template', $dataEmail, true);
 
         //sendmail
-        if ($email != '') {
-            $this->sendMail($email, $subject, $message);
-        }
+        // if ($email != '') {
+        //     $this->sendMail($email, $subject, $message);
+        // }
 
         $data = [
             'clinic' => $clinic
@@ -429,6 +427,7 @@ class Physician extends CI_Controller
         ];
 
         $this->session->set_flashdata('msg', 'เพิ่มคิวเรียบร้อย');
+
         redirect(base_url().'physician/manage?date='.$date, 'refresh');
     }
 

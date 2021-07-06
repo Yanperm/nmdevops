@@ -110,14 +110,14 @@
                 <input type='hidden' id="date" name='date' value="<?php echo $date; ?>">
                 <input type='hidden' id="queue" name='queue'>
                 <input type='hidden' id="qber" name='qber'>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>เมลล์</label>
                     <input type="email" class="form-control" placeholder="" id="email" name="email" required onBlur="checkEmail(this.value)">
                 </div>
                 <div>
 
                 </div>
-                <p id="error-email" style="display:none;color: #f44336;">เมลล์นี้มีการใช้งานในระบบ</p>
+                <p id="error-email" style="display:none;color: #f44336;">เมลล์นี้มีการใช้งานในระบบ</p> -->
                 <div class="form-group">
                     <label>ชื่อ</label>
                     <input type="text" class="form-control" placeholder="" id="fname" name="firstname_booking" required>
@@ -137,7 +137,7 @@
 
                 <div class="form-group">
                     <label>สาเหตุที่มาพบแพทย์</label>
-                    <textarea class="form-control" name="cause" required></textarea>
+                    <textarea class="form-control" id="cause" name="cause" required></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success" type="button" onclick="addQueue()">ยืนยันการนัดหมอ</button>
@@ -210,15 +210,17 @@
     }
 
     function resetData() {
-        $("#email").val('');
+        // $("#email").val('');
         $("#fname").val('');
         $("#lname").val('');
         $("#telephone").val('');
         $("#line_id").val('');
+        $("#cause").val('');
 
-        $("#fname").removeAttr('disabled');
-        $("#lname").removeAttr('disabled');
-        $("#telephone").removeAttr('disabled');
-        $("#line_id").removeAttr('disabled');
+
+        // $("#fname").removeAttr('disabled');
+        // $("#lname").removeAttr('disabled');
+        // $("#telephone").removeAttr('disabled');
+        // $("#line_id").removeAttr('disabled');
     }
 </script>
