@@ -318,6 +318,8 @@ class Physician extends CI_Controller
     {
         $firstName = $this->input->post('firstname_booking');
         $lastName = $this->input->post('lastname_booking');
+
+        
         $email = $this->input->post('email');
         $telephone = $this->input->post('telephone');
         $lineId = $this->input->post('line_id');
@@ -334,11 +336,23 @@ class Physician extends CI_Controller
             $time = '';
         }
 
+       
+
         $dateNow = new DateTime();
         $currentTime = $dateNow->getTimestamp();
 
         //Duplicate email check
         $userId = $this->MembersModel->checkDuplicate($email);
+        if ($userId){
+
+            $data = [
+                'CUSTOMERNAME' => $firstName . " " . $lastName,
+                'LINEID' => $lineId,
+                'PHONE' => $telephone,
+            ];
+
+            $this->MembersModel->update($data, $userId);
+        }
 
         if ($userId == false) {
             $userId = $currentTime;
