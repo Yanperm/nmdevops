@@ -17,6 +17,7 @@ class Clinic extends CI_Controller
         $this->load->model('StatModel');
         $this->load->model('LikeModel');
         $this->load->model('CloseModel');
+        $this->load->model('CloseQueueModel');
         $this->load->model('KeySetting');
     }
 
@@ -118,6 +119,8 @@ class Clinic extends CI_Controller
         $startTime = '';
         $endTime = '';
 
+        $fullQueue = $this->CloseQueueModel->listDataByDate($clinicId, $date);
+
         $close = $this->CloseModel->listData($clinicId);
         $closeStatus = false;
         foreach ($close as $item) {
@@ -192,7 +195,8 @@ class Clinic extends CI_Controller
             'maxQber' => $maxQber,
             'statusBooked' => $statusBooked,
             'queueBooked' => $queueBooked,
-            'closeStatus' => $closeStatus
+            'closeStatus' => $closeStatus,
+            'fullQueue' => $fullQueue
         ];
 
         $dataHeader = [

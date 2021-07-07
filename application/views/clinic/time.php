@@ -25,7 +25,11 @@
                             $today = date($date);
                             $number = date('w', strtotime($today));
                             ?>
-                            <?php if ($number == $clinic->DAYOFF || $closeStatus): ?>
+                            <?php if ($fullQueue): ?>
+                                <div class="alert alert-danger text-center" role="alert">
+                                    คิวจองเต็มแล้ว โปรดจองคิวในวันถัดไป  ต้องขออภัยด้วยค่ะ
+                                </div>
+                            <?php elseif ($number == $clinic->DAYOFF || $closeStatus): ?>
                                 <div class="alert alert-danger text-center" role="alert">
                                     หยุดทำการ <?php echo $date; ?>
                                 </div>
