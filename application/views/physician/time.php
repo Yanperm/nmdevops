@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <label>วันหยุดทำการ</label>
                                     <select class="form-control" name="DAYOFF">
-                                        <option <?php if ($time["DAYOFF"] == 0): ?> selected <?php endif; ?> value="">ไม่มีวันหยุด</option>
+                                        <option <?php if ($time["DAYOFF"] == 7): ?> selected <?php endif; ?> value="7">ไม่มีวันหยุด</option>
                                         <?php for ($i = 0; $i < 7; $i++): ?>
                                             <option <?php if ($time["DAYOFF"] == $i && ($time["DAYOFF"] == 0 && $time["TIME_OPEN"] != '')): ?> selected <?php endif; ?> value="<?php echo $i; ?>"><?php echo $day[$i]; ?></option>
                                         <?php endfor; ?>
@@ -123,6 +123,38 @@
                         <?php endforeach; ?>
                     </ul>
                 </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-lg-6">
+                    <h6>ตั้งค่าคิวเต็มคลินิก</h6>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <?php if ($this->session->flashdata('msg_full_queue')): ?>
+                                <div class="alert alert-success  alert-dismissible fade show">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong>สำเร็จ!</strong> <?php echo $this->session->flashdata('msg_full_queue'); ?>
+                                </div>
+                            <?php endif; ?>
+                            <form action="<?php echo base_url('physician/fullQueue')?>" method="post">
+                            <div class="form-group">
+                                <input type="date" required class="form-control" name="QUEUECLOSEDATE"  placeholder="วันที่คิวเต็ม" value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                                <button type="submit" class="btn_1 medium mt-3 mb-3">เพิ่มคิวเต็ม</button>
+                            </form>
+
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <?php foreach ($fullQueue as $item): ?>
+                            <li class="list-group-item">
+                                <?php echo $item->CLOSEDATE; ?>
+                                <a style="float: right" href="<?php echo base_url('physician/fullQueueDelete')."?id=".$item->colseid;?>">X</a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
             </div>
             <!-- /row-->
         </div>

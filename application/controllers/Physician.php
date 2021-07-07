@@ -10,6 +10,7 @@ class Physician extends CI_Controller
         $this->load->model('ClinicModel');
         $this->load->model('BookingModel');
         $this->load->model('CloseModel');
+        $this->load->model('CloseQueueModel');
         $this->load->model('YoutubeModel');
         $this->load->model('LikeModel');
         $this->load->model('StatModel');
@@ -536,13 +537,15 @@ class Physician extends CI_Controller
     public function time()
     {
         $dateClose = $this->CloseModel->listData($this->session->userdata('id'));
+        $fullQueue = $this->CloseQueueModel->listData($this->session->userdata('id'));
         $time = $this->ClinicModel->detailById($this->session->userdata('id'));
         $day = ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"];
 
         $data = [
             'day' => $day,
             'time' => (array)$time,
-            'dateClose' => $dateClose
+            'dateClose' => $dateClose,
+            'fullQueue' => $fullQueue
         ];
         $this->load->view('template/header_physician');
         $this->load->view('physician/time', $data);
@@ -597,6 +600,31 @@ class Physician extends CI_Controller
         $this->CloseModel->delete($this->input->get('id'));
 
         $this->session->set_flashdata('msg_holiday', 'ลบวันหยุดเรียบร้อย');
+        redirect(base_url('physician/time'));
+    }
+
+    public function fullQueue()
+    {
+        $dateNow = new DateTime();
+        $currentTime = $dateNow->getTimestamp();
+
+        $data = [
+            'colseid' => $currentTime,
+            'CLINICID' => $this->session->userdata('id'),
+            'CLOSEDATE' => $this->input->post('QUEUECLOSEDATE'),
+        ];
+
+       $id =  $this->CloseQueueModel->insert($data);
+
+        $this->session->set_flashdata('msg_full_queue', 'เพิ่มคิวเต็มเรียบร้อย');
+        redirect(base_url('physician/time'));
+    }
+
+    public function fullQueueDelete()
+    {
+        $this->CloseQueueModel->delete($this->input->get('id'));
+
+        $this->session->set_flashdata('msg_full_queue', 'ลบวันคิวเต็มเรียบร้อย');
         redirect(base_url('physician/time'));
     }
 

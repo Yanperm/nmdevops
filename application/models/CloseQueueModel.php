@@ -26,12 +26,13 @@ class CloseQueueModel extends CI_Model
     public function insert($data)
     {
         $this->db->insert('tbqueueclode', $data);
+      
         return $this->db->insert_id();
     }
 
     public function delete($id)
     {
-        $this->db->where('closeid', $id);
+        $this->db->where('colseid', $id);
         $this->db->delete('tbqueueclode');
     }
 }
