@@ -195,7 +195,7 @@ class Auth extends CI_Controller
 
                 redirect(base_url(''));
             } else {
-                $this->session->set_flashdata('message', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+                $this->session->set_flashdata('message', 'เมล์หรือรหัสผ่าน เข้าใช้ระบบของคนไข้ ไม่ถูกต้อง!');
                 redirect(base_url('login'));
             }
         }

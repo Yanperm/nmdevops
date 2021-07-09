@@ -4,29 +4,23 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h1>คนไข้จำนวนมากกำลังรออยู่...</h1>
-                    <p class="lead">ถึงเวลาแล้วที่จะทำให้คนไข้จำนวนมาก ค้นหาคลินิกของคุณหมอ
-พบได้ทุกช่องทาง และทำการ นัดหมอ ได้ทันทีตลอด 24 ชั่วโมง
-บน Nutmor Platorm</p>
+                    <p class="lead">ถึงเวลาแล้วที่จะทำให้คนไข้จำนวนมาก ค้นหาคลินิกของคุณหมอ พบได้ทุกช่องทาง และทำการ นัดหมอ ได้ทันทีตลอด 24 ชั่วโมง บน Nutmor Platform</p>
                     <div class="box_feat_2">
                         <i class="pe-7s-map-2"></i>
                         <h3>SEO ทำให้คนไข้พบ คลินิก บน Google</h3>
-                        <p>เมื่อเจ็บป่วย คนไข้จะค้นหาแพทย์ ผ่าน Google จะพบคลินิกเป็นลำดับต้นๆ คนไข้จะ
-เข้าไปหาข้อมูลเพื่อหาคลินิกที่ตรงกับความต้องการ ความพิเศษของนัดหมอ คือ คนไข้
-จะสามารถนัดหมายแพทย์ได้ทันที ตั้งแต่ครั้งแรกที่คนไข้ค้นหาข้อมูลคลินิก</p>
+                        <p>เมื่อเจ็บป่วย คนไข้จะค้นหาแพทย์ ผ่าน Google จะพบคลินิกเป็นลำดับต้นๆ คนไข้จะ เข้าไปหาข้อมูลเพื่อหาคลินิกที่ตรงกับความต้องการ ความพิเศษของนัดหมอ คือ คนไข้ จะสามารถนัดหมายแพทย์ได้ทันที ตั้งแต่ครั้งแรกที่คนไข้ค้นหาข้อมูลคลินิก</p>
                     </div>
                     <div class="box_feat_2">
                         <i class="pe-7s-date"></i>
                         <h3>ไม่พลาดทุกการนัดหมาย จัดการได้ง่าย ทุกที่ทุกเวลา</h3>
-                        <p>ด้วยระบบนัดหมาย เช็คอิน ดูคิว แจ้งเตือน ออนไลน์ จะไม่ทำให้คนไข้ลืมการนัดหมาย
-ที่สำคัญ คลินิกสามารถรู้ Cheif Complain ของผู้ป่วยได้ล่วงหน้า สามารถบริหาร
-จัดการนัดหมายในแต่ละวันได้อย่างมีประสิทธิภาพ</p>
+                        <p>ด้วยระบบนัดหมาย เช็คอิน ดูคิว แจ้งเตือน ออนไลน์ จะไม่ทำให้คนไข้ลืมการนัดหมาย ที่สำคัญ คลินิกสามารถรู้ Cheif Complain ของผู้ป่วยได้ล่วงหน้า สามารถบริหาร จัดการนัดหมายในแต่ละวันได้อย่างมีประสิทธิภาพ
+                        </p>
                     </div>
                     <div class="box_feat_2">
                         <i class="pe-7s-phone"></i>
                         <h3>นัดหมอ ได้ทันที ด้วย Mobile App</h3>
-                        <p>คนไข้สามารถ Download Application ได้ทั้ง App Store และ Play Store ใช้
-เวลาในการนัดหมายแพทย์ผ่าน Application แต่ละครั้ง ไม่เกิน 3 วินาที รวดเร็ว และ
-ไม่จำเป็นต้องมารอหมอที่คลินิกเป็นเวลานาน</p>
+                        <p>คนไข้สามารถ Download Application ได้ทั้ง App Store และ Play Store ใช้ เวลาในการนัดหมายแพทย์ผ่าน Application แต่ละครั้ง ไม่เกิน 3 วินาที รวดเร็ว และ ไม่จำเป็นต้องมารอหมอที่คลินิกเป็นเวลานาน
+                        </p>
                     </div>
                 </div>
                 <!-- /col -->
@@ -67,7 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" data-page="1" name="next" class="next action-button" value="ถัดไป"/>
+                            <input type="button" data-page="1" name="next" class="next action-button" value="ถัดไป" />
 
                         </fieldset>
 
@@ -77,7 +71,8 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>เมลล์</label>
-                                    <input type="email" class="form-control" placeholder="" name="email_clinic" data-rule-required="true" data-msg-required="กรุณากรุณากรอกเมลล์" data-rule-email="true" data-msg-email="กรุณากรุณากรอกเมลให้ถูกต้อง" data-rule-remote="<?php echo base_url('check_email_clinic_already'); ?>" data-msg-remote="บัญชีอีเมลนี้มีการใช้งานแล้ว">
+                                    <input type="email" class="form-control" placeholder="" name="email_clinic" data-rule-required="true" data-msg-required="กรุณากรุณากรอกเมลล์" data-rule-email="true" data-msg-email="กรุณากรุณากรอกเมลให้ถูกต้อง" data-rule-remote="<?php echo base_url('check_email_clinic_already'); ?>"
+                                        data-msg-remote="บัญชีอีเมลนี้มีการใช้งานแล้ว">
                                     <span class="error1" style="display: none;">
                                             <i class="error-log fa fa-exclamation-triangle"></i>
                                         </span>
@@ -100,8 +95,8 @@
                             </div>
 
 
-                            <input type="button" data-page="2" name="previous" class="previous action-button" value="ก่อนหน้า"/>
-                            <input type="button" data-page="2" name="next" class="next action-button" value="ถัดไป"/>
+                            <input type="button" data-page="2" name="previous" class="previous action-button" value="ก่อนหน้า" />
+                            <input type="button" data-page="2" name="next" class="next action-button" value="ถัดไป" />
 
                         </fieldset>
                         <fieldset>
@@ -126,8 +121,8 @@
                                     <input type="file" name="files_clinic" class="form-control">
                                 </div>
                             </div>
-                            <input type="button" data-page="3" name="previous" class="previous action-button" value="ก่อนหน้า"/>
-                            <input type="button" data-page="3" name="next" class="next action-button" value="ถัดไป"/>
+                            <input type="button" data-page="3" name="previous" class="previous action-button" value="ก่อนหน้า" />
+                            <input type="button" data-page="3" name="next" class="next action-button" value="ถัดไป" />
 
                         </fieldset>
                         <!-- Cultivation FIELD SET -->
@@ -201,9 +196,9 @@
                                     <button id="type3" type="button" onclick="selectPackage(3)" class="pricing-action">59,000 ฿ Yearly</button>
                                 </div>
                             </div>
-                            <input type="hidden" id="package" name="package" value="<?php echo $type;?>" data-rule-required="true"  data-msg-required="กรุณากรุณาเลือกแพ็กเกจ" >
-                            <input type="button" data-page="3" name="previous" class="previous action-button" value="ก่อนหน้า"/>
-                            <input type="button" data-page="3" name="next" class="submit action-button" value="สมัครสมาชิก"/>
+                            <input type="hidden" id="package" name="package" value="<?php echo $type;?>" data-rule-required="true" data-msg-required="กรุณากรุณาเลือกแพ็กเกจ">
+                            <input type="button" data-page="3" name="previous" class="previous action-button" value="ก่อนหน้า" />
+                            <input type="button" data-page="3" name="next" class="submit action-button" value="สมัครสมาชิก" />
 
                         </fieldset>
                     </form>
@@ -275,18 +270,19 @@
     </div>
     <!-- /hero_register -->
 </main>
-<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.2/css/intlTelInput.css"/>
-<link rel="stylesheet" media="all" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
-<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"/>
+<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.2/css/intlTelInput.css" />
+<link rel="stylesheet" media="all" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" />
 
 <style>
     /*form styles*/
+    
     .steps {
         width: 100%;
         margin: 7px auto;
         position: relative;
     }
-
+    
     .steps fieldset {
         background: white;
         border: 0 none;
@@ -297,17 +293,16 @@
         box-sizing: border-box;
         width: 100%;
         /*margin: 0 10%;*/
-
         /*stacking fieldsets above each other*/
         position: initial;
     }
-
     /*Hide all except first fieldset*/
+    
     .steps fieldset:not(:first-of-type) {
         display: none;
     }
-
     /*inputs*/
+    
     .steps label {
         color: #333333;
         text-align: left !important;
@@ -317,9 +312,9 @@
         padding-top: 12px;
         display: inline-block;
     }
-
-
-    .steps input, .steps textarea {
+    
+    .steps input,
+    .steps textarea {
         outline: none;
         display: block;
         width: 100%;
@@ -344,12 +339,13 @@
         -o-transition: all 0.3s linear 0s;
         transition: all 0.3s linear 0s;
     }
-
-    .steps input:focus, .steps textarea:focus {
+    
+    .steps input:focus,
+    .steps textarea:focus {
         color: #333333;
         border: 1px solid #e74e84;
     }
-
+    
     .error1 {
         -moz-border-radius: 3px;
         -webkit-border-radius: 3px;
@@ -370,9 +366,8 @@
         /*font: 14px Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;*/
         line-height: 39px;
         white-space: nowrap;
-
     }
-
+    
     .error1:before {
         width: 0;
         height: 0;
@@ -384,23 +379,24 @@
         border-right: 8px solid #e62163;
         border-bottom: 6px solid transparent;
     }
-
+    
     .error-log {
         margin: 5px 5px 5px 0;
         font-size: 19px;
         position: relative;
         bottom: -2px;
     }
-
+    
     .question-log {
         margin: 5px 1px 5px 0;
         font-size: 15px;
         position: relative;
         bottom: -2px;
     }
-
     /*buttons*/
-    .steps .action-button, .action-button {
+    
+    .steps .action-button,
+    .action-button {
         width: 100px !important;
         background: #e74e84;
         font-weight: bold;
@@ -417,19 +413,24 @@
         transition: all 0.3s linear 0s;
         display: block;
     }
-
-    .steps .next, .steps .submit {
+    
+    .steps .next,
+    .steps .submit {
         float: right;
     }
-
+    
     .steps .previous {
         float: left;
     }
-
-    .steps .action-button:hover, .steps .action-button:focus, .action-button:hover, .action-button:focus {
-        background: #bf134d;;
+    
+    .steps .action-button:hover,
+    .steps .action-button:focus,
+    .action-button:hover,
+    .action-button:focus {
+        background: #bf134d;
+        ;
     }
-
+    
     .steps .explanation {
         display: block;
         clear: both;
@@ -448,9 +449,8 @@
         font-weight: 200;
         cursor: pointer;
     }
-
-
     /*headings*/
+    
     .fs-title {
         text-transform: uppercase;
         margin: 0 0 5px;
@@ -460,7 +460,7 @@
         font-weight: bold;
         text-align: center;
     }
-
+    
     .fs-subtitle {
         font-weight: normal;
         font-size: 13px;
@@ -468,8 +468,8 @@
         margin-bottom: 20px;
         text-align: center;
     }
-
     /*progressbar*/
+    
     #progressbar {
         margin-bottom: 30px;
         overflow: hidden;
@@ -478,7 +478,7 @@
         width: 100%;
         text-align: center;
     }
-
+    
     #progressbar li {
         list-style-type: none;
         color: #ffffff;
@@ -489,7 +489,7 @@
         float: left;
         position: relative;
     }
-
+    
     #progressbar li:before {
         content: counter(step);
         counter-increment: step;
@@ -502,11 +502,11 @@
         background: white;
         border-radius: 50%;
         margin: 0 auto 3px auto;
-            z-index: 2;
-    position: relative;
+        z-index: 2;
+        position: relative;
     }
-
     /*progressbar connectors*/
+    
     #progressbar li:after {
         /*content: '';
         width: 100%;
@@ -516,33 +516,30 @@
         left: -50%;
         top: 21px;
         z-index: -1;*/
-            width: 100%;
-    height: 2px;
-    content: '';
-    position: absolute;
-    background-color: #ffffff;
-    top: 22px;
-    left: -50%;
-    z-index: 0;
+        width: 100%;
+        height: 2px;
+        content: '';
+        position: absolute;
+        background-color: #ffffff;
+        top: 22px;
+        left: -50%;
+        z-index: 0;
     }
-
-
-
+    
     #progressbar li:first-child:after {
         /*connector not needed before the first step*/
         content: none;
     }
-
     /*marking active/completed steps green*/
     /*The number of the step and the connector before it = green*/
-    #progressbar li.active:before, #progressbar li.active:after {
+    
+    #progressbar li.active:before,
+    #progressbar li.active:after {
         background: #e74e84;
         color: white;
     }
-
-
     /* my modal */
-
+    
     .modal p {
         font-size: 15px;
         font-weight: 100;
@@ -550,7 +547,7 @@
         color: #3C3B3B;
         line-height: 21px;
     }
-
+    
     .modal {
         position: fixed;
         top: 50%;
@@ -569,16 +566,16 @@
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
-
+    
     .modal.modal-show {
         visibility: visible;
     }
-
+    
     .lt-ie9 .modal {
         top: 0;
         margin-left: -315px;
     }
-
+    
     .modal-content {
         background: #ffffff;
         position: relative;
@@ -586,7 +583,7 @@
         padding: 40px;
         border-radius: 3px;
     }
-
+    
     .modal-overlay {
         background: #000000;
         position: fixed;
@@ -596,7 +593,7 @@
         width: 100%;
         height: 100%;
         z-index: 1000;
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
         opacity: 0;
         -moz-transition-property: visibility, opacity;
         -o-transition-property: visibility, opacity;
@@ -611,29 +608,29 @@
         -webkit-transition-duration: 0, 0.5s;
         transition-duration: 0, 0.5s;
     }
-
+    
     .modal-show .modal-overlay {
         visibility: visible;
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+        filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=60);
         opacity: 0.6;
         -moz-transition: opacity 0.5s;
         -o-transition: opacity 0.5s;
         -webkit-transition: opacity 0.5s;
         transition: opacity 0.5s;
     }
-
     /*slide*/
+    
     .modal[data-modal-effect|=slide] .modal-content {
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
         opacity: 0;
         -moz-transition: all 0.5s 0;
         -o-transition: all 0.5s 0;
         -webkit-transition: all 0.5s 0;
         transition: all 0.5s 0;
     }
-
+    
     .modal[data-modal-effect|=slide].modal-show .modal-content {
-        filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+        filter: progid: DXImageTransform.Microsoft.Alpha(enabled=false);
         opacity: 1;
         -moz-transition: all 0.5s 0.1s;
         -o-transition: all 0.5s 0.1s;
@@ -641,46 +638,39 @@
         -webkit-transition-delay: 0.1s;
         transition: all 0.5s 0.1s;
     }
-
+    
     .modal[data-modal-effect=slide-top] .modal-content {
         -moz-transform: translateY(-300%);
         -ms-transform: translateY(-300%);
         -webkit-transform: translateY(-300%);
         transform: translateY(-300%);
     }
-
+    
     .modal[data-modal-effect=slide-top].modal-show .modal-content {
         -moz-transform: translateY(0);
         -ms-transform: translateY(0);
         -webkit-transform: translateY(0);
         transform: translateY(0);
     }
-
-
     /* RESPONSIVE */
-
     /* moves error logs in tablet/smaller screens */
-
+    
     @media (max-width: 1000px) {
-
         /*brings inputs down in size */
-        .steps input, .steps textarea {
+        .steps input,
+        .steps textarea {
             outline: none;
             display: block;
             width: 100% !important;
         }
-
         /*brings errors in */
         .error1 {
             left: 345px;
             margin-top: -58px;
             font-weight: 700;
         }
-
-
     }
-
-
+    
     @media (max-width: 675px) {
         /*mobile phone: uncollapse all fields: remove progress bar*/
         .steps {
@@ -688,11 +678,9 @@
             margin: 50px auto;
             position: relative;
         }
-
         #progressbar {
             display: none;
         }
-
         /*move error logs */
         .error1 {
             position: relative;
@@ -701,7 +689,6 @@
             top: -11px;
             font-weight: 700;
         }
-
         .error1:before {
             width: 0;
             height: 0;
@@ -714,44 +701,38 @@
             border-bottom: 8px solid #e62163;
             border-right: 6px solid transparent;
         }
-
         /*show hidden fieldsets */
         .steps fieldset:not(:first-of-type) {
             display: block;
         }
-
         .steps fieldset {
             position: relative;
             width: 100%;
             margin: 0 auto;
             margin-top: 45px;
         }
-
-        .steps .next, .steps .previous {
+        .steps .next,
+        .steps .previous {
             display: none;
         }
-
         .steps .explanation {
             display: none;
         }
-
         .steps .submit {
             float: right;
             margin: 28px auto 10px;
             width: 100% !important;
         }
-
     }
-
-
     /* Info */
+    
     .info {
         width: 300px;
         margin: 35px auto;
         text-align: center;
         /*font-family: 'roboto', sans-serif;*/
     }
-
+    
     .info h1 {
         margin: 0;
         padding: 0;
@@ -759,33 +740,32 @@
         font-weight: 400;
         color: #333333;
         padding-bottom: 5px;
-
     }
-
+    
     .info span {
         color: #666666;
         font-size: 13px;
         margin-top: 20px;
     }
-
+    
     .info span a {
         color: #666666;
         text-decoration: none;
     }
-
+    
     .info span .fa {
         color: rgb(226, 168, 16);
         font-size: 19px;
         position: relative;
         left: -2px;
     }
-
+    
     .info span .spoilers {
         color: #999999;
         margin-top: 5px;
         font-size: 10px;
     }
-
+    
     .pricing {
         display: -webkit-flex;
         display: flex;
@@ -796,7 +776,7 @@
         width: 100%;
         margin: 0 auto 3em;
     }
-
+    
     .pricing-item {
         position: relative;
         display: -webkit-flex;
@@ -809,22 +789,22 @@
         -webkit-flex: 0 1 330px;
         flex: 0 1 226px;
     }
-
+    
     .pricing-action {
         color: inherit;
         border: none;
         background: none;
         cursor: pointer;
     }
-
+    
     .pricing-action:focus {
         outline: none;
     }
-
+    
     .pricing-feature-list {
         text-align: left;
     }
-
+    
     .pricing-palden .pricing-item {
         font-family: "Open Sans", sans-serif;
         cursor: default;
@@ -834,7 +814,7 @@
         border-radius: 20px 20px 10px 10px;
         margin: 1em;
     }
-
+    
     @media screen and (min-width: 66.25em) {
         .pricing-palden .pricing-item {
             margin: 1em -0.5em;
@@ -845,14 +825,14 @@
             box-shadow: 0 0 20px rgba(46, 59, 125, 0.23);
         }
     }
-
+    
     .pricing-palden .pricing-deco {
         border-radius: 10px 10px 0 0;
         background: linear-gradient(135deg, #e84e84, #f4cfdc);
         padding: 3em 0 9em;
         position: relative;
     }
-
+    
     .pricing-palden .pricing-deco-img {
         position: absolute;
         bottom: 0;
@@ -860,7 +840,7 @@
         width: 100%;
         height: 160px;
     }
-
+    
     .pricing-palden .pricing-title {
         font-size: 0.75em;
         margin: 0;
@@ -868,26 +848,26 @@
         letter-spacing: 5px;
         color: #fff;
     }
-
+    
     .pricing-palden .deco-layer {
         -webkit-transition: -webkit-transform 0.5s;
         transition: transform 0.5s;
     }
-
+    
     .pricing-palden .pricing-item:hover .deco-layer--1 {
         -webkit-transform: translate3d(15px, 0, 0);
         transform: translate3d(15px, 0, 0);
     }
-
+    
     .pricing-palden .pricing-item:hover .deco-layer--2 {
         -webkit-transform: translate3d(-15px, 0, 0);
         transform: translate3d(-15px, 0, 0);
     }
-
+    
     .pricing-palden .icon {
         font-size: 2.5em;
     }
-
+    
     .pricing-palden .pricing-price {
         font-size: 3em;
         font-weight: bold;
@@ -896,35 +876,35 @@
         margin: 0 0 0.25em 0;
         line-height: 0.75;
     }
-
+    
     .pricing-palden .pricing-currency {
         font-size: 0.15em;
         vertical-align: top;
     }
-
+    
     .pricing-palden .pricing-period {
         font-size: 0.15em;
         padding: 0 0 0 0.5em;
         font-style: italic;
     }
-
+    
     .pricing-palden .pricing__sentence {
         font-weight: bold;
         margin: 0 0 1em 0;
         padding: 0 0 0.5em;
     }
-
+    
     .pricing-palden .pricing-feature-list {
         margin-top: -15px;
         padding: 0.25em 0 2.5em;
         list-style: none;
         text-align: center;
     }
-
+    
     .pricing-palden .pricing-feature {
         padding: 1em 0;
     }
-
+    
     .pricing-palden .pricing-action {
         font-weight: bold;
         margin: auto 1em 2em 3em;
@@ -935,21 +915,19 @@
         -webkit-transition: background-color 0.3s;
         transition: background-color 0.3s;
     }
-
+    
     .pricing-palden .pricing-action:hover,
     .pricing-palden .pricing-action:focus {
         background: linear-gradient(135deg, #e84e84, #b9204d);
     }
-
+    
     .pricing-palden .pricing-item--featured .pricing-deco {
         padding: 5em 0 8.885em 0;
     }
-
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script>
-
-    $(document).ready(function () {
+    $(document).ready(function() {
 
 
         var current_fs, next_fs, previous_fs;
@@ -958,27 +936,27 @@
         $(".steps").validate({
             errorClass: "invalid",
             errorElement: "span",
-            errorPlacement: function (error, element) {
+            errorPlacement: function(error, element) {
                 error.insertAfter(element.next("span").children());
             },
-            highlight: function (element) {
+            highlight: function(element) {
                 $(element).next("span").show();
             },
-            unhighlight: function (element) {
+            unhighlight: function(element) {
                 $(element).next("span").hide();
             }
         });
-        $(".next").click(function () {
+        $(".next").click(function() {
             $(".steps").validate({
                 errorClass: "invalid",
                 errorElement: "span",
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.next("span").children());
                 },
-                highlight: function (element) {
+                highlight: function(element) {
                     $(element).next("span").show();
                 },
-                unhighlight: function (element) {
+                unhighlight: function(element) {
                     $(element).next("span").hide();
                 }
             });
@@ -1011,17 +989,17 @@
             //     }
             // );
         });
-        $(".submit").click(function () {
+        $(".submit").click(function() {
             $(".steps").validate({
                 errorClass: "invalid",
                 errorElement: "span",
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.next("span").children());
                 },
-                highlight: function (element) {
+                highlight: function(element) {
                     $(element).next("span").show();
                 },
-                unhighlight: function (element) {
+                unhighlight: function(element) {
                     $(element).next("span").hide();
                 }
             });
@@ -1056,7 +1034,7 @@
             //     }
             // );
         });
-        $(".previous").click(function () {
+        $(".previous").click(function() {
             if (animating) return false;
             animating = false;
             current_fs = $(this).parent();
@@ -1091,7 +1069,7 @@
     });
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#register-clinic-form').validate({
             rules: {
                 clinic_name: {
@@ -1145,7 +1123,7 @@
                     equalTo: "รหัสไม่ตรงกัน"
                 }
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form.submit();
             }
         });
@@ -1156,9 +1134,8 @@
     }
 
     let package = $('#package').val();
-    $("#type"+package).css("background", "linear-gradient(135deg, #e84e84, #b9204d)");
+    $("#type" + package).css("background", "linear-gradient(135deg, #e84e84, #b9204d)");
 </script>
 
 <!-- Validation JS file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-
