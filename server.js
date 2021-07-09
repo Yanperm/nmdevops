@@ -11,8 +11,8 @@ var options = {
 //const https = require('https').Server(options, app);
 var server = require('https').createServer(options, app);
 
-var port = process.env.PORT || 3000;
-server.listen(port, function () {
+var port = process.env.PORT || 2083;
+server.listen(port, function() {
     console.log('Server listening at port %d', port);
 });
 var io = require('socket.io')(server, {
@@ -20,8 +20,8 @@ var io = require('socket.io')(server, {
         origin: '*',
     }
 });
-io.on('connection', function (socket) {
-    socket.on('queue', function (data) {
+io.on('connection', function(socket) {
+    socket.on('queue', function(data) {
         io.sockets.emit(data.id, {
             message: data.message,
         });
