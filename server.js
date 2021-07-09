@@ -3,8 +3,8 @@ var app = express();
 
 var fs = require('fs');
 var options = {
-    key: fs.readFileSync('/root/.ssh/privatekey.pem'),
-    cert: fs.readFileSync('/root/.ssh/certificate.pem')
+    key: fs.readFileSync('/root/.ssh/server.key'),
+    cert: fs.readFileSync('/root/.ssh/server.crt')
 };
 
 //const app = require('express')();
