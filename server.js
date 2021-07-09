@@ -17,8 +17,7 @@ server.listen(port, function() {
 });
 var io = require('socket.io')(server, {
     cors: {
-        origin: "https://nutmor.com:8080",
-        methods: ["GET", "POST"]
+        origin: "*",
     }
 });
 io.on('connection', function(socket) {

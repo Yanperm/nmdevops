@@ -354,7 +354,7 @@
 <script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js');?>"></script>
 
 <script>
-    var socket = io.connect( 'https://'+window.location.hostname+':2083', {secure: true});
+    var socket = io.connect( 'https://'+window.location.hostname+':2083', {secure: false, port: 2083});
 
     socket.on('queue', function( data ) {});
 
