@@ -227,7 +227,10 @@
       class="bg-dark text-white">
 
 <div class="container-fluid">
+
     <?php
+    header('Access-Control-Allow-Origin: *');
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
     $start = '';
     $end = '';
     $dayNow = date('N');
@@ -351,7 +354,7 @@
 <script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js');?>"></script>
 
 <script>
-    var socket = io.connect( 'https://'+window.location.hostname+':2083');
+    var socket = io.connect( 'https://'+window.location.hostname+':2083', {secure: true});
 
     socket.on('queue', function( data ) {});
 
