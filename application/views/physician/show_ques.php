@@ -354,13 +354,30 @@
 <script src="<?php echo base_url('node_modules/socket.io/client-dist/socket.io.js');?>"></script>
 
 <script>
-    var socket = io.connect( 'https://'+window.location.hostname+':2083', {secure: false, port: 2083});
 
-    socket.on('queue', function( data ) {});
+    setInterval(function(){
+        $.ajax({
+            url: '<?php echo base_url("welcome/getCurrentQueue"); ?>',
+            type: 'get',
+            data: {
+                clinic_id: '<?php echo $clinic->IDCLINIC;?>',
+            },
+            success: function(response) {
+                $('#order').html(response)
+            }
+        });
+    }, 5000);
 
-    socket.on('<?php echo $clinic->IDCLINIC;?>', function( data ) {
-        $('#order').html(data.message)
-    });
+    //var socket = io.connect('https://localhost:3000');
+    //
+    //socket.on('queue', function( data ) {});
+    //
+    //socket.on('<?php //echo $clinic->IDCLINIC;?>//', function( data ) {
+    //    $('#order').html(data.message)
+    //});
+
+
+
 
 </script>
 <!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
