@@ -50,6 +50,17 @@ class Welcome extends CI_Controller
         $this->load->view('physician/show_ques', $data);
     }
 
+    public function getCurrentQueue(){
+        $clinic_id = $_GET['clinic_id'];
+
+        $booking = $this->BookingModel->getCurrentQues($clinic_id);
+        if (count($booking) > 0) {
+            echo $booking[0]->QUES;
+        } else {
+            echo '';
+        }
+    }
+
     public function notificationCheckin()
     {
         $nextTwoDate = date('Y-m-d', strtotime(date("Y-m-d") .' +2 day'));
