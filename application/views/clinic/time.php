@@ -43,7 +43,7 @@
                             <?php endif; ?>
 
 
-                            <?php if ($number != $clinic->DAYOFF && !$statusBooked && !$closeStatus): ?>
+                            <?php if ($number != $clinic->DAYOFF && !$statusBooked && !$closeStatus && !$fullQueue): ?>
                                 <ul>
                                     <?php foreach ($times as $key => $time):
                                         $textTime = $time->format('H:i') . '-' . $time->add($interval)->format('H:i');
